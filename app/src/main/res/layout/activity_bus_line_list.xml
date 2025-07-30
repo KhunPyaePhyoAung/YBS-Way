@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/tool_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="@string/bus_list_title"
+            app:logo="@drawable/bus_toolbar_icon"
+            android:background="@color/primary"
+            android:elevation="20dp"
+            app:titleMarginStart="25dp"
+            android:fontFamily="@font/carre_jwja"
+            app:layout_constraintTop_toTopOf="parent"
+            app:titleTextColor="@color/text_primary">
+        </androidx.appcompat.widget.Toolbar>
+
+        <ListView
+            android:id="@+id/bus_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:dividerHeight="3dp"
+            android:background="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tool_bar"
+            app:layout_constraintVertical_bias="0.0">
+        </ListView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

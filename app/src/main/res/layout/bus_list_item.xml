@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:elevation="10dp"
+    android:background="@color/white"
+>
+
+    <RelativeLayout
+        android:id="@+id/icon_layout"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:elevation="20dp"
+    >
+        <TextView
+            android:id="@+id/bus_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/carre_jwja"
+            />
+
+        <ImageView
+            android:id="@+id/bus_icon"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="2dp"
+    >
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@drawable/bus_route_origin"
+        />
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@drawable/more_vertical"
+        />
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@drawable/bus_route_end"
+        />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="fill_vertical"
+        android:weightSum="2"
+        android:paddingVertical="8dp"
+        android:paddingRight="8dp"
+    >
+        <TextView
+            android:id="@+id/bus_from"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:layout_weight="1"
+            android:textColor="@color/black"
+            android:layout_marginBottom="5dp"
+        />
+
+        <TextView
+            android:id="@+id/bus_to"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:layout_weight="1"
+            android:textColor="@color/black"
+            android:layout_marginTop="5dp"
+        />
+
+    </LinearLayout>
+
+</LinearLayout>

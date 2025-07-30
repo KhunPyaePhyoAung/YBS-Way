@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="gray">#808080</color>
+    <color name="white_smoke">#ABABAB</color>
+    <color name="primary">#003E6C</color>
+    <color name="secondary">#005A9E</color>
+    <color name="text_primary">#FFFFFF</color>
+    <color name="text_secondary">#000000</color>
+
+    <color name="bus_stop_fill">#D15900</color>
+    <color name="bus_stop_border">#FFFFFF</color>
+    <color name="bus_stop_inner_icon">#FFFFFF</color>
+    <color name="bus_route">#D15900</color>
+    <color name="bus_stop_info_bubble_background">@color/primary</color>
+    <color name="bus_stop_info_bubble_border">@color/black</color>
+    <color name="bus_stop_info_bubble_text">@color/text_primary</color>
 </resources>
