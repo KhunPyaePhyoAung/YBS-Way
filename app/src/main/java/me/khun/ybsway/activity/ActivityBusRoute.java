@@ -148,6 +148,7 @@ public class ActivityBusRoute extends ActivityBaseMap implements Marker.OnMarker
     public boolean onMarkerClick(Marker marker, MapView mapView) {
         InfoWindow.closeAllInfoWindowsOn(mapView);
         mapController.animateTo(marker.getPosition());
+        marker.showInfoWindow();
         showDynamicInfoWindow = true;
         return true;
     }
