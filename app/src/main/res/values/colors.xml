@@ -9,11 +9,11 @@
     <color name="text_primary">#FFFFFF</color>
     <color name="text_secondary">#000000</color>
 
-    <color name="bus_stop_fill">#D15900</color>
+    <color name="bus_stop_fill">@color/primary</color>
     <color name="bus_stop_border">#FFFFFF</color>
     <color name="bus_stop_inner_icon">#FFFFFF</color>
-    <color name="bus_route">#D15900</color>
-    <color name="bus_stop_info_bubble_background">@color/primary</color>
-    <color name="bus_stop_info_bubble_border">@color/black</color>
-    <color name="bus_stop_info_bubble_text">@color/text_primary</color>
+    <color name="bus_route">@color/primary</color>
+    <color name="bus_stop_info_bubble_background">#DC5E00</color>
+    <color name="bus_stop_info_bubble_border">#000000</color>
+    <color name="bus_stop_info_bubble_text">#FFFFFF</color>
 </resources>
