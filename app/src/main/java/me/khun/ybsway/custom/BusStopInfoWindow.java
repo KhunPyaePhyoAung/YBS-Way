@@ -7,16 +7,16 @@ import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.infowindow.InfoWindow;
 
 import me.khun.ybsway.R;
-import me.khun.ybsway.entity.BusStop;
+import me.khun.ybsway.view.BusStopView;
 
 public class BusStopInfoWindow extends InfoWindow {
     protected BusStopMarker marker;
-    protected BusStop busStop;
+    protected BusStopView busStop;
     protected TextView nameTextView;
     protected TextView townshipTextView;
     protected TextView streetTextView;
 
-    public BusStopInfoWindow(MapView mapView, BusStop busStop) {
+    public BusStopInfoWindow(MapView mapView, BusStopView busStop) {
         super(R.layout.bus_stop_info, mapView);
         this.busStop = busStop;
 
@@ -24,9 +24,9 @@ public class BusStopInfoWindow extends InfoWindow {
         townshipTextView = mView.findViewById(R.id.township);
         streetTextView = mView.findViewById(R.id.street);
 
-        nameTextView.setText(busStop.getNameMM());
-        townshipTextView.setText(busStop.getTownshipMM());
-        streetTextView.setText(String.format("(%s)", busStop.getStreetMM()));
+        nameTextView.setText(busStop.getName());
+        townshipTextView.setText(busStop.getTownshipName());
+        streetTextView.setText(String.format("(%s)", busStop.getStreetName()));
     }
 
     public BusStopMarker getMarkerReference() {

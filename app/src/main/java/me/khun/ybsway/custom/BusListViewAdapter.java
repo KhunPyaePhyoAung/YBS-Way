@@ -18,29 +18,29 @@ import java.util.List;
 
 import me.khun.ybsway.R;
 import me.khun.ybsway.activity.ActivityBusRoute;
-import me.khun.ybsway.entity.Bus;
+import me.khun.ybsway.view.BusView;
 
 public class BusListViewAdapter extends BaseAdapter {
 
     private final Context context;
-    private final List<Bus> buses;
+    private final List<BusView> busViewList;
     private LayoutInflater inflater = null;
 
-    public BusListViewAdapter(Context context, List<Bus> buses) {
+    public BusListViewAdapter(Context context, List<BusView> busViewList) {
         this.context = context;
-        this.buses = buses;
+        this.busViewList = busViewList;
         inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
     public int getCount() {
-        return buses.size();
+        return busViewList.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return buses.get(i);
+        return busViewList.get(i);
     }
 
     @Override
@@ -58,29 +58,28 @@ public class BusListViewAdapter extends BaseAdapter {
         }
 
         RelativeLayout iconLayout = vi.findViewById(R.id.icon_layout);
-        ImageView busIcon = vi.findViewById(R.id.bus_icon);
+        ImageView busIconImageView = vi.findViewById(R.id.bus_icon);
         TextView busNumberTextView = vi.findViewById(R.id.bus_number);
-        TextView busStartTextView = vi.findViewById(R.id.bus_from);
-        TextView busEndTextView = vi.findViewById(R.id.bus_to);
+        TextView busOriginTextView = vi.findViewById(R.id.bus_from);
+        TextView busDestinationTextView = vi.findViewById(R.id.bus_to);
 
-        Bus bus = buses.get(i);
+        BusView busView = busViewList.get(i);
 
-        String busName = bus.getName();
-        if (busName.contains("Airport")) {
-            busNumberTextView.setText(null);
-            busIcon.setImageDrawable(AppCompatResources.getDrawable(context, R.drawable.plane));
+        if (busView.getDisplayIconId() == null) {
+            busNumberTextView.setText(busView.getNumber());
+            busIconImageView.setImageDrawable(null);
         } else {
-            busNumberTextView.setText(bus.getNumber());
-            busIcon.setImageDrawable(null);
+            busNumberTextView.setText(null);
+            busIconImageView.setImageDrawable(AppCompatResources.getDrawable(context, busView.getDisplayIconId()));
         }
 
-        iconLayout.setBackgroundColor(Color.parseColor("#" + bus.getHexColorCode()));
-        busStartTextView.setText(bus.getStartName());
-        busEndTextView.setText(bus.getEndName());
+        iconLayout.setBackgroundColor(Color.parseColor("#" + busView.getHexColorCode()));
+        busOriginTextView.setText(busView.getOriginName());
+        busDestinationTextView.setText(busView.getDestinationName());
 
         vi.setOnClickListener(view1 -> {
             Intent intent = new Intent(context, ActivityBusRoute.class);
-            intent.putExtra("route_id", bus.getRouteId());
+            intent.putExtra("route_id", busView.getRouteId());
             context.startActivity(intent);
         });
 

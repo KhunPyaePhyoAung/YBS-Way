@@ -3,7 +3,7 @@ package me.khun.ybsway.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import me.khun.ybsway.YBSWayApplication;
+import me.khun.ybsway.application.YBSWayApplication;
 
 public class Route {
 

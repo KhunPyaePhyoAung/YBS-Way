@@ -28,7 +28,7 @@ import java.util.List;
 
 import me.khun.ybsway.R;
 import me.khun.ybsway.custom.BusStopMarker;
-import me.khun.ybsway.entity.BusStop;
+import me.khun.ybsway.view.BusStopView;
 
 public class ActivityBaseMap  extends AppCompatActivity implements MapListener, MapEventsReceiver {
     public static final double YANGON_LATITUDE = 16.851544;
@@ -90,10 +90,11 @@ public class ActivityBaseMap  extends AppCompatActivity implements MapListener, 
                                 | TileSourcePolicy.FLAG_USER_AGENT_MEANINGFUL
                                 | TileSourcePolicy.FLAG_USER_AGENT_NORMALIZED
                 ));
+        
         return tileSource;
     }
 
-    protected BusStopMarker getBusStopMarker(BusStop busStop) {
+    protected BusStopMarker getBusStopMarker(BusStopView busStop) {
         BusStopMarker busStopMarker = new BusStopMarker(map, busStop);
         GeoPoint point = new GeoPoint(busStop.getLatitude(), busStop.getLongitude());
         busStopMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER);
@@ -173,7 +174,7 @@ public class ActivityBaseMap  extends AppCompatActivity implements MapListener, 
         return false;
     }
 
-    public static Marker findNearestMarker(GeoPoint target, List<? extends Marker> markers) {
+    public Marker findNearestMarker(GeoPoint target, List<? extends Marker> markers) {
         if (markers.isEmpty()) {
             return null;
         }

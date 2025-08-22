@@ -17,22 +17,27 @@ import org.osmdroid.views.overlay.infowindow.InfoWindow;
 import java.util.ArrayList;
 import java.util.List;
 
-import me.khun.ybsway.YBSWayApplication;
+import me.khun.ybsway.application.YBSWayApplication;
 import me.khun.ybsway.R;
 import me.khun.ybsway.custom.BusStopInfoWindow;
 import me.khun.ybsway.custom.BusStopMarker;
-import me.khun.ybsway.entity.Bus;
-import me.khun.ybsway.entity.BusStop;
 import me.khun.ybsway.entity.Coordinate;
-import me.khun.ybsway.entity.Route;
+import me.khun.ybsway.mapper.BusMapper;
+import me.khun.ybsway.mapper.BusStopMapper;
 import me.khun.ybsway.service.BusService;
 import me.khun.ybsway.service.BusStopService;
+import me.khun.ybsway.view.BusStopView;
+import me.khun.ybsway.view.BusView;
+import me.khun.ybsway.viewmodel.BusRouteViewModel;
 
 public class ActivityBusRoute extends ActivityBaseMap implements Marker.OnMarkerClickListener {
 
     private List<BusStopMarker> busStopMarkerList;
+    private BusMapper busMapper;
+    private BusStopMapper busStopMapper;
     private BusService busService ;
     private BusStopService busStopService ;
+    private BusRouteViewModel busRouteViewModel;
     private Marker nearestMarker;
     private boolean showDynamicInfoWindow = false;
 
@@ -41,33 +46,34 @@ public class ActivityBusRoute extends ActivityBaseMap implements Marker.OnMarker
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bus_route);
 
-        busService = YBSWayApplication.busService;
-        busStopService = YBSWayApplication.busStopService;
-
         Toolbar toolbar = findViewById(R.id.tool_bar);
         map = findViewById(R.id.map);
         setupMap(map);
 
-        Bundle bundle = getIntent().getExtras();
+        busMapper = YBSWayApplication.busMapper;
+        busStopMapper = YBSWayApplication.busStopMapper;
+        busService = YBSWayApplication.busService;
+        busStopService = YBSWayApplication.busStopService;
+        busStopMarkerList = new ArrayList<>(YBSWayApplication.DEFAULT_BUS_STOP_LIST_SIZE);
+        busRouteViewModel = new BusRouteViewModel(busMapper, busStopMapper, busService, busStopService);
 
+        busRouteViewModel.getToolbarTitle().observe(this, toolbar::setTitle);
+        busRouteViewModel.getBusData().observe(this, this::drawRoute);
+
+        Bundle bundle = getIntent().getExtras();
         if ( bundle != null) {
             String routeId = bundle.getString("route_id");
-            Bus bus = busService.findOneByRouteId(routeId);
-            if (bus != null) {
-                toolbar.setTitle(bus.getRouteId());
-                drawRoute(bus);
-            }
+            busRouteViewModel.loadBusDataByRouteId(routeId);
         }
     }
 
-    private void drawRoute(Bus bus) {
-        if ( bus == null || bus.getRouteCoordinateList().isEmpty() ) {
+    private void drawRoute(BusView busView) {
+        if ( busView == null || busView.getRouteCoordinateList().isEmpty() ) {
             return;
         }
 
         int roadWidth = 15;
         int roadColor = getResources().getColor(R.color.bus_route);
-        Route route = bus.getRoute();
 
         Polyline roadOverlay = new Polyline(map);
         roadOverlay.getOutlinePaint().setStrokeWidth(roadWidth);
@@ -75,29 +81,20 @@ public class ActivityBusRoute extends ActivityBaseMap implements Marker.OnMarker
         roadOverlay.getOutlinePaint().setStrokeJoin(Paint.Join.ROUND);
         map.getOverlays().add(roadOverlay);
 
-        List<Coordinate> coordinateList = bus.getRouteCoordinateList();
+        List<Coordinate> coordinateList = busView.getRouteCoordinateList();
 
         if ( coordinateList == null || coordinateList.isEmpty() ) {
             return;
         }
 
-        Coordinate centerCoordinate = coordinateList.get(coordinateList.size() / 4);
-        for ( Coordinate coordinate : bus.getRouteCoordinateList() ) {
+        for ( Coordinate coordinate : busView.getRouteCoordinateList() ) {
             GeoPoint point = new GeoPoint(coordinate.getLatitude(), coordinate.getLongitude());
             roadOverlay.addPoint(point);
             roadOverlay.setInfoWindow(null);
         }
 
-        List<BusStop> busStopList = route.getBusStopList();
-
-        if ( busStopList == null || busStopList.isEmpty() ) {
-            mapController.animateTo(new GeoPoint(centerCoordinate.getLatitude(), centerCoordinate.getLongitude()));
-            return;
-        }
-
-        busStopMarkerList = new ArrayList<>(busStopList.size());
-
-        for ( BusStop busStop : busStopList ) {
+        List<BusStopView> busStopViewList = busView.getBusStopViewList();
+        for ( BusStopView busStop : busStopViewList ) {
             BusStopMarker busStopMarker = getBusStopMarker(busStop);
             busStopMarker.setOnMarkerClickListener(this);
             BusStopInfoWindow infoWindow = (new BusStopInfoWindow(map, busStop));
@@ -110,7 +107,7 @@ public class ActivityBusRoute extends ActivityBaseMap implements Marker.OnMarker
             busStopMarkerList.add(busStopMarker);
         }
 
-        BusStop centerStop = busStopList.get(busStopList.size() / 4);
+        BusStopView centerStop = busStopViewList.get(busStopViewList.size() / 4);
         GeoPoint centerGeoPoint = new GeoPoint(centerStop.getLatitude(), centerStop.getLongitude());
         mapController.animateTo(centerGeoPoint);
         map.invalidate();

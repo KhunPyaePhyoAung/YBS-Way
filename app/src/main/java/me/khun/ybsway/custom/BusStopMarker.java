@@ -3,19 +3,19 @@ package me.khun.ybsway.custom;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.Marker;
 
-import me.khun.ybsway.entity.BusStop;
+import me.khun.ybsway.view.BusStopView;
 
 public class BusStopMarker extends Marker {
     protected MapView mapView;
-    protected BusStop busStop;
+    protected BusStopView busStop;
 
-    public BusStopMarker(MapView mapView, BusStop busStop) {
+    public BusStopMarker(MapView mapView, BusStopView busStop) {
         super(mapView);
         this.mapView = mapView;
         this.busStop = busStop;
     }
 
-    public BusStop getBusStop() {
+    public BusStopView getBusStop() {
         return busStop;
     }
 

@@ -1,7 +1,11 @@
-package me.khun.ybsway;
+package me.khun.ybsway.application;
 
 import android.content.Context;
 
+import me.khun.ybsway.mapper.BusMapper;
+import me.khun.ybsway.mapper.BusStopMapper;
+import me.khun.ybsway.mapper.DefaultBusMapper;
+import me.khun.ybsway.mapper.DefaultBusStopMapper;
 import me.khun.ybsway.repository.BusRepository;
 import me.khun.ybsway.repository.BusStopRepository;
 import me.khun.ybsway.repository.JsonFileBusRepositoryImpl;
@@ -18,6 +22,8 @@ public class YBSWayApplication extends android.app.Application {
     public static BusStopRepository busStopRepository;
     public static BusService busService;
     public static BusStopService busStopService;
+    public static BusMapper busMapper;
+    public static BusStopMapper busStopMapper;
 
     private static YBSWayApplication instance;
 
@@ -30,6 +36,8 @@ public class YBSWayApplication extends android.app.Application {
         busStopRepository = JsonFileBusStopRepositoryImpl.getInstance(getAppContext());
         busStopService = BusStopServiceImpl.getInstance(busStopRepository);
         busService = BusServiceImpl.getInstance(busRepository, busStopService);
+        busStopMapper = new DefaultBusStopMapper();
+        busMapper = new DefaultBusMapper(busStopMapper);
     }
 
     public static int dpToPx(double dp) {

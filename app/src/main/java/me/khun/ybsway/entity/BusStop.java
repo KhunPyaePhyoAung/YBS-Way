@@ -3,7 +3,6 @@ package me.khun.ybsway.entity;
 import androidx.annotation.Nullable;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Objects;
 
 public class BusStop implements Serializable {

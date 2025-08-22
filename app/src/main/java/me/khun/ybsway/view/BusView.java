@@ -1,19 +1,20 @@
-package me.khun.ybsway.entity;
+package me.khun.ybsway.view;
 
 import java.util.List;
 
-public class Bus {
+import me.khun.ybsway.entity.Coordinate;
+
+public class BusView {
     private String routeId;
     private String name;
-    private String start;
-    private String end;
     private String number;
+    private String originName;
+    private String destinationName;
     private String hexColorCode;
     private List<Integer> busStopIdList;
     private List<Coordinate> routeCoordinateList;
-    private Route route;
-
-    public Bus() {}
+    private Integer displayIconId;
+    private List<BusStopView> busStopViewList;
 
     public String getRouteId() {
         return routeId;
@@ -39,20 +40,20 @@ public class Bus {
         this.number = number;
     }
 
-    public Route getRoute() {
-        return route;
+    public String getOriginName() {
+        return originName;
     }
 
-    public void setRoute(Route route) {
-        this.route = route;
+    public void setOriginName(String originName) {
+        this.originName = originName;
     }
 
-    public String getStartName() {
-        return name.substring(name.indexOf(") ") + 2, name.indexOf(" -"));
+    public String getDestinationName() {
+        return destinationName;
     }
 
-    public String getEndName() {
-        return  name.substring(name.lastIndexOf(" ") + 1);
+    public void setDestinationName(String destinationName) {
+        this.destinationName = destinationName;
     }
 
     public String getHexColorCode() {
@@ -64,7 +65,7 @@ public class Bus {
     }
 
     public List<Integer> getBusStopIdList() {
-        return List.copyOf(busStopIdList);
+        return busStopIdList;
     }
 
     public void setBusStopIdList(List<Integer> busStopIdList) {
@@ -77,5 +78,21 @@ public class Bus {
 
     public void setRouteCoordinateList(List<Coordinate> routeCoordinateList) {
         this.routeCoordinateList = routeCoordinateList;
+    }
+
+    public List<BusStopView> getBusStopViewList() {
+        return busStopViewList;
+    }
+
+    public void setBusStopViewList(List<BusStopView> busStopViewList) {
+        this.busStopViewList = busStopViewList;
+    }
+
+    public Integer getDisplayIconId() {
+        return displayIconId;
+    }
+
+    public void setDisplayIconId(Integer displayIconId) {
+        this.displayIconId = displayIconId;
     }
 }

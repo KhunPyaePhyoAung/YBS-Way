@@ -1,14 +1,10 @@
 package me.khun.ybsway.service;
 
-import android.app.Application;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import me.khun.ybsway.YBSWayApplication;
-import me.khun.ybsway.entity.Bus;
 import me.khun.ybsway.entity.BusStop;
 import me.khun.ybsway.repository.BusStopRepository;
 

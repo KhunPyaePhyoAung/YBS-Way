@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import me.khun.ybsway.YBSWayApplication;
+import me.khun.ybsway.application.YBSWayApplication;
 import me.khun.ybsway.entity.Bus;
 import me.khun.ybsway.entity.Coordinate;
 
