@@ -17,6 +17,7 @@ import me.khun.ybsway.service.BusStopServiceImpl;
 
 public class YBSWayApplication extends android.app.Application {
     public static final int DEFAULT_BUS_STOP_LIST_SIZE = 500;
+    public static final Language DEFAULT_LANGUAGE = Language.ENGLISH;
 
     public static BusRepository busRepository;
     public static BusStopRepository busStopRepository;
@@ -31,17 +32,12 @@ public class YBSWayApplication extends android.app.Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
-
         busRepository = JsonFileBusRepositoryImpl.getInstance(getAppContext());
         busStopRepository = JsonFileBusStopRepositoryImpl.getInstance(getAppContext());
         busStopService = BusStopServiceImpl.getInstance(busStopRepository);
         busService = BusServiceImpl.getInstance(busRepository, busStopService);
         busStopMapper = new DefaultBusStopMapper();
         busMapper = new DefaultBusMapper(busStopMapper);
-    }
-
-    public static int dpToPx(double dp) {
-        return (int) (dp * getAppContext().getResources().getDisplayMetrics().density);
     }
 
     public static Context getAppContext() {

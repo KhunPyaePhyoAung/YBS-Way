@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.List;
 
+import me.khun.ybsway.application.Language;
 import me.khun.ybsway.entity.Bus;
 import me.khun.ybsway.entity.BusStop;
 import me.khun.ybsway.mapper.BusMapper;
@@ -34,11 +35,11 @@ public class BusRouteViewModel extends ViewModel {
         toolbarTitle = Transformations.map(busViewData, b -> String.format("YBS %s", b.getRouteId()));
     }
 
-    public void loadBusDataByRouteId(String routeId) {
+    public void loadBusDataByRouteId(String routeId, Language language) {
         Bus bus = busService.findOneByRouteId(routeId);
-        BusView busView = busMapper.mapToBusView(bus);
+        BusView busView = busMapper.mapToBusView(bus, language);
         List<BusStop> busStopList = busStopService.findAllByIds(bus.getBusStopIdList());
-        busStopListData.setValue(busStopMapper.mapToBusStopList(busStopList));
+        busStopListData.setValue(busStopMapper.mapToBusStopList(busStopList, language));
         busViewData.setValue(busView);
     }
 

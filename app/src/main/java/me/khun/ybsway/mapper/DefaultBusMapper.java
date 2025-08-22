@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import me.khun.ybsway.R;
+import me.khun.ybsway.application.Language;
 import me.khun.ybsway.entity.Bus;
 import me.khun.ybsway.view.BusView;
 
@@ -17,17 +18,17 @@ public class DefaultBusMapper implements BusMapper {
     }
 
     @Override
-    public BusView mapToBusView(Bus bus) {
+    public BusView mapToBusView(Bus bus, Language language) {
         BusView busView = new BusView();
         busView.setRouteId(bus.getRouteId());
         busView.setName(bus.getName());
         busView.setNumber(bus.getNumber());
-        busView.setOriginName(bus.getStartName());
-        busView.setDestinationName(bus.getEndName());
+        busView.setOriginName(bus.getOriginName());
+        busView.setDestinationName(bus.getDestinationName());
         busView.setHexColorCode(bus.getHexColorCode());
         busView.setBusStopIdList(bus.getBusStopIdList());
         busView.setRouteCoordinateList(bus.getRouteCoordinateList());
-        busView.setBusStopViewList(busStopMapper.mapToBusStopList(bus.getRoute().getBusStopList()));
+        busView.setBusStopViewList(busStopMapper.mapToBusStopList(bus.getRoute().getBusStopList(), language));
         if (bus.getName().contains("Airport")) {
             busView.setDisplayIconId(AIRPLANE_ICON);
         }
@@ -36,7 +37,7 @@ public class DefaultBusMapper implements BusMapper {
     }
 
     @Override
-    public List<BusView> mapToBusViewList(List<Bus> busList) {
-        return busList.stream().map(this::mapToBusView).collect(Collectors.toList());
+    public List<BusView> mapToBusViewList(List<Bus> busList, Language language) {
+        return busList.stream().map(bus -> mapToBusView(bus, language)).collect(Collectors.toList());
     }
 }

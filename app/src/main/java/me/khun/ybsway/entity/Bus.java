@@ -5,8 +5,8 @@ import java.util.List;
 public class Bus {
     private String routeId;
     private String name;
-    private String start;
-    private String end;
+    private String originName;
+    private String destinationName;
     private String number;
     private String hexColorCode;
     private List<Integer> busStopIdList;
@@ -29,6 +29,8 @@ public class Bus {
 
     public void setName(String name) {
         this.name = name;
+        this.originName = name.substring(name.indexOf(") ") + 2, name.indexOf(" -"));
+        this.destinationName = name.substring(name.lastIndexOf(" ") + 1);
     }
 
     public String getNumber() {
@@ -47,12 +49,12 @@ public class Bus {
         this.route = route;
     }
 
-    public String getStartName() {
-        return name.substring(name.indexOf(") ") + 2, name.indexOf(" -"));
+    public String getOriginName() {
+        return originName;
     }
 
-    public String getEndName() {
-        return  name.substring(name.lastIndexOf(" ") + 1);
+    public String getDestinationName() {
+        return  destinationName;
     }
 
     public String getHexColorCode() {

@@ -5,9 +5,8 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-import me.khun.ybsway.R;
+import me.khun.ybsway.application.Language;
 import me.khun.ybsway.entity.Bus;
 import me.khun.ybsway.mapper.BusMapper;
 import me.khun.ybsway.service.BusService;
@@ -24,10 +23,9 @@ public class BusListViewModel extends ViewModel {
         this.busService = busService;
     }
 
-    public void loadBusData() {
+    public void loadBusData(Language language) {
         List<Bus> buses = busService.getAll();
-        List<BusView> busViews = buses.stream().map(busMapper::mapToBusView).collect(Collectors.toList());
-
+        List<BusView> busViews = busMapper.mapToBusViewList(buses, language);
         busList.setValue(busViews);
     }
 

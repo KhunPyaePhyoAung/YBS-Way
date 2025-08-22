@@ -7,7 +7,6 @@ import android.os.StrictMode;
 import android.preference.PreferenceManager;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.content.res.AppCompatResources;
 
 import org.osmdroid.api.IMapController;
@@ -30,7 +29,7 @@ import me.khun.ybsway.R;
 import me.khun.ybsway.custom.BusStopMarker;
 import me.khun.ybsway.view.BusStopView;
 
-public class ActivityBaseMap  extends AppCompatActivity implements MapListener, MapEventsReceiver {
+public class ActivityBaseMap  extends BaseActivity implements MapListener, MapEventsReceiver {
     public static final double YANGON_LATITUDE = 16.851544;
     public static final double YANGON_LONGITUDE = 96.176099;
     public static final double MAX_NORTH_LATITUDE = 18.400445;
