@@ -26,18 +26,24 @@ public class YBSWayApplication extends android.app.Application {
     public static BusMapper busMapper;
     public static BusStopMapper busStopMapper;
 
+    private static LanguageConfig LANGUAGE_CONFIG;
     private static YBSWayApplication instance;
 
     @Override
     public void onCreate() {
         super.onCreate();
         instance = this;
+        LANGUAGE_CONFIG = LanguageConfig.getInstance(getAppContext());
         busRepository = JsonFileBusRepositoryImpl.getInstance(getAppContext());
         busStopRepository = JsonFileBusStopRepositoryImpl.getInstance(getAppContext());
         busStopService = BusStopServiceImpl.getInstance(busStopRepository);
         busService = BusServiceImpl.getInstance(busRepository, busStopService);
-        busStopMapper = new DefaultBusStopMapper();
-        busMapper = new DefaultBusMapper(busStopMapper);
+        busStopMapper = new DefaultBusStopMapper(LANGUAGE_CONFIG);
+        busMapper = new DefaultBusMapper(LANGUAGE_CONFIG, busStopMapper);
+    }
+
+    public static LanguageConfig languageConfig() {
+        return LANGUAGE_CONFIG;
     }
 
     public static Context getAppContext() {

@@ -1,23 +1,27 @@
 package me.khun.ybsway.mapper;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
-import me.khun.ybsway.application.Language;
+import me.khun.ybsway.application.LanguageConfig;
 import me.khun.ybsway.entity.BusStop;
 import me.khun.ybsway.view.BusStopView;
 
 public class DefaultBusStopMapper implements BusStopMapper {
 
+    private final LanguageConfig languageConfig;
+
+    public DefaultBusStopMapper(LanguageConfig languageConfig) {
+        this.languageConfig = languageConfig;
+    }
+
     @Override
-    public BusStopView mapToBusStopView(BusStop busStop, Language language) {
+    public BusStopView mapToBusStopView(BusStop busStop) {
         BusStopView busStopView = new BusStopView();
         busStopView.setId(busStop.getId());
         busStopView.setCoordinate(busStop.getCoordinate());
 
-        switch (language) {
+        switch (languageConfig.getLanguage()) {
             case BURMESE:
             default:
                 busStopView.setName(busStop.getNameMM());
@@ -35,7 +39,7 @@ public class DefaultBusStopMapper implements BusStopMapper {
     }
 
     @Override
-    public List<BusStopView> mapToBusStopList(List<BusStop> busStopList, Language language) {
-        return busStopList.stream().map(busStop -> mapToBusStopView(busStop, language)).collect(Collectors.toList());
+    public List<BusStopView> mapToBusStopList(List<BusStop> busStopList) {
+        return busStopList.stream().map(this::mapToBusStopView).collect(Collectors.toList());
     }
 }

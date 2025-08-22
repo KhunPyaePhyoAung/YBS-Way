@@ -17,13 +17,11 @@ import org.osmdroid.views.overlay.infowindow.InfoWindow;
 import java.util.ArrayList;
 import java.util.List;
 
-import me.khun.ybsway.application.Language;
 import me.khun.ybsway.application.YBSWayApplication;
 import me.khun.ybsway.R;
 import me.khun.ybsway.custom.BusStopInfoWindow;
 import me.khun.ybsway.custom.BusStopMarker;
 import me.khun.ybsway.entity.Coordinate;
-import me.khun.ybsway.hepler.LanguageHelper;
 import me.khun.ybsway.mapper.BusMapper;
 import me.khun.ybsway.mapper.BusStopMapper;
 import me.khun.ybsway.service.BusService;
@@ -41,7 +39,6 @@ public class ActivityBusRoute extends ActivityBaseMap implements Marker.OnMarker
     private BusStopService busStopService ;
     private BusRouteViewModel busRouteViewModel;
     private Marker nearestMarker;
-    private Language language;
     private boolean showDynamicInfoWindow = false;
 
     @Override
@@ -53,7 +50,6 @@ public class ActivityBusRoute extends ActivityBaseMap implements Marker.OnMarker
         map = findViewById(R.id.map);
         setupMap(map);
 
-        language = LanguageHelper.getLanguage(this);
         busMapper = YBSWayApplication.busMapper;
         busStopMapper = YBSWayApplication.busStopMapper;
         busService = YBSWayApplication.busService;
@@ -67,7 +63,7 @@ public class ActivityBusRoute extends ActivityBaseMap implements Marker.OnMarker
         Bundle bundle = getIntent().getExtras();
         if ( bundle != null) {
             String routeId = bundle.getString("route_id");
-            busRouteViewModel.loadBusDataByRouteId(routeId, language);
+            busRouteViewModel.loadBusDataByRouteId(routeId);
         }
     }
 

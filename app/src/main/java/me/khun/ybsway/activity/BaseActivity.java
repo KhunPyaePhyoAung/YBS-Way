@@ -4,11 +4,11 @@ import android.content.Context;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import me.khun.ybsway.hepler.LanguageHelper;
+import me.khun.ybsway.application.YBSWayApplication;
 
 public class BaseActivity extends AppCompatActivity {
     @Override
     protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(LanguageHelper.wrap(newBase));
+        super.attachBaseContext(YBSWayApplication.languageConfig().wrap(newBase));
     }
 }
