@@ -28,8 +28,8 @@
 
         <ImageView
             android:id="@+id/bus_icon"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
             android:layout_centerInParent="true" />
     </RelativeLayout>
 
@@ -57,7 +57,7 @@
         <ImageView
             android:layout_width="15dp"
             android:layout_height="15dp"
-            android:src="@drawable/bus_route_end"
+            android:src="@drawable/bus_route_destination"
         />
 
     </LinearLayout>

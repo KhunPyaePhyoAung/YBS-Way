@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <inset xmlns:android="http://schemas.android.com/apk/res/android"
-    android:inset="120px">   <!-- margin-like padding around your oval -->
+    android:inset="125px">   <!-- margin-like padding around your oval -->
 
-    <shape android:shape="rectangle">
+    <shape android:shape="oval">
         <size android:width="512px" android:height="512px"/>
         <solid android:color="@color/primary"/> <!-- Blue color -->
     </shape>
