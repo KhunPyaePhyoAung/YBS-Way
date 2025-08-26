@@ -14,11 +14,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:logo="@drawable/toolbar_bus_icon"
-            app:titleMarginStart="25dp"
+            app:titleMarginStart="5dp"
+            app:titleTextColor="@color/text_primary"
             app:layout_constraintTop_toTopOf="parent"
             android:elevation="20dp"
-            android:background="@color/primary"
-            app:titleTextColor="@color/text_primary">
+            app:navigationIcon="@drawable/toolbar_back_arrow"
+            app:navigationContentDescription="@string/toolbar_back_button_description"
+            android:background="@color/primary">
         </androidx.appcompat.widget.Toolbar>
 
         <org.osmdroid.views.MapView

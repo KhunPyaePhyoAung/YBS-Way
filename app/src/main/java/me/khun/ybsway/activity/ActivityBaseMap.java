@@ -23,7 +23,9 @@ import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.MapEventsOverlay;
 import org.osmdroid.views.overlay.Marker;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import me.khun.ybsway.R;
 import me.khun.ybsway.custom.BusStopMarker;
@@ -40,6 +42,7 @@ public class ActivityBaseMap  extends BaseActivity implements MapListener, MapEv
     public static final double MIN_ZOOM_LEVEL = 10;
     public static final double MAX_ZOOM_LEVEL = 22;
 
+    protected final Map<Integer, Drawable> busStopIconMap = new HashMap<>();
     protected MapView map ;
     protected IMapController mapController;
     protected int currentZoomLevel;
@@ -54,6 +57,18 @@ public class ActivityBaseMap  extends BaseActivity implements MapListener, MapEv
         StrictMode.setThreadPolicy(policy);
         Context ctx = getApplicationContext();
         Configuration.getInstance().load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx));
+
+        busStopIconMap.put(44, AppCompatResources.getDrawable(getApplicationContext(), R.drawable.bus_stop_icon_44dp));
+        busStopIconMap.put(40, AppCompatResources.getDrawable(getApplicationContext(), R.drawable.bus_stop_icon_40dp));
+        busStopIconMap.put(36, AppCompatResources.getDrawable(getApplicationContext(), R.drawable.bus_stop_icon_36dp));
+        busStopIconMap.put(32, AppCompatResources.getDrawable(getApplicationContext(), R.drawable.bus_stop_icon_32dp));
+        busStopIconMap.put(28, AppCompatResources.getDrawable(getApplicationContext(), R.drawable.bus_stop_icon_28dp));
+        busStopIconMap.put(24, AppCompatResources.getDrawable(getApplicationContext(), R.drawable.bus_stop_icon_24dp));
+        busStopIconMap.put(20, AppCompatResources.getDrawable(getApplicationContext(), R.drawable.bus_stop_icon_20dp));
+        busStopIconMap.put(16, AppCompatResources.getDrawable(getApplicationContext(), R.drawable.bus_stop_icon_16dp));
+        busStopIconMap.put(12, AppCompatResources.getDrawable(getApplicationContext(), R.drawable.bus_stop_icon_12dp));
+        busStopIconMap.put(10, AppCompatResources.getDrawable(getApplicationContext(), R.drawable.bus_stop_icon_10dp));
+        busStopIconMap.put(8, AppCompatResources.getDrawable(getApplicationContext(), R.drawable.bus_stop_icon_8dp));
     }
 
     protected void setupMap(MapView map) {
@@ -105,33 +120,33 @@ public class ActivityBaseMap  extends BaseActivity implements MapListener, MapEv
     }
 
     protected Drawable getScaledBusStopIcon(int zoomLevel) {
-        int drawableId;
+        int dpUnit;
 
         if (zoomLevel > 20) {
-            drawableId = R.drawable.bus_stop_icon_44dp;
+            dpUnit = 44;
         } else if (zoomLevel > 19) {
-            drawableId = R.drawable.bus_stop_icon_40dp;
+            dpUnit = 40;
         } else if (zoomLevel > 18) {
-            drawableId = R.drawable.bus_stop_icon_36dp;
+            dpUnit = 36;
         } else if (zoomLevel > 17) {
-            drawableId = R.drawable.bus_stop_icon_32dp;
+            dpUnit = 32;
         } else if (zoomLevel > 16) {
-            drawableId = R.drawable.bus_stop_icon_28dp;
+            dpUnit = 28;
         } else if (zoomLevel > 15) {
-            drawableId = R.drawable.bus_stop_icon_24dp;
+            dpUnit = 24;
         } else if (zoomLevel > 14) {
-            drawableId = R.drawable.bus_stop_icon_20dp;
+            dpUnit = 20;
         } else if (zoomLevel > 13) {
-            drawableId = R.drawable.bus_stop_icon_16dp;
+            dpUnit = 16;
         } else if (zoomLevel > 12) {
-            drawableId = R.drawable.bus_stop_icon_12dp;
+            dpUnit = 12;
         } else if (zoomLevel > 11) {
-            drawableId = R.drawable.bus_stop_icon_10dp;
+            dpUnit = 10;
         } else {
-            drawableId = R.drawable.bus_stop_icon_8dp;
+            dpUnit = 8;
         }
 
-        return AppCompatResources.getDrawable(getApplicationContext(), drawableId);
+        return busStopIconMap.get(dpUnit);
     }
 
     @Override

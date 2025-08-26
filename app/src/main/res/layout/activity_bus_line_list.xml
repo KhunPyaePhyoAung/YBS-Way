@@ -18,17 +18,19 @@
             app:logo="@drawable/toolbar_bus_icon"
             android:background="@color/primary"
             android:elevation="20dp"
-            app:titleMarginStart="25dp"
-            android:fontFamily="@font/carre_jwja"
-            app:layout_constraintTop_toTopOf="parent"
-            app:titleTextColor="@color/text_primary">
+            app:titleMarginStart="5dp"
+            app:titleTextColor="@color/text_primary"
+            app:titleTextAppearance="@style/Toolbar.TitleText"
+            app:navigationIcon="@drawable/toolbar_back_arrow"
+            app:navigationContentDescription="@string/toolbar_back_button_description"
+            app:layout_constraintTop_toTopOf="parent">
         </androidx.appcompat.widget.Toolbar>
 
         <ListView
             android:id="@+id/bus_list"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:dividerHeight="3dp"
+            android:dividerHeight="@dimen/bus_list_divider_height"
             android:background="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

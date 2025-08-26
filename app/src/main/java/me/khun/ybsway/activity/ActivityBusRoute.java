@@ -4,6 +4,7 @@ import android.graphics.Paint;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
 
 import org.osmdroid.events.ScrollEvent;
@@ -40,6 +41,7 @@ public class ActivityBusRoute extends ActivityBaseMap implements Marker.OnMarker
     private BusRouteViewModel busRouteViewModel;
     private Marker nearestMarker;
     private boolean showDynamicInfoWindow = false;
+    private ActionBar actionBar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,6 +49,14 @@ public class ActivityBusRoute extends ActivityBaseMap implements Marker.OnMarker
         setContentView(R.layout.activity_bus_route);
 
         Toolbar toolbar = findViewById(R.id.tool_bar);
+        setSupportActionBar(toolbar);
+        actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayShowHomeEnabled(true);
+        toolbar.setNavigationOnClickListener(v -> {
+            onBackPressed();
+        });
+
         map = findViewById(R.id.map);
         setupMap(map);
 
@@ -57,7 +67,7 @@ public class ActivityBusRoute extends ActivityBaseMap implements Marker.OnMarker
         busStopMarkerList = new ArrayList<>(YBSWayApplication.DEFAULT_BUS_STOP_LIST_SIZE);
         busRouteViewModel = new BusRouteViewModel(busMapper, busStopMapper, busService, busStopService);
 
-        busRouteViewModel.getToolbarTitle().observe(this, toolbar::setTitle);
+        busRouteViewModel.getToolbarTitle().observe(this, actionBar::setTitle);
         busRouteViewModel.getBusData().observe(this, this::drawRoute);
 
         Bundle bundle = getIntent().getExtras();

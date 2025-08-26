@@ -2,7 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="80dp"
     android:orientation="horizontal"
     android:elevation="10dp"
     android:background="@color/white"
@@ -11,7 +11,7 @@
     <RelativeLayout
         android:id="@+id/icon_layout"
         android:layout_width="80dp"
-        android:layout_height="match_parent"
+        android:layout_height="80dp"
         android:layout_gravity="center"
         android:elevation="20dp"
     >
@@ -21,15 +21,15 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:gravity="center"
-            android:textSize="30sp"
+            android:textSize="@dimen/bus_list_item_number_text_size"
             android:textColor="@color/white"
             android:fontFamily="@font/carre_jwja"
             />
 
         <ImageView
             android:id="@+id/bus_icon"
-            android:layout_width="26dp"
-            android:layout_height="26dp"
+            android:layout_width="@dimen/bus_list_item_icon_size"
+            android:layout_height="@dimen/bus_list_item_icon_size"
             android:layout_centerInParent="true" />
     </RelativeLayout>
 
@@ -40,24 +40,27 @@
         android:orientation="vertical"
         android:gravity="center"
         android:padding="2dp"
+        android:weightSum="3"
     >
 
         <ImageView
-            android:layout_width="15dp"
-            android:layout_height="15dp"
+            android:layout_width="@dimen/bus_list_item_trip_icon_size"
+            android:layout_height="@dimen/bus_list_item_trip_icon_size"
             android:src="@drawable/bus_route_origin"
+            android:layout_weight="1"
         />
 
         <ImageView
-            android:layout_width="15dp"
-            android:layout_height="15dp"
+            android:layout_width="@dimen/bus_list_item_trip_icon_size"
+            android:layout_height="@dimen/bus_list_item_trip_icon_size"
             android:src="@drawable/more_vertical"
         />
 
         <ImageView
-            android:layout_width="15dp"
-            android:layout_height="15dp"
+            android:layout_width="@dimen/bus_list_item_trip_icon_size"
+            android:layout_height="@dimen/bus_list_item_trip_icon_size"
             android:src="@drawable/bus_route_destination"
+            android:layout_weight="1"
         />
 
     </LinearLayout>
@@ -68,8 +71,8 @@
         android:orientation="vertical"
         android:gravity="fill_vertical"
         android:weightSum="2"
-        android:paddingVertical="8dp"
-        android:paddingRight="8dp"
+        android:paddingVertical="6dp"
+        android:paddingHorizontal="6dp"
     >
         <TextView
             android:id="@+id/bus_from"
@@ -78,7 +81,9 @@
             android:gravity="center_vertical"
             android:layout_weight="1"
             android:textColor="@color/black"
+            android:textSize="@dimen/bus_list_item_trip_text_size"
             android:layout_marginBottom="5dp"
+            android:textAppearance="@style/AppFont"
         />
 
         <TextView
@@ -89,6 +94,8 @@
             android:layout_weight="1"
             android:textColor="@color/black"
             android:layout_marginTop="5dp"
+            android:textSize="@dimen/bus_list_item_trip_text_size"
+            android:textAppearance="@style/AppFont"
         />
 
     </LinearLayout>

@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">YBS Way</string>
     <string name="bus_list_title">ယာဥ်လိုင်းများ</string>
+    <string name="toolbar_back_button_description">နောက်သို့</string>
 </resources>

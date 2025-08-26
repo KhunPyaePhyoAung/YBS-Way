@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.widget.ListView;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.widget.Toolbar;
 
 import me.khun.ybsway.application.YBSWayApplication;
 import me.khun.ybsway.R;
@@ -18,11 +20,21 @@ public class ActivityBusList extends BaseActivity {
     private BusMapper busMapper;
     private BusService busService;
     private BusListViewModel busViewModel;
+    private ActionBar actionBar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bus_line_list);
+
+        Toolbar toolbar = findViewById(R.id.tool_bar);
+        setSupportActionBar(toolbar);
+        actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayShowHomeEnabled(true);
+        toolbar.setNavigationOnClickListener(v -> {
+            onBackPressed();
+        });
 
         busListView = findViewById(R.id.bus_list);
         busMapper = YBSWayApplication.busMapper;
