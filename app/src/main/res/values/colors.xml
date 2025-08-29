@@ -5,15 +5,40 @@
     <color name="gray">#808080</color>
     <color name="white_smoke">#ABABAB</color>
     <color name="primary">#003E6C</color>
-    <color name="secondary">#005A9E</color>
+    <color name="primary_dark">#002947</color>
+    <color name="secondary">#B8E1FF</color>
     <color name="text_primary">#FFFFFF</color>
     <color name="text_secondary">#000000</color>
+    <color name="background_primary">#FFFFFF</color>
 
-    <color name="bus_stop_fill">@color/primary</color>
+    <color name="bus_stop_fill">#00609C</color>
     <color name="bus_stop_border">#FFFFFF</color>
     <color name="bus_stop_inner_icon">#FFFFFF</color>
-    <color name="bus_route">@color/primary</color>
+    <color name="bus_route">#00609C</color>
     <color name="bus_stop_info_bubble_background">#DC5E00</color>
     <color name="bus_stop_info_bubble_border">#000000</color>
     <color name="bus_stop_info_bubble_text">#FFFFFF</color>
+
+    <color name="nav_header_bg">@color/primary</color>
+    <color name="nav_header_title">@color/text_primary</color>
+    <color name="nav_header_sub_title">@color/text_primary</color>
+
+    <color name="nav_toggle_icon">@color/white</color>
+    <color name="nav_toggle_bg">#BF424242</color>
+    <color name="nav_toggle_bg_pressed">#BF171717</color>
+
+    <color name="btn_search_stop_icon">@color/text_primary</color>
+    <color name="btn_search_stop_bg">@color/primary</color>
+    <color name="btn_search_stop_bg_pressed">@color/secondary</color>
+
+    <color name="search_location_input_border">#CACACA</color>
+    <color name="search_location_input_bg">@color/white</color>
+    <color name="search_location_input_text">#000000</color>
+    <color name="search_location_input_hint">#CCCCCC</color>
+    <color name="search_location_input_cursor">@color/primary</color>
+    <color name="search_location_input_icon">#CCCCCC</color>
+
+    <color name="screen_loading_border">#7ECCFD</color>
+    <color name="screen_loading_bg">#DAFCFF</color>
+    <color name="screen_loading_message">@color/primary</color>
 </resources>

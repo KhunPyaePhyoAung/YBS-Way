@@ -9,4 +9,12 @@
     <dimen name="bus_stop_info_window_street_text_size">11sp</dimen>
     <dimen name="bus_stop_info_window_township_text_size">11sp</dimen>
     <dimen name="bus_stop_info_window_arrow_size">16dp</dimen>
+    <dimen name="search_location_input_height">40dp</dimen>
+    <dimen name="search_location_input_icon_size">20dp</dimen>
+    <dimen name="screen_loading_icon_size">30dp</dimen>
+    <dimen name="nav_header_height">200dp</dimen>
+    <dimen name="nav_icon_size">60dp</dimen>
+    <dimen name="nav_header_size">18sp</dimen>
+    <dimen name="nav_sub_header_size">14sp</dimen>
+    <dimen name="screen_loading_message_size">12sp</dimen>
 </resources>

@@ -10,7 +10,7 @@ public class ActivitySplash extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        startActivity(new Intent(this, ActivityBusList.class));
+        startActivity(new Intent(this, ActivityMain.class));
         finish();
     }
 }

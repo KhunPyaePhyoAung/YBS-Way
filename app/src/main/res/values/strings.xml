@@ -1,5 +1,14 @@
 <resources>
     <string name="app_name">YBS Way</string>
-    <string name="bus_list_title">ယာဥ်လိုင်းများ</string>
+    <string name="nav_home_page_title">ပင်မစာမျက်နှာ</string>
+    <string name="nav_language_setting_page_title">ဘာသာစကား</string>
+    <string name="nav_bus_list_title">ယာဉ်လိုင်းများ</string>
+    <string name="nav_about_title">အကြောင်း</string>
+    <string name="bus_list_title">ယာဉ်လိုင်းများ</string>
     <string name="toolbar_back_button_description">နောက်သို့</string>
+    <string name="nav_header_sub_title">ybsway@gmail.com</string>
+    <string name="nav_open">Open Navigation</string>
+    <string name="nav_close">Close Navigation</string>
+    <string name="ybs_data_loading_message">အချက်အလက်များအသင့်ပြင်နေပါသည်။</string>
+    <string name="search_location_input_hint">မှတ်တိုင်ရှာမည်</string>
 </resources>

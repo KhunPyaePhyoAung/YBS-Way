@@ -1,11 +1,15 @@
 package me.khun.ybsway.activity;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
 
+import androidx.annotation.IdRes;
 import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 
@@ -22,16 +26,23 @@ import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.MapEventsOverlay;
 import org.osmdroid.views.overlay.Marker;
+import org.osmdroid.views.overlay.Polyline;
+import org.osmdroid.views.overlay.infowindow.InfoWindow;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import me.khun.ybsway.R;
+import me.khun.ybsway.application.YBSWayApplication;
+import me.khun.ybsway.custom.BusStopInfoWindow;
 import me.khun.ybsway.custom.BusStopMarker;
+import me.khun.ybsway.entity.Coordinate;
 import me.khun.ybsway.view.BusStopView;
+import me.khun.ybsway.view.BusView;
 
-public class ActivityBaseMap  extends BaseActivity implements MapListener, MapEventsReceiver {
+public class ActivityBaseMap  extends BaseActivity implements MapListener, MapEventsReceiver, Marker.OnMarkerClickListener {
     public static final double YANGON_LATITUDE = 16.851544;
     public static final double YANGON_LONGITUDE = 96.176099;
     public static final double MAX_NORTH_LATITUDE = 18.400445;
@@ -41,13 +52,22 @@ public class ActivityBaseMap  extends BaseActivity implements MapListener, MapEv
     public static final double DEFAULT_MAP_ZOOM_LEVEL = 13;
     public static final double MIN_ZOOM_LEVEL = 10;
     public static final double MAX_ZOOM_LEVEL = 22;
+    public static final double PROPER_ZOOM_LEVEL = 16;
+    public static final long ZOOM_ANIMATION_SPEED = 1500L;
 
     protected final Map<Integer, Drawable> busStopIconMap = new HashMap<>();
-    protected MapView map ;
+    protected MapView mapView;
     protected IMapController mapController;
     protected int currentZoomLevel;
     protected Drawable busStopIcon;
     protected GeoPoint mapCenterPoint;
+    protected boolean showDynamicInfoWindow = false;
+    protected final List<BusStopMarker> busStopMarkerList = new ArrayList<>(YBSWayApplication.DEFAULT_BUS_STOP_LIST_SIZE);
+    protected Marker nearestMarker;
+    protected volatile boolean isLoadingBusStops = false;
+
+    private final Handler mainHandler = new Handler(Looper.getMainLooper());
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,6 +78,7 @@ public class ActivityBaseMap  extends BaseActivity implements MapListener, MapEv
         Context ctx = getApplicationContext();
         Configuration.getInstance().load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx));
 
+        busStopIconMap.put(48, AppCompatResources.getDrawable(getApplicationContext(), R.drawable.bus_stop_icon_48dp));
         busStopIconMap.put(44, AppCompatResources.getDrawable(getApplicationContext(), R.drawable.bus_stop_icon_44dp));
         busStopIconMap.put(40, AppCompatResources.getDrawable(getApplicationContext(), R.drawable.bus_stop_icon_40dp));
         busStopIconMap.put(36, AppCompatResources.getDrawable(getApplicationContext(), R.drawable.bus_stop_icon_36dp));
@@ -71,26 +92,27 @@ public class ActivityBaseMap  extends BaseActivity implements MapListener, MapEv
         busStopIconMap.put(8, AppCompatResources.getDrawable(getApplicationContext(), R.drawable.bus_stop_icon_8dp));
     }
 
-    protected void setupMap(MapView map) {
-        mapController = map.getController();
+    protected void setupMap(@IdRes int mapViewId) {
+        mapView = findViewById(mapViewId);
+        mapController = mapView.getController();
         mapController.setZoom(DEFAULT_MAP_ZOOM_LEVEL);
         mapController.setCenter(new GeoPoint(YANGON_LATITUDE, YANGON_LONGITUDE));
 
-        map.setTileSource(getTileSource());
-        map.setBuiltInZoomControls(false);
-        map.setMultiTouchControls(true);
-        map.setMinZoomLevel(MIN_ZOOM_LEVEL);
-        map.setMaxZoomLevel(MAX_ZOOM_LEVEL);
-        map.setHorizontalMapRepetitionEnabled(false);
-        map.setVerticalMapRepetitionEnabled(false);
-        map.setScrollableAreaLimitLatitude(MAX_NORTH_LATITUDE, MAX_SOUTH_LATITUDE, 0);
-        map.setScrollableAreaLimitLongitude(MAX_WEST_LONGITUDE, MAX_EAST_LONGITUDE, 0);
-        map.addMapListener(this);
+        mapView.setTileSource(getTileSource());
+        mapView.setBuiltInZoomControls(false);
+        mapView.setMultiTouchControls(true);
+        mapView.setMinZoomLevel(MIN_ZOOM_LEVEL);
+        mapView.setMaxZoomLevel(MAX_ZOOM_LEVEL);
+        mapView.setHorizontalMapRepetitionEnabled(false);
+        mapView.setVerticalMapRepetitionEnabled(false);
+        mapView.setScrollableAreaLimitLatitude(MAX_NORTH_LATITUDE, MAX_SOUTH_LATITUDE, 0);
+        mapView.setScrollableAreaLimitLongitude(MAX_WEST_LONGITUDE, MAX_EAST_LONGITUDE, 0);
+        mapView.addMapListener(this);
         MapEventsOverlay mapEventsOverlay = new MapEventsOverlay(this);
-        map.getOverlays().add(0, mapEventsOverlay);
+        mapView.getOverlays().add(0, mapEventsOverlay);
 
-        currentZoomLevel = map.getZoomLevel();
-        mapCenterPoint = new GeoPoint(map.getMapCenter().getLatitude(), map.getMapCenter().getLongitude());
+        currentZoomLevel = mapView.getZoomLevel();
+        mapCenterPoint = new GeoPoint(mapView.getMapCenter().getLatitude(), mapView.getMapCenter().getLongitude());
         busStopIcon = getScaledBusStopIcon(currentZoomLevel);
     }
 
@@ -109,7 +131,7 @@ public class ActivityBaseMap  extends BaseActivity implements MapListener, MapEv
     }
 
     protected BusStopMarker getBusStopMarker(BusStopView busStop) {
-        BusStopMarker busStopMarker = new BusStopMarker(map, busStop);
+        BusStopMarker busStopMarker = new BusStopMarker(mapView, busStop);
         GeoPoint point = new GeoPoint(busStop.getLatitude(), busStop.getLongitude());
         busStopMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER);
         busStopMarker.setPosition(point);
@@ -122,7 +144,9 @@ public class ActivityBaseMap  extends BaseActivity implements MapListener, MapEv
     protected Drawable getScaledBusStopIcon(int zoomLevel) {
         int dpUnit;
 
-        if (zoomLevel > 20) {
+        if (zoomLevel > 21) {
+            dpUnit = 48;
+        } else if (zoomLevel > 20) {
             dpUnit = 44;
         } else if (zoomLevel > 19) {
             dpUnit = 40;
@@ -149,9 +173,94 @@ public class ActivityBaseMap  extends BaseActivity implements MapListener, MapEv
         return busStopIconMap.get(dpUnit);
     }
 
+    protected void drawRoute(BusView busView) {
+        if ( busView == null || busView.getRouteCoordinateList().isEmpty() ) {
+            return;
+        }
+
+        int roadWidth = 15;
+        int roadColor = getResources().getColor(R.color.bus_route);
+
+        Polyline roadOverlay = new Polyline(mapView);
+        roadOverlay.getOutlinePaint().setStrokeWidth(roadWidth);
+        roadOverlay.getOutlinePaint().setColor(roadColor);
+        roadOverlay.getOutlinePaint().setStrokeJoin(Paint.Join.ROUND);
+        mapView.getOverlays().add(roadOverlay);
+
+        List<Coordinate> coordinateList = busView.getRouteCoordinateList();
+
+        if ( coordinateList == null || coordinateList.isEmpty() ) {
+            return;
+        }
+
+        for ( Coordinate coordinate : busView.getRouteCoordinateList() ) {
+            GeoPoint point = new GeoPoint(coordinate.getLatitude(), coordinate.getLongitude());
+            roadOverlay.addPoint(point);
+            roadOverlay.setInfoWindow(null);
+        }
+
+        List<BusStopView> busStopViewList = busView.getBusStopViewList();
+        drawBusStops(busStopViewList);
+
+        BusStopView centerStop = busStopViewList.get(busStopViewList.size() / 4);
+        GeoPoint centerGeoPoint = new GeoPoint(centerStop.getLatitude(), centerStop.getLongitude());
+        mapController.animateTo(centerGeoPoint);
+        mapView.invalidate();
+    }
+
+    protected void drawBusStops(List<BusStopView> busStopViewList) {
+
+        new Thread(() -> {
+            isLoadingBusStops = true;
+            List<BusStopMarker> markerList = new ArrayList<>();
+            for ( BusStopView busStop : busStopViewList ) {
+                BusStopMarker busStopMarker = getBusStopMarker(busStop);
+                busStopMarker.setOnMarkerClickListener(this);
+                BusStopInfoWindow infoWindow = (new BusStopInfoWindow(mapView, busStop));
+                infoWindow.setOnClickListener(view -> {
+                    infoWindow.close();
+                    showDynamicInfoWindow = false;
+                });
+                busStopMarker.setInfoWindow(infoWindow);
+                markerList.add(busStopMarker);
+                mainHandler.post(() -> {
+                    mapView.getOverlays().add(busStopMarker);
+                    mapView.invalidate();
+                });
+            }
+            synchronized (busStopMarkerList) {
+                busStopMarkerList.clear();
+                busStopMarkerList.addAll(markerList);
+            }
+
+            mainHandler.post(() -> {
+                isLoadingBusStops = false;
+                resetBusStopIcons();
+                mapView.invalidate();
+                postDrawBusStops();
+            });
+        }).start();
+    }
+
+    protected void postDrawBusStops() {
+
+    }
+
     @Override
     public boolean onScroll(ScrollEvent event) {
-        mapCenterPoint = new GeoPoint(map.getMapCenter().getLatitude(), map.getMapCenter().getLongitude());
+        mapCenterPoint = new GeoPoint(mapView.getMapCenter().getLatitude(), mapView.getMapCenter().getLongitude());
+        Marker newNearestMarker = findNearestMarker(mapCenterPoint, busStopMarkerList);
+
+        if ( nearestMarker == newNearestMarker ) {
+            return false;
+        }
+
+        nearestMarker = newNearestMarker;
+
+        if ( nearestMarker != null && showDynamicInfoWindow) {
+            InfoWindow.closeAllInfoWindowsOn(mapView);
+            nearestMarker.showInfoWindow();
+        }
         return true;
     }
 
@@ -160,27 +269,34 @@ public class ActivityBaseMap  extends BaseActivity implements MapListener, MapEv
         int zoomLevel = (int) event.getZoomLevel();
         if ( currentZoomLevel != zoomLevel ) {
             currentZoomLevel = (int) event.getZoomLevel();
-            busStopIcon = getScaledBusStopIcon(currentZoomLevel);
+            resetBusStopIcons();
             return true;
         }
         return false;
     }
 
+    protected void resetBusStopIcons() {
+        if (isLoadingBusStops) {
+            return;
+        }
+
+        busStopIcon = getScaledBusStopIcon(currentZoomLevel);
+        for (BusStopMarker busStopMarker : busStopMarkerList) {
+            busStopMarker.setIcon(busStopIcon);
+            busStopMarker.resetAnchor(0.5f, 0f);
+        }
+    }
+
     @Override
     public void onResume() {
         super.onResume();
-        map.onResume();
+        mapView.onResume();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        map.onPause();
-    }
-
-    @Override
-    public boolean singleTapConfirmedHelper(GeoPoint p) {
-        return false;
+        mapView.onPause();
     }
 
     @Override
@@ -205,5 +321,25 @@ public class ActivityBaseMap  extends BaseActivity implements MapListener, MapEv
         }
 
         return nearest;
+    }
+
+    @Override
+    public boolean onMarkerClick(Marker marker, MapView mapView) {
+        InfoWindow.closeAllInfoWindowsOn(mapView);
+        if (mapView.getZoomLevelDouble() > PROPER_ZOOM_LEVEL) {
+            mapController.animateTo(marker.getPosition());
+        } else {
+            mapController.animateTo(marker.getPosition(), PROPER_ZOOM_LEVEL, ZOOM_ANIMATION_SPEED);
+        }
+        marker.showInfoWindow();
+        showDynamicInfoWindow = true;
+        return true;
+    }
+
+    @Override
+    public boolean singleTapConfirmedHelper(GeoPoint p) {
+        InfoWindow.closeAllInfoWindowsOn(mapView);
+        showDynamicInfoWindow = false;
+        return true;
     }
 }

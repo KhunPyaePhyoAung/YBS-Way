@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn = "navigation_view">
+
+    <group
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/nav_home_icon"
+            android:title="@string/nav_home_page_title"/>
+
+        <item
+            android:id="@+id/nav_bus_lines"
+            android:icon="@drawable/nav_bus_lines_icon"
+            android:title="@string/bus_list_title"/>
+
+        <item
+            android:id="@+id/nav_language_settings"
+            android:icon="@drawable/nav_language_icon"
+            android:title="@string/nav_language_setting_page_title"/>
+
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/nav_about_icon"
+            android:title="@string/nav_about_title"/>
+    </group>
+
+</menu>

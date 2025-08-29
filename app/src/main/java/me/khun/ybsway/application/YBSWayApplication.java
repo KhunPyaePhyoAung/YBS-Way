@@ -40,6 +40,7 @@ public class YBSWayApplication extends android.app.Application {
         busService = BusServiceImpl.getInstance(busRepository, busStopService);
         busStopMapper = new DefaultBusStopMapper(LANGUAGE_CONFIG);
         busMapper = new DefaultBusMapper(LANGUAGE_CONFIG, busStopMapper);
+        long end = System.currentTimeMillis();
     }
 
     public static LanguageConfig languageConfig() {
