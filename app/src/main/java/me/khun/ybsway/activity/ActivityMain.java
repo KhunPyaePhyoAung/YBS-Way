@@ -26,6 +26,7 @@ public class ActivityMain extends ActivityBaseMap implements NavigationView.OnNa
     private DrawerLayout drawerLayout;
     private LinearLayout loadingContainer;
     private ImageButton btnNavToggle;
+    private ImageButton searchRouteButton;
     private NavigationView navigationView;
 
     @Override
@@ -36,12 +37,14 @@ public class ActivityMain extends ActivityBaseMap implements NavigationView.OnNa
 
         busStopMapper = YBSWayApplication.busStopMapper;
         busStopService = YBSWayApplication.busStopService;
+
         mainViewModel = new MainViewModel(busStopMapper, busStopService);
         mainViewModel.getAllBusStopsData().observe(this, this::drawBusStops);
 
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         btnNavToggle = findViewById(R.id.btn_nav_toggle);
+        searchRouteButton = findViewById(R.id.btn_search_route);
         loadingContainer = findViewById(R.id.loading_container);
 
         btnNavToggle.setOnClickListener(v -> {
@@ -54,7 +57,6 @@ public class ActivityMain extends ActivityBaseMap implements NavigationView.OnNa
 
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setCheckedItem(R.id.nav_home);
-
         mainViewModel.loadAllBusStopsData();
     }
 
@@ -66,16 +68,24 @@ public class ActivityMain extends ActivityBaseMap implements NavigationView.OnNa
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        startActivity(new Intent(this, ActivityBusList.class));
 
+        int menuId = item.getItemId();
+        Intent intent = null;
+
+        if (menuId == R.id.nav_home) {
+            intent = new Intent(this, ActivityMain.class);
+        } else if (menuId == R.id.nav_bus_lines) {
+            intent = new Intent(this, ActivityBusList.class);
+        } else if (menuId == R.id.nav_language_settings) {
+            intent = new Intent(this, ActivityLanguageSetting.class);
+        } else if (menuId == R.id.nav_about) {
+            intent = new Intent(this, ActivityMain.class);
+        }
+
+        startActivity(intent);
+        item.setChecked(true);
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        navigationView.setCheckedItem(R.id.nav_home);
     }
 
     @Override

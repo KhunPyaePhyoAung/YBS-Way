@@ -41,4 +41,10 @@
     <color name="screen_loading_border">#7ECCFD</color>
     <color name="screen_loading_bg">#DAFCFF</color>
     <color name="screen_loading_message">@color/primary</color>
+
+    <color name="toolbar_logo">@color/text_primary</color>
+
+    <color name="language_list_item">@color/background_primary</color>
+    <color name="language_list_item_selected">@color/secondary</color>
+
 </resources>

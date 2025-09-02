@@ -57,6 +57,10 @@
             android:name=".activity.ActivityBusRoute"
             android:exported="true">
         </activity>
+        <activity
+            android:name=".activity.ActivityLanguageSetting"
+            android:exported="true">
+        </activity>
     </application>
 
 </manifest>

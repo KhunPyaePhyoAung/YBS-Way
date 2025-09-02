@@ -14,7 +14,7 @@ import me.khun.ybsway.mapper.BusMapper;
 import me.khun.ybsway.service.BusService;
 import me.khun.ybsway.viewmodel.BusListViewModel;
 
-public class ActivityBusList extends BaseActivity {
+public class ActivityBusList extends ActivityBase {
 
     private ListView busListView;
     private BusMapper busMapper;

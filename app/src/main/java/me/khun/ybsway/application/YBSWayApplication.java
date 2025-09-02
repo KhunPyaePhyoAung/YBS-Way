@@ -6,6 +6,8 @@ import me.khun.ybsway.mapper.BusMapper;
 import me.khun.ybsway.mapper.BusStopMapper;
 import me.khun.ybsway.mapper.DefaultBusMapper;
 import me.khun.ybsway.mapper.DefaultBusStopMapper;
+import me.khun.ybsway.mapper.DefaultLanguageMapper;
+import me.khun.ybsway.mapper.LanguageMapper;
 import me.khun.ybsway.repository.BusRepository;
 import me.khun.ybsway.repository.BusStopRepository;
 import me.khun.ybsway.repository.JsonFileBusRepositoryImpl;
@@ -25,6 +27,7 @@ public class YBSWayApplication extends android.app.Application {
     public static BusStopService busStopService;
     public static BusMapper busMapper;
     public static BusStopMapper busStopMapper;
+    public static LanguageMapper languageMapper;
 
     private static LanguageConfig LANGUAGE_CONFIG;
     private static YBSWayApplication instance;
@@ -40,7 +43,7 @@ public class YBSWayApplication extends android.app.Application {
         busService = BusServiceImpl.getInstance(busRepository, busStopService);
         busStopMapper = new DefaultBusStopMapper(LANGUAGE_CONFIG);
         busMapper = new DefaultBusMapper(LANGUAGE_CONFIG, busStopMapper);
-        long end = System.currentTimeMillis();
+        languageMapper = new DefaultLanguageMapper();
     }
 
     public static LanguageConfig languageConfig() {

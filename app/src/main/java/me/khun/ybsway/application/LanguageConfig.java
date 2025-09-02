@@ -12,10 +12,14 @@ public class LanguageConfig {
     private static final String PREFS_NAME = "app_prefs";
     private static final String KEY_LANGUAGE = "language";
     private static LanguageConfig instance;
+    private Language currentLanguage;
     private final SharedPreferences prefs;
+    private final Context context;
 
     private LanguageConfig(Context context) {
+        this.context = context;
         prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        currentLanguage = Language.ofCode(prefs.getString(KEY_LANGUAGE, DEFAULT_LANGUAGE.getCode()));
     }
 
     public static synchronized LanguageConfig getInstance(Context context) {
@@ -27,11 +31,12 @@ public class LanguageConfig {
 
     public void setLanguage(Language language) {
         prefs.edit().putString(KEY_LANGUAGE, language.getCode()).apply();
+        currentLanguage = language;
+        applyLanguage(context, language);
     }
 
-    public Language getLanguage() {
-        String currentCode = prefs.getString(KEY_LANGUAGE, DEFAULT_LANGUAGE.getCode());
-        return Language.ofCode(currentCode);
+    public Language getCurrentLanguage() {
+        return currentLanguage;
     }
 
     public Context applyLanguage(Context context, Language language) {
@@ -46,7 +51,6 @@ public class LanguageConfig {
     }
 
     public Context wrap(Context context) {
-        Language language = getLanguage();
-        return applyLanguage(context, language);
+        return applyLanguage(context, getCurrentLanguage());
     }
 }

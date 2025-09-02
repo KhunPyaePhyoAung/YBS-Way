@@ -2,11 +2,10 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -14,8 +13,8 @@
             android:id="@+id/tool_bar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/toolbar_height"
-            app:title="@string/bus_list_title"
-            app:logo="@drawable/toolbar_bus_icon"
+            app:title="@string/language_setting_title"
+            app:logo="@drawable/toolbar_language_icon"
             android:background="@color/primary"
             android:elevation="20dp"
             app:titleMarginStart="5dp"
@@ -27,10 +26,10 @@
         </androidx.appcompat.widget.Toolbar>
 
         <ListView
-            android:id="@+id/bus_list"
+            android:id="@+id/language_list"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:dividerHeight="@dimen/bus_list_divider_height"
+            android:dividerHeight="@dimen/language_list_divider_height"
             android:background="@color/background_primary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

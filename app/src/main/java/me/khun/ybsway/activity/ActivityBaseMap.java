@@ -42,7 +42,7 @@ import me.khun.ybsway.entity.Coordinate;
 import me.khun.ybsway.view.BusStopView;
 import me.khun.ybsway.view.BusView;
 
-public class ActivityBaseMap  extends BaseActivity implements MapListener, MapEventsReceiver, Marker.OnMarkerClickListener {
+public class ActivityBaseMap  extends ActivityBase implements MapListener, MapEventsReceiver, Marker.OnMarkerClickListener {
     public static final double YANGON_LATITUDE = 16.851544;
     public static final double YANGON_LONGITUDE = 96.176099;
     public static final double MAX_NORTH_LATITUDE = 18.400445;
@@ -130,7 +130,7 @@ public class ActivityBaseMap  extends BaseActivity implements MapListener, MapEv
         return tileSource;
     }
 
-    protected BusStopMarker getBusStopMarker(BusStopView busStop) {
+    protected BusStopMarker createBusStopMarker(BusStopView busStop) {
         BusStopMarker busStopMarker = new BusStopMarker(mapView, busStop);
         GeoPoint point = new GeoPoint(busStop.getLatitude(), busStop.getLongitude());
         busStopMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER);
@@ -214,36 +214,28 @@ public class ActivityBaseMap  extends BaseActivity implements MapListener, MapEv
             isLoadingBusStops = true;
             List<BusStopMarker> markerList = new ArrayList<>();
             for ( BusStopView busStop : busStopViewList ) {
-                BusStopMarker busStopMarker = getBusStopMarker(busStop);
+                BusStopMarker busStopMarker = createBusStopMarker(busStop);
                 busStopMarker.setOnMarkerClickListener(this);
-                BusStopInfoWindow infoWindow = (new BusStopInfoWindow(mapView, busStop));
-                infoWindow.setOnClickListener(view -> {
-                    infoWindow.close();
-                    showDynamicInfoWindow = false;
-                });
-                busStopMarker.setInfoWindow(infoWindow);
                 markerList.add(busStopMarker);
                 mainHandler.post(() -> {
                     mapView.getOverlays().add(busStopMarker);
                     mapView.invalidate();
                 });
             }
+
             synchronized (busStopMarkerList) {
                 busStopMarkerList.clear();
                 busStopMarkerList.addAll(markerList);
             }
 
-            mainHandler.post(() -> {
-                isLoadingBusStops = false;
-                resetBusStopIcons();
-                mapView.invalidate();
-                postDrawBusStops();
-            });
+            mainHandler.post(this::postDrawBusStops);
         }).start();
     }
 
     protected void postDrawBusStops() {
-
+        isLoadingBusStops = false;
+        resetBusStopIcons();
+        mapView.invalidate();
     }
 
     @Override
@@ -259,6 +251,10 @@ public class ActivityBaseMap  extends BaseActivity implements MapListener, MapEv
 
         if ( nearestMarker != null && showDynamicInfoWindow) {
             InfoWindow.closeAllInfoWindowsOn(mapView);
+            if (nearestMarker instanceof BusStopMarker) {
+                BusStopMarker busStopMarker = (BusStopMarker) nearestMarker;
+                createBusStopInfoWindowIfNull(busStopMarker);
+            }
             nearestMarker.showInfoWindow();
         }
         return true;
@@ -284,6 +280,17 @@ public class ActivityBaseMap  extends BaseActivity implements MapListener, MapEv
         for (BusStopMarker busStopMarker : busStopMarkerList) {
             busStopMarker.setIcon(busStopIcon);
             busStopMarker.resetAnchor(0.5f, 0f);
+        }
+    }
+
+    protected void createBusStopInfoWindowIfNull(BusStopMarker busStopMarker) {
+        if (busStopMarker.getInfoWindow() == null) {
+            BusStopInfoWindow infoWindow = new BusStopInfoWindow(mapView, busStopMarker.getBusStop());
+            infoWindow.setOnClickListener(view -> {
+                infoWindow.close();
+                showDynamicInfoWindow = false;
+            });
+            busStopMarker.setInfoWindow(infoWindow);
         }
     }
 
@@ -331,6 +338,12 @@ public class ActivityBaseMap  extends BaseActivity implements MapListener, MapEv
         } else {
             mapController.animateTo(marker.getPosition(), PROPER_ZOOM_LEVEL, ZOOM_ANIMATION_SPEED);
         }
+
+        if (marker instanceof BusStopMarker) {
+            BusStopMarker busStopMarker = (BusStopMarker) marker;
+            createBusStopInfoWindowIfNull(busStopMarker);
+        }
+
         marker.showInfoWindow();
         showDynamicInfoWindow = true;
         return true;

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="25dp"
-    android:height="25dp"
+    android:width="@dimen/toolbar_logo_size"
+    android:height="@dimen/toolbar_logo_size"
     android:viewportWidth="24"
     android:viewportHeight="24">
     <path
-        android:fillColor="@color/text_primary"
+        android:fillColor="@color/toolbar_logo"
         android:pathData="M20.016 11.016v1.969h-12.188l5.578 5.625-1.406 1.406-8.016-8.016 8.016-8.016 1.406 1.406-5.578 5.625h12.188z" />
 </vector>

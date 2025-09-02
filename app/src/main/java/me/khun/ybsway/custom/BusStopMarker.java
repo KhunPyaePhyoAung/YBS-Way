@@ -13,6 +13,7 @@ public class BusStopMarker extends Marker {
         super(mapView);
         this.mapView = mapView;
         this.busStop = busStop;
+        setInfoWindow(null);
     }
 
     public BusStopView getBusStop() {
@@ -25,4 +26,5 @@ public class BusStopMarker extends Marker {
             showInfoWindow();
         }
     }
+
 }

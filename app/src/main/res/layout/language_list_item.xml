@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="15dp"
+    android:orientation="horizontal"
+    android:gravity="start|center_vertical"
+    android:elevation="10dp"
+    android:background="@color/language_list_item"
+    >
+
+    <ImageView
+        android:id="@+id/language_icon_image_view"
+        android:layout_width="@dimen/language_list_item_icon_size"
+        android:layout_height="@dimen/language_list_item_icon_size" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        >
+        <TextView
+            android:id="@+id/language_name_en"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:textColor="@color/black"
+            android:textSize="@dimen/language_list_item_main_text_size"
+            android:textAppearance="@style/AppFont"
+            />
+
+        <TextView
+            android:id="@+id/language_name_native"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/language_list_item_sub_text_size"
+            android:textAppearance="@style/AppFont"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>
