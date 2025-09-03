@@ -253,9 +253,8 @@ public class ActivityBaseMap  extends ActivityBase implements MapListener, MapEv
             InfoWindow.closeAllInfoWindowsOn(mapView);
             if (nearestMarker instanceof BusStopMarker) {
                 BusStopMarker busStopMarker = (BusStopMarker) nearestMarker;
-                createBusStopInfoWindowIfNull(busStopMarker);
+                showBusStopInfoWindow(busStopMarker);
             }
-            nearestMarker.showInfoWindow();
         }
         return true;
     }
@@ -281,6 +280,11 @@ public class ActivityBaseMap  extends ActivityBase implements MapListener, MapEv
             busStopMarker.setIcon(busStopIcon);
             busStopMarker.resetAnchor(0.5f, 0f);
         }
+    }
+
+    protected void showBusStopInfoWindow(BusStopMarker busStopMarker) {
+        createBusStopInfoWindowIfNull(busStopMarker);
+        busStopMarker.showInfoWindow();
     }
 
     protected void createBusStopInfoWindowIfNull(BusStopMarker busStopMarker) {
@@ -341,11 +345,10 @@ public class ActivityBaseMap  extends ActivityBase implements MapListener, MapEv
 
         if (marker instanceof BusStopMarker) {
             BusStopMarker busStopMarker = (BusStopMarker) marker;
-            createBusStopInfoWindowIfNull(busStopMarker);
+            showBusStopInfoWindow(busStopMarker);
+            showDynamicInfoWindow = true;
         }
 
-        marker.showInfoWindow();
-        showDynamicInfoWindow = true;
         return true;
     }
 

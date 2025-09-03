@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">YBS Way</string>
+    <string name="nav_home_page_title">ホーム</string>
+    <string name="nav_language_setting_page_title">言語</string>
+    <string name="nav_bus_list_title">YBS 路線</string>
+    <string name="nav_about_title">アプリについて</string>
+    <string name="bus_list_title">YBS 路線</string>
+    <string name="language_setting_title">言語設定</string>
+    <string name="toolbar_back_button_description">戻る</string>
+    <string name="nav_header_sub_title">ybsway@gmail.com</string>
+    <string name="ybs_data_loading_message">YBS データを準備中…</string>
+    <string name="search_location_input_hint">バス停を探す</string>
+    <string name="app_about_title">アプリについて</string>
+    <string name="app_about_body">YBS Way はヤンゴン・バス・サービスのためのシンプルな経路検索アプリです。ユーザーがヤンゴンで最も速く、便利なバス経路を見つけるのに役立ちます。</string>
+    <string name="app_developer_title">開発者</string>
+    <string name="app_developer_body">クン ピィッ ピョー アウン\nkhunpyaephyoaung74@gmail.com</string>
+</resources>

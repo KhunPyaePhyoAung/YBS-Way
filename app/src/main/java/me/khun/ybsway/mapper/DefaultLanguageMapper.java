@@ -2,6 +2,9 @@ package me.khun.ybsway.mapper;
 
 import static me.khun.ybsway.application.Language.*;
 
+import androidx.annotation.DrawableRes;
+import androidx.annotation.IdRes;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -19,6 +22,7 @@ public class DefaultLanguageMapper implements LanguageMapper {
     public DefaultLanguageMapper() {
         languageFlagMap.put(BURMESE, R.drawable.myanmar_round_icon);
         languageFlagMap.put(ENGLISH, R.drawable.united_kingdom_round_icon);
+        languageFlagMap.put(JAPANESE, R.drawable.japan_round_icon);
     }
 
     @Override

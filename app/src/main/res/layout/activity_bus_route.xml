@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+    android:background="@color/background_primary">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="fill_parent"
@@ -12,12 +13,11 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/tool_bar"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/toolbar_height"
-            app:logo="@drawable/toolbar_bus_icon"
-            app:titleMarginStart="5dp"
-            app:titleTextColor="@color/text_primary"
+            android:layout_height="wrap_content"
+            app:titleMarginStart="@dimen/toolbar_title_margin_start"
             app:layout_constraintTop_toTopOf="parent"
             android:elevation="20dp"
+            app:titleTextAppearance="@style/Toolbar.TitleText"
             app:navigationIcon="@drawable/toolbar_back_arrow"
             app:navigationContentDescription="@string/toolbar_back_button_description"
             android:background="@color/primary">

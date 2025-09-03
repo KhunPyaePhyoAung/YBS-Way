@@ -31,7 +31,6 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:theme="@style/Theme.YBSWay"
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
@@ -47,18 +46,27 @@
         </activity>
         <activity
             android:name=".activity.ActivityMain"
+            android:theme="@style/Theme.YBSWay"
             android:exported="true">
         </activity>
         <activity
             android:name=".activity.ActivityBusList"
+            android:theme="@style/Theme.YBSWay"
             android:exported="true">
         </activity>
         <activity
             android:name=".activity.ActivityBusRoute"
+            android:theme="@style/Theme.YBSWay"
             android:exported="true">
         </activity>
         <activity
             android:name=".activity.ActivityLanguageSetting"
+            android:theme="@style/Theme.YBSWay"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".activity.ActivityAbout"
+            android:theme="@style/Theme.YBSWay"
             android:exported="true">
         </activity>
     </application>

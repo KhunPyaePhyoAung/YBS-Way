@@ -47,4 +47,8 @@
     <color name="language_list_item">@color/background_primary</color>
     <color name="language_list_item_selected">@color/secondary</color>
 
+    <color name="about_page_app_name_color">@color/primary</color>
+    <color name="about_page_app_version_color">@color/primary</color>
+    <color name="about_page_content_title_color">@color/black</color>
+    <color name="about_page_content_body_color">@color/black</color>
 </resources>

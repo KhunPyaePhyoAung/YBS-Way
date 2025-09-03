@@ -3,7 +3,7 @@ package me.khun.ybsway.application;
 import java.util.Objects;
 
 public enum Language {
-    BURMESE("my"), ENGLISH("en");
+    BURMESE("my"), ENGLISH("en"), JAPANESE("ja");
 
     private final String languageCode;
 

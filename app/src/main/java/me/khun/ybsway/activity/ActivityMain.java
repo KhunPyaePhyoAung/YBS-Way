@@ -79,7 +79,7 @@ public class ActivityMain extends ActivityBaseMap implements NavigationView.OnNa
         } else if (menuId == R.id.nav_language_settings) {
             intent = new Intent(this, ActivityLanguageSetting.class);
         } else if (menuId == R.id.nav_about) {
-            intent = new Intent(this, ActivityMain.class);
+            intent = new Intent(this, ActivityAbout.class);
         }
 
         startActivity(intent);
