@@ -34,6 +34,7 @@ public class ActivityMain extends ActivityBaseMap implements NavigationView.OnNa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setupMap(R.id.map_view);
+        setupGpsButton(R.id.btn_gps);
 
         busStopMapper = YBSWayApplication.busStopMapper;
         busStopService = YBSWayApplication.busStopService;

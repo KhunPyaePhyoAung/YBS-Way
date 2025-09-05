@@ -14,4 +14,13 @@
     <string name="app_about_body">YBS Way သည် ရန်ကုန် ဘတ်စ်စနစ်အတွက် လမ်းကြောင်းရှာဖွေရေး အပ်ပလီကေးရှင်းလေးတစ်ခု ဖြစ်သည်။ ဤအပ်ပလီကေးရှင်းသည် အသုံးပြုသူများအတွက် ရန်ကုန်ရှိ အမြန်ဆုံးနှင့် အဆင်ပြေနိုင်ဆုံး ဘတ်စ်လမ်းကြောင်းများကို ရှာဖွေရာတွင် ကူညီပေးနိုင်ပါသည်။</string>
     <string name="app_developer_title">ဖန်တီးရေးဆွဲသူ</string>
     <string name="app_developer_body">ခွန်ပြည့်ဖြိုးအောင်\nkhunpyaephyoaung74@gmail.com</string>
+
+    <string name="location_permission_required_title">တည်နေရာခွင့်ပြုချက်လိုအပ်သည်။</string>
+    <string name="location_permission_required_message">ဤအပ်ပလီကေးရှင်းတွင် တည်နေရာ ခွင့်ပြုချက်လိုအပ်ပါသည်။ ခွင့်ပြုရန် အပ်လီကေးရှင်းဆက်တင်ကို ဖွင့်ချင်ပါသလား?</string>
+    <string name="location_permission_required_confirm">လုပ်မည်</string>
+    <string name="location_permission_required_deny">မလုပ်ပါ</string>
+
+    <string name="gps_prompt_error_title">မမျှော်လင့်ထားသော အမှား</string>
+    <string name="gps_prompt_error_message">GPS ဆက်တင်ကို ဖွင့်၍ မရပါ။ ဆက်တင်တွင် GPS ကို ဖွင့်ပါ။</string>
+    <string name="gps_prompt_error_action">ပိတ်မည်</string>
 </resources>

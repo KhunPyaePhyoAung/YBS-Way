@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+
+    <solid android:color="@color/gps_button_background" />
+    <padding
+        android:top="@dimen/gps_button_padding"
+        android:right="@dimen/gps_button_padding"
+        android:left="@dimen/gps_button_padding"
+        android:bottom="@dimen/gps_button_padding" />
+</shape>

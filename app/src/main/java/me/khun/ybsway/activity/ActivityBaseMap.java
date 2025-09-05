@@ -1,17 +1,39 @@
 package me.khun.ybsway.activity;
 
+import android.Manifest;
+import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.IntentSender;
+import android.content.pm.PackageManager;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
+import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
+import android.provider.Settings;
+import android.widget.ImageButton;
 
 import androidx.annotation.IdRes;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
+import com.google.android.gms.common.api.ResolvableApiException;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.LocationSettingsResponse;
+import com.google.android.gms.location.SettingsClient;
+import com.google.android.gms.tasks.Task;
 
 import org.osmdroid.api.IMapController;
 import org.osmdroid.config.Configuration;
@@ -24,10 +46,13 @@ import org.osmdroid.tileprovider.tilesource.TileSourcePolicy;
 import org.osmdroid.tileprovider.tilesource.XYTileSource;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
+import org.osmdroid.views.overlay.FolderOverlay;
 import org.osmdroid.views.overlay.MapEventsOverlay;
 import org.osmdroid.views.overlay.Marker;
 import org.osmdroid.views.overlay.Polyline;
 import org.osmdroid.views.overlay.infowindow.InfoWindow;
+import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider;
+import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -42,9 +67,9 @@ import me.khun.ybsway.entity.Coordinate;
 import me.khun.ybsway.view.BusStopView;
 import me.khun.ybsway.view.BusView;
 
-public class ActivityBaseMap  extends ActivityBase implements MapListener, MapEventsReceiver, Marker.OnMarkerClickListener {
-    public static final double YANGON_LATITUDE = 16.851544;
-    public static final double YANGON_LONGITUDE = 96.176099;
+public class ActivityBaseMap extends ActivityBase implements MapListener, MapEventsReceiver, Marker.OnMarkerClickListener {
+    public static final double YANGON_LATITUDE = 16.866931;
+    public static final double YANGON_LONGITUDE = 96.172709;
     public static final double MAX_NORTH_LATITUDE = 18.400445;
     public static final double MAX_SOUTH_LATITUDE = 15.573180;
     public static final double MAX_WEST_LONGITUDE = 95.121037;
@@ -52,17 +77,28 @@ public class ActivityBaseMap  extends ActivityBase implements MapListener, MapEv
     public static final double DEFAULT_MAP_ZOOM_LEVEL = 13;
     public static final double MIN_ZOOM_LEVEL = 10;
     public static final double MAX_ZOOM_LEVEL = 22;
-    public static final double PROPER_ZOOM_LEVEL = 16;
+    public static final double PROPER_ZOOM_LEVEL = 15;
     public static final long ZOOM_ANIMATION_SPEED = 1500L;
+    protected static final int LOCATION_PERMISSIONS_REQUEST_CODE = 1;
+    protected static final int LOCATION_PERMISSIONS_FORCE_SETTING_REQUEST_CODE = 2;
 
     protected final Map<Integer, Drawable> busStopIconMap = new HashMap<>();
+    protected final List<BusStopMarker> busStopMarkerList = new ArrayList<>(YBSWayApplication.DEFAULT_BUS_STOP_LIST_SIZE);
+    protected final List<String> MAP_OVERLAY_SORTED_LIST = List.of("event", "bus_route", "bus_stops", "my_location");
+    protected final String[] LOCATION_PERMISSIONS = {
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+    };
+
     protected MapView mapView;
     protected IMapController mapController;
+    protected MyLocationNewOverlay mLocationOverlay;
+    protected ImageButton btnGPS;
     protected int currentZoomLevel;
     protected Drawable busStopIcon;
     protected GeoPoint mapCenterPoint;
     protected boolean showDynamicInfoWindow = false;
-    protected final List<BusStopMarker> busStopMarkerList = new ArrayList<>(YBSWayApplication.DEFAULT_BUS_STOP_LIST_SIZE);
+    protected BroadcastReceiver gpsSwitchReceiver;
     protected Marker nearestMarker;
     protected volatile boolean isLoadingBusStops = false;
 
@@ -92,6 +128,18 @@ public class ActivityBaseMap  extends ActivityBase implements MapListener, MapEv
         busStopIconMap.put(8, AppCompatResources.getDrawable(getApplicationContext(), R.drawable.bus_stop_icon_8dp));
     }
 
+    protected void setupGpsButton(@IdRes int btnGpsId) {
+        btnGPS = findViewById(btnGpsId);
+
+        btnGPS.setOnClickListener(view -> {
+            if (isLocationServiceOn()) {
+                mLocationOverlay.enableFollowLocation();
+            } else {
+                turnOnLocationService(true);
+            }
+        });
+    }
+
     protected void setupMap(@IdRes int mapViewId) {
         mapView = findViewById(mapViewId);
         mapController = mapView.getController();
@@ -108,8 +156,19 @@ public class ActivityBaseMap  extends ActivityBase implements MapListener, MapEv
         mapView.setScrollableAreaLimitLatitude(MAX_NORTH_LATITUDE, MAX_SOUTH_LATITUDE, 0);
         mapView.setScrollableAreaLimitLongitude(MAX_WEST_LONGITUDE, MAX_EAST_LONGITUDE, 0);
         mapView.addMapListener(this);
+
         MapEventsOverlay mapEventsOverlay = new MapEventsOverlay(this);
-        mapView.getOverlays().add(0, mapEventsOverlay);
+        mapView.getOverlays().add(MAP_OVERLAY_SORTED_LIST.indexOf("event"), mapEventsOverlay);
+
+        Polyline roadOverlay = new Polyline(mapView);
+        mapView.getOverlays().add(MAP_OVERLAY_SORTED_LIST.indexOf("bus_route"), roadOverlay);
+
+        FolderOverlay markerOverlay = new FolderOverlay();
+        mapView.getOverlays().add(MAP_OVERLAY_SORTED_LIST.indexOf("bus_stops"), markerOverlay);
+
+        mLocationOverlay = new MyLocationNewOverlay(new GpsMyLocationProvider(this), mapView);
+        mLocationOverlay.enableMyLocation();
+        mapView.getOverlays().add(MAP_OVERLAY_SORTED_LIST.indexOf("my_location"), mLocationOverlay);
 
         currentZoomLevel = mapView.getZoomLevel();
         mapCenterPoint = new GeoPoint(mapView.getMapCenter().getLatitude(), mapView.getMapCenter().getLongitude());
@@ -126,7 +185,7 @@ public class ActivityBaseMap  extends ActivityBase implements MapListener, MapEv
                                 | TileSourcePolicy.FLAG_USER_AGENT_MEANINGFUL
                                 | TileSourcePolicy.FLAG_USER_AGENT_NORMALIZED
                 ));
-        
+
         return tileSource;
     }
 
@@ -174,26 +233,25 @@ public class ActivityBaseMap  extends ActivityBase implements MapListener, MapEv
     }
 
     protected void drawRoute(BusView busView) {
-        if ( busView == null || busView.getRouteCoordinateList().isEmpty() ) {
+        if (busView == null || busView.getRouteCoordinateList().isEmpty()) {
             return;
         }
 
         int roadWidth = 15;
         int roadColor = getResources().getColor(R.color.bus_route);
 
-        Polyline roadOverlay = new Polyline(mapView);
+        Polyline roadOverlay = (Polyline) mapView.getOverlays().get(MAP_OVERLAY_SORTED_LIST.indexOf("bus_route"));
         roadOverlay.getOutlinePaint().setStrokeWidth(roadWidth);
         roadOverlay.getOutlinePaint().setColor(roadColor);
         roadOverlay.getOutlinePaint().setStrokeJoin(Paint.Join.ROUND);
-        mapView.getOverlays().add(roadOverlay);
 
         List<Coordinate> coordinateList = busView.getRouteCoordinateList();
 
-        if ( coordinateList == null || coordinateList.isEmpty() ) {
+        if (coordinateList == null || coordinateList.isEmpty()) {
             return;
         }
 
-        for ( Coordinate coordinate : busView.getRouteCoordinateList() ) {
+        for (Coordinate coordinate : busView.getRouteCoordinateList()) {
             GeoPoint point = new GeoPoint(coordinate.getLatitude(), coordinate.getLongitude());
             roadOverlay.addPoint(point);
             roadOverlay.setInfoWindow(null);
@@ -212,13 +270,14 @@ public class ActivityBaseMap  extends ActivityBase implements MapListener, MapEv
 
         new Thread(() -> {
             isLoadingBusStops = true;
+            FolderOverlay markerOverlay = (FolderOverlay) mapView.getOverlays().get(MAP_OVERLAY_SORTED_LIST.indexOf("bus_stops"));
             List<BusStopMarker> markerList = new ArrayList<>();
-            for ( BusStopView busStop : busStopViewList ) {
+            for (BusStopView busStop : busStopViewList) {
                 BusStopMarker busStopMarker = createBusStopMarker(busStop);
                 busStopMarker.setOnMarkerClickListener(this);
                 markerList.add(busStopMarker);
                 mainHandler.post(() -> {
-                    mapView.getOverlays().add(busStopMarker);
+                    markerOverlay.add(busStopMarker);
                     mapView.invalidate();
                 });
             }
@@ -243,13 +302,13 @@ public class ActivityBaseMap  extends ActivityBase implements MapListener, MapEv
         mapCenterPoint = new GeoPoint(mapView.getMapCenter().getLatitude(), mapView.getMapCenter().getLongitude());
         Marker newNearestMarker = findNearestMarker(mapCenterPoint, busStopMarkerList);
 
-        if ( nearestMarker == newNearestMarker ) {
+        if (nearestMarker == newNearestMarker) {
             return false;
         }
 
         nearestMarker = newNearestMarker;
 
-        if ( nearestMarker != null && showDynamicInfoWindow) {
+        if (nearestMarker != null && showDynamicInfoWindow) {
             InfoWindow.closeAllInfoWindowsOn(mapView);
             if (nearestMarker instanceof BusStopMarker) {
                 BusStopMarker busStopMarker = (BusStopMarker) nearestMarker;
@@ -262,7 +321,7 @@ public class ActivityBaseMap  extends ActivityBase implements MapListener, MapEv
     @Override
     public boolean onZoom(ZoomEvent event) {
         int zoomLevel = (int) event.getZoomLevel();
-        if ( currentZoomLevel != zoomLevel ) {
+        if (currentZoomLevel != zoomLevel) {
             currentZoomLevel = (int) event.getZoomLevel();
             resetBusStopIcons();
             return true;
@@ -299,14 +358,30 @@ public class ActivityBaseMap  extends ActivityBase implements MapListener, MapEv
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        gpsSwitchReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                if (intent.getAction() != null && intent.getAction().matches(LocationManager.PROVIDERS_CHANGED_ACTION)) {
+                    syncStates();
+                }
+            }
+        };
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
+        registerReceiver(gpsSwitchReceiver, new IntentFilter(LocationManager.PROVIDERS_CHANGED_ACTION));
         mapView.onResume();
+        syncStates();
     }
 
     @Override
     public void onPause() {
         super.onPause();
+        unregisterReceiver(gpsSwitchReceiver);
         mapView.onPause();
     }
 
@@ -358,4 +433,139 @@ public class ActivityBaseMap  extends ActivityBase implements MapListener, MapEv
         showDynamicInfoWindow = false;
         return true;
     }
+
+    protected void turnOnLocationService(boolean forceToSetting) {
+        int requestCode = forceToSetting ?
+                LOCATION_PERMISSIONS_FORCE_SETTING_REQUEST_CODE
+                : LOCATION_PERMISSIONS_REQUEST_CODE;
+        requestPermissionsIfNecessary(LOCATION_PERMISSIONS, requestCode);
+
+        if (isLocationPermissionGranted()) {
+            promptEnableGpsIfOff();
+        }
+        syncStates();
+    }
+
+    protected void syncStates() {
+        if (isLocationServiceOn()) {
+            btnGPS.setActivated(true);
+            mLocationOverlay.enableMyLocation();
+        } else {
+            btnGPS.setActivated(false);
+            mLocationOverlay.disableMyLocation();
+        }
+    }
+
+    protected void requestPermissionsIfNecessary(String[] permissions, int requestCode) {
+        List<String> permissionsToRequest = new ArrayList<>(permissions.length);
+
+        for (String permission : permissions) {
+            if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+                permissionsToRequest.add(permission);
+            }
+        }
+
+        if (!permissionsToRequest.isEmpty()) {
+            ActivityCompat.requestPermissions(
+                     this,
+                            permissionsToRequest.toArray(new String[0]),
+                            requestCode
+                    );
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == LOCATION_PERMISSIONS_REQUEST_CODE) {
+            for (int result : grantResults) {
+                if (result == PackageManager.PERMISSION_DENIED) {
+                    // Permission denied → just return
+                    return;
+                }
+            }
+            // Location permission granted
+            promptEnableGpsIfOff();
+        } else if (requestCode == LOCATION_PERMISSIONS_FORCE_SETTING_REQUEST_CODE) {
+            for (int i = 0; i < permissions.length; i++) {
+                if (grantResults[i] == PackageManager.PERMISSION_DENIED) {
+                    // Permission denied
+                    if (!ActivityCompat.shouldShowRequestPermissionRationale(this, permissions[i])) {
+                        showLocationPermissionSettingsDialog();
+                    }
+                    return;
+                }
+            }
+
+            // Location permission granted
+            promptEnableGpsIfOff();
+        }
+
+        syncStates();
+    }
+
+    protected void openLocationSettings() {
+        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+        Uri uri = Uri.fromParts("package", getPackageName(), null);
+        intent.setData(uri);
+        startActivity(intent);
+    }
+
+    protected void showLocationPermissionSettingsDialog() {
+        new AlertDialog.Builder(this, R.style.MyDialogTheme)
+                .setTitle(R.string.location_permission_required_title)
+                .setMessage(R.string.location_permission_required_message)
+                .setPositiveButton(R.string.location_permission_required_confirm, (dialog, which) -> {
+                    openLocationSettings();
+                })
+                .setNegativeButton(R.string.location_permission_required_deny, (dialog, which) -> dialog.dismiss())
+                .setCancelable(false)
+                .show();
+    }
+
+    protected boolean isLocationServiceOn() {
+        return isLocationPermissionGranted() && isGpsOn();
+    }
+
+    protected boolean isLocationPermissionGranted() {
+        for (String permission : LOCATION_PERMISSIONS) {
+            if (ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    protected boolean isGpsOn() {
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
+                locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+    }
+
+    protected void promptEnableGpsIfOff() {
+        LocationRequest locationRequest = LocationRequest.create().setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder().addLocationRequest(locationRequest);
+        SettingsClient client = LocationServices.getSettingsClient(this);
+        Task<LocationSettingsResponse> task = client.checkLocationSettings(builder.build());
+
+        task.addOnFailureListener(e -> {
+            if (e instanceof ResolvableApiException) {
+                // Location settings are not satisfied, but this can be fixed
+                try {
+                    ResolvableApiException resolvable = (ResolvableApiException) e;
+                    resolvable.startResolutionForResult(this, 1001);
+                } catch (IntentSender.SendIntentException sendEx) {
+                    new AlertDialog.Builder(this, R.style.MyDialogTheme)
+                            .setTitle(R.string.gps_prompt_error_title)
+                            .setMessage(R.string.gps_prompt_error_message)
+                            .setNegativeButton(R.string.gps_prompt_error_action, (dialog, which) -> dialog.dismiss())
+                            .setCancelable(false)
+                            .show();
+                }
+            }
+            syncStates();
+        });
+    }
+
 }

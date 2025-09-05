@@ -28,4 +28,13 @@
     <dimen name="about_page_app_version_size">18sp</dimen>
     <dimen name="about_page_content_title_size">20sp</dimen>
     <dimen name="about_page_content_body_size">14sp</dimen>
+
+    <dimen name="gps_button_size">50dp</dimen>
+    <dimen name="gps_button_padding">12dp</dimen>
+    <dimen name="gps_button_margin_bottom">150dp</dimen>
+    <dimen name="gps_button_margin_end">15dp</dimen>
+
+    <dimen name="dialog_title">16sp</dimen>
+    <dimen name="dialog_body">14sp</dimen>
+    <dimen name="dialog_button_text">14sp</dimen>
 </resources>

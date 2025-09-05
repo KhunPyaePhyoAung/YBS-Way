@@ -1,17 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
-        <item name="fontFamily">@font/pyidaungsu_regular</item>
+        <item name="fontFamily">@font/myanmar_kuttar</item>
         <item name="android:textSize">22sp</item>
         <item name="android:textColor">@color/text_primary</item>
     </style>
     <style name="AppFont">
-        <item name="fontFamily">@font/pyidaungsu_regular</item>
-        <item name="fontWeight">400</item>
+        <item name="fontFamily">@font/myanmar_kuttar</item>
     </style>
     <style name="editText.location.outline" parent="@android:style/Widget.EditText">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/primary</item>
         <item name="android:textColorHint">@color/search_location_input_hint</item>
     </style>
+    <style name="MyDialogTheme" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <!-- Change background, text colors, corner radius, etc. -->
+        <item name="android:background">@color/background_primary</item>
+        <item name="android:textColor">@color/text_background_primary</item>
+        <item name="android:textColorPrimary">@color/text_background_primary</item>
+        <item name="android:textColorSecondary">@color/text_background_primary</item>
+        <item name="fontFamily">@font/pyidaungsu_regular</item>
+        <item name="android:windowMinWidthMajor">80%</item>
+        <item name="android:windowMinWidthMinor">80%</item>
+        <item name="android:buttonBarPositiveButtonStyle">@style/MyDialogButtonText</item>
+        <item name="android:buttonBarNegativeButtonStyle">@style/MyDialogButtonText</item>
+        <item name="android:buttonBarNeutralButtonStyle">@style/MyDialogButtonText</item>
+    </style>
+
+    <style name="MyDialogButtonText" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/text_background_primary</item>
+        <item name="android:textSize">@dimen/dialog_button_text</item>
+        <item name="android:textAppearance">@style/AppFont</item>
+    </style>
+
 </resources>

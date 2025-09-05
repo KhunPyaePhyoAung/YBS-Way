@@ -14,4 +14,13 @@
     <string name="app_about_body">YBS Way is a simple route-finding app for Yangon Bus Service. It helps users find the fastest and most convenient bus routes in Yangon.</string>
     <string name="app_developer_title">Developed By</string>
     <string name="app_developer_body">Khun Pyae Phyo Aung\nkhunpyaephyoaung74@gmail.com</string>
+
+    <string name="location_permission_required_title">Location Permission Required</string>
+    <string name="location_permission_required_message">This app needs location permission. Do you want to open app settings to enable it?</string>
+    <string name="location_permission_required_confirm">Yes</string>
+    <string name="location_permission_required_deny">No</string>
+
+    <string name="gps_prompt_error_title">Unexpected Error</string>
+    <string name="gps_prompt_error_message">GPS settings couldn’t be opened. Turn on GPS in settings.</string>
+    <string name="gps_prompt_error_action">Close</string>
 </resources>

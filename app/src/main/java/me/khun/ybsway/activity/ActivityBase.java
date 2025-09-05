@@ -1,10 +1,13 @@
 package me.khun.ybsway.activity;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import java.util.Objects;
 

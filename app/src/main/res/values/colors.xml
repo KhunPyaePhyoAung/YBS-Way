@@ -10,6 +10,7 @@
     <color name="text_primary">#FFFFFF</color>
     <color name="text_secondary">#000000</color>
     <color name="background_primary">#FFFFFF</color>
+    <color name="text_background_primary">#000000</color>
 
     <color name="bus_stop_fill">#00609C</color>
     <color name="bus_stop_border">#FFFFFF</color>
@@ -51,4 +52,9 @@
     <color name="about_page_app_version_color">@color/primary</color>
     <color name="about_page_content_title_color">@color/black</color>
     <color name="about_page_content_body_color">@color/black</color>
+
+    <color name="gps_button_background">#8A000000</color>
+    <color name="gps_button_background_pressed">#A9000000</color>
+    <color name="gps_button_border">#949494</color>
+
 </resources>

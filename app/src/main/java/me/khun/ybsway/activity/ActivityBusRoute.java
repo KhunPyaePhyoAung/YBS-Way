@@ -30,6 +30,9 @@ public class ActivityBusRoute extends ActivityBaseMap implements Marker.OnMarker
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bus_route);
 
+        setupMap(R.id.map_view);
+        setupGpsButton(R.id.btn_gps);
+
         Toolbar toolbar = findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
         actionBar = getSupportActionBar();
@@ -38,8 +41,6 @@ public class ActivityBusRoute extends ActivityBaseMap implements Marker.OnMarker
         toolbar.setNavigationOnClickListener(v -> {
             onBackPressed();
         });
-
-        setupMap(R.id.map_view);
 
         busMapper = YBSWayApplication.busMapper;
         busStopMapper = YBSWayApplication.busStopMapper;

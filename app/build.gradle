@@ -42,4 +42,6 @@ dependencies {
     implementation "androidx.core:core-splashscreen:1.0.1"
     implementation 'androidx.viewpager:viewpager:1.0.0'
     implementation "org.jgrapht:jgrapht-core:1.5.2"
+    implementation "com.google.android.gms:play-services-location:21.3.0"
+
 }
