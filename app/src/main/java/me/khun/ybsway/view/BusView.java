@@ -7,9 +7,10 @@ import me.khun.ybsway.entity.Coordinate;
 public class BusView {
     private String routeId;
     private String name;
-    private String number;
+    private String subName;
     private String originName;
     private String destinationName;
+    private String agencyId;
     private String hexColorCode;
     private List<Integer> busStopIdList;
     private List<Coordinate> routeCoordinateList;
@@ -32,12 +33,12 @@ public class BusView {
         this.name = name;
     }
 
-    public String getNumber() {
-        return number;
+    public String getSubName() {
+        return subName;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
+    public void setSubName(String subName) {
+        this.subName = subName;
     }
 
     public String getOriginName() {

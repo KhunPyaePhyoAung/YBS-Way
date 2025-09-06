@@ -23,15 +23,29 @@ public class DefaultBusMapper implements BusMapper {
     public BusView mapToBusView(Bus bus) {
         BusView busView = new BusView();
         busView.setRouteId(bus.getRouteId());
-        busView.setName(bus.getName());
-        busView.setNumber(bus.getNumber());
-        busView.setOriginName(bus.getOriginName());
-        busView.setDestinationName(bus.getDestinationName());
         busView.setHexColorCode(bus.getHexColorCode());
         busView.setBusStopIdList(bus.getBusStopIdList());
         busView.setRouteCoordinateList(bus.getRouteCoordinateList());
         busView.setBusStopViewList(busStopMapper.mapToBusStopList(bus.getRoute().getBusStopList()));
-        if (bus.getName().contains("Airport")) {
+
+
+        switch (languageConfig.getLanguage()) {
+            case BURMESE:
+                busView.setName(bus.getNameMM());
+                busView.setSubName(bus.getSubNameMM());
+                busView.setOriginName(bus.getOriginNameMM());
+                busView.setDestinationName(bus.getDestinationNameMM());
+                break;
+            case ENGLISH:
+            default:
+                busView.setName(bus.getNameEN());
+                busView.setSubName(bus.getSubNameEN());
+                busView.setOriginName(bus.getOriginNameEN());
+                busView.setDestinationName(bus.getDestinationNameEN());
+                break;
+        }
+
+        if (bus.getNameEN().equals("APS")) {
             busView.setDisplayIconId(AIRPLANE_ICON);
         }
 

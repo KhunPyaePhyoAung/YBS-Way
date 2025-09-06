@@ -11,8 +11,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import me.khun.ybsway.application.YBSWayApplication;
 import me.khun.ybsway.entity.Bus;
@@ -48,19 +46,16 @@ public class JsonFileBusRepositoryImpl implements BusRepository {
             for (int i = 0; i < busArray.length(); i++) {
                 JSONObject busObject = busArray.getJSONObject(i);
                 Bus bus = new Bus();
-                bus.setName(busObject.getString("name"));
+                bus.setNameMM(busObject.getString("name_mm"));
+                bus.setNameEN(busObject.getString("name_en"));
+                bus.setSubNameMM(busObject.getString("sub_name_mm"));
+                bus.setSubNameEN(busObject.getString("sub_name_en"));
+                bus.setOriginNameMM(busObject.getString("origin_name_mm"));
+                bus.setOriginNameEN(busObject.getString("origin_name_en"));
+                bus.setDestinationNameMM(busObject.getString("destination_name_mm"));
+                bus.setDestinationNameEN(busObject.getString("destination_name_en"));
                 bus.setRouteId(busObject.getString("route_id"));
                 bus.setHexColorCode(busObject.getString("color"));
-
-                int splitIndex = -1;
-
-                Pattern pattern = Pattern.compile("\\D+");
-                Matcher matcher = pattern.matcher(bus.getRouteId());
-                while (matcher.find()) {
-                    splitIndex = matcher.start();
-                }
-
-                bus.setNumber(splitIndex < 0 ? bus.getRouteId() : bus.getRouteId().substring(0, splitIndex));
 
                 List<Integer> busStopIdList = new ArrayList<>(YBSWayApplication.DEFAULT_BUS_STOP_LIST_SIZE);
 
