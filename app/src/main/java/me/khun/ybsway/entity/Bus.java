@@ -4,10 +4,15 @@ import java.util.List;
 
 public class Bus {
     private String routeId;
-    private String name;
-    private String originName;
-    private String destinationName;
-    private String number;
+    private String nameMM;
+    private String nameEN;
+    private String subNameMM;
+    private String subNameEN;
+    private String originNameMM;
+    private String originNameEN;
+    private String destinationNameMM;
+    private String destinationNameEN;
+    private String agencyId;
     private String hexColorCode;
     private List<Integer> busStopIdList;
     private List<Coordinate> routeCoordinateList;
@@ -23,22 +28,68 @@ public class Bus {
         this.routeId = routeId;
     }
 
-    public String getName() {
-        return name;
+    public String getNameMM() {
+        return nameMM;
     }
 
-    public void setName(String name) {
-        this.name = name;
-        this.originName = name.substring(name.indexOf(") ") + 2, name.indexOf(" -"));
-        this.destinationName = name.substring(name.lastIndexOf(" ") + 1);
+    public void setNameMM(String nameMM) {
+        this.nameMM = nameMM;
     }
 
-    public String getNumber() {
-        return number;
+    public String getNameEN() {
+        return nameEN;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
+    public void setNameEN(String nameEN) {
+        this.nameEN = nameEN;
+    }
+
+    public String getSubNameMM() {
+        return subNameMM;
+    }
+
+    public void setSubNameMM(String subNameMM) {
+        this.subNameMM = subNameMM;
+    }
+
+    public String getSubNameEN() {
+        return subNameEN;
+    }
+
+    public void setSubNameEN(String subNameEN) {
+        this.subNameEN = subNameEN;
+    }
+
+    public void setOriginNameMM(String originNameMM) {
+        this.originNameMM = originNameMM;
+    }
+
+    public String getOriginNameEN() {
+        return originNameEN;
+    }
+
+    public void setOriginNameEN(String originNameEN) {
+        this.originNameEN = originNameEN;
+    }
+
+    public void setDestinationNameMM(String destinationNameMM) {
+        this.destinationNameMM = destinationNameMM;
+    }
+
+    public String getDestinationNameEN() {
+        return destinationNameEN;
+    }
+
+    public void setDestinationNameEN(String destinationNameEN) {
+        this.destinationNameEN = destinationNameEN;
+    }
+
+    public String getAgencyId() {
+        return agencyId;
+    }
+
+    public void setAgencyId(String agencyId) {
+        this.agencyId = agencyId;
     }
 
     public Route getRoute() {
@@ -49,12 +100,12 @@ public class Bus {
         this.route = route;
     }
 
-    public String getOriginName() {
-        return originName;
+    public String getOriginNameMM() {
+        return originNameMM;
     }
 
-    public String getDestinationName() {
-        return  destinationName;
+    public String getDestinationNameMM() {
+        return destinationNameMM;
     }
 
     public String getHexColorCode() {

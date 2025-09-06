@@ -66,7 +66,7 @@ public class BusListViewAdapter extends BaseAdapter {
         BusView busView = busViewList.get(i);
 
         if (busView.getDisplayIconId() == null) {
-            busNumberTextView.setText(busView.getNumber());
+            busNumberTextView.setText(busView.getName());
             busIconImageView.setImageDrawable(null);
         } else {
             busNumberTextView.setText(null);
