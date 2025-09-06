@@ -29,7 +29,7 @@ public class DefaultBusMapper implements BusMapper {
         busView.setBusStopViewList(busStopMapper.mapToBusStopList(bus.getRoute().getBusStopList()));
 
 
-        switch (languageConfig.getLanguage()) {
+        switch (languageConfig.getCurrentLanguage()) {
             case BURMESE:
                 busView.setName(bus.getNameMM());
                 busView.setSubName(bus.getSubNameMM());
