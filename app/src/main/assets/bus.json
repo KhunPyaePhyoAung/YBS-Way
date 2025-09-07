@@ -1,6 +1,6 @@
 [
   {
-    "agency_id": "YRTA",
+    "agency_id": "GYCT",
     "color": "405CAA",
     "name": "(\u1041) \u101c\u103e\u100a\u103a\u1038\u1000\u1030\u1038\u1008\u1031\u1038\u101b\u103e\u1031\u1037 - \u1007\u101d\u1014",
     "route_id": "1",
@@ -1069,7 +1069,7 @@
     ]
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": "YUPT",
     "color": "DF504E",
     "name": "(\u1042) \u101a\u102f\u1007\u1014(\u1001\u102d\u102f\u1004\u103a\u101b\u103d\u103e\u1031\u101d\u102b\u101c\u1019\u103a\u1038) - \u1021\u1031\u102c\u1004\u103a\u1019\u1004\u103a\u1039\u1002\u101c\u102c\u1021\u101d\u1031\u1038\u1015\u103c\u1031\u1038\u101d\u1004\u103a\u1038",
     "route_id": "2",
@@ -1080,7 +1080,7 @@
     "origin_name_mm": "ယုဇနဥယျာဉ်မြို့တော်",
     "origin_name_en": "Yuzana Garden City",
     "destination_name_mm": "အောင်မင်္ဂလာအဝေးပြေး",
-    "destination_name_en": "Aung Mingalar Highway Terminal",
+    "destination_name_en": "Aung Mingalar Highway Bus Terminal",
     "payment_method": [],
     "shape": {
       "geometry": {
@@ -1717,7 +1717,7 @@
     ]
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": "YUPT",
     "color": "DF504E",
     "name": "(\u1043 \u1010\u102c\u1019\u103d\u1031) \u101a\u102f\u1007\u1014\u1025\u101a\u103b\u102c\u1009\u103a\u1019\u103c\u102d\u102f\u1037\u1010\u1031\u102c\u103a - \u1019\u1004\u103a\u1039\u1002\u101c\u102c\u1005\u103b\u1031\u1038 - \u101c\u1019\u103a\u1038\u1045\u1040",
     "route_id": "3",
@@ -4659,7 +4659,7 @@
     ]
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": "GST",
     "color": "DF504E",
     "name": "(\u1045) \u101b\u102d\u102f\u1038\u1019\u101b\u102d\u1015\u103a\u101e\u102c - \u1017\u102d\u102f\u101c\u103a\u1001\u103b\u102f\u1015\u103a\u1021\u1031\u102c\u1004\u103a\u1006\u1014\u103a\u1038\u101c\u1019\u103a\u1038",
     "route_id": "5",
@@ -4667,10 +4667,10 @@
     "name_en": "5",
     "sub_name_mm": null,
     "sub_name_en": null,
-    "origin_name_mm": "ဒဂုံဆိပ်ကမ်း(ရိုးမရိပ်သာ)",
-    "origin_name_en": "Dagon Seikkan(Yoma Ave)",
-    "destination_name_mm": "ညောင်တန်းအိမ်ရာ",
-    "destination_name_en": "Nyaung Tan Housing",
+    "origin_name_mm": "ဒဂုံဆိပ်ကမ်း (ရိုးမရိပ်သာ)",
+    "origin_name_en": "Dagon Seikkan (Yoma Ave)",
+    "destination_name_mm": "ညောင်တန်း",
+    "destination_name_en": "Nyaung Tan",
     "payment_method": [],
     "shape": {
       "geometry": {
@@ -5987,7 +5987,7 @@
     ]
   },
   {
-    "agency_id": "GYCT",
+    "agency_id": null,
     "color": "DF504E",
     "name": "(\u1046-\u1000) \u1010\u1031\u102c\u1004\u103a\u1012\u1002\u102f\u1036 \u101e\u102d\u1019\u103a\u1001\u103b\u1031\u102c\u1004\u103a\u1038 - \u101c\u103e\u102d\u102f\u1004\u103a\u101e\u102c\u101a\u102c",
     "route_id": "6",
@@ -5995,10 +5995,10 @@
     "name_en": "6",
     "sub_name_mm": null,
     "sub_name_en": null,
-    "origin_name_mm": "ဒဂုံဆိပ်ကမ်း(၈/၉ လမ်းဆုံ)",
-    "origin_name_en": "Dagon Seikkan(8/9 Crossroad)",
+    "origin_name_mm": "ဒဂုံဆိပ်ကမ်း (၈/၉ လမ်းဆုံ)",
+    "origin_name_en": "Dagon Seikkan (8/9 Crossroad)",
     "destination_name_mm": "ဒဂုံဧရာအဝေးပြေး",
-    "destination_name_en": "Dagon Ayar Highway Terminal",
+    "destination_name_en": "Dagon Ayar Highway Bus Terminal",
     "payment_method": [],
     "shape": {
       "geometry": {
@@ -7329,8 +7329,8 @@
     "name_en": "7",
     "sub_name_mm": "နတ်စင်",
     "sub_name_en": "Nat Sin",
-    "origin_name_mm": "တောင်ဒဂုံ(အောင်မြင့်မိုရ်အိမ်ရာ)",
-    "origin_name_en": "South Dagon(Aung Myint Mo Housing)",
+    "origin_name_mm": "တောင်ဒဂုံ (အောင်မြင့်မိုရ်အိမ်ရာ)",
+    "origin_name_en": "South Dagon (Aung Myint Mo Housing)",
     "destination_name_mm": "ဆူးလေ",
     "destination_name_en": "Sule",
     "payment_method": [],
@@ -7991,8 +7991,8 @@
     "name_en": "7",
     "sub_name_mm": "စက်မှုဇုန်",
     "sub_name_en": "Set Hmu Zone",
-    "origin_name_mm": "တောင်ဒဂုံ(အောင်မြင့်မိုရ်အိမ်ရာ)",
-    "origin_name_en": "South Dagon(Aung Myint Mo Housing)",
+    "origin_name_mm": "တောင်ဒဂုံ (အောင်မြင့်မိုရ်အိမ်ရာ)",
+    "origin_name_en": "South Dagon (Aung Myint Mo Housing)",
     "destination_name_mm": "ဆူးလေ",
     "destination_name_en": "Sule",
     "payment_method": [],
@@ -8642,8 +8642,8 @@
     "name_en": "8",
     "sub_name_mm": null,
     "sub_name_en": null,
-    "origin_name_mm": "ဒဂုံဆိပ်ကမ်း(၁၆၈ ရပ်ကွက်)",
-    "origin_name_en": "Dagon Seikkan(168 Ward)",
+    "origin_name_mm": "ဒဂုံဆိပ်ကမ်း (၁၆၈ ရပ်ကွက်)",
+    "origin_name_en": "Dagon Seikkan (168 Ward)",
     "destination_name_mm": "လသာ",
     "destination_name_en": "Latha",
     "payment_method": [],
@@ -9394,16 +9394,16 @@
     ]
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": "GYCT",
     "color": "96509F",
     "name": "(\u1049) \u1010\u102d\u102f\u1004\u103a\u1038\u101b\u1004\u103a\u1038\u101e\u102c\u1038 \u1014\u100a\u103a\u1038\u1015\u100a\u102c\u1010\u1000\u1039\u1000\u101e\u102d\u102f\u101c\u103a - \u1000\u103b\u1031\u102c\u1000\u103a\u1010\u102d\u102f\u1004\u103a",
-    "route_id": "9-A",
+    "route_id": "9-SarOu",
     "name_mm": "၉",
     "name_en": "9",
-    "sub_name_mm": "",
-    "sub_name_en": "",
+    "sub_name_mm": "စာဥ",
+    "sub_name_en": "Sar Ou",
     "origin_name_mm": "တိုင်းရင်းသားနည်းပညာတက္ကသိုလ်",
-    "origin_name_en": "Yangon Technological University",
+    "origin_name_en": "NYRDDC",
     "destination_name_mm": "မင်္ဂလာဈေး",
     "destination_name_en": "Mingalar Market",
     "payment_method": [],
@@ -10035,14 +10035,14 @@
     ]
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": "GYCT",
     "color": "96509F",
     "name": "(\u1049) \u1010\u102d\u102f\u1004\u103a\u1038\u101b\u1004\u103a\u1038\u101e\u102c\u1038 \u1014\u100a\u103a\u1038\u1015\u100a\u102c\u1010\u1000\u1039\u1000\u101e\u102d\u102f\u101c\u103a - \u1000\u103b\u1031\u102c\u1000\u103a\u1010\u102d\u102f\u1004\u103a",
-    "route_id": "9-B",
+    "route_id": "9-KwatThit",
     "name_mm": "၉",
     "name_en": "9",
-    "sub_name_mm": null,
-    "sub_name_en": null,
+    "sub_name_mm": "ကွက်သစ်",
+    "sub_name_en": "Kwat Thit",
     "origin_name_mm": "ဒဂုံဆိပ်ကမ်း(၈၇ ရပ်ကွက်)",
     "origin_name_en": "Dagon Seikkan(87 Ward)",
     "destination_name_mm": "မင်္ဂလာဈေး",
@@ -11631,7 +11631,7 @@
     ]
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": "YUPT",
     "color": "405CAA",
     "name": "(\u1041\u1041) \u1021\u1031\u102c\u1004\u103a\u1019\u1004\u103a\u1039\u1002\u101c\u102c\u1021\u101d\u1031\u1038\u1015\u103c\u1031\u1038 - \u101b\u103d\u103e\u1031\u1010\u102d\u1002\u102f\u1036\u1018\u102f\u101b\u102c\u1038",
     "route_id": "11",
@@ -11640,7 +11640,7 @@
     "sub_name_mm": null,
     "sub_name_en": null,
     "origin_name_mm": "အောင်မင်္ဂလာအဝေးပြေး",
-    "origin_name_en": "Aung Mingalar Highway Terminal",
+    "origin_name_en": "Aung Mingalar Highway Bus Terminal",
     "destination_name_mm": "လသာ",
     "destination_name_en": "Latha",
     "payment_method": [],
@@ -12431,10 +12431,10 @@
     "name_en": "12",
     "sub_name_mm": null,
     "sub_name_en": null,
-    "origin_name_mm": "မြောက်ဒဂုံ(ထားဝယ်ချောင်း)",
-    "origin_name_en": "North Dagon(Htar Wal Chaung)",
-    "destination_name_mm": "ဆူးလေ(မြို့တော်ခန်းမ)",
-    "destination_name_en": "Sule(City Hall)",
+    "origin_name_mm": "မြောက်ဒဂုံ (ထားဝယ်ချောင်း)",
+    "origin_name_en": "North Dagon (Htawal Chaung)",
+    "destination_name_mm": "ဆူးလေ (မြို့တော်ခန်းမ)",
+    "destination_name_en": "Sule (City Hall)",
     "payment_method": [],
     "shape": {
       "geometry": {
@@ -13339,6 +13339,7 @@
     ]
   },
   {
+    "agency_id": "BDL",
     "color": "DF504E",
     "name": "(\u1041\u1043) \u1015\u102b\u101b\u1019\u102e - \u1017\u102d\u102f\u101c\u103a\u1010\u1005\u103a\u1011\u1031\u102c\u1004\u103a\u1018\u102f\u101b\u102c\u1038",
     "route_id": "13",
@@ -13346,9 +13347,9 @@
     "name_en": "13",
     "sub_name_mm": null,
     "sub_name_en": null,
-    "origin_name_mm": "ဒဂုံတက္ကသိုလ်",
-    "origin_name_en": "Dagon University",
-    "destination_name_mm": "ဗိုလ်တစ်ထောင်ဘုရား",
+    "origin_name_mm": "အရှေ့ဒဂုံ (၁၁၈ ရပ်ကွက်)",
+    "origin_name_en": "East Dagon (118 Ward)",
+    "destination_name_mm": "ဗိုလ်တထောင်ဘုရား",
     "destination_name_en": "Botahtaung Pagoda",
     "payment_method": [],
     "shape": {
@@ -14074,8 +14075,8 @@
     "name_en": "14",
     "sub_name_mm": null,
     "sub_name_en": null,
-    "origin_name_mm": "ပါရမီ(ညောင်ပင်)",
-    "origin_name_en": "Parami(Nyaung Pin)",
+    "origin_name_mm": "ပါရမီ (ညောင်ပင်)",
+    "origin_name_en": "Parami (Nyaung Pin)",
     "destination_name_mm": "သခင်မြပန်းခြံ",
     "destination_name_en": "Thakin Mya Park",
     "payment_method": [],
@@ -14908,7 +14909,7 @@
     ]
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": "YUPT",
     "color": "DF504E",
     "name": "(\u1041\u1045 \u101b\u103d\u103e\u1031\u1015\u1031\u102b\u1000\u1039\u1000\u1036) \u1012\u1002\u102f\u1036\u1010\u1000\u1039\u1000\u101e\u102d\u102f\u101c\u103a  - \u1018\u102f\u101b\u1004\u1037\u103a\u1014\u1031\u102c\u1004\u103a\u101c\u1019\u103a\u1038 - \u1010\u100a\u1004\u103a\u1038\u1000\u102f\u1014\u103a\u1038",
     "route_id": "15",
@@ -16105,7 +16106,7 @@
     ]
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": "GYCT",
     "color": "DF504E",
     "name": "(\u1041\u1046 \u1010\u1031\u102c\u1004\u103a\u1004\u1030\u101c\u1019\u103a\u1038) \u101b\u103d\u103e\u1031\u1015\u1031\u102b\u1000\u103a\u1000\u1036 - \u1012\u1002\u102f\u1036\u1027\u101b\u102c\u1021\u101d\u1031\u1038\u1015\u103c\u1031\u1038\u101d\u1004\u103a\u1038",
     "route_id": "16",
@@ -16116,7 +16117,7 @@
     "origin_name_mm": "ရွှေပေါက္ကံ",
     "origin_name_en": "Shwe Pauk Kan",
     "destination_name_mm": "ဒဂုံဧရာအဝေးပြေး",
-    "destination_name_en": "Dagon Ayar Highway Terminal",
+    "destination_name_en": "Dagon Ayar Highway Bus Terminal",
     "payment_method": [],
     "shape": {
       "geometry": {
@@ -17069,7 +17070,7 @@
     "origin_name_mm": "ရွှေပေါက္ကံ",
     "origin_name_en": "Shwe Pauk Kan",
     "destination_name_mm": "ဒဂုံဧရာအဝေးပြေး",
-    "destination_name_en": "Dagon Ayar Highway Terminal",
+    "destination_name_en": "Dagon Ayar Highway Bus Terminal",
     "payment_method": [],
     "shape": {
       "geometry": {
@@ -17909,8 +17910,8 @@
     ]
   },
   {
-    "agency_id": "YRTA",
-    "color": "DF504E",
+    "agency_id": null,
+    "color": "405CAA",
     "name": "(\u1041\u1048) \u1001\u101b\u1031\u101b\u102d\u1015\u103a\u1019\u103d\u1014\u103a - \u1007\u101d\u1014",
     "route_id": "18",
     "name_mm": "၁၈",
@@ -17919,8 +17920,8 @@
     "sub_name_en": null,
     "origin_name_mm": "ထောက်ကြန့်",
     "origin_name_en": "Htauk Kyant",
-    "destination_name_mm": "တောင်ဒဂုံ(ယဉ်ကျေးမှုတက္ကသိုလ်)",
-    "destination_name_en": "South Dagon(University of Culture)",
+    "destination_name_mm": "တောင်ဒဂုံ (ယဉ်ကျေးမှုတက္ကသိုလ်)",
+    "destination_name_en": "South Dagon (University of Culture)",
     "payment_method": [],
     "shape": {
       "geometry": {
@@ -18755,8 +18756,8 @@
     "name_en": "19",
     "sub_name_mm": null,
     "sub_name_en": null,
-    "origin_name_mm": "ရွှေပေါက္ကံ(ဆင်ဖုံ)",
-    "origin_name_en": "Shwe Pauk Kan(Sin Phon)",
+    "origin_name_mm": "ရွှေပေါက္ကံ (ဆင်ဖုံ)",
+    "origin_name_en": "Shwe Pauk Kan (Sin Phon)",
     "destination_name_mm": "သခင်မြပန်းခြံ",
     "destination_name_en": "Thakin Mya Park",
     "payment_method": [],
@@ -20050,7 +20051,7 @@
     "sub_name_mm": null,
     "sub_name_en": null,
     "origin_name_mm": "ဒဂုံဧရာအဝေးပြေး",
-    "origin_name_en": "Dagon Ayar Highway Terminal",
+    "origin_name_en": "Dagon Ayar Highway Bus Terminal",
     "destination_name_mm": "သခင်မြပန်းခြံ",
     "destination_name_en": "Thakin Mya Park",
     "payment_method": [],
@@ -20722,7 +20723,7 @@
     "name_en": "21",
     "sub_name_mm": null,
     "sub_name_en": null,
-    "origin_name_mm": "ရန်ကုန်အနောက်ပိုင်းတက္ကသိုလ်",
+    "origin_name_mm": "အနောက်ပိုင်းတက္ကသိုလ်",
     "origin_name_en": "West Yangon University",
     "destination_name_mm": "လသာ",
     "destination_name_en": "Latha",
@@ -21829,7 +21830,7 @@
     ]
   },
   {
-    "agency_id": "P11",
+    "agency_id": null,
     "color": "405CAA",
     "name": "(\u1042\u1042) \u1021\u1014\u1031\u102c\u1000\u103a\u1015\u102d\u102f\u1004\u103a\u1038\u1010\u1000\u1039\u1000\u101e\u102d\u102f\u101c\u103a(\u1011\u1014\u103a\u1038\u1010\u1015\u1004\u103a) - \u101e\u1001\u1004\u103a\u1019\u103c\u1015\u1014\u103a\u1038\u1001\u103c\u1036",
     "route_id": "22",
@@ -21837,7 +21838,7 @@
     "name_en": "22",
     "sub_name_mm": null,
     "sub_name_en": null,
-    "origin_name_mm": "ရန်ကုန်အနောက်ပိုင်းတက္ကသိုလ်",
+    "origin_name_mm": "အနောက်ပိုင်းတက္ကသိုလ်",
     "origin_name_en": "West Yangon University",
     "destination_name_mm": "သခင်မြပန်းခြံ",
     "destination_name_en": "Thakin Mya Park",
@@ -22816,7 +22817,7 @@
     ]
   },
   {
-    "agency_id": "GYCT",
+    "agency_id": "",
     "color": "405CAA",
     "name": "(\u1042\u1043 \u1018\u102f\u101b\u1004\u103a\u1014\u1031\u102c\u1004\u103a\u1010\u1036\u1010\u102c\u1038) (\u1010\u1030\u1038\u1001\u103b\u1031\u102c\u1004\u103a\u1038) - \u101e\u1001\u1004\u103a\u1019\u103c\u1015\u1014\u103a\u1038\u1001\u103c\u1036",
     "route_id": "23",
@@ -22824,7 +22825,7 @@
     "name_en": "23",
     "sub_name_mm": null,
     "sub_name_en": null,
-    "origin_name_mm": "ရန်ကုန်အနောက်ပိုင်းနည်းပညာတက္ကသိုလ်",
+    "origin_name_mm": "အနောက်ပိုင်းနည်းပညာတက္ကသိုလ်",
     "origin_name_en": "West Yangon Technological University",
     "destination_name_mm": "သခင်မြပန်းခြံ",
     "destination_name_en": "Thakin Mya Park",
@@ -23138,7 +23139,7 @@
     ]
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": "YUPT",
     "color": "DF504E",
     "name": "(\u1042\u1044) \u1012\u1002\u102f\u1036\u1010\u1000\u1039\u1000\u101e\u102d\u102f\u101c\u103a - \u1017\u102d\u102f\u101c\u103a\u1010\u1011\u1031\u102c\u1004\u103a\u1018\u102f\u101b\u102c\u1038\u101c\u1019\u103a\u1038",
     "route_id": "24",
@@ -24463,7 +24464,7 @@
   },
 
   {
-    "agency_id": "YRTA",
+    "agency_id": "YUPT",
     "color": "DF504E",
     "name": "(\u1042\u1046) \u1012\u1002\u102f\u1036\u1010\u1000\u1039\u1000\u101e\u102d\u102f\u101c\u103a - \u1017\u102d\u102f\u101c\u103a\u1010\u1011\u1031\u102c\u1004\u103a\u1018\u102f\u101b\u102c\u1038\u101c\u1019\u103a\u1038",
     "route_id": "26",
@@ -25542,7 +25543,7 @@
     ]
   },
   {
-    "agency_id": "TRAN",
+    "agency_id": "TLPC",
     "color": "DF504E",
     "name": "(\u1042\u1047) \u1005\u102d\u1010\u103a\u1000\u103b\u1014\u103a\u1038\u1019\u102c\u101b\u1031\u1038\u1006\u1031\u1038\u101b\u102f\u1036 - \u1000\u103b\u102d\u102f\u1000\u1039\u1000\u1006\u1036\u101c\u1019\u103a\u1038",
     "route_id": "27",
@@ -25962,7 +25963,7 @@
     ]
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": "YUPT",
     "color": "DF504E",
     "name": "(\u1042\u1048) \u1012\u1002\u102f\u1036\u1010\u1000\u1039\u1000\u101e\u102d\u102f\u101c\u103a - \u1006\u1030\u1038\u101c\u1031\u1019\u103c\u102d\u102f\u1037\u1010\u1031\u102c\u103a\u1001\u1014\u103a\u1038\u1019",
     "route_id": "28",
@@ -25972,8 +25973,8 @@
     "sub_name_en": null,
     "origin_name_mm": "ဒဂုံတက္ကသိုလ်",
     "origin_name_en": "Dagon University",
-    "destination_name_mm": "ဆူးလေမြို့တော်ခန်းမ",
-    "destination_name_en": "Sule(City Hall)",
+    "destination_name_mm": "ဆူးလေ (မြို့တော်ခန်းမ)",
+    "destination_name_en": "Sule (City Hall)",
     "payment_method": [],
     "shape": {
       "geometry": {
@@ -26364,10 +26365,10 @@
     "name_en": "29",
     "sub_name_mm": null,
     "sub_name_en": null,
-    "origin_name_mm": "ဒဂုံတက္ကသိုလ်",
-    "origin_name_en": "Dagon University",
-    "destination_name_mm": "ဆူးလေမြို့တော်ခန်းမ",
-    "destination_name_en": "Sule(City Hall)",
+    "origin_name_mm": "ရွှေပေါက္ကံ (တံတားထိပ်)",
+    "origin_name_en": "Shwe Pauk Kan (Bridge)",
+    "destination_name_mm": "ဆူးလေ (မြို့တော်ခန်းမ)",
+    "destination_name_en": "Sule (City Hall)",
     "payment_method": [],
     "shape": {
       "geometry": {
@@ -27892,7 +27893,7 @@
     ]
   },
   {
-    "agency_id": "KBG",
+    "agency_id": "KBY",
     "color": "96509F",
     "name": "(\u1043\u1041) \u101e\u1014\u103a\u101c\u103b\u1004\u103a(\u1021\u101b\u103e\u1031\u1037\u1015\u102d\u102f\u1004\u103a\u1038\u1010\u1000\u1039\u1000\u101e\u102d\u102f\u101c\u103a) - \u1017\u102d\u102f\u101c\u103a\u1010\u1011\u1031\u102c\u1004\u103a\u1008\u1031\u1038\u101c\u1019\u103a\u1038",
     "route_id": "31-Tarwa",
@@ -27900,7 +27901,7 @@
     "name_en": "31",
     "sub_name_mm": "တာဝ",
     "sub_name_en": "Tawa",
-    "origin_name_mm": "ရန်ကုန်အရှေ့ပိုင်းတက္ကသိုလ်",
+    "origin_name_mm": "အရှေ့ပိုင်းတက္ကသိုလ်",
     "origin_name_en": "East Yangon University",
     "destination_name_mm": "ပန်းဆိုးတန်း",
     "destination_name_en": "Pansodan",
@@ -28699,7 +28700,7 @@
     ]
   },
   {
-    "agency_id": "KBG",
+    "agency_id": "KBY",
     "color": "96509F",
     "name": "(\u1043\u1041) \u101e\u1014\u103a\u101c\u103b\u1004\u103a(\u1021\u101b\u103e\u1031\u1037\u1015\u102d\u102f\u1004\u103a\u1038\u1010\u1000\u1039\u1000\u101e\u102d\u102f\u101c\u103a) - \u1017\u102d\u102f\u101c\u103a\u1010\u1011\u1031\u102c\u1004\u103a\u1008\u1031\u1038\u101c\u1019\u103a\u1038",
     "route_id": "31-Thilawa",
@@ -28707,8 +28708,8 @@
     "name_en": "31",
     "sub_name_mm": "သီလဝါ",
     "sub_name_en": "Thilawa",
-    "origin_name_mm": "ရန်ကုန်အရှေ့ပိုင်းတက္ကသိုလ်",
-    "origin_name_en": "East Yangon University",
+    "origin_name_mm": "သီလဝါ (အိမ်ရာ)",
+    "origin_name_en": "Thilawa Housing",
     "destination_name_mm": "ပန်းဆိုးတန်း",
     "destination_name_en": "Pansodan",
     "payment_method": [],
@@ -29506,7 +29507,7 @@
     ]
   },
   {
-    "agency_id": "LuDu",
+    "agency_id": "LUDU",
     "color": "96509F",
     "name": "(\u1043\u1042) \u101b\u1031\u1000\u103c\u1031\u102c\u1004\u103a\u1038\u1010\u1000\u1039\u1000\u101e\u102d\u102f\u101c\u103a - \u1011\u1031\u102c\u1000\u103a\u1000\u103c\u1014\u1037\u103a",
     "route_id": "32",
@@ -30538,7 +30539,7 @@
     ]
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": "",
     "color": "96509F",
     "name": "(\u1043\u1043) \u1000\u103b\u1031\u102c\u1000\u103a\u1010\u1014\u103a\u1038 - \u101a\u102f\u1007\u1014\u1015\u101c\u102c\u1007\u102c",
     "route_id": "33",
@@ -31204,7 +31205,7 @@
     ]
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": "GST",
     "color": "96509F",
     "name": "(\u1043\u1044) \u1001\u101b\u1019\u103a\u1038 - \u1019\u101f\u102c\u1017\u1014\u1039\u1013\u102f\u101c\u101c\u1019\u103a\u1038",
     "route_id": "34",
@@ -31943,7 +31944,7 @@
     ]
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": null,
     "color": "405CAA",
     "name": "(\u1043\u1045) \u1011\u1031\u102c\u1000\u103a\u1000\u103c\u1014\u103a\u1037 - \u1019\u101f\u102c\u1017\u1014\u1039\u1013\u102f\u101c\u101c\u1019\u103a\u1038",
     "route_id": "35",
@@ -32493,7 +32494,7 @@
     ]
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": "YUPT",
     "color": "405CAA",
     "name": "(\u1043\u1046 \u101b\u103d\u103e\u1031\u1015\u1031\u102b\u1000\u1039\u1000\u1036) \u101b\u103d\u103e\u1031\u1015\u1031\u102b\u1000\u1039\u1000\u1036 - \u1006\u1030\u1038\u101c\u1031",
     "route_id": "36",
@@ -32503,8 +32504,8 @@
     "sub_name_en": null,
     "origin_name_mm": "ရွှေပေါက္ကံ",
     "origin_name_en": "Shwe Pauk Kan",
-    "destination_name_mm": "ဆူးလေ(မြို့တော်ခန်းမ)",
-    "destination_name_en": "Sule(City Hall)",
+    "destination_name_mm": "ဆူးလေ (မြို့တော်ခန်းမ)",
+    "destination_name_en": "Sule (City Hall)",
     "payment_method": [],
     "shape": {
       "geometry": {
@@ -33024,10 +33025,10 @@
     "name_en": "37",
     "sub_name_mm": null,
     "sub_name_en": null,
-    "origin_name_mm": "ဆူးလေ",
-    "origin_name_en": "Sule",
-    "destination_name_mm": "ထောက်ကြန့်",
-    "destination_name_en": "Htauk Kyant",
+    "origin_name_mm": "ထောက်ကြန့်",
+    "origin_name_en": "Htauk Kyant",
+    "destination_name_mm": "ဆူးလေ",
+    "destination_name_en": "Sule",
     "payment_method": [],
     "shape": {
       "geometry": {
@@ -35015,10 +35016,10 @@
     "name_en": "38",
     "sub_name_mm": null,
     "sub_name_en": null,
-    "origin_name_mm": "ပါရမီ(ညောင်ပင်)",
-    "origin_name_en": "Parami(Nyaung Pin)",
+    "origin_name_mm": "ပါရမီ (ညောင်ပင်)",
+    "origin_name_en": "Parami (Nyaung Pin)",
     "destination_name_mm": "သီရိမင်္ဂလာဈေးသစ်",
-    "destination_name_en": "Thiri Mingalar Market(New)",
+    "destination_name_en": "Thiri Mingalar Market (New)",
     "payment_method": [],
     "shape": {
       "geometry": {
@@ -35445,10 +35446,10 @@
     "name_en": "39",
     "sub_name_mm": null,
     "sub_name_en": null,
-    "origin_name_mm": "ရွှေပြည်သာ(ဝါးတရာ)",
-    "origin_name_en": "Shwe Pyi Thar(War Tayar)",
-    "destination_name_mm": "လသာ(အနော်ရထာလမ်း)",
-    "destination_name_en": "Latha(Anawrahta Road)",
+    "origin_name_mm": "ရွှေပြည်သာ (ဝါးတရာ)",
+    "origin_name_en": "Shwe Pyi Thar (War Tayar)",
+    "destination_name_mm": "လသာ",
+    "destination_name_en": "Latha",
     "payment_method": [],
     "shape": {
       "geometry": {
@@ -36482,7 +36483,7 @@
     ]
   },
   {
-    "agency_id": "YUPT",
+    "agency_id": "",
     "color": "405CAA",
     "name": "(\u1044\u1040) \u101b\u103d\u103e\u1031\u1015\u103c\u100a\u103a\u101e\u102c(\u101c\u102d\u1014\u103a\u1000\u102f\u1014\u103a\u1038) - \u101e\u1001\u1004\u103a\u1019\u103c\u1015\u1014\u103a\u1038\u1001\u103c\u1036",
     "route_id": "40",
@@ -36490,8 +36491,8 @@
     "name_en": "40",
     "sub_name_mm": null,
     "sub_name_en": null,
-    "origin_name_mm": "ရွှေပြည်သာ(ညရပ်ကွက်)",
-    "origin_name_en": "Shew Pyi Thar(Nya Ward)",
+    "origin_name_mm": "ရွှေပြည်သာ (ညရပ်ကွက်)",
+    "origin_name_en": "Shew Pyi Thar (Nya Ward)",
     "destination_name_mm": "သခင်မြပန်းခြံ",
     "destination_name_en": "Thakin Mya Park",
     "payment_method": [],
@@ -38801,7 +38802,7 @@
     ]
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": "",
     "color": "405CAA",
     "name": "(\u1044\u1042) \u101b\u103d\u103e\u1031\u1015\u103c\u100a\u103a\u101e\u102c(\u101c\u102d\u1014\u103a\u1000\u102f\u1014\u103a\u1038) - \u101b\u1010\u1014\u102c\u101c\u1019\u103a\u1038",
     "route_id": "42",
@@ -38809,10 +38810,10 @@
     "name_en": "42",
     "sub_name_mm": null,
     "sub_name_en": null,
-    "origin_name_mm": "ရွှေပြည်သာ(သာဓုကန်)",
-    "origin_name_en": "Shwe Pyi Thar(Thar Du Kan)",
-    "destination_name_mm": "သာကေတ(ကန်ကြီးထောင့်)",
-    "destination_name_en": "Thaketa(Kan Gyi Daung)",
+    "origin_name_mm": "ရွှေပြည်သာ (သာဓုကန်)",
+    "origin_name_en": "Shwe Pyi Thar (Thar Du Kan)",
+    "destination_name_mm": "သာကေတ (ကန်ကြီးထောင့်)",
+    "destination_name_en": "Thaketa (Kan Gyi Daung)",
     "payment_method": [],
     "shape": {
       "geometry": {
@@ -39502,7 +39503,7 @@
     ]
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": "YBPC",
     "color": "405CAA",
     "name": "(\u1044\u1043) \u101d\u102b\u101a\u102c\u101c\u1000\u103a - \u1017\u102d\u102f\u101c\u103a\u1010\u1011\u1031\u102c\u1004\u103a\u1018\u102f\u101b\u102c\u1038",
     "route_id": "43",
@@ -40213,7 +40214,7 @@
     ]
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": "RCBT",
     "color": "2C8A6C",
     "name": "(\u1044\u1044) \u101c\u102d\u1014\u103a\u1000\u102f\u1014\u103a\u1038 - \u101c\u103e\u100a\u103a\u1038\u1000\u1030\u1038\u1008\u1031\u1038\u101b\u103e\u1031\u1037",
     "route_id": "44",
@@ -40221,10 +40222,10 @@
     "name_en": "44",
     "sub_name_mm": null,
     "sub_name_en": null,
-    "origin_name_mm": "လှည်းကူး",
-    "origin_name_en": "hlegu",
+    "origin_name_mm": "လှည်းကူးတာဆုံ",
+    "origin_name_en": "Hlegu Tar Sone",
     "destination_name_mm": "သီရိမင်္ဂလာဈေးသစ်",
-    "destination_name_en": "Thiri Mingalar Market(New)",
+    "destination_name_en": "Thiri Mingalar Market (New)",
     "payment_method": [],
     "shape": {
       "geometry": {
@@ -41684,7 +41685,7 @@
     ]
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": "TYAT",
     "color": "2C8A6C",
     "name": "(\u1044\u1045) \u101c\u103e\u100a\u103a\u1038\u1000\u1030\u1038\u1008\u1031\u1038\u101b\u103e\u1031\u1037 - \u1019\u1004\u103a\u1038\u1000\u102f\u1014\u103a\u1038",
     "route_id": "45",
@@ -42118,7 +42119,7 @@
     ]
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": "",
     "color": "2C8A6C",
     "name": "(\u1044\u1046) \u1012\u102b\u1038\u1015\u102d\u1014\u103a - \u1010\u1031\u102c\u1004\u103a\u1019\u103c\u1031\u102c\u1000\u103a\u101c\u1019\u103a\u1038\u1006\u102f\u1036",
     "route_id": "46",
@@ -42570,7 +42571,7 @@
     ]
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": null,
     "color": "2C8A6C",
     "name": "(\u1044\u1047) \u101c\u103e\u102d\u102f\u1004\u103a\u101e\u102c\u101a\u102c \u1018\u102e\u1021\u102d\u102f\u1005\u102e - \u1010\u103d\u1036\u1010\u1031\u1038",
     "route_id": "47",
@@ -42578,8 +42579,213 @@
     "name_en": "47",
     "sub_name_mm": null,
     "sub_name_en": null,
-    "origin_name_mm": "လှိုင်သာယာ(ဘီအိုစီ)",
-    "origin_name_en": "Hlaing Tharyar(BOC)",
+    "origin_name_mm": "လှိုင်သာယာ (ဘီအိုစီ)",
+    "origin_name_en": "Hlaing Thaya (BOC)",
+    "destination_name_mm": "တွံတေး",
+    "destination_name_en": "Twantay",
+    "payment_method": [],
+    "shape": {
+      "geometry": {
+        "coordinates": [
+          [
+            95.9928249,
+            16.708873
+          ],
+          [
+            95.9994094,
+            16.7076947
+          ],
+          [
+            96.0004393,
+            16.7076865
+          ],
+          [
+            96.002834,
+            16.7083688
+          ],
+          [
+            96.004276,
+            16.7088949
+          ],
+          [
+            96.0051343,
+            16.7089114
+          ],
+          [
+            96.0117437,
+            16.7082586
+          ],
+          [
+            96.0129789,
+            16.7084076
+          ],
+          [
+            96.0308839,
+            16.7136906
+          ],
+          [
+            96.0320158,
+            16.7137382
+          ],
+          [
+            96.0322128,
+            16.7141728
+          ],
+          [
+            96.0310895,
+            16.7172716
+          ],
+          [
+            96.0250552,
+            16.7304499
+          ],
+          [
+            96.0224866,
+            16.7359575
+          ],
+          [
+            96.0222538,
+            16.7366972
+          ],
+          [
+            96.0223601,
+            16.7372758
+          ],
+          [
+            96.0232181,
+            16.7397686
+          ],
+          [
+            96.0238416,
+            16.7421631
+          ],
+          [
+            96.0256492,
+            16.7495337
+          ],
+          [
+            96.0275356,
+            16.7569001
+          ],
+          [
+            96.0294882,
+            16.7649439
+          ],
+          [
+            96.0300345,
+            16.7751597
+          ],
+          [
+            96.0304753,
+            16.7815646
+          ],
+          [
+            96.0305552,
+            16.7841268
+          ],
+          [
+            96.0302186,
+            16.7864873
+          ],
+          [
+            96.03022,
+            16.7871695
+          ],
+          [
+            96.0308398,
+            16.7932175
+          ],
+          [
+            96.0311307,
+            16.7966817
+          ],
+          [
+            96.0320521,
+            16.8062307
+          ],
+          [
+            96.0326476,
+            16.8132352
+          ],
+          [
+            96.0327602,
+            16.8140362
+          ],
+          [
+            96.036231,
+            16.8245834
+          ],
+          [
+            96.0363259,
+            16.8251811
+          ],
+          [
+            96.0369123,
+            16.8372043
+          ],
+          [
+            96.0369338,
+            16.8380001
+          ],
+          [
+            96.036349,
+            16.8451471
+          ],
+          [
+            96.0357107,
+            16.852566
+          ],
+          [
+            96.0358136,
+            16.8549782
+          ],
+          [
+            96.0356296,
+            16.8656163
+          ],
+          [
+            96.0357068,
+            16.8661702
+          ],
+          [
+            96.0370868,
+            16.8690897
+          ],
+          [
+            96.0387842,
+            16.8714551
+          ],
+          [
+            96.0387574,
+            16.8718281
+          ],
+          [
+            96.0377778,
+            16.8724896
+          ],
+          [
+            96.0369749,
+            16.872825
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {},
+      "type": "Feature"
+    },
+    "stops": []
+  },
+  {
+    "agency_id": null,
+    "color": "2C8A6C",
+    "name": "(\u1044\u1047) \u101c\u103e\u102d\u102f\u1004\u103a\u101e\u102c\u101a\u102c \u1018\u102e\u1021\u102d\u102f\u1005\u102e - \u1010\u103d\u1036\u1010\u1031\u1038",
+    "route_id": "48",
+    "name_mm": "၄၈",
+    "name_en": "48",
+    "sub_name_mm": null,
+    "sub_name_en": null,
+    "origin_name_mm": "ဒလ",
+    "origin_name_en": "Dala",
     "destination_name_mm": "တွံတေး",
     "destination_name_en": "Twantay",
     "payment_method": [],
@@ -43036,7 +43242,7 @@
     "stops": []
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": null,
     "color": "2C8A6C",
     "name": "(\u1044\u1049) \u101c\u103e\u102d\u102f\u1004\u103a\u101e\u102c\u101a\u102c \u1018\u102e\u1021\u102d\u102f\u1005\u102e - \u1000\u103d\u1019\u103a\u1038\u1001\u103c\u1036\u1000\u102f\u1014\u103a\u1038",
     "route_id": "49",
@@ -43044,8 +43250,8 @@
     "name_en": "49",
     "sub_name_mm": null,
     "sub_name_en": null,
-    "origin_name_mm": "လှိုင်သာယာ(ဘီအိုစီ)",
-    "origin_name_en": "Hlaing Tharyar(BOC)",
+    "origin_name_mm": "လှိုင်သာယာ (ဘီအိုစီ)",
+    "origin_name_en": "Hlaing Thaya (BOC)",
     "destination_name_mm": "ကွမ်းခြံကုန်း",
     "destination_name_en": "Kung Gyan Kone",
     "payment_method": [],
@@ -43673,7 +43879,7 @@
     "stops": []
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": "",
     "color": "2C8A6C",
     "name": "(\u1045\u1040) \u1012\u101c - \u1000\u103d\u1019\u103a\u1038\u1001\u103c\u1036\u1000\u102f\u1014\u103a\u1038",
     "route_id": "50",
@@ -44294,7 +44500,7 @@
     "stops": []
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": "",
     "color": "2C8A6C",
     "name": "(\u1045\u1041) \u1015\u1032\u1001\u1030\u1038 - \u1001\u101b\u1019\u103a\u1038",
     "route_id": "51",
@@ -44667,7 +44873,7 @@
     "stops": []
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": "",
     "color": "2C8A6C",
     "name": "(\u1045\u1042) \u1011\u1014\u103a\u1038\u1010\u1005\u103a\u1015\u1004\u103a - \u1019\u102e\u1038\u1001\u103d\u1000\u103a\u1008\u1031\u1038",
     "route_id": "52",
@@ -44677,8 +44883,8 @@
     "sub_name_en": null,
     "origin_name_mm": "ထန်းတပင်",
     "origin_name_en": "Htantabin",
-    "destination_name_mm": "လှိုင်သာယာ(မီးခွက်ဈေး)",
-    "destination_name_en": "Hlaing Tharyar(Mii Khwat Market)",
+    "destination_name_mm": "လှိုင်သာယာ (မီးခွက်ဈေး)",
+    "destination_name_en": "Hlaing Thaya (Mee Khwat Market)",
     "payment_method": [],
     "shape": {
       "geometry": {
@@ -44808,18 +45014,18 @@
     "stops": []
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": "",
     "color": "2C8A6C",
     "name": "(\u1045\u1043) \u101b\u103d\u103e\u1031\u101c\u1004\u103a\u1017\u1014\u103a\u1038\u101c\u1019\u103a\u1038\u1006\u102f\u1036 - \u101b\u103d\u103e\u1031\u101c\u1004\u103a\u1017\u1014\u103a\u1038\u101c\u1019\u103a\u1038\u1006\u102f\u1036",
-    "route_id": "53-A",
+    "route_id": "53-MeeKhwat",
     "name_mm": "၅၃",
     "name_en": "53",
-    "sub_name_mm": null,
-    "sub_name_en": null,
+    "sub_name_mm": "မီးခွက်ဈေး",
+    "sub_name_en": "Mee Khwat",
     "origin_name_mm": "အလယ်ရွာ",
-    "origin_name_en": "A Lal Ywar",
-    "destination_name_mm": "လှိုင်သာယာ(စက်မှုဇုန်)",
-    "destination_name_en": "Hlaing Tharyar(Industrial Zone)",
+    "origin_name_en": "Ah Lel Village",
+    "destination_name_mm": "လှိုင်သာယာ (စက်မှုဇုန်)",
+    "destination_name_en": "Hlaing Thaya (Industrial Zone)",
     "payment_method": [],
     "shape": {
       "geometry": {
@@ -44972,18 +45178,18 @@
     ]
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": "",
     "color": "2C8A6C",
     "name": "(\u1045\u1043) \u101b\u103d\u103e\u1031\u101c\u1004\u103a\u1017\u1014\u103a\u1038\u101c\u1019\u103a\u1038\u1006\u102f\u1036 - \u101b\u103d\u103e\u1031\u101c\u1004\u103a\u1017\u1014\u103a\u1038\u101c\u1019\u103a\u1038\u1006\u102f\u1036",
-    "route_id": "53-B",
+    "route_id": "53-YoneShae",
     "name_mm": "၅၃",
     "name_en": "53",
-    "sub_name_mm": null,
-    "sub_name_en": null,
+    "sub_name_mm": "ရုံးရှေ့",
+    "sub_name_en": "Yone Shae",
     "origin_name_mm": "အလယ်ရွာ",
-    "origin_name_en": "A Lal Ywar",
-    "destination_name_mm": "လှိုင်သာယာ(စက်မှုဇုန်)",
-    "destination_name_en": "Hlaing Tharyar(Industrial Zone)",
+    "origin_name_en": "Ah Lel Village",
+    "destination_name_mm": "လှိုင်သာယာ (စက်မှုဇုန်)",
+    "destination_name_en": "Hlaing Thaya (Industrial Zone)",
     "payment_method": [],
     "shape": {
       "geometry": {
@@ -45136,6 +45342,7 @@
     ]
   },
   {
+    "agency_id": "BDL",
     "color": "DF504E",
     "name": "(\u1045\u1045) \u1015\u102b\u101b\u1019\u102e - \u1005\u1031\u102c\u103a\u1018\u103d\u102c\u1038\u1000\u103c\u102e\u1038\u1000\u102f\u1014\u103a\u1038 - \u101e\u1001\u1004\u103a\u1019\u103c\u1015\u1014\u103a\u1038\u1001\u103c\u1036",
     "route_id": "55",
@@ -45143,8 +45350,8 @@
     "name_en": "55",
     "sub_name_mm": null,
     "sub_name_en": null,
-    "origin_name_mm": "ပါရမီ(ညောင်ပင်)",
-    "origin_name_en": "Parami(Nyaung Pin)",
+    "origin_name_mm": "ပါရမီ (ညောင်ပင်)",
+    "origin_name_en": "Parami (Nyaung Pin)",
     "destination_name_mm": "သခင်မြပန်းခြံ",
     "destination_name_en": "Thakin Mya Park",
     "payment_method": [],
@@ -46289,7 +46496,7 @@
     ]
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": "YUPT",
     "color": "86603E",
     "name": "(\u1045\u1048) \u1019\u103c\u102d\u102f\u1037\u1010\u103d\u1004\u103a\u1038  - \u1019\u103c\u102d\u102f\u1037\u1010\u103d\u1004\u103a\u1038",
     "route_id": "58",
@@ -46636,7 +46843,7 @@
     ]
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": "YUPT",
     "color": "DF504E",
     "name": "(\u1045\u1049) \u1010\u1031\u102c\u1004\u103a\u1012\u1002\u102f\u1036\u101e\u102d\u1019\u103a\u1000\u103b\u1031\u102c\u1004\u103a\u1038\u101c\u1019\u103a\u1038\u1006\u102f\u1036 - \u1017\u101f\u102d\u102f\u1021\u1019\u103b\u102d\u102f\u1038\u101e\u1019\u102e\u1038\u1006\u1031\u1038\u101b\u102f\u1036",
     "route_id": "59",
@@ -46644,8 +46851,8 @@
     "name_en": "59",
     "sub_name_mm": null,
     "sub_name_en": null,
-    "origin_name_mm": "တောင်ဒဂုံ(ကျောက်လမ်း)",
-    "origin_name_en": "South Dagon(Kyauk Road)",
+    "origin_name_mm": "တောင်ဒဂုံ (ကျောက်လမ်း)",
+    "origin_name_en": "South Dagon (Kyauk Road)",
     "destination_name_mm": "ဗဟိုအမျိုးသမီးဆေးရုံ",
     "destination_name_en": "Central Women's Hospital",
     "payment_method": [],
@@ -47072,7 +47279,7 @@
   },
   {
     "agency_id": "GYCT",
-    "color": "2C8A6C",
+    "color": "DF504E",
     "name": "(\u1046\u1040 \u1021\u1000\u103c\u102e\u1038) \u101a\u102f\u1007\u1014\u1025\u101a\u103b\u102c\u1009\u103a\u1019\u103c\u102d\u102f\u1037\u1010\u1031\u102c\u103a - \u1000\u103b\u1031\u102c\u1000\u103a\u1000\u102f\u1014\u103a\u1038",
     "route_id": "60",
     "name_mm": "၆၀",
@@ -47082,7 +47289,7 @@
     "origin_name_mm": "ယုဇနဥယျာဉ်မြို့တော်",
     "origin_name_en": "Yuzana Garden City",
     "destination_name_mm": "သီရိမင်္ဂလာဈေးသစ်",
-    "destination_name_en": "Thiri Mingalar Market(New)",
+    "destination_name_en": "Thiri Mingalar Market (New)",
     "payment_method": [],
     "shape": {
       "geometry": {
@@ -47719,7 +47926,7 @@
     ]
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": "",
     "color": "405CAA",
     "name": "(\u1046\u1041) \u1021\u1014\u1031\u102c\u1000\u103a\u1015\u102d\u102f\u1004\u103a\u1038\u1014\u100a\u103a\u1038\u1015\u100a\u102c\u1010\u1000\u1039\u1000\u101e\u102d\u102f\u101c\u103a - \u1006\u1030\u1038\u101c\u1031",
     "route_id": "61",
@@ -48576,7 +48783,7 @@
     ]
   },
   {
-    "agency_id": "KBG",
+    "agency_id": "YBPC",
     "color": "DF504E",
     "name": "(\u1046\u1042) \u1012\u1002\u102f\u1036\u1010\u1000\u1039\u1000\u101e\u102d\u102f\u101c\u103a - \u1000\u103c\u100a\u103a\u1037\u1019\u103c\u1004\u103a\u1010\u102d\u102f\u1004\u103a",
     "route_id": "62",
@@ -49575,7 +49782,7 @@
     ]
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": "TYAT",
     "color": "DF504E",
     "name": "(\u1046\u1043) \u1005\u1036\u1015\u103c\u1005\u103b\u1031\u1038 - \u101e\u1036\u101c\u103b\u1000\u103a\u1005\u103d\u1014\u103a\u1038",
     "route_id": "63",
@@ -49800,7 +50007,7 @@
     ]
   },
   {
-    "agency_id": "KBG",
+    "agency_id": "KBY",
     "color": "DF504E",
     "name": "(\u1046\u1044 \u101e\u102f\u1013\u1019\u1039\u1019\u102c\u101c\u1019\u103a\u1038) \u101d\u1031\u1018\u102c\u1002\u102e - \u1014\u1014\u103a\u1038\u101e\u102e\u1010\u102c\u1006\u102d\u1015\u103a\u1000\u1019\u103a\u1038",
     "route_id": "64-Khaymarthi",
@@ -50621,7 +50828,7 @@
     ]
   },
   {
-    "agency_id": "KBG",
+    "agency_id": "KBY",
     "color": "DF504E",
     "name": "(\u1046\u1044 \u1001\u1031\u1019\u102c\u101e\u102e\u101c\u1019\u103a\u1038) \u101d\u1031\u1018\u102c\u1002\u102e - \u1014\u1014\u103a\u1038\u101e\u102e\u1010\u102c\u1006\u102d\u1015\u103a\u1000\u1019\u103a\u1038",
     "route_id": "64-Thudhamar",
@@ -51504,7 +51711,7 @@
     ]
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": "",
     "color": "405CAA",
     "name": "(\u1046\u1045 \u1017\u102d\u102f\u101c\u103a\u1001\u103b\u102f\u1015\u103a\u1021\u1031\u102c\u1004\u103a\u1006\u1014\u103a\u1038\u101c\u1019\u103a\u1038) \u1017\u102d\u102f\u101c\u103a\u1010\u1011\u1031\u102c\u1004\u103a\u1018\u102f\u101b\u102c\u1038 - \u101b\u103d\u103e\u1031\u1015\u103c\u100a\u103a\u101e\u102c",
     "route_id": "65",
@@ -51512,8 +51719,8 @@
     "name_en": "65",
     "sub_name_mm": null,
     "sub_name_en": null,
-    "origin_name_mm": "ရွှေပြည်သာ(လိန်ကုန်း)",
-    "origin_name_en": "Shwe Pyi Thar(Lain Kone)",
+    "origin_name_mm": "ရွှေပြည်သာ (လိန်ကုန်း)",
+    "origin_name_en": "Shwe Pyi Thar (Lain Kone)",
     "destination_name_mm": "ဗိုလ်တထောင်ဘုရား",
     "destination_name_en": "Botahtaung Pagoda",
     "payment_method": [],
@@ -52901,7 +53108,7 @@
     ]
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": "RCBT",
     "color": "2C8A6C",
     "name": "(\u1046\u1046) \u1000\u103d\u1014\u103a\u1015\u1030\u1010\u102c\u1010\u1000\u1039\u1000\u101e\u102d\u102f\u101c\u103a - \u1005\u102d\u1010\u103a\u1000\u103b\u1014\u103a\u1038\u1019\u102c\u101b\u1031\u1038\u1006\u1031\u1038\u101b\u102f\u1036",
     "route_id": "66",
@@ -53236,7 +53443,7 @@
     ]
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": "RCBT",
     "color": "2C8A6C",
     "name": "(\u1046\u1047) \u100a\u1031\u102c\u1004\u103a\u101b\u103d\u103e\u1031 - \u100a\u1031\u102c\u1004\u103a\u101b\u103d\u103e\u1031",
     "route_id": "67",
@@ -53445,7 +53652,7 @@
     "stops": []
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": "",
     "color": "405CAA",
     "name": "(\u1046\u1048) \u101b\u103d\u103e\u1031\u1015\u103c\u100a\u103a\u101e\u102c (\u1021\u102d\u1019\u103a\u1019\u100a\u103a\u1038\u1000\u103c\u102e\u1038) - \u1014\u100a\u103a\u1038\u1015\u100a\u102c\u1010\u1000\u1039\u1000\u101e\u102d\u102f\u101c\u103a",
     "route_id": "68",
@@ -53453,9 +53660,9 @@
     "name_en": "68",
     "sub_name_mm": null,
     "sub_name_en": null,
-    "origin_name_mm": "ရွှေပြည်သာ(အိမ်မည်းကြီး)",
-    "origin_name_en": "Shew Pyi Thar(Eain Mae Gyi)",
-    "destination_name_mm": "ရန်ကုန်အနောက်ပိုင်းနည်းပညာတက္ကသိုလ်",
+    "origin_name_mm": "ရွှေပြည်သာ (အိမ်မည်းကြီး)",
+    "origin_name_en": "Shew Pyi Thar (Eain Mae Gyi)",
+    "destination_name_mm": "အနောက်ပိုင်းနည်းပညာတက္ကသိုလ်",
     "destination_name_en": "West Yangon Technological University",
     "payment_method": [],
     "shape": {
@@ -53714,7 +53921,7 @@
     ]
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": "",
     "color": "405CAA",
     "name": "(\u1046\u1049) \u101b\u103d\u103e\u1031\u1015\u103c\u100a\u103a\u101e\u102c (\u1021\u1031\u102c\u1000\u103a\u1006\u102d\u1015\u103a) - \u1012\u1002\u102f\u1036\u1027\u101b\u102c\u1021\u101d\u1031\u1038\u1015\u103c\u1031\u1038",
     "route_id": "69",
@@ -53722,10 +53929,10 @@
     "name_en": "69",
     "sub_name_mm": null,
     "sub_name_en": null,
-    "origin_name_mm": "ရွှေပြည်သာ(လှော်ကား)",
-    "origin_name_en": "Shwe Pyi Thar(Hlawga)",
+    "origin_name_mm": "ရွှေပြည်သာ (လှော်ကား)",
+    "origin_name_en": "Shwe Pyi Thar (Hlawga)",
     "destination_name_mm": "ဒဂုံဧရာအဝေးပြေး",
-    "destination_name_en": "Dagon Ayar Highway Terminal",
+    "destination_name_en": "Dagon Ayar Highway Bus Terminal",
     "payment_method": [],
     "shape": {
       "geometry": {
@@ -53887,7 +54094,7 @@
     ]
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": "GST",
     "color": "96509F",
     "name": "(\u1047\u1040) \u1010\u1031\u102c\u1004\u103a\u1012\u1002\u102f\u1036 - \u1000\u103b\u1031\u102c\u1000\u103a\u1000\u102f\u1014\u103a\u1038",
     "route_id": "70-Kyauktan",
@@ -54301,7 +54508,7 @@
     ]
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": "GST",
     "color": "96509F",
     "name": "(\u1047\u1040) \u1010\u1031\u102c\u1004\u103a\u1012\u1002\u102f\u1036 - \u1000\u103b\u1031\u102c\u1000\u103a\u1000\u102f\u1014\u103a\u1038",
     "route_id": "70-Thilawa",
@@ -54715,8 +54922,8 @@
     ]
   },
   {
-    "agency_id": "YRTA",
-    "color": "2C8A6C",
+    "agency_id": "RCBT",
+    "color": "DF504E",
     "name": "(\u1047\u1041) \u101e\u101b\u1000\u103a\u1015\u1004\u103a\u1001\u103b\u1031\u102c\u1004\u103a - \u1005\u1036\u1015\u103c\u1008\u1031\u1038",
     "route_id": "71",
     "name_mm": "၇၁",
@@ -54724,7 +54931,7 @@
     "sub_name_mm": null,
     "sub_name_en": null,
     "origin_name_mm": "သရက်ပင်ချောင်",
-    "origin_name_en": "Tha Yet Pin Chaung",
+    "origin_name_en": "Thayet Pin Chaung",
     "destination_name_mm": "ဇဝန",
     "destination_name_en": "Zawana",
     "payment_method": [],
@@ -54892,15 +55099,15 @@
   },
   {
     "agency_id": "YBPC",
-    "color": "405CAA",
+    "color": "DF504E",
     "name": "(\u1047\u1042) \u1027\u101b\u102c\u101d\u100f\u103a - \u1006\u1030\u1038\u101c\u1031",
     "route_id": "72",
     "name_mm": "၇၂",
     "name_en": "72",
     "sub_name_mm": null,
     "sub_name_en": null,
-    "origin_name_mm": "သာကေတ(ဧရာဝဏ်)",
-    "origin_name_en": "Thaketa(Ayar Wun)",
+    "origin_name_mm": "သာကေတ (ကန်ကြီးထောင့်)",
+    "origin_name_en": "Thaketa (Kan Gyi Daung)",
     "destination_name_mm": "ဆူးလေ",
     "destination_name_en": "Sule",
     "payment_method": [],
@@ -55657,7 +55864,7 @@
     ]
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": null,
     "color": "2C8A6C",
     "name": "(\u1047\u1043) \u101b\u103d\u103e\u1031\u1015\u103c\u100a\u103a\u101e\u102c - \u1011\u1031\u102c\u1000\u103a\u1000\u103c\u1014\u103a\u1037",
     "route_id": "73",
@@ -55665,8 +55872,8 @@
     "name_en": "73",
     "sub_name_mm": null,
     "sub_name_en": null,
-    "origin_name_mm": "ရွှေပြည်သာ",
-    "origin_name_en": "Shwe Pyi Thar",
+    "origin_name_mm": "ရွှေပြည်သာ (လိန်ကုန်း)",
+    "origin_name_en": "Shwe Pyi Thar (Lain Kone)",
     "destination_name_mm": "ထောက်ကြန့်",
     "destination_name_en": "Htauk Kyant",
     "payment_method": [],
@@ -56588,7 +56795,7 @@
     ]
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": "RCBT",
     "color": "405CAA",
     "name": "(\u1047\u1044) \u101b\u103d\u103e\u1031\u1015\u103c\u100a\u103a\u101e\u102c - \u1012\u1002\u102f\u1036\u1027\u101b\u102c\u1021\u101d\u1031\u1038\u1015\u103c\u1031\u1038",
     "route_id": "74",
@@ -56596,10 +56803,10 @@
     "name_en": "74",
     "sub_name_mm": null,
     "sub_name_en": null,
-    "origin_name_mm": "ရွှေပြည်သာ(သံဒင်းဈေး)",
-    "origin_name_en": "Shwe Pyi Thar(Than Din Market)",
+    "origin_name_mm": "ရွှေပြည်သာ(သံဒင်း)",
+    "origin_name_en": "Shwe Pyi Thar(Than Din)",
     "destination_name_mm": "ဒဂုံဧရာအဝေးပြေး",
-    "destination_name_en": "Dagon Ayar Highway Terminal",
+    "destination_name_en": "Dagon Ayar Highway Bus Terminal",
     "payment_method": [],
     "shape": {
       "geometry": {
@@ -56818,7 +57025,7 @@
     ]
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": "",
     "color": "DF504E",
     "name": "(\u1047\u1045) \u101e\u102f\u101d\u100f\u1039\u100f\u1018\u102f\u101b\u102c\u1038 - \u1000\u103c\u100a\u103a\u1037\u1019\u103c\u1004\u103a\u1010\u102d\u102f\u1004\u103a",
     "route_id": "75",
@@ -56828,8 +57035,8 @@
     "sub_name_en": null,
     "origin_name_mm": "ပင်လုံအိမ်ရာ",
     "origin_name_en": "Pin Lon Housing",
-    "destination_name_mm": "ကြည့်မြင်တိုင်",
-    "destination_name_en": "Kyee Myin Daing",
+    "destination_name_mm": "ကြည့်မြင်တိုင် (ညဈေး)",
+    "destination_name_en": "Kyee Myin Daing (Night Market)",
     "payment_method": [],
     "shape": {
       "geometry": {
@@ -57133,7 +57340,7 @@
     ]
   },
   {
-    "agency_id": "TRAN",
+    "agency_id": "TLPC",
     "color": "405CAA",
     "name": "(\u1047\u1046) \u1021\u101b\u103e\u1031\u1037 \u1015\u102d\u102f\u1004\u103a\u1038\u1010\u1000\u1039\u1000\u101e\u102d\u102f\u101c\u103a - \u1005\u1000\u103a\u1019\u103e\u102f(\u1041)",
     "route_id": "76",
@@ -57141,7 +57348,7 @@
     "name_en": "76",
     "sub_name_mm": null,
     "sub_name_en": null,
-    "origin_name_mm": "ရန်ကုန်အရှေ့ပိုင်းတက္ကသိုလ်",
+    "origin_name_mm": "အရှေ့ပိုင်းတက္ကသိုလ်",
     "origin_name_en": "East Yangon University",
     "destination_name_mm": "ကျောက်တော်ကြီး",
     "destination_name_en": "Kyauk Taw Gyi",
@@ -57516,7 +57723,7 @@
     ]
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": "RCBT",
     "color": "405CAA",
     "name": "(\u1047\u1047) \u1026\u1038\u1011\u1031\u102c\u1004\u103a\u1018\u102d\u102f - \u1019\u103c\u1004\u103a\u1038\u101c\u103e\u100a\u103a\u1038\u1002\u102d\u1010",
     "route_id": "77",
@@ -57524,8 +57731,8 @@
     "name_en": "77",
     "sub_name_mm": null,
     "sub_name_en": null,
-    "origin_name_mm": "ရွှေပြည်သာ",
-    "origin_name_en": "Shwe Pyi Thar",
+    "origin_name_mm": "ရွှေပြည်သာ (သဲကွင်း)",
+    "origin_name_en": "Shwe Pyi Thar (Thal Kwin)",
     "destination_name_mm": "လသာ",
     "destination_name_en": "Latha",
     "payment_method": [],
@@ -58137,7 +58344,7 @@
     ]
   },
   {
-    "agency_id": "LuDu",
+    "agency_id": "LUDU",
     "color": "405CAA",
     "name": "(\u1047\u1048) \u1000\u103d\u1014\u103a\u1015\u103b\u1030\u1010\u102c\u101e\u1000\u1039\u1000\u101e\u102d\u102f\u101c\u103a -\u1006\u1030\u1038\u101c\u1031 (\u1018\u1030\u1010\u102c\u1000\u103c\u102e\u1038)",
     "route_id": "78",
@@ -58861,7 +59068,7 @@
     ]
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": "",
     "color": "405CAA",
     "name": "(\u1047\u1049) \u101c\u1004\u103a\u1038\u1005\u1012\u1031\u102b\u1004\u103a\u1038 - \u1021\u1014\u1031\u102c\u1000\u103a\u1015\u102d\u102f\u1004\u103a\u1038\u1010\u1000\u1039\u1000\u101e\u102d\u102f\u101c",
     "route_id": "79",
@@ -58869,7 +59076,7 @@
     "name_en": "79",
     "sub_name_mm": null,
     "sub_name_en": null,
-    "origin_name_mm": "ရန်ကုန်အနောက်ပိုင်းတက္ကသိုလ်",
+    "origin_name_mm": "အနောက်ပိုင်းတက္ကသိုလ်",
     "origin_name_en": "West Yangon University",
     "destination_name_mm": "လင်းစဒေါင်း",
     "destination_name_en": "Lin Sadaung",
@@ -59220,7 +59427,7 @@
     ]
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": "TLPC",
     "color": "DF504E",
     "name": "(\u1048\u1040 \u1001\u102d\u102f\u1004\u103a\u101b\u103d\u103e\u1031\u101d\u102b) \u101e\u1001\u1004\u103a\u1019\u103c\u1015\u1014\u103a\u1038\u1001\u103c\u1036 - \u1001\u102d\u102f\u1004\u103a\u101b\u103d\u103e\u1031\u101d\u102b - \u101b\u1010\u1014\u102c\u1014\u103e\u1004\u103a\u1038\u1006\u102e\u1021\u102d\u1019\u103a\u101a\u102c",
     "route_id": "80",
@@ -59228,8 +59435,8 @@
     "name_en": "80",
     "sub_name_mm": null,
     "sub_name_en": null,
-    "origin_name_mm": "ဒဂုံဆိပ်ကမ်း(၁၆၈ ရပ်ကွက်)",
-    "origin_name_en": "Dagon Seikkan(168 Ward)",
+    "origin_name_mm": "ဒဂုံဆိပ်ကမ်း (၁၆၈ ရပ်ကွက်)",
+    "origin_name_en": "Dagon Seikkan (168 Ward)",
     "destination_name_mm": "ရန်ကုန်ဘူတာကြီး",
     "destination_name_en": "Yangon Railway Station",
     "payment_method": [],
@@ -60297,7 +60504,7 @@
     ]
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": "TLPC",
     "color": "DF504E",
     "name": "(\u1048\u1041) \u1010\u1031\u102c\u1004\u103a\u1019\u103c\u1031\u102c\u1000\u103a\u101c\u1019\u103a\u1038\u1006\u102f\u1036 - \u1015\u1014\u103a\u1038\u1006\u102d\u102f\u1038\u1010\u1014\u103a\u1038",
     "route_id": "81",
@@ -60592,8 +60799,8 @@
     ]
   },
   {
-    "agency_id": "YRTA",
-    "color": "DF504E",
+    "agency_id": "OMNIFOCUS",
+    "color": "405CAA",
     "name": "(\u1048\u1041) \u1010\u1031\u102c\u1004\u103a\u1019\u103c\u1031\u102c\u1000\u103a\u101c\u1019\u103a\u1038\u1006\u102f\u1036 - \u1015\u1014\u103a\u1038\u1006\u102d\u102f\u1038\u1010\u1014\u103a\u1038",
     "route_id": "82",
     "name_mm": "၈၂",
@@ -60601,7 +60808,7 @@
     "sub_name_mm": null,
     "sub_name_en": null,
     "origin_name_mm": "ဒဂုံဧရာအဝေးပြေး",
-    "origin_name_en": "Dagon Ayar Highway Terminal",
+    "origin_name_en": "Dagon Ayar Highway Bus Terminal",
     "destination_name_mm": "ဗိုလ်တထောင်ဘုရား",
     "destination_name_en": "Botahtaung Pagoda",
     "payment_method": [],
@@ -60621,7 +60828,7 @@
   },
   {
     "agency_id": "OMNIFOCUS",
-    "color": "405CAA",
+    "color": "86603E",
     "name": "(\u1048\u1043) \u1012\u1002\u102f\u1036\u1027\u101b\u102c\u1021\u101d\u1031\u1038\u1015\u103c\u1031\u1038 - \u1021\u1004\u103a\u1038\u101d\u1021\u102d\u1019\u103a\u101b\u102c",
     "route_id": "83",
     "name_mm": "၈၃",
@@ -60629,9 +60836,9 @@
     "sub_name_mm": null,
     "sub_name_en": null,
     "origin_name_mm": "ဒဂုံဧရာအဝေးပြေး",
-    "origin_name_en": "Dagon Ayar Highway Terminal",
-    "destination_name_mm": "ရွှေလီအိမ်ရာ",
-    "destination_name_en": "Shwe Li Housing",
+    "origin_name_en": "Dagon Ayar Highway Bus Terminal",
+    "destination_name_mm": "ရတနာနှင်းဆီအိမ်ရာ",
+    "destination_name_en": "Yadanar Hninsi Housing",
     "payment_method": [],
     "shape": {
       "geometry": {
@@ -61245,7 +61452,7 @@
     ]
   },
   {
-    "agency_id": "YUPT",
+    "agency_id": "PST",
     "color": "405CAA",
     "name": "(\u1048\u1044) \u101e\u102c\u1000\u1031\u1010 - \u1019\u103c\u1031\u102c\u1000\u103a\u1012\u1002",
     "route_id": "84",
@@ -61253,10 +61460,10 @@
     "name_en": "84",
     "sub_name_mm": null,
     "sub_name_en": null,
-    "origin_name_mm": "အရှေ့ဒဂုံ",
-    "origin_name_en": "East Dagon",
-    "destination_name_mm": "သာကေတ",
-    "destination_name_en": "Thaketa",
+    "origin_name_mm": "အရှေ့ဒဂုံ (၁၄ ရပ်ကွက်)",
+    "origin_name_en": "East Dagon (14 Ward)",
+    "destination_name_mm": "သာကေတ (၄၉ အစိမ်းဂိတ်)",
+    "destination_name_en": "Thaketa (49 Green Gate)",
     "payment_method": [],
     "shape": {
       "geometry": {
@@ -61465,7 +61672,7 @@
     ]
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": "TLPC",
     "color": "405CAA",
     "name": "(\u1048\u1045) \u101e\u102c\u1000\u1031\u1010 - \u1010\u102e\u1018\u102e\u1006\u1031\u1038\u101b",
     "route_id": "85",
@@ -61473,8 +61680,8 @@
     "name_en": "85",
     "sub_name_mm": null,
     "sub_name_en": null,
-    "origin_name_mm": "လှိုင်သာယာ(တူးချောင်း)",
-    "origin_name_en": "Hlaing Tharyar(Tuu Chaung)",
+    "origin_name_mm": "လှိုင်သာယာ (တူးချောင်း)",
+    "origin_name_en": "Hlaing Thaya (Tuu Chaung)",
     "destination_name_mm": "သာကေတအဝိုင်း",
     "destination_name_en": "Thaketa Circle",
     "payment_method": [],
@@ -61815,7 +62022,7 @@
     ]
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": "",
     "color": "DF504E",
     "name": "(\u1048\u1046) \u1010\u102c\u1019\u103d\u1031 - \u1021\u1004\u103a\u1038\u1005\u102d\u1014\u103a",
     "route_id": "86",
@@ -64755,10 +64962,10 @@
     "name_en": "89",
     "sub_name_mm": "မင်းနန္ဒာ",
     "sub_name_en": "Min Nandar",
-    "origin_name_mm": "သာကေတ(ရတနာအိမ်ရာ)",
-    "origin_name_en": "Thaketa(Yadanar Housing)",
-    "destination_name_mm": "ကြည့်မြင်တိုင်(ပန်းပင်ကြီးလမ်း)",
-    "destination_name_en": "Kyee Myin Daing(Pann Pin Gyi Street)",
+    "origin_name_mm": "သာကေတ (ရတနာအိမ်ရာ)",
+    "origin_name_en": "Thaketa (Yadanar Housing)",
+    "destination_name_mm": "ကြည့်မြင်တိုင် (ပန်းပင်ကြီးလမ်း)",
+    "destination_name_en": "Kyee Myin Daing (Pann Pin Gyi Street)",
     "payment_method": [],
     "shape": {
       "geometry": {
@@ -65447,10 +65654,10 @@
     "name_en": "89",
     "sub_name_mm": "မြင်တော်သာ",
     "sub_name_en": "Myin Taw Thar",
-    "origin_name_mm": "သာကေတ(ရတနာအိမ်ရာ)",
-    "origin_name_en": "Thaketa(Yadanar Housing)",
-    "destination_name_mm": "ကြည့်မြင်တိုင်(ပန်းပင်ကြီးလမ်း)",
-    "destination_name_en": "Kyee Myin Daing(Pann Pin Gyi Street)",
+    "origin_name_mm": "သာကေတ (ရတနာအိမ်ရာ)",
+    "origin_name_en": "Thaketa (Yadanar Housing)",
+    "destination_name_mm": "ကြည့်မြင်တိုင် (ပန်းပင်ကြီးလမ်း)",
+    "destination_name_en": "Kyee Myin Daing (Pann Pin Gyi Street)",
     "payment_method": [],
     "shape": {
       "geometry": {
@@ -66017,7 +66224,7 @@
     ]
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": "",
     "color": "405CAA",
     "name": "(\u1049\u1040) \u1025\u1000\u1039\u1000\u1036 - \u101e\u1001\u1004\u103a\u1019\u103c\u1015\u1014\u103a\u1038\u1001\u103c\u1036",
     "route_id": "90",
@@ -67788,7 +67995,7 @@
     ]
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": "RCBT",
     "color": "2C8A6C",
     "name": "(\u1049\u1041) \u1010\u102d\u102f\u1000\u103a\u1000\u103c\u102e\u1038 - \u1021\u1019\u103e\u1010\u103a(\u1043)\u101c\u1019\u103a\u1038\u1006\u102f\u1036",
     "route_id": "91",
@@ -68603,7 +68810,7 @@
     ]
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": "",
     "color": "405CAA",
     "name": "(\u1049\u1042 \u1001\u1031\u1019\u102c\u101e\u102e\u101c\u1019\u103a\u1038) \u1021\u1019\u103e\u1010\u103a(\u1043)\u101c\u1019\u103a\u1038\u1006\u102f\u1036 - \u1007\u101d\u1014",
     "route_id": "92",
@@ -69618,7 +69825,7 @@
     ]
   },
   {
-    "agency_id": "LuDu",
+    "agency_id": "LUDU",
     "color": "405CAA",
     "name": "(\u1049\u1043) \u1021\u1014\u1031\u102c\u1000\u103a\u1015\u102d\u102f\u1004\u103a\u1038\u1010\u1000\u1039\u1000\u101e\u102d\u102f\u101c\u103a - \u101b\u1014\u103a\u1000\u102f\u1014\u103a\u1018\u1030\u1010\u102c\u1000\u103c\u102e\u1038",
     "route_id": "93",
@@ -70356,7 +70563,7 @@
     ]
   },
   {
-    "agency_id": "LuDu",
+    "agency_id": "LUDU",
     "color": "405CAA",
     "name": "(\u1049\u1044) \u1000\u103d\u1014\u103a\u1015\u103b\u1030\u1010\u102c\u1010\u1000\u1039\u1000\u101e\u102d\u102f\u101c\u103a - \u101b\u1014\u103a\u1000\u102f\u1014\u103a\u1018\u1030\u1010\u102c\u1000\u103c\u102e\u1038",
     "route_id": "94",
@@ -72632,7 +72839,7 @@
     ]
   },
   {
-    "agency_id": "GYCT",
+    "agency_id": "GST",
     "color": "96509F",
     "name": "(\u1049\u1045) \u1000\u103b\u1031\u102c\u1000\u103a\u1010\u1014\u103a\u1038 - \u1021\u101c\u102f\u1015\u103a\u101e\u1019\u102c\u1038\u1006\u1031\u1038\u101b\u102f\u1036",
     "route_id": "95",
@@ -75322,7 +75529,7 @@
     ]
   },
   {
-    "agency_id": "LuDu",
+    "agency_id": "",
     "color": "DF504E",
     "name": "(\u1049\u1047) \u1005\u102e\u1038\u1015\u103d\u102c\u1038\u101b\u1031\u1038\u1010\u1000\u1039\u1000\u101e\u102d\u102f\u101c\u103a\u201c\u101b\u103d\u102c\u101e\u102c\u1000\u103c\u102e\u1038\u1014\u101a\u103a\u1019\u103c\u1031\u201d - \u1011\u1031\u102c\u1000\u103a\u1000\u103c\u1014\u1037\u103a",
     "route_id": "97",
@@ -75330,8 +75537,8 @@
     "name_en": "97",
     "sub_name_mm": null,
     "sub_name_en": null,
-    "origin_name_mm": "စီးပွားရေးတက္ကသိုလ်(ရွာသာကြီး)",
-    "origin_name_en": "Yangon University of Economics",
+    "origin_name_mm": "သုခဒဂုံအိမ်ရာ",
+    "origin_name_en": "Thukha Dagon Housing",
     "destination_name_mm": "ထောက်ကြန့်",
     "destination_name_en": "Htauk Kyant",
     "payment_method": [],
@@ -77564,7 +77771,7 @@
     "sub_name_mm": null,
     "sub_name_en": null,
     "origin_name_mm": "ဒဂုံဧရာအဝေးပြေး",
-    "origin_name_en": "Dagon Ayar Highway Terminal",
+    "origin_name_en": "Dagon Ayar Highway Bus Terminal",
     "destination_name_mm": "လင်းစဒေါင်း",
     "destination_name_en": "Lin Sadaung",
     "payment_method": [],
@@ -78619,7 +78826,7 @@
     "sub_name_mm": null,
     "sub_name_en": null,
     "origin_name_mm": "ဒဂုံဧရာအဝေးပြေး",
-    "origin_name_en": "Dagon Ayar Highway Terminal",
+    "origin_name_en": "Dagon Ayar Highway Bus Terminal",
     "destination_name_mm": "ရွှေလီအိမ်ရာ",
     "destination_name_en": "Shwe Li Housing",
     "payment_method": [],
@@ -79780,8 +79987,8 @@
     "name_en": "100",
     "sub_name_mm": null,
     "sub_name_en": null,
-    "origin_name_mm": "တောင်ဒဂုံ(ကျီစု)",
-    "origin_name_en": "South Dagon(Kyi Su)",
+    "origin_name_mm": "တောင်ဒဂုံ (ကျီစု)",
+    "origin_name_en": "South Dagon (Kyi Su)",
     "destination_name_mm": "ဗိုလ်တထောင်ဘုရား",
     "destination_name_en": "Botahtaung Pagoda",
     "payment_method": [],
@@ -79808,10 +80015,10 @@
     "name_en": "103",
     "sub_name_mm": null,
     "sub_name_en": null,
-    "origin_name_mm": "တောင်ဒဂုံ(ကျီစု)",
-    "origin_name_en": "South Dagon(Kyi Su)",
+    "origin_name_mm": "တောင်ဒဂုံ (ကျီစု)",
+    "origin_name_en": "South Dagon (Kyi Su)",
     "destination_name_mm": "ဒဂုံဧရာအဝေးပြေး",
-    "destination_name_en": "Dagon Ayar Highway Terminal",
+    "destination_name_en": "Dagon Ayar Highway Bus Terminal",
     "payment_method": [],
     "shape": {
       "geometry": {
@@ -81157,8 +81364,8 @@
     "name_en": "105",
     "sub_name_mm": null,
     "sub_name_en": null,
-    "origin_name_mm": "မှော်ဘီ(TU)",
-    "origin_name_en": "Hmawbi(TU)",
+    "origin_name_mm": "မှော်ဘီ (နည်းပညာတက္ကသိုလ်)",
+    "origin_name_en": "Hmawbi (Technological University)",
     "destination_name_mm": "ဆူးလေ",
     "destination_name_en": "Sule",
     "payment_method": [],
@@ -92702,8 +92909,8 @@
     "name_en": "109",
     "sub_name_mm": null,
     "sub_name_en": null,
-    "origin_name_mm": "မှော်ဘီ(TU)",
-    "origin_name_en": "Hmawbi(TU)",
+    "origin_name_mm": "မှော်ဘီ (နည်းပညာတက္ကသိုလ်)",
+    "origin_name_en": "Hmawbi (Technological University)",
     "destination_name_mm": "အင်းစိန်ပန်းခြံ",
     "destination_name_en": "Insein Park",
     "payment_method": [],
@@ -94672,7 +94879,7 @@
     ]
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": "YUPT",
     "color": "DF504E",
     "name": "(\u1043 \u101e\u102f\u101d\u100f\u1039\u100f\u1005\u103b\u1031\u1038) \u101a\u102f\u1007\u1014\u1025\u101a\u103b\u102c\u1009\u103a\u1019\u103c\u102d\u102f\u1037\u1010\u1031\u102c\u103a - \u101c\u1019\u103a\u1038\u1045\u1040",
     "route_id": "110",
@@ -94682,8 +94889,8 @@
     "sub_name_en": null,
     "origin_name_mm": "ယုဇနဥယျာဉ်မြို့တော်",
     "origin_name_en": "Yuzana Garden City",
-    "destination_name_mm": "ဆူးလေ(မြို့တော်ခန်းမ)",
-    "destination_name_en": "Sule(City Hall)",
+    "destination_name_mm": "ဆူးလေ (မြို့တော်ခန်းမ)",
+    "destination_name_en": "Sule (City Hall)",
     "payment_method": [],
     "shape": {
       "geometry": {
@@ -95987,7 +96194,7 @@
     ]
   },
   {
-    "agency_id": "YUPT",
+    "agency_id": "PST",
     "color": "DF504E",
     "name": "(\u1047 \u1019\u1031\u102c\u1004\u103a\u1019\u1000\u1014\u103a\u101c\u1019\u103a\u1038) \u1010\u1031\u102c\u1004\u103a\u1012\u1002\u102f\u1036 (\u1047\u1040/\u1047\u1042)\u101b\u1015\u103a\u1000\u103d\u1000\u103a - \u1019\u101f\u102c\u1017\u1014\u1039\u1013\u102f\u101c\u101c\u1019\u103a\u1038",
     "route_id": "111-SetHmuZone",
@@ -95995,8 +96202,8 @@
     "name_en": "111",
     "sub_name_mm": "စက်မှုဇုန်",
     "sub_name_en": "Set Hmu Zone",
-    "origin_name_mm": "တောင်ဒဂုံ(ကျီစု)",
-    "origin_name_en": "South Dagon(Kyi Su)",
+    "origin_name_mm": "တောင်ဒဂုံ (ကျီစု)",
+    "origin_name_en": "South Dagon (Kyi Su)",
     "destination_name_mm": "ဆူးလေ",
     "destination_name_en": "Sule",
     "payment_method": [],
@@ -96638,7 +96845,7 @@
     ]
   },
   {
-    "agency_id": "YUPT",
+    "agency_id": "PST",
     "color": "DF504E",
     "name": "(\u1047 \u1019\u1031\u102c\u1004\u103a\u1019\u1000\u1014\u103a\u101c\u1019\u103a\u1038) \u1010\u1031\u102c\u1004\u103a\u1012\u1002\u102f\u1036 (\u1047\u1040/\u1047\u1042)\u101b\u1015\u103a\u1000\u103d\u1000\u103a - \u1019\u101f\u102c\u1017\u1014\u1039\u1013\u102f\u101c\u101c\u1019\u103a\u1038",
     "route_id": "111-NatSin",
@@ -96646,8 +96853,8 @@
     "name_en": "111",
     "sub_name_mm": "နတ်စင်",
     "sub_name_en": "Nat Sin",
-    "origin_name_mm": "တောင်ဒဂုံ(ကျီစု)",
-    "origin_name_en": "South Dagon(Kyi Su)",
+    "origin_name_mm": "တောင်ဒဂုံ (ကျီစု)",
+    "origin_name_en": "South Dagon (Kyi Su)",
     "destination_name_mm": "ဆူးလေ",
     "destination_name_en": "Sule",
     "payment_method": [],
@@ -97297,8 +97504,8 @@
     "name_en": "112",
     "sub_name_mm": null,
     "sub_name_en": null,
-    "origin_name_mm": "တောင်ဒဂုံ(အောင်မြင့်မိုရ်အိမ်ရာ)",
-    "origin_name_en": "South Dagon(Aung Myint Mo Housing)",
+    "origin_name_mm": "တောင်ဒဂုံ (အောင်မြင့်မိုရ်အိမ်ရာ)",
+    "origin_name_en": "South Dagon (Aung Myint Mo Housing)",
     "destination_name_mm": "ဆူးလေ",
     "destination_name_en": "Sule",
     "payment_method": [],
@@ -97948,8 +98155,8 @@
     "name_en": "113",
     "sub_name_mm": null,
     "sub_name_en": null,
-    "origin_name_mm": "ကားကြီးဂိတ်(ငမိုးရိပ်)",
-    "origin_name_en": "Kar Gyi Gate(Nga Moe Yeik)",
+    "origin_name_mm": "ငမိုးရိပ် (ကားကြီးဂိတ်)",
+    "origin_name_en": "Nga Moe Yeik (Kar Gyi Gate)",
     "destination_name_mm": "ဆူးလေ",
     "destination_name_en": "Sule",
     "payment_method": [],
@@ -98591,7 +98798,7 @@
     ]
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": "YUPT",
     "color": "DF504E",
     "name": "(\u1042\u1044) \u1000\u103b\u1014\u103a\u1005\u1005\u103a\u101e\u102c\u1038\u101c\u1019\u103a\u1038 - \u1017\u102d\u102f\u101c\u103a\u1010\u1011\u1031\u102c\u1004\u103a\u1018\u102f\u101b\u102c\u1038\u101c\u1019\u103a\u1038",
     "route_id": "114",
@@ -98599,8 +98806,8 @@
     "name_en": "114",
     "sub_name_mm": null,
     "sub_name_en": null,
-    "origin_name_mm": "အရှေ့ဒဂုံ(၁၀၈ ရပ်ကွက်)",
-    "origin_name_en": "East Dagon(108 Ward)",
+    "origin_name_mm": "အရှေ့ဒဂုံ (၁၀၈ ရပ်ကွက်)",
+    "origin_name_en": "East Dagon (108 Ward)",
     "destination_name_mm": "ဗိုလ်တထောင်ဘုရား",
     "destination_name_en": "Botahtaung Pagoda",
     "payment_method": [],
@@ -98985,7 +99192,7 @@
     ]
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": "YUPT",
     "color": "405CAA",
     "name": "(\u1043\u1046 \u1021\u1031\u102c\u1004\u103a\u1019\u1004\u103a\u1039\u1002\u101c\u102c) \u1021\u1031\u102c\u1004\u103a\u1019\u1004\u103a\u1039\u1002\u101c\u102c - \u1006\u1030\u1038\u101c\u1031",
     "route_id": "115",
@@ -98994,7 +99201,7 @@
     "sub_name_mm": null,
     "sub_name_en": null,
     "origin_name_mm": "အောင်မင်္ဂလာအဝေးပြေး",
-    "origin_name_en": "Aung Mingalar Highway Terminal",
+    "origin_name_en": "Aung Mingalar Highway Bus Terminal",
     "destination_name_mm": "ဆူးလေ",
     "destination_name_en": "Sule",
     "payment_method": [],
@@ -99674,7 +99881,7 @@
     ]
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": "YUPT",
     "color": "405CAA",
     "name": "(\u1043\u1046 \u1011\u1031\u102c\u1000\u103a\u1000\u103c\u1014\u103a\u1037) \u1011\u1031\u102c\u1000\u103a\u1000\u103c\u1014\u103a\u1037 - \u1006\u1030\u1038\u101c\u1031",
     "route_id": "116",
@@ -101947,7 +102154,7 @@
     ]
   },
   {
-    "agency_id": "LuDu",
+    "agency_id": "",
     "color": "DF504E",
     "name": "(\u1049\u1047) \u1005\u102e\u1038\u1015\u103d\u102c\u1038\u101b\u1031\u1038\u1010\u1000\u1039\u1000\u101e\u102d\u102f\u101c\u103a\u201c\u101b\u103d\u102c\u101e\u102c\u1000\u103c\u102e\u1038\u1014\u101a\u103a\u1019\u103c\u1031\u201d - \u1011\u1031\u102c\u1000\u103a\u1000\u103c\u1014\u1037\u103a",
     "route_id": "118",
@@ -101955,8 +102162,8 @@
     "name_en": "118",
     "sub_name_mm": null,
     "sub_name_en": null,
-    "origin_name_mm": "စီးပွားရေးတက္ကသိုလ်(ရွာသာကြီး)",
-    "origin_name_en": "Yangon University of Economics",
+    "origin_name_mm": "သုခဒဂုံအိမ်ရာ",
+    "origin_name_en": "Thukha Dagon Housing",
     "destination_name_mm": "ရန်ကုန်ဘူတာကြီး",
     "destination_name_en": "Yangon Railway Station",
     "payment_method": [],
@@ -104180,8 +104387,8 @@
     ]
   },
   {
-    "agency_id": "YRTA",
-    "color": "DF504E",
+    "agency_id": "GYCT",
+    "color": "405CAA",
     "name": "(\u1041\u1046 \u1021\u1031\u102c\u1004\u103a\u1019\u1004\u103a\u1039\u1002\u101c\u102c) \u1021\u1031\u102c\u1004\u103a\u1019\u1004\u103a\u1039\u1002\u101c\u102c - \u1012\u1002\u102f\u1036\u1027\u101b\u102c\u1021\u101d\u1031\u1038\u1015\u103c\u1031\u1038\u101d\u1004\u103a\u1038",
     "route_id": "119",
     "name_mm": "၁၁၉",
@@ -104189,9 +104396,9 @@
     "sub_name_mm": null,
     "sub_name_en": null,
     "origin_name_mm": "အောင်မင်္ဂလာအဝေးပြေး",
-    "origin_name_en": "Aung Mingalar Highway Terminal",
+    "origin_name_en": "Aung Mingalar Highway Bus Terminal",
     "destination_name_mm": "ဒဂုံဧရာအဝေးပြေး",
-    "destination_name_en": "Dagon Ayar Highway Terminal",
+    "destination_name_en": "Dagon Ayar Highway Bus Terminal",
     "payment_method": [],
     "shape": {
       "geometry": {
@@ -104655,7 +104862,7 @@
     ]
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": null,
     "color": "DF504E",
     "name": "(\u1048\u1040 \u1019\u102e\u1014\u102e) \u1021\u1011\u1000\u103a\u1015\u1014\u103a\u1038\u1006\u102d\u102f\u1038\u1010\u1014\u103a\u1038 - \u101e\u102c\u1000\u1031\u1010",
     "route_id": "120",
@@ -104663,8 +104870,8 @@
     "name_en": "120",
     "sub_name_mm": null,
     "sub_name_en": null,
-    "origin_name_mm": "သာကေတ(အနော်မာ)",
-    "origin_name_en": "Thaketa(Anawmar)",
+    "origin_name_mm": "သာကေတ (အနော်မာ)",
+    "origin_name_en": "Thaketa (Anawmar)",
     "destination_name_mm": "ရန်ကုန်ဘူတာကြီး",
     "destination_name_en": "Yangon Railway Station",
     "payment_method": [],
@@ -105071,7 +105278,7 @@
     ]
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": "",
     "color": "405CAA",
     "name": "(\u1049\u1040) \u1025\u1000\u1039\u1000\u1036 - \u101e\u1001\u1004\u103a\u1019\u103c\u1015\u1014\u103a\u1038\u1001\u103c\u1036",
     "route_id": "123-Ahpyauk",
@@ -105081,8 +105288,8 @@
     "sub_name_en": "Ahpyauk",
     "origin_name_mm": "အဖျောက်",
     "origin_name_en": "Ahpyauk",
-    "destination_name_mm": "အင်းစိန်(ဘီအိုစီ)",
-    "destination_name_en": "Insein(BOC)",
+    "destination_name_mm": "အင်းစိန် (ဘီအိုစီ)",
+    "destination_name_en": "Insein (BOC)",
     "payment_method": [],
     "shape": {
       "geometry": {
@@ -106842,7 +107049,7 @@
     ]
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": "",
     "color": "405CAA",
     "name": "(\u1049\u1040) \u1025\u1000\u1039\u1000\u1036 - \u101e\u1001\u1004\u103a\u1019\u103c\u1015\u1014\u103a\u1038\u1001\u103c\u1036",
     "route_id": "123-TaikKyi",
@@ -108613,7 +108820,7 @@
     ]
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": null,
     "color": "405CAA",
     "name": "(\u1049\u1040) \u1025\u1000\u1039\u1000\u1036 - \u101e\u1001\u1004\u103a\u1019\u103c\u1015\u1014\u103a\u1038\u1001\u103c\u1036",
     "route_id": "124",
@@ -108623,8 +108830,8 @@
     "sub_name_en": null,
     "origin_name_mm": "ဆကာကြီး",
     "origin_name_en": "Zakagyi",
-    "destination_name_mm": "အင်းစိန်(ဘီအိုစီ)",
-    "destination_name_en": "Insein(BOC)",
+    "destination_name_mm": "အင်းစိန် (ဘီအိုစီ)",
+    "destination_name_en": "Insein (BOC)",
     "payment_method": [],
     "shape": {
       "geometry": {
@@ -110384,7 +110591,7 @@
     ]
   },
   {
-    "agency_id": "P11",
+    "agency_id": null,
     "color": "DF504E",
     "name": "(\u1042\u1042) \u1021\u1014\u1031\u102c\u1000\u103a\u1015\u102d\u102f\u1004\u103a\u1038\u1010\u1000\u1039\u1000\u101e\u102d\u102f\u101c\u103a(\u1011\u1014\u103a\u1038\u1010\u1015\u1004\u103a) - \u101e\u1001\u1004\u103a\u1019\u103c\u1015\u1014\u103a\u1038\u1001\u103c\u1036",
     "route_id": "126",
@@ -111371,7 +111578,7 @@
     ]
   },
   {
-    "agency_id": "",
+    "agency_id": "BDL",
     "color": "DF504E",
     "name": "",
     "route_id": "128",
@@ -111427,7 +111634,7 @@
     ]
   },
   {
-    "agency_id": "",
+    "agency_id": null,
     "color": "405CAA",
     "name": "",
     "route_id": "130",
@@ -111435,8 +111642,8 @@
     "name_en": "130",
     "sub_name_mm": null,
     "sub_name_en": null,
-    "origin_name_mm": "ရန်ကုန်အ‌နောက်ပိုင်းတက္ကသိုလ်",
-    "origin_name_en": "West Yangon University",
+    "origin_name_mm": "အ‌နောက်ပိုင်းနည်းပညာတက္ကသိုလ်",
+    "origin_name_en": "West Yangon Technological University",
     "destination_name_mm": "သခင်မြပန်းခြံ",
     "destination_name_en": "Thakin Mya Park",
     "payment_method": [],
@@ -111455,7 +111662,7 @@
     ]
   },
   {
-    "agency_id": "P11",
+    "agency_id": null,
     "color": "405CAA",
     "name": "(\u1042\u1041) \u1021\u1014\u1031\u102c\u1000\u103a\u1015\u102d\u102f\u1004\u103a\u1038\u1010\u1000\u1039\u1000\u101e\u102d\u102f\u101c\u103a(\u1011\u1014\u103a\u1038\u1010\u1015\u1004\u103a) - \u1019\u101f\u102c\u1017\u1014\u1039\u1013\u102f\u101c\u101c\u1019\u103a\u1038",
     "route_id": "131",
@@ -111463,7 +111670,7 @@
     "name_en": "131",
     "sub_name_mm": null,
     "sub_name_en": null,
-    "origin_name_mm": "ရန်ကုန်အ‌နောက်ပိုင်းတက္ကသိုလ်",
+    "origin_name_mm": "အ‌နောက်ပိုင်းတက္ကသိုလ်",
     "origin_name_en": "West Yangon University",
     "destination_name_mm": "မော်တင်",
     "destination_name_en": "Maw Tin",
@@ -112570,7 +112777,7 @@
     ]
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": "",
     "color": "405CAA",
     "name": "(\u1047\u1049) \u101c\u1004\u103a\u1038\u1005\u1012\u1031\u102b\u1004\u103a\u1038 - \u1021\u1014\u1031\u102c\u1000\u103a\u1015\u102d\u102f\u1004\u103a\u1038\u1010\u1000\u1039\u1000\u101e\u102d\u102f\u101c",
     "route_id": "132",
@@ -112578,7 +112785,7 @@
     "name_en": "132",
     "sub_name_mm": null,
     "sub_name_en": null,
-    "origin_name_mm": "ရန်ကုန်အ‌နောက်ပိုင်းတက္ကသိုလ်",
+    "origin_name_mm": "အ‌နောက်ပိုင်းတက္ကသိုလ်",
     "origin_name_en": "West Yangon University",
     "destination_name_mm": "ဗိုလ်တထောင်ဘုရား",
     "destination_name_en": "Botahtaung Pagoda",
@@ -112929,7 +113136,7 @@
     ]
   },
   {
-    "agency_id": "YUPT",
+    "agency_id": "PST",
     "color": "DF504E",
     "name": "(\u1044) \u101a\u102f\u1007\u1014\u1025\u101a\u103b\u102c\u1009\u103a\u1019\u103c\u102d\u102f\u1037\u1010\u1031\u102c\u103a - \u1006\u1030\u1038\u101c\u1031",
     "route_id": "133",
@@ -114106,16 +114313,16 @@
     ]
   },
   {
-    "agency_id": "YUPT",
-    "color": "96509F",
+    "agency_id": "PST",
+    "color": "DF504E",
     "name": "(\u1048) \u101c\u1019\u103a\u1038\u1019\u1010\u1031\u102c\u103a - \u1010\u1031\u102c\u1004\u103a\u1012\u1002\u102f\u1036\u1021\u1004\u103a\u1038\u101d\u1021\u102d\u1019\u103a\u101b\u102c",
     "route_id": "134",
     "name_mm": "၁၃၄",
     "name_en": "134",
     "sub_name_mm": null,
     "sub_name_en": null,
-    "origin_name_mm": "ဒဂုံဆိပ်ကမ်း(၁၆၈ ရပ်ကွက်)",
-    "origin_name_en": "Dagon Seikkan(168 Ward)",
+    "origin_name_mm": "ဒဂုံဆိပ်ကမ်း (၁၆၈ ရပ်ကွက်)",
+    "origin_name_en": "Dagon Seikkan (168 Ward)",
     "destination_name_mm": "လသာ",
     "destination_name_en": "Latha",
     "payment_method": [],
@@ -114866,8 +115073,8 @@
     ]
   },
   {
-    "agency_id": "YUPT",
-    "color": "96509F",
+    "agency_id": "PST",
+    "color": "DF504E",
     "name": "(\u1041\u1040) \u1010\u102d\u102f\u1004\u103a\u1038\u101b\u1004\u103a\u1038\u101e\u102c\u1038\u1000\u103b\u1031\u1038\u101b\u103d\u102c - \u1012\u1002\u102f\u1036\u1010\u1000\u1039\u1000\u101e\u102d\u102f\u101c\u103a",
     "route_id": "135",
     "name_mm": "၁၃၅",
@@ -115821,7 +116028,7 @@
     ]
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": "PST",
     "color": "405CAA",
     "name": "(\u1041\u1041) \u1021\u1031\u102c\u1004\u103a\u1019\u1004\u103a\u1039\u1002\u101c\u102c\u1021\u101d\u1031\u1038\u1015\u103c\u1031\u1038 - \u101b\u103d\u103e\u1031\u1010\u102d\u1002\u102f\u1036\u1018\u102f\u101b\u102c\u1038",
     "route_id": "136",
@@ -115830,7 +116037,7 @@
     "sub_name_mm": null,
     "sub_name_en": null,
     "origin_name_mm": "အောင်မင်္ဂလာအဝေးပြေး",
-    "origin_name_en": "Aung Mingalar Highway Terminal",
+    "origin_name_en": "Aung Mingalar Highway Bus Terminal",
     "destination_name_mm": "လသာ",
     "destination_name_en": "Latha",
     "payment_method": [],
@@ -116613,7 +116820,7 @@
     ]
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": null,
     "color": "DF504E",
     "name": "(\u1041\u1045 \u101b\u103d\u103e\u1031\u1015\u1031\u102b\u1000\u1039\u1000\u1036) \u1012\u1002\u102f\u1036\u1010\u1000\u1039\u1000\u101e\u102d\u102f\u101c\u103a  - \u1018\u102f\u101b\u1004\u1037\u103a\u1014\u1031\u102c\u1004\u103a\u101c\u1019\u103a\u1038 - \u1010\u100a\u1004\u103a\u1038\u1000\u102f\u1014\u103a\u1038",
     "route_id": "137",
@@ -117810,7 +118017,7 @@
     ]
   },
   {
-    "agency_id": "YUPT",
+    "agency_id": "PST",
     "color": "DF504E",
     "name": "(\u1041\u1047) \u101b\u103d\u103e\u1031\u1015\u1031\u102b\u1000\u103a\u1000\u1036 - \u1021\u1014\u1031\u102c\u1000\u103a\u1015\u102d\u102f\u1004\u103a\u1038\u1014\u100a\u103a\u1038\u1015\u100a\u102c\u1010\u1000\u1039\u1000\u101e\u102d\u102f\u101c\u103a",
     "route_id": "138",
@@ -117818,10 +118025,10 @@
     "name_en": "138",
     "sub_name_mm": null,
     "sub_name_en": null,
-    "origin_name_mm": "ရွှေပေါက္ကံ(ဆင်ဖုံ)",
-    "origin_name_en": "Shwe Pauk Kan(Sin Phon)",
+    "origin_name_mm": "ရွှေပေါက္ကံ (ဆင်ဖုံ)",
+    "origin_name_en": "Shwe Pauk Kan (Sin Phon)",
     "destination_name_mm": "ဒဂုံဧရာအဝေးပြေး",
-    "destination_name_en": "Dagon Ayar Highway Terminal",
+    "destination_name_en": "Dagon Ayar Highway Bus Terminal",
     "payment_method": [],
     "shape": {
       "geometry": {
@@ -118661,7 +118868,7 @@
     ]
   },
   {
-    "agency_id": "YUPT",
+    "agency_id": "PST",
     "color": "DF504E",
     "name": "(\u1042\u1049) \u1012\u1002\u102f\u1036\u1010\u1000\u1039\u1000\u101e\u102d\u102f\u101c\u103a - \u1006\u1030\u1038\u101c\u1031",
     "route_id": "139",
@@ -119052,7 +119259,7 @@
     ]
   },
   {
-    "agency_id": "P11",
+    "agency_id": "GYCT",
     "color": "405CAA",
     "name": "(\u1043\u1049) \u101b\u103d\u103e\u1031\u1015\u103c\u100a\u103a\u101e\u102c(\u101c\u102d\u1014\u103a\u1000\u102f\u1014\u103a\u1038) - \u1019\u101f\u102c\u1017\u1014\u1039\u1013\u102f\u101c\u101c\u1019\u103a\u1038",
     "route_id": "140",
@@ -120097,7 +120304,7 @@
     ]
   },
   {
-    "agency_id": "YUPT",
+    "agency_id": "PST",
     "color": "405CAA",
     "name": "(\u1044\u1040) \u101b\u103d\u103e\u1031\u1015\u103c\u100a\u103a\u101e\u102c(\u101c\u102d\u1014\u103a\u1000\u102f\u1014\u103a\u1038) - \u101e\u1001\u1004\u103a\u1019\u103c\u1015\u1014\u103a\u1038\u1001\u103c\u1036",
     "route_id": "141",
@@ -120105,8 +120312,8 @@
     "name_en": "141",
     "sub_name_mm": null,
     "sub_name_en": null,
-    "origin_name_mm": "ရွှေပြည်သာ(လိန်ကုန်း)",
-    "origin_name_en": "Shwe Pyi Thar(Lain Kone)",
+    "origin_name_mm": "ရွှေပြည်သာ (လိန်ကုန်း)",
+    "origin_name_en": "Shwe Pyi Thar (Lain Kone)",
     "destination_name_mm": "သခင်မြပန်းခြံ",
     "destination_name_en": "Thakin Mya Park",
     "payment_method": [],
@@ -121441,7 +121648,7 @@
     ]
   },
   {
-    "agency_id": "YUPT",
+    "agency_id": "PST",
     "color": "405CAA",
     "name": "(\u1044\u1040) \u101b\u103d\u103e\u1031\u1015\u103c\u100a\u103a\u101e\u102c(\u101c\u102d\u1014\u103a\u1000\u102f\u1014\u103a\u1038) - \u101e\u1001\u1004\u103a\u1019\u103c\u1015\u1014\u103a\u1038\u1001\u103c\u1036",
     "route_id": "142",
@@ -121449,8 +121656,8 @@
     "name_en": "142",
     "sub_name_mm": null,
     "sub_name_en": null,
-    "origin_name_mm": "ရွှေပြည်သာ(လိန်ကုန်း)",
-    "origin_name_en": "Shwe Pyi Thar(Lain Kone)",
+    "origin_name_mm": "ရွှေပြည်သာ (လိန်ကုန်း)",
+    "origin_name_en": "Shwe Pyi Thar (Lain Kone)",
     "destination_name_mm": "သခင်မြပန်းခြံ",
     "destination_name_en": "Thakin Mya Park",
     "payment_method": [],
@@ -122785,7 +122992,7 @@
     ]
   },
   {
-    "agency_id": "YUPT",
+    "agency_id": null,
     "color": "405CAA",
     "name": "(\u1044\u1040) \u101b\u103d\u103e\u1031\u1015\u103c\u100a\u103a\u101e\u102c(\u101c\u102d\u1014\u103a\u1000\u102f\u1014\u103a\u1038) - \u101e\u1001\u1004\u103a\u1019\u103c\u1015\u1014\u103a\u1038\u1001\u103c\u1036",
     "route_id": "143",
@@ -122793,8 +123000,8 @@
     "name_en": "143",
     "sub_name_mm": null,
     "sub_name_en": null,
-    "origin_name_mm": "ရွှေပြည်သာ(သံဒင်း)",
-    "origin_name_en": "Shwe Pyi Thar(Than Din)",
+    "origin_name_mm": "ရွှေပြည်သာ( သံဒင်း)",
+    "origin_name_en": "Shwe Pyi Thar (Than Din)",
     "destination_name_mm": "သခင်မြပန်းခြံ",
     "destination_name_en": "Thakin Mya Park",
     "payment_method": [],
@@ -124129,7 +124336,7 @@
     ]
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": "PST",
     "color": "DF504E",
     "name": "(\u1045\u1049) \u1010\u1031\u102c\u1004\u103a\u1012\u1002\u102f\u1036\u101e\u102d\u1019\u103a\u1000\u103b\u1031\u102c\u1004\u103a\u1038\u101c\u1019\u103a\u1038\u1006\u102f\u1036 - \u1017\u101f\u102d\u102f\u1021\u1019\u103b\u102d\u102f\u1038\u101e\u1019\u102e\u1038\u1006\u1031\u1038\u101b\u102f\u1036",
     "route_id": "144",
@@ -124564,7 +124771,7 @@
     ]
   },
   {
-    "agency_id": "YRTA",
+    "agency_id": "",
     "color": "405CAA",
     "name": "(\u1046\u1045 \u1015\u102f\u101c\u1032\u101c\u1019\u103a\u1038) \u1017\u102d\u102f\u101c\u103a\u1010\u1011\u1031\u102c\u1004\u103a\u1018\u102f\u101b\u102c\u1038 - \u101b\u103d\u103e\u1031\u1015\u103c\u100a\u103a\u101e\u102c",
     "route_id": "145",
@@ -124572,8 +124779,8 @@
     "name_en": "145",
     "sub_name_mm": null,
     "sub_name_en": null,
-    "origin_name_mm": "ရွှေပြည်သာ(ရဲသင်တန်းကျောင်း)",
-    "origin_name_en": "Shwe Pyi Thar(Police Academy)",
+    "origin_name_mm": "ရွှေပြည်သာ (ရဲသင်တန်းကျောင်း)",
+    "origin_name_en": "Shwe Pyi Thar (Police Academy)",
     "destination_name_mm": "ဗိုလ်တထောင်ဘုရား",
     "destination_name_en": "Botahtaung Pagoda",
     "payment_method": [],
@@ -125994,7 +126201,7 @@
     "sub_name_mm": "ပြည်",
     "sub_name_en": "Pyay",
     "origin_name_mm": "အောင်မင်္ဂလာအဝေးပြေး",
-    "origin_name_en": "Aung Mingalar Highway Terminal",
+    "origin_name_en": "Aung Mingalar Highway Bus Terminal",
     "destination_name_mm": "ဆူးလေ",
     "destination_name_en": "Sule",
     "payment_method": [],
