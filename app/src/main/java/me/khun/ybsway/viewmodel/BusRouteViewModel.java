@@ -31,7 +31,7 @@ public class BusRouteViewModel extends ViewModel {
         this.busStopMapper = busStopMapper;
         this.busService = busService;
         this.busStopService = busStopService;
-        toolbarTitle = Transformations.map(busViewData, b -> String.format("%s %s",b.getPrefixName(), b.getName()));
+        toolbarTitle = Transformations.map(busViewData, b -> String.format("%s %s %s", b.getPrefixName(), b.getName(), b.getSubName() == null ? "" : String.format("(%s)", b.getSubName())));
     }
 
     public void loadBusDataByRouteId(String routeId) {

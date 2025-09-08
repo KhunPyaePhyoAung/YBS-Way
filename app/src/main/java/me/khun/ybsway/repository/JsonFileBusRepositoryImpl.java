@@ -48,8 +48,14 @@ public class JsonFileBusRepositoryImpl implements BusRepository {
                 Bus bus = new Bus();
                 bus.setNameMM(busObject.getString("name_mm"));
                 bus.setNameEN(busObject.getString("name_en"));
-                bus.setSubNameMM(busObject.getString("sub_name_mm"));
-                bus.setSubNameEN(busObject.getString("sub_name_en"));
+
+                if (!busObject.isNull("sub_name_mm")) {
+                    bus.setSubNameMM(busObject.getString("sub_name_mm"));
+                }
+                if (!busObject.isNull("sub_name_en")) {
+                    bus.setSubNameEN(busObject.getString("sub_name_en"));
+                }
+
                 bus.setOriginNameMM(busObject.getString("origin_name_mm"));
                 bus.setOriginNameEN(busObject.getString("origin_name_en"));
                 bus.setDestinationNameMM(busObject.getString("destination_name_mm"));

@@ -60,6 +60,7 @@ public class BusListViewAdapter extends BaseAdapter {
         RelativeLayout iconLayout = vi.findViewById(R.id.icon_layout);
         ImageView busIconImageView = vi.findViewById(R.id.bus_icon);
         TextView busNameTextView = vi.findViewById(R.id.bus_name);
+        TextView busSubNameTextView = vi.findViewById(R.id.bus_sub_name);
         TextView busOriginTextView = vi.findViewById(R.id.bus_from);
         TextView busDestinationTextView = vi.findViewById(R.id.bus_to);
 
@@ -73,9 +74,17 @@ public class BusListViewAdapter extends BaseAdapter {
             busIconImageView.setImageDrawable(AppCompatResources.getDrawable(context, busView.getDisplayIconId()));
         }
 
+        if (busView.getSubName() == null) {
+            busSubNameTextView.setText("");
+        } else {
+            busSubNameTextView.setText(busView.getSubName());
+        }
+
         iconLayout.setBackgroundColor(Color.parseColor("#" + busView.getHexColorCode()));
         busOriginTextView.setText(busView.getOriginName());
         busDestinationTextView.setText(busView.getDestinationName());
+
+
 
         vi.setOnClickListener(view1 -> {
             Intent intent = new Intent(context, ActivityBusRoute.class);
