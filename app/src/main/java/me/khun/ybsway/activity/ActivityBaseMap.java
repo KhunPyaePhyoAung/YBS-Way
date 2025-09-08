@@ -81,6 +81,7 @@ public class ActivityBaseMap extends ActivityBase implements MapListener, MapEve
     public static final long ZOOM_ANIMATION_SPEED = 1500L;
     protected static final int LOCATION_PERMISSIONS_REQUEST_CODE = 1;
     protected static final int LOCATION_PERMISSIONS_FORCE_SETTING_REQUEST_CODE = 2;
+    protected static final int STORAGE_PERMISSIONS_FORCE_SETTING_REQUEST_CODE = 3;
 
     protected final Map<Integer, Drawable> busStopIconMap = new HashMap<>();
     protected final List<BusStopMarker> busStopMarkerList = new ArrayList<>(YBSWayApplication.DEFAULT_BUS_STOP_LIST_SIZE);
@@ -88,6 +89,9 @@ public class ActivityBaseMap extends ActivityBase implements MapListener, MapEve
     protected final String[] LOCATION_PERMISSIONS = {
             Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.ACCESS_COARSE_LOCATION
+    };
+    protected final String[] STORAGE_PERMISSIONS = {
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
 
     protected MapView mapView;
@@ -113,6 +117,8 @@ public class ActivityBaseMap extends ActivityBase implements MapListener, MapEve
         StrictMode.setThreadPolicy(policy);
         Context ctx = getApplicationContext();
         Configuration.getInstance().load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx));
+
+        requestPermissionsIfNecessary(STORAGE_PERMISSIONS, STORAGE_PERMISSIONS_FORCE_SETTING_REQUEST_CODE);
 
         busStopIconMap.put(48, AppCompatResources.getDrawable(getApplicationContext(), R.drawable.bus_stop_icon_48dp));
         busStopIconMap.put(44, AppCompatResources.getDrawable(getApplicationContext(), R.drawable.bus_stop_icon_44dp));
@@ -259,14 +265,13 @@ public class ActivityBaseMap extends ActivityBase implements MapListener, MapEve
 
         List<BusStopView> busStopViewList = busView.getBusStopViewList();
         drawBusStops(busStopViewList);
-
-        BusStopView centerStop = busStopViewList.get(busStopViewList.size() / 4);
-        GeoPoint centerGeoPoint = new GeoPoint(centerStop.getLatitude(), centerStop.getLongitude());
-        mapController.animateTo(centerGeoPoint);
-        mapView.invalidate();
     }
 
     protected void drawBusStops(List<BusStopView> busStopViewList) {
+
+        if (busStopViewList.isEmpty()) {
+            return;
+        }
 
         new Thread(() -> {
             isLoadingBusStops = true;
@@ -292,6 +297,12 @@ public class ActivityBaseMap extends ActivityBase implements MapListener, MapEve
     }
 
     protected void postDrawBusStops() {
+        if (!busStopMarkerList.isEmpty()) {
+            BusStopMarker centerStopMarker = busStopMarkerList.get(busStopMarkerList.size() / 4);
+            GeoPoint centerGeoPoint = centerStopMarker.getPosition();
+            mapController.animateTo(centerGeoPoint);
+        }
+
         isLoadingBusStops = false;
         resetBusStopIcons();
         mapView.invalidate();

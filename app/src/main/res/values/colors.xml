@@ -11,22 +11,27 @@
     <color name="text_secondary">#000000</color>
     <color name="background_primary">#FFFFFF</color>
     <color name="text_background_primary">#000000</color>
+    <color name="accent">#DD5F00</color>
+    <color name="accent_dark">#A54700</color>
+    <color name="text_accent">#FFFFFF</color>
+    <color name="text_accent_dark">#FFFFFF</color>
+    <color name="glass">#8A000000</color>
+    <color name="glass_dark">#A9000000</color>
 
     <color name="bus_stop_fill">#00609C</color>
     <color name="bus_stop_border">#FFFFFF</color>
     <color name="bus_stop_inner_icon">#FFFFFF</color>
     <color name="bus_route">#00609C</color>
-    <color name="bus_stop_info_bubble_background">#DC5E00</color>
-    <color name="bus_stop_info_bubble_border">#000000</color>
-    <color name="bus_stop_info_bubble_text">#FFFFFF</color>
+    <color name="bus_stop_info_bubble_background">@color/accent</color>
+    <color name="bus_stop_info_bubble_text">@color/text_accent</color>
 
     <color name="nav_header_bg">@color/primary</color>
     <color name="nav_header_title">@color/text_primary</color>
     <color name="nav_header_sub_title">@color/text_primary</color>
 
     <color name="nav_toggle_icon">@color/white</color>
-    <color name="nav_toggle_bg">#BF424242</color>
-    <color name="nav_toggle_bg_pressed">#BF171717</color>
+    <color name="nav_toggle_bg">@color/glass</color>
+    <color name="nav_toggle_bg_pressed">@color/glass_dark</color>
 
     <color name="btn_search_stop_icon">@color/text_primary</color>
     <color name="btn_search_stop_bg">@color/primary</color>
@@ -39,9 +44,9 @@
     <color name="search_location_input_cursor">@color/primary</color>
     <color name="search_location_input_icon">#CCCCCC</color>
 
-    <color name="screen_loading_border">#7ECCFD</color>
-    <color name="screen_loading_bg">#DAFCFF</color>
-    <color name="screen_loading_message">@color/primary</color>
+    <color name="screen_loading_border">@color/accent_dark</color>
+    <color name="screen_loading_bg">@color/accent</color>
+    <color name="screen_loading_message">@color/text_accent</color>
 
     <color name="toolbar_logo">@color/text_primary</color>
 
@@ -53,7 +58,7 @@
     <color name="about_page_content_title_color">@color/black</color>
     <color name="about_page_content_body_color">@color/black</color>
 
-    <color name="gps_button_background">#8A000000</color>
+    <color name="gps_button_background">@color/glass</color>
     <color name="gps_button_background_pressed">#A9000000</color>
     <color name="gps_button_border">#949494</color>
 

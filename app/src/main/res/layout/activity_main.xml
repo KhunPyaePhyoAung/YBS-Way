@@ -111,10 +111,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 
-            <ProgressBar
+            <ImageView
+                android:id="@+id/loading_gif"
                 android:layout_width="@dimen/screen_loading_icon_size"
                 android:layout_height="@dimen/screen_loading_icon_size"
-                android:indeterminateDrawable="@drawable/loading"/>
+                android:scaleType="fitCenter"/>
 
             <TextView
                 android:layout_width="match_parent"

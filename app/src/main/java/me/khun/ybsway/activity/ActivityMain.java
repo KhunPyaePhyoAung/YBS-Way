@@ -5,12 +5,14 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.navigation.NavigationView;
 
 import me.khun.ybsway.R;
@@ -47,6 +49,12 @@ public class ActivityMain extends ActivityBaseMap implements NavigationView.OnNa
         btnNavToggle = findViewById(R.id.btn_nav_toggle);
         searchRouteButton = findViewById(R.id.btn_search_route);
         loadingContainer = findViewById(R.id.loading_container);
+
+        ImageView loadingGif = findViewById(R.id.loading_gif);
+        Glide.with(this)
+                .asGif()
+                .load(R.drawable.loading_white) // your GIF file
+                .into(loadingGif);
 
         btnNavToggle.setOnClickListener(v -> {
             if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
