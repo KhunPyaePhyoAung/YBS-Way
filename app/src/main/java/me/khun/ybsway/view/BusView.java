@@ -6,6 +6,7 @@ import me.khun.ybsway.entity.Coordinate;
 
 public class BusView {
     private String routeId;
+    private String prefixName;
     private String name;
     private String subName;
     private String originName;
@@ -23,6 +24,14 @@ public class BusView {
 
     public void setRouteId(String routeId) {
         this.routeId = routeId;
+    }
+
+    public String getPrefixName() {
+        return prefixName;
+    }
+
+    public void setPrefixName(String prefixName) {
+        this.prefixName = prefixName;
     }
 
     public String getName() {

@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
-        <item name="fontFamily">@font/myanmar_kuttar</item>
+        <item name="fontFamily">@font/pyidaungsu_regular</item>
         <item name="android:textSize">22sp</item>
         <item name="android:textColor">@color/text_primary</item>
     </style>
     <style name="AppFont">
-        <item name="fontFamily">@font/myanmar_kuttar</item>
+        <item name="fontFamily">@font/pyidaungsu_regular</item>
+        <item name="android:fontFamily">@font/pyidaungsu_regular</item>
     </style>
     <style name="editText.location.outline" parent="@android:style/Widget.EditText">
         <item name="android:textSize">14sp</item>
@@ -20,6 +21,7 @@
         <item name="android:textColorPrimary">@color/text_background_primary</item>
         <item name="android:textColorSecondary">@color/text_background_primary</item>
         <item name="fontFamily">@font/pyidaungsu_regular</item>
+        <item name="android:fontFamily">@font/pyidaungsu_regular</item>
         <item name="android:windowMinWidthMajor">80%</item>
         <item name="android:windowMinWidthMinor">80%</item>
         <item name="android:buttonBarPositiveButtonStyle">@style/MyDialogButtonText</item>

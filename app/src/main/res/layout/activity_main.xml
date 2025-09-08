@@ -76,6 +76,8 @@
                             android:inputType="text"
                             android:gravity="center_vertical"
                             android:hint="@string/search_location_input_hint"
+                            android:textAppearance="@style/AppFont"
+                            android:textSize="@dimen/search_location_input_text_size"
                             android:background="@drawable/search_location_edit_text_shape"
                             style="@style/editText.location.outline"
                             android:textCursorDrawable="@drawable/search_location_input_cursor"
@@ -140,7 +142,6 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.navigation.NavigationView
-        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:id="@+id/nav_view"
@@ -148,6 +149,7 @@
         android:background="@color/background_primary"
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/nav_menu"
+        app:itemTextAppearance="@style/AppFont"
         app:itemRippleColor="@color/nav_item_background"
         app:itemShapeFillColor="@color/nav_item_background"
         app:itemIconTint="@color/primary"

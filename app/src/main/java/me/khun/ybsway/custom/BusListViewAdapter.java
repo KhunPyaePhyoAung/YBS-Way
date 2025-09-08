@@ -59,17 +59,17 @@ public class BusListViewAdapter extends BaseAdapter {
 
         RelativeLayout iconLayout = vi.findViewById(R.id.icon_layout);
         ImageView busIconImageView = vi.findViewById(R.id.bus_icon);
-        TextView busNumberTextView = vi.findViewById(R.id.bus_number);
+        TextView busNameTextView = vi.findViewById(R.id.bus_name);
         TextView busOriginTextView = vi.findViewById(R.id.bus_from);
         TextView busDestinationTextView = vi.findViewById(R.id.bus_to);
 
         BusView busView = busViewList.get(i);
 
         if (busView.getDisplayIconId() == null) {
-            busNumberTextView.setText(busView.getName());
+            busNameTextView.setText(busView.getName());
             busIconImageView.setImageDrawable(null);
         } else {
-            busNumberTextView.setText(null);
+            busNameTextView.setText(null);
             busIconImageView.setImageDrawable(AppCompatResources.getDrawable(context, busView.getDisplayIconId()));
         }
 

@@ -31,6 +31,7 @@ public class DefaultBusMapper implements BusMapper {
 
         switch (languageConfig.getCurrentLanguage()) {
             case BURMESE:
+                busView.setPrefixName("ဝိုင်ဘီအက်စ်");
                 busView.setName(bus.getNameMM());
                 busView.setSubName(bus.getSubNameMM());
                 busView.setOriginName(bus.getOriginNameMM());
@@ -38,6 +39,7 @@ public class DefaultBusMapper implements BusMapper {
                 break;
             case ENGLISH:
             default:
+                busView.setPrefixName("YBS");
                 busView.setName(bus.getNameEN());
                 busView.setSubName(bus.getSubNameEN());
                 busView.setOriginName(bus.getOriginNameEN());
