@@ -5,6 +5,6 @@
     <item android:state_activated="true" android:drawable="@drawable/gps_active" />
 
     <!-- State: button is "off" -->
-    <item android:drawable="@drawable/gps" />
+    <item android:drawable="@drawable/gps_inactive" />
 
 </selector>

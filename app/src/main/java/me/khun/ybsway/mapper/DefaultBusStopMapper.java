@@ -23,13 +23,13 @@ public class DefaultBusStopMapper implements BusStopMapper {
 
         switch (languageConfig.getCurrentLanguage()) {
             case BURMESE:
-                busStopView.setName(busStop.getNameMM());
+                busStopView.setName(busStop.getId() + " : " + busStop.getNameMM());
                 busStopView.setStreetName(busStop.getStreetMM());
                 busStopView.setTownshipName(busStop.getTownshipMM());
                 break;
             case ENGLISH:
             default:
-                busStopView.setName(busStop.getNameEN());
+                busStopView.setName(busStop.getId() + " : " + busStop.getNameEN());
                 busStopView.setStreetName(busStop.getStreetEN());
                 busStopView.setTownshipName(busStop.getTownshipEN());
                 break;

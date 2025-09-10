@@ -67,9 +67,9 @@ public class JsonFileBusRepositoryImpl implements BusRepository {
 
                 JSONArray routeArray = busObject.getJSONArray("stops");
 
-                for (int j = 0; j < routeArray.length(); j++) {
-                    busStopIdList.add(routeArray.getInt(j));
-                }
+//                for (int j = 0; j < routeArray.length(); j++) {
+//                    busStopIdList.add(routeArray.getInt(j));
+//                }
 
                 bus.setBusStopIdList(busStopIdList);
 

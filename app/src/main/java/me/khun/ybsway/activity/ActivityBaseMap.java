@@ -56,8 +56,13 @@ import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import me.khun.ybsway.R;
 import me.khun.ybsway.application.YBSWayApplication;
@@ -132,6 +137,8 @@ public class ActivityBaseMap extends ActivityBase implements MapListener, MapEve
         busStopIconMap.put(12, AppCompatResources.getDrawable(getApplicationContext(), R.drawable.bus_stop_icon_12dp));
         busStopIconMap.put(10, AppCompatResources.getDrawable(getApplicationContext(), R.drawable.bus_stop_icon_10dp));
         busStopIconMap.put(8, AppCompatResources.getDrawable(getApplicationContext(), R.drawable.bus_stop_icon_8dp));
+        busStopIconMap.put(6, AppCompatResources.getDrawable(getApplicationContext(), R.drawable.bus_stop_icon_6dp));
+        busStopIconMap.put(4, AppCompatResources.getDrawable(getApplicationContext(), R.drawable.bus_stop_icon_4dp));
     }
 
     protected void setupGpsButton(@IdRes int btnGpsId) {
@@ -212,27 +219,29 @@ public class ActivityBaseMap extends ActivityBase implements MapListener, MapEve
         if (zoomLevel > 21) {
             dpUnit = 48;
         } else if (zoomLevel > 20) {
-            dpUnit = 44;
-        } else if (zoomLevel > 19) {
-            dpUnit = 40;
-        } else if (zoomLevel > 18) {
             dpUnit = 36;
-        } else if (zoomLevel > 17) {
+        } else if (zoomLevel > 19) {
             dpUnit = 32;
-        } else if (zoomLevel > 16) {
+        } else if (zoomLevel > 18) {
             dpUnit = 28;
-        } else if (zoomLevel > 15) {
+        } else if (zoomLevel > 17) {
+            dpUnit = 28;
+        } else if (zoomLevel > 16) {
             dpUnit = 24;
-        } else if (zoomLevel > 14) {
+        } else if (zoomLevel > 15) {
             dpUnit = 20;
-        } else if (zoomLevel > 13) {
+        } else if (zoomLevel > 14) {
             dpUnit = 16;
-        } else if (zoomLevel > 12) {
-            dpUnit = 12;
-        } else if (zoomLevel > 11) {
+        } else if (zoomLevel > 13) {
             dpUnit = 10;
-        } else {
+        } else if (zoomLevel > 12) {
             dpUnit = 8;
+        } else if (zoomLevel > 11) {
+            dpUnit = 6;
+        } else if (zoomLevel > 10) {
+            dpUnit = 4;
+        } else {
+            dpUnit = 4;
         }
 
         return busStopIconMap.get(dpUnit);
@@ -273,36 +282,49 @@ public class ActivityBaseMap extends ActivityBase implements MapListener, MapEve
             return;
         }
 
-        new Thread(() -> {
-            isLoadingBusStops = true;
-            FolderOverlay markerOverlay = (FolderOverlay) mapView.getOverlays().get(MAP_OVERLAY_SORTED_LIST.indexOf("bus_stops"));
-            List<BusStopMarker> markerList = new ArrayList<>();
-            for (BusStopView busStop : busStopViewList) {
-                BusStopMarker busStopMarker = createBusStopMarker(busStop);
-                busStopMarker.setOnMarkerClickListener(this);
-                markerList.add(busStopMarker);
+        isLoadingBusStops = true;
+        FolderOverlay markerOverlay = (FolderOverlay) mapView.getOverlays().get(MAP_OVERLAY_SORTED_LIST.indexOf("bus_stops"));
+        List<BusStopMarker> markerList = new ArrayList<>();
+
+        for (BusStopView bs : busStopViewList) {
+            BusStopMarker busStopMarker = createBusStopMarker(bs);
+            busStopMarker.setOnMarkerClickListener(this);
+            markerList.add(busStopMarker);
+        }
+        ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+        Queue<BusStopMarker> queue = new LinkedList<>(markerList);
+
+        int refreshEveryBatch = 1;
+        int[] counter = {0};
+        int batchSize = 10; // add 30 per tick
+        executor.scheduleWithFixedDelay(() -> {
+            if (!queue.isEmpty()) {
+                List<BusStopMarker> batch = new ArrayList<>();
+                for (int i = 0; i < batchSize && !queue.isEmpty(); i++) {
+                    batch.add(queue.poll());
+                }
                 mainHandler.post(() -> {
-                    markerOverlay.add(busStopMarker);
-                    mapView.invalidate();
+                    for (BusStopMarker stop : batch) {
+                        markerOverlay.add(stop);
+                    }
+                    counter[0]++;
+                    if (counter[0] % refreshEveryBatch == 0) {
+                        mapView.invalidate();
+                    }
                 });
+            } else {
+                executor.shutdown();
+                synchronized (busStopMarkerList) {
+                    busStopMarkerList.clear();
+                    busStopMarkerList.addAll(markerList);
+                }
+                mapView.invalidate();
+                mainHandler.post(this::postDrawBusStops);
             }
-
-            synchronized (busStopMarkerList) {
-                busStopMarkerList.clear();
-                busStopMarkerList.addAll(markerList);
-            }
-
-            mainHandler.post(this::postDrawBusStops);
-        }).start();
+        }, 0, 5, TimeUnit.MILLISECONDS);
     }
 
     protected void postDrawBusStops() {
-        if (!busStopMarkerList.isEmpty()) {
-            BusStopMarker centerStopMarker = busStopMarkerList.get(busStopMarkerList.size() / 4);
-            GeoPoint centerGeoPoint = centerStopMarker.getPosition();
-            mapController.animateTo(centerGeoPoint);
-        }
-
         isLoadingBusStops = false;
         resetBusStopIcons();
         mapView.invalidate();
@@ -332,6 +354,7 @@ public class ActivityBaseMap extends ActivityBase implements MapListener, MapEve
     @Override
     public boolean onZoom(ZoomEvent event) {
         int zoomLevel = (int) event.getZoomLevel();
+        System.out.println("Zoom : " + zoomLevel);
         if (currentZoomLevel != zoomLevel) {
             currentZoomLevel = (int) event.getZoomLevel();
             resetBusStopIcons();

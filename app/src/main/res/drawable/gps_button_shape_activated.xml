@@ -5,7 +5,7 @@
 
     <solid android:color="@color/gps_button_background" />
     <stroke
-        android:color="@color/gps_button_border"
+        android:color="@color/gps_button_border_activated"
         android:width="2dp" />
     <padding
         android:top="@dimen/gps_button_padding"

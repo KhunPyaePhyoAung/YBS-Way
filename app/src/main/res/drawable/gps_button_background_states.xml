@@ -10,5 +10,9 @@
         android:drawable="@drawable/gps_button_shape_pressed" />
     <item
         android:state_enabled="true"
+        android:state_activated="true"
+        android:drawable="@drawable/gps_button_shape_activated" />
+    <item
+        android:state_enabled="true"
         android:drawable="@drawable/gps_button_shape" />
 </selector>

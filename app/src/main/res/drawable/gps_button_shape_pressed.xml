@@ -4,4 +4,8 @@
     android:shape="oval">
 
     <solid android:color="@color/gps_button_background_pressed" />
+
+    <stroke
+        android:color="@color/gps_button_border"
+        android:width="2dp" />
 </shape>

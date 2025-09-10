@@ -3,15 +3,21 @@
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="gray">#808080</color>
+    <color name="light_gray">#BCBCBC</color>
+    <color name="green">#00C853</color>
     <color name="white_smoke">#ABABAB</color>
     <color name="primary">#003E6C</color>
     <color name="primary_dark">#002947</color>
     <color name="secondary">#B8E1FF</color>
+    <color name="secondary_dark">#85BDE6</color>
     <color name="text_primary">#FFFFFF</color>
     <color name="text_secondary">#000000</color>
-    <color name="background_primary">#FFFFFF</color>
+    <color name="background_primary">#FFFFF1</color>
+    <color name="background_primary_light">#FFFFFA</color>
+    <color name="background_primary_dark">#ECECCD</color>
     <color name="text_background_primary">#000000</color>
     <color name="accent">#DD5F00</color>
+    <color name="accent_light">#F18A3C</color>
     <color name="accent_dark">#A54700</color>
     <color name="text_accent">#FFFFFF</color>
     <color name="text_accent_dark">#FFFFFF</color>
@@ -29,20 +35,20 @@
     <color name="nav_header_title">@color/text_primary</color>
     <color name="nav_header_sub_title">@color/text_primary</color>
 
-    <color name="nav_toggle_icon">@color/white</color>
-    <color name="nav_toggle_bg">@color/glass</color>
-    <color name="nav_toggle_bg_pressed">@color/glass_dark</color>
+    <color name="nav_toggle_icon">@color/primary</color>
+    <color name="nav_toggle_bg">@android:color/transparent</color>
+    <color name="nav_toggle_bg_pressed">@color/background_primary_dark</color>
 
     <color name="btn_search_stop_icon">@color/text_primary</color>
     <color name="btn_search_stop_bg">@color/primary</color>
     <color name="btn_search_stop_bg_pressed">@color/secondary</color>
 
     <color name="search_location_input_border">#CACACA</color>
-    <color name="search_location_input_bg">@color/white</color>
+    <color name="search_location_input_bg">#FFFFF6</color>
     <color name="search_location_input_text">#000000</color>
     <color name="search_location_input_hint">#CCCCCC</color>
     <color name="search_location_input_cursor">@color/primary</color>
-    <color name="search_location_input_icon">#CCCCCC</color>
+    <color name="search_location_input_icon">@color/primary</color>
 
     <color name="screen_loading_border">@color/accent_dark</color>
     <color name="screen_loading_bg">@color/accent</color>
@@ -50,7 +56,7 @@
 
     <color name="toolbar_logo">@color/text_primary</color>
 
-    <color name="language_list_item">@color/background_primary</color>
+    <color name="language_list_item">#FFFFFF</color>
     <color name="language_list_item_selected">@color/secondary</color>
 
     <color name="about_page_app_name_color">@color/primary</color>
@@ -58,9 +64,12 @@
     <color name="about_page_content_title_color">@color/black</color>
     <color name="about_page_content_body_color">@color/black</color>
 
-    <color name="gps_button_background">@color/glass</color>
-    <color name="gps_button_background_pressed">#A9000000</color>
-    <color name="gps_button_border">#949494</color>
+    <color name="gps_button_background">@color/background_primary</color>
+    <color name="gps_button_background_pressed">@color/background_primary_dark</color>
+    <color name="gps_button_border">@color/accent_light</color>
+    <color name="gps_button_border_activated">@color/accent</color>
+    <color name="gps_inactive">@color/light_gray</color>
+    <color name="gps_active">@color/accent</color>
 
     <color name="bus_list_item_name">@color/white</color>
     <color name="bus_list_item_sub_name">@color/white</color>

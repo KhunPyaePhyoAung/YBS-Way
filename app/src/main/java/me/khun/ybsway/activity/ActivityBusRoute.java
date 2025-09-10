@@ -6,10 +6,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
 
+import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.overlay.Marker;
 
 import me.khun.ybsway.application.YBSWayApplication;
 import me.khun.ybsway.R;
+import me.khun.ybsway.custom.BusStopMarker;
 import me.khun.ybsway.mapper.BusMapper;
 import me.khun.ybsway.mapper.BusStopMapper;
 import me.khun.ybsway.service.BusService;
@@ -55,6 +57,16 @@ public class ActivityBusRoute extends ActivityBaseMap implements Marker.OnMarker
         if ( bundle != null) {
             String routeId = bundle.getString("route_id");
             busRouteViewModel.loadBusDataByRouteId(routeId);
+        }
+    }
+
+    @Override
+    protected void postDrawBusStops() {
+        super.postDrawBusStops();
+        if (!busStopMarkerList.isEmpty()) {
+            BusStopMarker centerStopMarker = busStopMarkerList.get(busStopMarkerList.size() / 4);
+            GeoPoint centerGeoPoint = centerStopMarker.getPosition();
+            mapController.animateTo(centerGeoPoint);
         }
     }
 }
