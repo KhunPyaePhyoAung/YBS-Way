@@ -87,6 +87,7 @@ public class ActivityBaseMap extends ActivityBase implements MapListener, MapEve
     protected static final int LOCATION_PERMISSIONS_REQUEST_CODE = 1;
     protected static final int LOCATION_PERMISSIONS_FORCE_SETTING_REQUEST_CODE = 2;
     protected static final int STORAGE_PERMISSIONS_FORCE_SETTING_REQUEST_CODE = 3;
+    protected static final int ICON_RESET_INTERVAL_MILLS = 250;
 
     protected final Map<Integer, Drawable> busStopIconMap = new HashMap<>();
     protected final List<BusStopMarker> busStopMarkerList = new ArrayList<>(YBSWayApplication.DEFAULT_BUS_STOP_LIST_SIZE);
@@ -112,6 +113,8 @@ public class ActivityBaseMap extends ActivityBase implements MapListener, MapEve
     protected volatile boolean isLoadingBusStops = false;
 
     private final Handler mainHandler = new Handler(Looper.getMainLooper());
+
+    private Runnable pendingIconUpdateRunnable;
 
 
     @Override
@@ -354,10 +357,18 @@ public class ActivityBaseMap extends ActivityBase implements MapListener, MapEve
     @Override
     public boolean onZoom(ZoomEvent event) {
         int zoomLevel = (int) event.getZoomLevel();
-        System.out.println("Zoom : " + zoomLevel);
         if (currentZoomLevel != zoomLevel) {
-            currentZoomLevel = (int) event.getZoomLevel();
-            resetBusStopIcons();
+            currentZoomLevel = zoomLevel;
+
+            if (pendingIconUpdateRunnable != null) {
+                mainHandler.removeCallbacks(pendingIconUpdateRunnable);
+            }
+
+            pendingIconUpdateRunnable = () -> {
+                resetBusStopIcons();
+                mapView.postInvalidateOnAnimation();
+            };
+            mainHandler.postDelayed(pendingIconUpdateRunnable, ICON_RESET_INTERVAL_MILLS);
             return true;
         }
         return false;
@@ -368,6 +379,7 @@ public class ActivityBaseMap extends ActivityBase implements MapListener, MapEve
             return;
         }
 
+        System.out.println("Resetting Icons");
         busStopIcon = getScaledBusStopIcon(currentZoomLevel);
         for (BusStopMarker busStopMarker : busStopMarkerList) {
             busStopMarker.setIcon(busStopIcon);
