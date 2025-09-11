@@ -65,16 +65,37 @@
             android:scaleType="fitXY"
             android:src="@drawable/gps_button_icon_states"/>
 
-        <View
-            android:id="@+id/search_view"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/search_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="gone"
             android:background="@color/background_primary"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <ListView
+                android:id="@+id/bus_stop_result_list_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:dividerHeight="@dimen/bus_stop_list_divider_height"
+                android:layout_marginTop="@dimen/search_list_margin_top"
+                android:clipToPadding="false"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"/>
+
+            <ImageView
+                android:id="@+id/iv_not_found"
+                android:layout_width="@dimen/bus_stop_list_not_found_icon_size"
+                android:layout_height="@dimen/bus_stop_list_not_found_icon_size"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:src="@drawable/bus_stop_not_found_icon"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
             android:id="@+id/search_bar"
@@ -121,18 +142,28 @@
 
                     <EditText
                         android:id="@+id/bus_stop_input"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
+                        android:layout_weight="1"
                         android:layout_marginStart="5dp"
                         android:inputType="text"
                         android:gravity="center_vertical"
                         android:hint="@string/search_location_input_hint"
                         android:textAppearance="@style/AppFont"
                         android:textSize="@dimen/search_location_input_text_size"
+                        android:maxLength="100"
                         android:background="@drawable/search_location_edit_text_shape"
                         style="@style/editText.location.outline"
                         android:textCursorDrawable="@drawable/search_location_input_cursor"
                         android:autofillHints="Source" />
+
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:id="@+id/btn_clear_search"
+                        android:layout_width="@dimen/search_location_input_delete_icon_size"
+                        android:layout_height="@dimen/search_location_input_delete_icon_size"
+                        android:background="@drawable/delete_text_button_bg_states"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/delete_text_icon"/>
 
                 </LinearLayout>
 

@@ -9,8 +9,8 @@ public class BusStop implements Serializable {
     private Integer id;
     private String nameMM;
     private String nameEN;
-    private String streetMM;
-    private String streetEN;
+    private String roadNameMM;
+    private String roadNameEN;
     private String townshipMM;
     private String townshipEN;
     private Coordinate coordinate;
@@ -31,12 +31,12 @@ public class BusStop implements Serializable {
         this.nameMM = nameMM;
     }
 
-    public String getStreetMM() {
-        return streetMM;
+    public String getRoadNameMM() {
+        return roadNameMM;
     }
 
-    public void setStreetMM(String streetMM) {
-        this.streetMM = streetMM;
+    public void setRoadNameMM(String roadNameMM) {
+        this.roadNameMM = roadNameMM;
     }
 
     public String getTownshipMM() {
@@ -55,12 +55,12 @@ public class BusStop implements Serializable {
         this.nameEN = nameEN;
     }
 
-    public String getStreetEN() {
-        return streetEN;
+    public String getRoadNameEN() {
+        return roadNameEN;
     }
 
-    public void setStreetEN(String streetEN) {
-        this.streetEN = streetEN;
+    public void setRoadNameEN(String roadNameEN) {
+        this.roadNameEN = roadNameEN;
     }
 
     public String getTownshipEN() {

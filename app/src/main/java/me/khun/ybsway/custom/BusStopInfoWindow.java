@@ -24,9 +24,9 @@ public class BusStopInfoWindow extends InfoWindow {
         townshipTextView = mView.findViewById(R.id.township);
         streetTextView = mView.findViewById(R.id.street);
 
-        nameTextView.setText(busStop.getName());
+        nameTextView.setText(String.format("%s : %s", busStop.getId(), busStop.getName()));
         townshipTextView.setText(busStop.getTownshipName());
-        streetTextView.setText(String.format("(%s)", busStop.getStreetName()));
+        streetTextView.setText(String.format("(%s)", busStop.getRoadName()));
     }
 
     public BusStopMarker getMarkerReference() {
