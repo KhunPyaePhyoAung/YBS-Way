@@ -11,6 +11,16 @@
     <dimen name="bus_list_item_trip_icon_size">15dp</dimen>
     <dimen name="bus_list_item_trip_text_size">14sp</dimen>
     <dimen name="bus_list_divider_height">4dp</dimen>
+
+    <dimen name="bus_stop_list_icon_size">40dp</dimen>
+    <dimen name="bus_stop_list_item_icon_wrapper_size">85dp</dimen>
+    <dimen name="bus_stop_list_item_title_size">16sp</dimen>
+    <dimen name="bus_stop_list_item_sub_title_size">12sp</dimen>
+    <dimen name="bus_stop_list_divider_height">5dp</dimen>
+    <dimen name="bus_stop_list_item_sub_title_icon_size">12dp</dimen>
+
+    <dimen name="bus_stop_list_not_found_icon_size">120dp</dimen>
+
     <dimen name="bus_stop_info_window_name_text_size">14sp</dimen>
     <dimen name="bus_stop_info_window_street_text_size">11sp</dimen>
     <dimen name="bus_stop_info_window_township_text_size">11sp</dimen>
@@ -19,7 +29,9 @@
     <dimen name="search_bar_radius">32dp</dimen>
     <dimen name="search_location_input_height">42dp</dimen>
     <dimen name="search_location_input_icon_size">20dp</dimen>
+    <dimen name="search_location_input_delete_icon_size">24dp</dimen>
     <dimen name="search_location_input_text_size">14sp</dimen>
+    <dimen name="search_list_margin_top">84dp</dimen>
     <dimen name="screen_loading_icon_size">30dp</dimen>
     <dimen name="nav_toggle_icon_size">20dp</dimen>
     <dimen name="nav_header_height">200dp</dimen>

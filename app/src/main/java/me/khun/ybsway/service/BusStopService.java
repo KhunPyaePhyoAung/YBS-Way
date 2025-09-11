@@ -10,4 +10,6 @@ public interface BusStopService {
     BusStop findOneById(Integer id);
 
     List<BusStop> findAllByIds(List<Integer> idList);
+
+    List<BusStop> searchFromList(String keyword, int minRatio, List<BusStop> sourceList);
 }

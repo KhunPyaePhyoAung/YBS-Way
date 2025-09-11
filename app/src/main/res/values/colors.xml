@@ -49,6 +49,7 @@
     <color name="search_location_input_hint">#CCCCCC</color>
     <color name="search_location_input_cursor">@color/primary</color>
     <color name="search_location_input_icon">@color/primary</color>
+    <color name="search_location_input_delete_icon">@color/gray</color>
 
     <color name="screen_loading_border">@color/accent_dark</color>
     <color name="screen_loading_bg">@color/accent</color>
@@ -73,5 +74,9 @@
 
     <color name="bus_list_item_name">@color/white</color>
     <color name="bus_list_item_sub_name">@color/white</color>
+
+    <color name="bus_stop_list_item_icon">@color/gray</color>
+    <color name="bus_stop_list_not_found">@color/background_primary_dark</color>
+
 
 </resources>

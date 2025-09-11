@@ -17,6 +17,7 @@ import me.khun.ybsway.entity.Coordinate;
 
 public class JsonFileBusStopRepositoryImpl implements BusStopRepository {
 
+    private static final String FILE_NAME = "bus_stop_old.json";
     private final List<BusStop> busStopList = new LinkedList<>();
 
     private static volatile JsonFileBusStopRepositoryImpl instance = null;
@@ -35,7 +36,7 @@ public class JsonFileBusStopRepositoryImpl implements BusStopRepository {
     private JsonFileBusStopRepositoryImpl(Context context) {
 
         try (BufferedReader reader = new BufferedReader(
-                new InputStreamReader(context.getAssets().open("bus_stop.json")))) {
+                new InputStreamReader(context.getAssets().open(FILE_NAME)))) {
 
             StringBuilder sb = new StringBuilder();
             String line;
@@ -51,8 +52,8 @@ public class JsonFileBusStopRepositoryImpl implements BusStopRepository {
                 bs.setId(busStopObject.getInt("id"));
                 bs.setNameMM(busStopObject.getString("name_mm"));
                 bs.setNameEN(busStopObject.getString("name_en"));
-                bs.setStreetMM(busStopObject.getString("road_mm"));
-                bs.setStreetEN(busStopObject.getString("road_en"));
+                bs.setRoadNameMM(busStopObject.getString("road_mm"));
+                bs.setRoadNameEN(busStopObject.getString("road_en"));
                 bs.setTownshipMM(busStopObject.getString("township_mm"));
                 bs.setTownshipEN(busStopObject.getString("township_en"));
                 bs.setCoordinate(new Coordinate(busStopObject.getDouble("lat"), busStopObject.getDouble("lng")));

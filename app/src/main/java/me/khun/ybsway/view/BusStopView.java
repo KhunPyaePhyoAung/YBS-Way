@@ -7,7 +7,7 @@ import me.khun.ybsway.entity.Coordinate;
 public class BusStopView {
     private Integer id;
     private String name;
-    private String streetName;
+    private String roadName;
     private String townshipName;
     private Coordinate coordinate;
 
@@ -27,12 +27,12 @@ public class BusStopView {
         this.name = name;
     }
 
-    public String getStreetName() {
-        return streetName;
+    public String getRoadName() {
+        return roadName;
     }
 
-    public void setStreetName(String streetName) {
-        this.streetName = streetName;
+    public void setRoadName(String roadName) {
+        this.roadName = roadName;
     }
 
     public String getTownshipName() {

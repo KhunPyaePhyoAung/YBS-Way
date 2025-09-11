@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp"
+    android:orientation="horizontal"
+    android:elevation="5dp"
+    android:background="@color/background_primary"
+    >
+
+    <RelativeLayout
+        android:id="@+id/icon_layout"
+        android:layout_width="@dimen/bus_stop_list_item_icon_wrapper_size"
+        android:layout_height="@dimen/bus_stop_list_item_icon_wrapper_size"
+        android:padding="10dp"
+        android:layout_gravity="center"
+        >
+
+        <ImageView
+            android:layout_width="@dimen/bus_stop_list_icon_size"
+            android:layout_height="@dimen/bus_stop_list_icon_size"
+            android:src="@drawable/bus_stop_icon_48dp"
+            android:layout_centerInParent="true"
+            android:elevation="10dp" />
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="2dp"
+        android:weightSum="3"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="2dp">
+
+            <TextView
+                android:id="@+id/bus_stop_name_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:textColor="@color/black"
+                android:textSize="@dimen/bus_stop_list_item_title_size"
+                android:textStyle="bold"
+                android:textAppearance="@style/AppFont"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="2dp">
+
+            <ImageView
+                android:layout_width="@dimen/bus_stop_list_item_sub_title_icon_size"
+                android:layout_height="@dimen/bus_stop_list_item_sub_title_icon_size"
+                android:src="@drawable/bus_stop_list_item_road_icon"
+                />
+
+            <TextView
+                android:id="@+id/township_name_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginStart="5dp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/bus_stop_list_item_sub_title_size"
+                android:textAppearance="@style/AppFont"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="2dp">
+
+            <ImageView
+                android:layout_width="@dimen/bus_stop_list_item_sub_title_icon_size"
+                android:layout_height="@dimen/bus_stop_list_item_sub_title_icon_size"
+                android:src="@drawable/bus_stop_list_item_road_icon"
+                />
+
+            <TextView
+                android:id="@+id/road_name_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginStart="5dp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/bus_stop_list_item_sub_title_size"
+                android:textAppearance="@style/AppFont"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>
