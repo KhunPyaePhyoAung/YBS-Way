@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/dialog_related_bus_bg">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingVertical="5dp">
+
+        <ImageView
+            android:layout_width="@dimen/dialog_related_bus_icon_size"
+            android:layout_height="@dimen/dialog_related_bus_icon_size"
+            android:src="@drawable/bus_stop_icon_48dp"/>
+
+        <TextView
+            android:id="@+id/tv_bus_stop_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/dialog_related_bus_title_size"
+            android:textStyle="bold"
+            android:textAppearance="@style/AppFont"
+            android:layout_marginStart="8dp"
+            android:textColor="@color/dialog_related_bus_title"/>
+    </LinearLayout>
+
+    <GridView
+        android:id="@+id/grid_bus_icon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:numColumns="auto_fit"
+        android:columnWidth="@dimen/dialog_related_bus_item_col_width"
+        android:horizontalSpacing="@dimen/dialog_related_bus_item_h_spacing"
+        android:verticalSpacing="@dimen/dialog_related_bus_item_v_spacing"
+        android:stretchMode="columnWidth"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center" >
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_close"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/related_bus_dialog_action_btn_bg_states"
+            android:gravity="center"
+            android:text="@string/btn_close_text"
+            android:textSize="@dimen/dialog_related_bus_close_btn_text"
+            android:textAppearance="@style/AppFont"
+            android:textColor="@color/white"
+            android:textAllCaps="false"
+            android:padding="10dp" />
+    </LinearLayout>
+</LinearLayout>

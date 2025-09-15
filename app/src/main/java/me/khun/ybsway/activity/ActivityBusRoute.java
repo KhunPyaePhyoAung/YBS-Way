@@ -11,7 +11,7 @@ import org.osmdroid.views.overlay.Marker;
 
 import me.khun.ybsway.application.YBSWayApplication;
 import me.khun.ybsway.R;
-import me.khun.ybsway.custom.BusStopMarker;
+import me.khun.ybsway.component.BusStopMarker;
 import me.khun.ybsway.mapper.BusMapper;
 import me.khun.ybsway.mapper.BusStopMapper;
 import me.khun.ybsway.service.BusService;
@@ -34,6 +34,7 @@ public class ActivityBusRoute extends ActivityBaseMap implements Marker.OnMarker
 
         setupMap(R.id.map_view);
         setupGpsButton(R.id.btn_gps);
+        setupRelatedBusComponent(R.id.related_bus_btn_container, R.id.btn_related_bus, R.id.badge_related_bus);
 
         Toolbar toolbar = findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);

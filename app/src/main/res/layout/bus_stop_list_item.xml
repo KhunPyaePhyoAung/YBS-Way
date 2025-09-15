@@ -52,6 +52,7 @@
                 android:textSize="@dimen/bus_stop_list_item_title_size"
                 android:textStyle="bold"
                 android:textAppearance="@style/AppFont"
+                android:singleLine="true"
                 />
 
         </LinearLayout>
@@ -78,6 +79,7 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/bus_stop_list_item_sub_title_size"
                 android:textAppearance="@style/AppFont"
+                android:singleLine="true"
                 />
 
         </LinearLayout>
@@ -104,6 +106,7 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/bus_stop_list_item_sub_title_size"
                 android:textAppearance="@style/AppFont"
+                android:singleLine="true"
                 />
 
         </LinearLayout>

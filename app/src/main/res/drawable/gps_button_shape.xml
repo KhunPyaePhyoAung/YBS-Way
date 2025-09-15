@@ -8,8 +8,8 @@
         android:color="@color/gps_button_border"
         android:width="2dp" />
     <padding
-        android:top="@dimen/gps_button_padding"
-        android:right="@dimen/gps_button_padding"
-        android:left="@dimen/gps_button_padding"
-        android:bottom="@dimen/gps_button_padding" />
+        android:top="@dimen/floating_button_padding"
+        android:right="@dimen/floating_button_padding"
+        android:left="@dimen/floating_button_padding"
+        android:bottom="@dimen/floating_button_padding" />
 </shape>

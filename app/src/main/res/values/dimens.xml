@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="toolbar_logo_size">28dp</dimen>
-    <dimen name="toolbar_title_margin_start">0dp</dimen>
+    <dimen name="toolbar_title_margin_start">10dp</dimen>
     <dimen name="toolbar_title_text_size">20sp</dimen>
     <dimen name="bus_list_item_height">85dp</dimen>
     <dimen name="bus_list_item_name_wrapper_size">92dp</dimen>
@@ -42,19 +42,33 @@
     <dimen name="language_list_item_icon_size">70dp</dimen>
     <dimen name="language_list_item_main_text_size">18sp</dimen>
     <dimen name="language_list_item_sub_text_size">14sp</dimen>
-    <dimen name="language_list_divider_height">3dp</dimen>
+    <dimen name="language_list_divider_height">2dp</dimen>
     <dimen name="about_page_icon_size">100dp</dimen>
     <dimen name="about_page_app_name_size">24sp</dimen>
     <dimen name="about_page_app_version_size">18sp</dimen>
     <dimen name="about_page_content_title_size">20sp</dimen>
     <dimen name="about_page_content_body_size">14sp</dimen>
 
-    <dimen name="gps_button_size">50dp</dimen>
-    <dimen name="gps_button_padding">12dp</dimen>
-    <dimen name="gps_button_margin_bottom">15dp</dimen>
-    <dimen name="gps_button_margin_end">15dp</dimen>
+    <dimen name="floating_button_size">50dp</dimen>
+    <dimen name="floating_button_padding">12dp</dimen>
+    <dimen name="floating_button_margin_bottom">15dp</dimen>
+    <dimen name="floating_button_margin_end">15dp</dimen>
 
     <dimen name="dialog_title">16sp</dimen>
     <dimen name="dialog_body">14sp</dimen>
     <dimen name="dialog_button_text">14sp</dimen>
+
+    <dimen name="related_bus_icon_size">64dp</dimen>
+    <dimen name="related_bus_btn_size">40dp</dimen>
+    <dimen name="related_bus_btn_padding">12dp</dimen>
+
+    <dimen name="dialog_related_bus_icon_size">40dp</dimen>
+    <dimen name="dialog_related_bus_title_size">21sp</dimen>
+    <dimen name="dialog_related_bus_item_col_width">66dp</dimen>
+    <dimen name="dialog_related_bus_item_h_spacing">12dp</dimen>
+    <dimen name="dialog_related_bus_item_v_spacing">15dp</dimen>
+    <dimen name="dialog_related_bus_close_btn_text">12sp</dimen>
+    <dimen name="dialog_related_bus_item_name">20sp</dimen>
+    <dimen name="dialog_related_bus_item_sub_name">9sp</dimen>
+    <dimen name="dialog_related_bus_item_icon">26dp</dimen>
 </resources>

@@ -22,7 +22,9 @@
     <color name="text_accent">#FFFFFF</color>
     <color name="text_accent_dark">#FFFFFF</color>
     <color name="glass">#8A000000</color>
+    <color name="text_glass">#FFFFFF</color>
     <color name="glass_dark">#A9000000</color>
+    <color name="glass_light">#661D1D1D</color>
 
     <color name="bus_stop_fill">#00609C</color>
     <color name="bus_stop_border">#FFFFFF</color>
@@ -78,5 +80,20 @@
     <color name="bus_stop_list_item_icon">@color/gray</color>
     <color name="bus_stop_list_not_found">@color/background_primary_dark</color>
 
+    <color name="related_bus_btn_bg">@color/primary</color>
+    <color name="related_bus_btn_bg_pressed">@color/secondary</color>
+    <color name="related_bus_badge_bg">@color/accent</color>
+    <color name="related_bus_badge_border">@color/white</color>
+    <color name="related_bus_badge_text">@color/white</color>
+    <color name="related_bus_icon_bg">@color/glass</color>
+    <color name="related_bus_icon_sub_name_bg">@color/glass</color>
+    <color name="related_bus_icon_sub_name_border">@color/text_glass</color>
+
+    <color name="dialog_related_bus_bg">@color/glass</color>
+    <color name="dialog_related_bus_title">@color/text_glass</color>
+
+    <color name="my_location_marker_border">@color/accent</color>
+    <color name="my_location_marker_bg">@color/background_primary</color>
+    <color name="my_location_marker_icon">@color/primary</color>
 
 </resources>

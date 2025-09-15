@@ -2,13 +2,15 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@color/background_primary">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipChildren="false"
+        android:clipToPadding="false">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/tool_bar"
@@ -34,14 +36,48 @@
             app:layout_constraintTop_toBottomOf="@+id/tool_bar"
             app:layout_constraintVertical_bias="0.0" />
 
+        <FrameLayout
+            android:id="@+id/related_bus_btn_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/btn_gps"
+            android:layout_marginBottom="@dimen/floating_button_margin_bottom"
+            android:layout_marginEnd="@dimen/floating_button_margin_end">
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/btn_related_bus"
+                android:layout_width="@dimen/floating_button_size"
+                android:layout_height="@dimen/floating_button_size"
+                android:background="@drawable/related_bus_btn_bg_states"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_launcher_plain"
+                android:elevation="10dp"/>
+
+            <TextView
+                android:id="@+id/badge_related_bus"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/related_bus_badge_bg"
+                android:textColor="@color/related_bus_badge_text"
+                android:gravity="center"
+                android:elevation="10dp"
+                android:textSize="11sp"
+                android:textAppearance="@style/AppFont"
+                android:layout_gravity="top|end"
+                android:translationX="8dp"
+                android:translationY="-8dp"/>
+        </FrameLayout>
+
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/btn_gps"
-            android:layout_width="@dimen/gps_button_size"
-            android:layout_height="@dimen/gps_button_size"
+            android:layout_width="@dimen/floating_button_size"
+            android:layout_height="@dimen/floating_button_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="@dimen/gps_button_margin_bottom"
-            android:layout_marginEnd="@dimen/gps_button_margin_end"
+            android:layout_marginBottom="@dimen/floating_button_margin_bottom"
+            android:layout_marginEnd="@dimen/floating_button_margin_end"
             android:background="@drawable/gps_button_background_states"
             android:scaleType="fitXY"
             android:src="@drawable/gps_button_icon_states"/>

@@ -23,4 +23,6 @@
     <string name="gps_prompt_error_title">Unexpected Error</string>
     <string name="gps_prompt_error_message">GPS settings couldn’t be opened. Turn on GPS in settings.</string>
     <string name="gps_prompt_error_action">Close</string>
+
+    <string name="btn_close_text">Close</string>
 </resources>

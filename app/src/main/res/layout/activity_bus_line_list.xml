@@ -30,6 +30,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:dividerHeight="@dimen/bus_list_divider_height"
+            android:clipToPadding="false"
+            android:paddingBottom="@dimen/bus_list_divider_height"
             android:background="@color/background_primary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

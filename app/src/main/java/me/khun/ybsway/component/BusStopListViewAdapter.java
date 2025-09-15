@@ -1,4 +1,4 @@
-package me.khun.ybsway.custom;
+package me.khun.ybsway.component;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -16,14 +16,11 @@ public class BusStopListViewAdapter extends BaseAdapter {
 
     private final Context context;
     private final List<BusStopView> busViewList;
-    private LayoutInflater inflater = null;
     private View.OnClickListener onClickListener;
 
     public BusStopListViewAdapter(Context context, List<BusStopView> busViewList) {
         this.context = context;
         this.busViewList = busViewList;
-        inflater = (LayoutInflater) context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
@@ -43,26 +40,25 @@ public class BusStopListViewAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        View vi = view;
 
         if (view == null) {
-            vi = inflater.inflate(R.layout.bus_stop_list_item, null);
+            view = LayoutInflater.from(context).inflate(R.layout.bus_stop_list_item, null);
         }
 
         BusStopView busStopView = busViewList.get(i);
 
-        TextView busStopNameTv = vi.findViewById(R.id.bus_stop_name_tv);
-        TextView townshipNameTv = vi.findViewById(R.id.township_name_tv);
-        TextView roadNameTv = vi.findViewById(R.id.road_name_tv);
+        TextView busStopNameTv = view.findViewById(R.id.bus_stop_name_tv);
+        TextView townshipNameTv = view.findViewById(R.id.township_name_tv);
+        TextView roadNameTv = view.findViewById(R.id.road_name_tv);
 
         busStopNameTv.setText(busStopView.getName());
         townshipNameTv.setText(busStopView.getTownshipName());
         roadNameTv.setText(busStopView.getRoadName());
 
         if (onClickListener != null) {
-            vi.setOnClickListener(onClickListener);
+            view.setOnClickListener(onClickListener);
         }
 
-        return vi;
+        return view;
     }
 }

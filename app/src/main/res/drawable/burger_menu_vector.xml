@@ -7,5 +7,13 @@
 
     <path
         android:fillColor="@color/nav_toggle_icon"
-        android:pathData="M3 6h18v2.016h-18v-2.016zM3 12.984v-1.969h18v1.969h-18zM3 18v-2.016h18v2.016h-18z" />
+        android:pathData="M19 17h-14c-1.103 0-2 0.897-2 2s0.897 2 2 2h14c1.103 0 2-0.897 2-2s-0.897-2-2-2z" />
+
+    <path
+        android:fillColor="@color/nav_toggle_icon"
+        android:pathData="M19 10h-14c-1.103 0-2 0.897-2 2s0.897 2 2 2h14c1.103 0 2-0.897 2-2s-0.897-2-2-2z" />
+
+    <path
+        android:fillColor="@color/nav_toggle_icon"
+        android:pathData="M19 3h-14c-1.103 0-2 0.897-2 2s0.897 2 2 2h14c1.103 0 2-0.897 2-2s-0.897-2-2-2z" />
 </vector>

@@ -1,4 +1,4 @@
-package me.khun.ybsway.custom;
+package me.khun.ybsway.component;
 
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.Marker;

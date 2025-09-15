@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+
+    <solid android:color="@color/related_bus_btn_bg" />
+    <size
+        android:width="@dimen/related_bus_btn_size"
+        android:height="@dimen/related_bus_btn_size" />
+    <padding
+        android:top="@dimen/related_bus_btn_padding"
+        android:right="@dimen/related_bus_btn_padding"
+        android:left="@dimen/related_bus_btn_padding"
+        android:bottom="@dimen/related_bus_btn_padding" />
+</shape>

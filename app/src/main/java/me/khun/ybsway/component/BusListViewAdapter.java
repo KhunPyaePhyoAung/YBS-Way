@@ -1,4 +1,4 @@
-package me.khun.ybsway.custom;
+package me.khun.ybsway.component;
 
 import android.content.Context;
 import android.content.Intent;
@@ -24,13 +24,10 @@ public class BusListViewAdapter extends BaseAdapter {
 
     private final Context context;
     private final List<BusView> busViewList;
-    private LayoutInflater inflater = null;
 
     public BusListViewAdapter(Context context, List<BusView> busViewList) {
         this.context = context;
         this.busViewList = busViewList;
-        inflater = (LayoutInflater) context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
@@ -50,19 +47,16 @@ public class BusListViewAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-
-        View vi = view;
-
         if (view == null) {
-            vi = inflater.inflate(R.layout.bus_list_item, null);
+            view = LayoutInflater.from(context).inflate(R.layout.bus_list_item, null);
         }
 
-        RelativeLayout iconLayout = vi.findViewById(R.id.icon_layout);
-        ImageView busIconImageView = vi.findViewById(R.id.bus_icon);
-        TextView busNameTextView = vi.findViewById(R.id.bus_name);
-        TextView busSubNameTextView = vi.findViewById(R.id.bus_sub_name);
-        TextView busOriginTextView = vi.findViewById(R.id.bus_from);
-        TextView busDestinationTextView = vi.findViewById(R.id.bus_to);
+        RelativeLayout iconLayout = view.findViewById(R.id.icon_layout);
+        ImageView busIconImageView = view.findViewById(R.id.bus_icon);
+        TextView busNameTextView = view.findViewById(R.id.bus_name);
+        TextView busSubNameTextView = view.findViewById(R.id.bus_sub_name);
+        TextView busOriginTextView = view.findViewById(R.id.bus_from);
+        TextView busDestinationTextView = view.findViewById(R.id.bus_to);
 
         BusView busView = busViewList.get(i);
 
@@ -83,15 +77,6 @@ public class BusListViewAdapter extends BaseAdapter {
         iconLayout.setBackgroundColor(Color.parseColor("#" + busView.getHexColorCode()));
         busOriginTextView.setText(busView.getOriginName());
         busDestinationTextView.setText(busView.getDestinationName());
-
-
-
-        vi.setOnClickListener(view1 -> {
-            Intent intent = new Intent(context, ActivityBusRoute.class);
-            intent.putExtra("route_id", busView.getRouteId());
-            context.startActivity(intent);
-        });
-
-        return vi;
+        return view;
     }
 }

@@ -1,13 +1,14 @@
 package me.khun.ybsway.activity;
 
 import android.content.Context;
-import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
+import androidx.appcompat.content.res.AppCompatResources;
 
 import java.util.Objects;
 
@@ -40,4 +41,20 @@ public class ActivityBase extends AppCompatActivity {
             recreate();
         }
     }
+
+    protected static Bitmap getBitmapFromDrawable(Context context, int drawableId, int sizeInDp) {
+        Drawable drawable = AppCompatResources.getDrawable(context, drawableId);
+        if (drawable == null) return null;
+
+        float density = context.getResources().getDisplayMetrics().density;
+        int sizeInPx = (int) (sizeInDp * density);
+
+        Bitmap bitmap = Bitmap.createBitmap(sizeInPx, sizeInPx, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, sizeInPx, sizeInPx);
+        drawable.draw(canvas);
+
+        return bitmap;
+    }
+
 }

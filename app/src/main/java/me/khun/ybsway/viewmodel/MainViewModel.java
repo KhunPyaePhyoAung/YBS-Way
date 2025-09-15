@@ -7,18 +7,21 @@ import androidx.lifecycle.ViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.khun.ybsway.entity.Bus;
 import me.khun.ybsway.entity.BusStop;
+import me.khun.ybsway.mapper.BusMapper;
 import me.khun.ybsway.mapper.BusStopMapper;
+import me.khun.ybsway.service.BusService;
 import me.khun.ybsway.service.BusStopService;
 import me.khun.ybsway.view.BusStopView;
-import me.xdrop.fuzzywuzzy.FuzzySearch;
+import me.khun.ybsway.view.BusView;
 
 public class MainViewModel extends ViewModel {
     private static final int MIN_SEARCH_RATIO = 70;
     private BusStopMapper busStopMapper;
     private BusStopService busStopService;
     private List<BusStop> busStopList = new ArrayList<>();
-    private MutableLiveData<List<BusStopView>> busStopViewList = new MutableLiveData<>();
+    private MutableLiveData<List<BusStopView>> busStopViewListData = new MutableLiveData<>();
 
     public MainViewModel(BusStopMapper busStopMapper, BusStopService busStopService) {
         this.busStopMapper = busStopMapper;
@@ -26,13 +29,13 @@ public class MainViewModel extends ViewModel {
     }
 
     public LiveData<List<BusStopView>> getAllBusStopsData() {
-        return busStopViewList;
+        return busStopViewListData;
     }
 
     public void loadAllBusStopsData() {
         busStopList.clear();
         busStopList.addAll(busStopService.getAll());
-        busStopViewList.setValue(busStopMapper.mapToBusStopList(busStopList));
+        busStopViewListData.setValue(busStopMapper.mapToBusStopList(busStopList));
 
     }
 

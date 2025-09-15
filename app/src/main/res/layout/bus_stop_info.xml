@@ -20,6 +20,7 @@
             android:textStyle="bold"
             android:textSize="@dimen/bus_stop_info_window_name_text_size"
             android:textAppearance="@style/AppFont"
+            android:singleLine="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -28,6 +29,7 @@
             android:textColor="@color/bus_stop_info_bubble_text"
             android:textSize="@dimen/bus_stop_info_window_street_text_size"
             android:textAppearance="@style/AppFont"
+            android:singleLine="true"
             android:layout_marginTop="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -37,6 +39,7 @@
             android:textColor="@color/bus_stop_info_bubble_text"
             android:textSize="@dimen/bus_stop_info_window_township_text_size"
             android:textAppearance="@style/AppFont"
+            android:singleLine="true"
             android:layout_marginTop="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />

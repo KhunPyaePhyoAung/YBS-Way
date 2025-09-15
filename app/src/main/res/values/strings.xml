@@ -23,4 +23,6 @@
     <string name="gps_prompt_error_title">မမျှော်လင့်ထားသော အမှား</string>
     <string name="gps_prompt_error_message">GPS ဆက်တင်ကို ဖွင့်၍ မရပါ။ ဆက်တင်တွင် GPS ကို ဖွင့်ပါ။</string>
     <string name="gps_prompt_error_action">ပိတ်မည်</string>
+
+    <string name="btn_close_text">ပိတ်မည်</string>
 </resources>

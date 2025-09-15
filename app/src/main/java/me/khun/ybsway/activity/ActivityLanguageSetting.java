@@ -13,7 +13,7 @@ import me.khun.ybsway.R;
 import me.khun.ybsway.application.Language;
 import me.khun.ybsway.application.LanguageConfig;
 import me.khun.ybsway.application.YBSWayApplication;
-import me.khun.ybsway.custom.LanguageListAdapter;
+import me.khun.ybsway.component.LanguageListAdapter;
 import me.khun.ybsway.mapper.LanguageMapper;
 import me.khun.ybsway.view.LanguageView;
 import me.khun.ybsway.viewmodel.LanguageSettingViewModel;

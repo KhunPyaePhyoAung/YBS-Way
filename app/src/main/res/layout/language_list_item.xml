@@ -30,6 +30,7 @@
             android:textColor="@color/black"
             android:textSize="@dimen/language_list_item_main_text_size"
             android:textAppearance="@style/AppFont"
+            android:singleLine="true"
             />
 
         <TextView
@@ -40,6 +41,7 @@
             android:textColor="@color/gray"
             android:textSize="@dimen/language_list_item_sub_text_size"
             android:textAppearance="@style/AppFont"
+            android:singleLine="true"
             />
 
     </LinearLayout>

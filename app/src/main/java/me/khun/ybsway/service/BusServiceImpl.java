@@ -1,6 +1,7 @@
 package me.khun.ybsway.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import me.khun.ybsway.entity.Bus;
@@ -49,7 +50,8 @@ public class BusServiceImpl implements BusService {
         return bus;
     }
 
-    public List<Bus> findAllByBusStopId(int busStopId) {
+    @Override
+    public List<Bus> getBusListByBusStopId(Integer busStopId) {
         List<Bus> resultList = new ArrayList<>(200);
         for ( Bus bus : busList ) {
             if ( bus.getBusStopIdList().contains(busStopId) ) {
@@ -58,4 +60,5 @@ public class BusServiceImpl implements BusService {
         }
         return List.copyOf(resultList);
     }
+
 }

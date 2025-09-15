@@ -38,6 +38,7 @@
         <activity
             android:name=".activity.ActivitySplash"
             android:theme="@style/SplashTheme"
+            android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -47,27 +48,32 @@
         <activity
             android:name=".activity.ActivityMain"
             android:theme="@style/Theme.YBSWay"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan"
             android:exported="true">
         </activity>
         <activity
             android:name=".activity.ActivityBusList"
             android:theme="@style/Theme.YBSWay"
+            android:screenOrientation="portrait"
             android:exported="true">
         </activity>
         <activity
             android:name=".activity.ActivityBusRoute"
             android:theme="@style/Theme.YBSWay"
+            android:screenOrientation="portrait"
             android:exported="true">
         </activity>
         <activity
             android:name=".activity.ActivityLanguageSetting"
             android:theme="@style/Theme.YBSWay"
+            android:screenOrientation="portrait"
             android:exported="true">
         </activity>
         <activity
             android:name=".activity.ActivityAbout"
             android:theme="@style/Theme.YBSWay"
+            android:screenOrientation="portrait"
             android:exported="true">
         </activity>
     </application>

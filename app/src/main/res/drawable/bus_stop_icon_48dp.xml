@@ -18,8 +18,8 @@
 
     <!-- Icon centered -->
     <item
-        android:width="36dp"
-        android:height="36dp"
+        android:width="34dp"
+        android:height="34dp"
         android:drawable="@drawable/bus_stop_vector"
         android:gravity="center" />
 </layer-list>

@@ -16,12 +16,12 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.lifecycle.Observer;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -30,11 +30,12 @@ import java.util.Objects;
 
 import me.khun.ybsway.R;
 import me.khun.ybsway.application.YBSWayApplication;
-import me.khun.ybsway.custom.BusStopListViewAdapter;
-import me.khun.ybsway.custom.BusStopMarker;
+import me.khun.ybsway.component.BusStopListViewAdapter;
+import me.khun.ybsway.component.BusStopMarker;
 import me.khun.ybsway.mapper.BusStopMapper;
 import me.khun.ybsway.service.BusStopService;
 import me.khun.ybsway.view.BusStopView;
+import me.khun.ybsway.view.BusView;
 import me.khun.ybsway.viewmodel.MainViewModel;
 
 public class ActivityMain extends ActivityBaseMap implements NavigationView.OnNavigationItemSelectedListener, AdapterView.OnItemClickListener {
@@ -58,6 +59,7 @@ public class ActivityMain extends ActivityBaseMap implements NavigationView.OnNa
         setContentView(R.layout.activity_main);
         setupMap(R.id.map_view);
         setupGpsButton(R.id.btn_gps);
+        setupRelatedBusComponent(R.id.related_bus_btn_container, R.id.btn_related_bus, R.id.badge_related_bus);
 
         busStopMapper = YBSWayApplication.busStopMapper;
         busStopService = YBSWayApplication.busStopService;
@@ -120,6 +122,8 @@ public class ActivityMain extends ActivityBaseMap implements NavigationView.OnNa
         busStopResultListView.setOnItemClickListener(this);
 
         getOnBackPressedDispatcher().addCallback(this, new ActivityMainOnBackPressedCallback(true));
+
+        baseMapViewModel.getRelatedBusStopData().observe(this, new RelatedBusListObserver());
 
         navigationView.setNavigationItemSelectedListener(this);
         mainViewModel.loadAllBusStopsData();
@@ -245,6 +249,23 @@ public class ActivityMain extends ActivityBaseMap implements NavigationView.OnNa
             } else {
                 setEnabled(false);
                 getOnBackPressedDispatcher().onBackPressed();
+            }
+        }
+    }
+
+    private class RelatedBusListObserver implements Observer<List<BusView>> {
+
+        @Override
+        public void onChanged(List<BusView> busViews) {
+            if (busViews.isEmpty()) {
+                System.out.println("No related bus");
+            } else {
+                System.out.println("Related bus list:");
+                for (BusView bv : busViews) {
+                    System.out.print(bv.getName());
+                    System.out.print(",");
+                }
+                System.out.println();
             }
         }
     }

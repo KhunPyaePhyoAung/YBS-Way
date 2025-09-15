@@ -8,4 +8,6 @@ public interface BusService {
     List<Bus> getAll();
 
     Bus findOneByRouteId(String routeId);
+
+    List<Bus> getBusListByBusStopId(Integer busStopId);
 }

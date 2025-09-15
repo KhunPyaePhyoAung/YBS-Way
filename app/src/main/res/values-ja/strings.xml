@@ -23,4 +23,6 @@
     <string name="gps_prompt_error_title">予期しないエラー</string>
     <string name="gps_prompt_error_message">GPS設定を開くことができませんでした。設定でGPSを有効にしてください。</string>
     <string name="gps_prompt_error_action">閉じる</string>
+
+    <string name="btn_close_text">閉じる</string>
 </resources>

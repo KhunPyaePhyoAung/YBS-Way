@@ -1,4 +1,4 @@
-package me.khun.ybsway.custom;
+package me.khun.ybsway.component;
 
 import android.view.View;
 import android.widget.TextView;
