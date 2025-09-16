@@ -30,6 +30,7 @@ import java.util.Objects;
 
 import me.khun.ybsway.R;
 import me.khun.ybsway.application.YBSWayApplication;
+import me.khun.ybsway.component.BusListToRoutePageItemClickListener;
 import me.khun.ybsway.component.BusStopListViewAdapter;
 import me.khun.ybsway.component.BusStopMarker;
 import me.khun.ybsway.mapper.BusStopMapper;
@@ -188,6 +189,13 @@ public class ActivityMain extends ActivityBaseMap implements NavigationView.OnNa
     public void onResume() {
         super.onResume();
         navigationView.setCheckedItem(R.id.nav_home);
+    }
+
+    @Override
+    protected AdapterView.OnItemClickListener getOnRelatedBusItemClickListener() {
+        BusListToRoutePageItemClickListener busItemClickListener = new BusListToRoutePageItemClickListener(this);
+        busItemClickListener.setBusList(relatedBusList);
+        return busItemClickListener;
     }
 
     @Override

@@ -210,10 +210,10 @@
                     android:id="@+id/btn_search_route"
                     android:layout_width="@dimen/search_location_input_height"
                     android:layout_height="@dimen/search_location_input_height"
-                    android:background="@drawable/search_button_states"
+                    android:background="@drawable/direction_button_states"
                     android:scaleType="fitXY"
                     android:layout_marginStart="5dp"
-                    android:src="@drawable/search_stop_vector"/>
+                    android:src="@drawable/direction_vector"/>
 
 
             </LinearLayout>

@@ -41,9 +41,9 @@
     <color name="nav_toggle_bg">@android:color/transparent</color>
     <color name="nav_toggle_bg_pressed">@color/background_primary_dark</color>
 
-    <color name="btn_search_stop_icon">@color/text_primary</color>
-    <color name="btn_search_stop_bg">@color/primary</color>
-    <color name="btn_search_stop_bg_pressed">@color/secondary</color>
+    <color name="btn_direction_icon">@color/text_primary</color>
+    <color name="btn_direction_bg">@color/primary</color>
+    <color name="btn_direction_bg_pressed">@color/secondary</color>
 
     <color name="search_location_input_border">#CACACA</color>
     <color name="search_location_input_bg">#FFFFF6</color>

@@ -9,6 +9,7 @@ import android.content.IntentFilter;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.location.LocationManager;
@@ -20,6 +21,7 @@ import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -69,7 +71,6 @@ import java.util.concurrent.TimeUnit;
 
 import me.khun.ybsway.R;
 import me.khun.ybsway.application.YBSWayApplication;
-import me.khun.ybsway.component.BusListToRoutePageItemClickListener;
 import me.khun.ybsway.component.BusStopInfoWindow;
 import me.khun.ybsway.component.BusStopMarker;
 import me.khun.ybsway.component.RelatedBusListDialog;
@@ -78,7 +79,7 @@ import me.khun.ybsway.view.BusStopView;
 import me.khun.ybsway.view.BusView;
 import me.khun.ybsway.viewmodel.BaseMapViewModel;
 
-public class ActivityBaseMap extends ActivityBase implements MapListener, MapEventsReceiver, Marker.OnMarkerClickListener {
+public abstract class ActivityBaseMap extends ActivityBase implements MapListener, MapEventsReceiver, Marker.OnMarkerClickListener {
     public static final double YANGON_LATITUDE = 16.866931;
     public static final double YANGON_LONGITUDE = 96.172709;
     public static final double MAX_NORTH_LATITUDE = 18.400445;
@@ -88,15 +89,15 @@ public class ActivityBaseMap extends ActivityBase implements MapListener, MapEve
     public static final double DEFAULT_MAP_ZOOM_LEVEL = 13;
     public static final double MIN_ZOOM_LEVEL = 10;
     public static final double MAX_ZOOM_LEVEL = 22;
-    public static final double PROPER_ZOOM_LEVEL = 17;
-    public static final long ZOOM_ANIMATION_SPEED = 1500L;
+    public static final double PROPER_ZOOM_LEVEL = 18;
+    public static final long ZOOM_ANIMATION_SPEED = 1000L;
     protected static final int LOCATION_PERMISSIONS_REQUEST_CODE = 1;
     protected static final int LOCATION_PERMISSIONS_FORCE_SETTING_REQUEST_CODE = 2;
     protected static final int STORAGE_PERMISSIONS_FORCE_SETTING_REQUEST_CODE = 3;
     protected static final int ICON_RESET_INTERVAL_MILLS = 250;
     protected static final int STATIC_MARKER_SIZE_IN_DP = 45;
     protected static final int LOCATION_PERSON_DRAWABLE_ID = R.drawable.my_location_person_icon;
-    protected static final int LOCATION_DIRECTION_DRAWABLE_ID = R.drawable.test;
+    protected static final int LOCATION_DIRECTION_DRAWABLE_ID = R.drawable.my_location_bus_icon_1;
 
     protected final Map<Integer, Drawable> busStopIconMap = new HashMap<>();
     protected final List<BusStopMarker> busStopMarkerList = new ArrayList<>(YBSWayApplication.DEFAULT_BUS_STOP_LIST_SIZE);
@@ -123,7 +124,6 @@ public class ActivityBaseMap extends ActivityBase implements MapListener, MapEve
     protected GeoPoint mapCenterPoint;
     protected BroadcastReceiver gpsSwitchReceiver;
     protected Marker nearestMarker;
-    protected BusListToRoutePageItemClickListener busItemClickListener;
     protected int currentZoomLevel;
     protected volatile boolean isLoadingBusStops = false;
     protected boolean showDynamicInfoWindow = false;
@@ -131,7 +131,6 @@ public class ActivityBaseMap extends ActivityBase implements MapListener, MapEve
     private final Handler mainHandler = new Handler(Looper.getMainLooper());
 
     private Runnable pendingIconUpdateRunnable;
-
 
 
     @Override
@@ -168,20 +167,12 @@ public class ActivityBaseMap extends ActivityBase implements MapListener, MapEve
             relatedBusList = busViewList;
             syncRelatedBusData();
         });
-        busItemClickListener = new BusListToRoutePageItemClickListener(this);
     }
 
     protected void setupGpsButton(@IdRes int btnGpsId) {
         btnGPS = findViewById(btnGpsId);
-
         btnGPS.setOnClickListener(view -> {
-            if (isLocationServiceOn()) {
-                mLocationOverlay.enableFollowLocation();
-                double zoomLevel = Math.max(PROPER_ZOOM_LEVEL, mapView.getZoomLevelDouble());
-                mapController.animateTo(mLocationOverlay.getMyLocation(), zoomLevel, ZOOM_ANIMATION_SPEED);
-            } else {
-                turnOnLocationService(true);
-            }
+            onGpsButtonClick();
         });
     }
 
@@ -225,11 +216,23 @@ public class ActivityBaseMap extends ActivityBase implements MapListener, MapEve
 
         Bitmap personBitmap = getBitmapFromDrawable(this, LOCATION_PERSON_DRAWABLE_ID, STATIC_MARKER_SIZE_IN_DP);
         Bitmap busBitmap = getBitmapFromDrawable(this, LOCATION_DIRECTION_DRAWABLE_ID, STATIC_MARKER_SIZE_IN_DP);
+
+        Drawable drawable = AppCompatResources.getDrawable(this, LOCATION_DIRECTION_DRAWABLE_ID);
+
+        float density = this.getResources().getDisplayMetrics().density;
+        int sizeLInPx = (int) (46 * density);
+        int sizeHInPx = (int) (23 * density);
+
+        Bitmap bitmap = Bitmap.createBitmap(sizeHInPx, sizeLInPx, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, sizeHInPx, sizeLInPx);
+        drawable.draw(canvas);
+
         mLocationOverlay = new MyLocationNewOverlay(new GpsMyLocationProvider(this), mapView);
         mLocationOverlay.enableMyLocation();
         mLocationOverlay.setPersonIcon(personBitmap);
         mLocationOverlay.setPersonAnchor(0.5f, 1f);
-        mLocationOverlay.setDirectionIcon(busBitmap);
+        mLocationOverlay.setDirectionIcon(bitmap);
         mLocationOverlay.setDirectionAnchor(0.5f, 0.5f);
         mapView.getOverlays().add(MAP_OVERLAY_SORTED_LIST.indexOf("my_location"), mLocationOverlay);
 
@@ -443,10 +446,21 @@ public class ActivityBaseMap extends ActivityBase implements MapListener, MapEve
     protected void createBusStopInfoWindowIfNull(BusStopMarker busStopMarker) {
         if (busStopMarker.getInfoWindow() == null) {
             BusStopInfoWindow infoWindow = new BusStopInfoWindow(mapView, busStopMarker.getBusStop());
-            infoWindow.setOnClickListener(view -> {
-                closeAllInfoWindow();
-            });
+            infoWindow.setOnClickListener(view -> onBusStopInfoWindowClicked(infoWindow));
             busStopMarker.setInfoWindow(infoWindow);
+        }
+    }
+
+    protected void onBusStopInfoWindowClicked(BusStopInfoWindow busStopInfoWindow) {
+        showRelatedBusListDialog();
+    }
+
+    protected void onGpsButtonClick() {
+        if (isLocationServiceOn()) {
+            mLocationOverlay.enableFollowLocation();
+            mapController.animateTo(mLocationOverlay.getMyLocation());
+        } else {
+            turnOnLocationService(true);
         }
     }
 
@@ -505,6 +519,7 @@ public class ActivityBaseMap extends ActivityBase implements MapListener, MapEve
     @Override
     public boolean onMarkerClick(Marker marker, MapView mapView) {
         InfoWindow.closeAllInfoWindowsOn(mapView);
+        mLocationOverlay.disableFollowLocation();
         if (mapView.getZoomLevelDouble() > PROPER_ZOOM_LEVEL) {
             mapController.animateTo(marker.getPosition());
         } else {
@@ -555,10 +570,11 @@ public class ActivityBaseMap extends ActivityBase implements MapListener, MapEve
         RelatedBusListDialog dialog = new RelatedBusListDialog(this);
         dialog.setBusStop(selectedBusStopView);
         dialog.setRelatedBusList(relatedBusList);
-        busItemClickListener.setBusList(relatedBusList);
-        dialog.setOnItemClickListener(busItemClickListener);
+        dialog.setOnItemClickListener(getOnRelatedBusItemClickListener());
         dialog.show();
     }
+
+    protected abstract AdapterView.OnItemClickListener getOnRelatedBusItemClickListener();
 
     protected void turnOnLocationService(boolean forceToSetting) {
         int requestCode = forceToSetting ?

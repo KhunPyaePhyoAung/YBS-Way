@@ -1,6 +1,7 @@
 package me.khun.ybsway.activity;
 
 import android.os.Bundle;
+import android.widget.AdapterView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
@@ -11,6 +12,7 @@ import org.osmdroid.views.overlay.Marker;
 
 import me.khun.ybsway.application.YBSWayApplication;
 import me.khun.ybsway.R;
+import me.khun.ybsway.component.BusListToRoutePageItemClickListener;
 import me.khun.ybsway.component.BusStopMarker;
 import me.khun.ybsway.mapper.BusMapper;
 import me.khun.ybsway.mapper.BusStopMapper;
@@ -20,6 +22,7 @@ import me.khun.ybsway.viewmodel.BusRouteViewModel;
 
 public class ActivityBusRoute extends ActivityBaseMap implements Marker.OnMarkerClickListener {
 
+    private Bundle bundle;
     private BusMapper busMapper;
     private BusStopMapper busStopMapper;
     private BusService busService ;
@@ -54,11 +57,12 @@ public class ActivityBusRoute extends ActivityBaseMap implements Marker.OnMarker
         busRouteViewModel.getToolbarTitle().observe(this, actionBar::setTitle);
         busRouteViewModel.getBusData().observe(this, this::drawRoute);
 
-        Bundle bundle = getIntent().getExtras();
+        bundle = getIntent().getExtras();
         if ( bundle != null) {
             String routeId = bundle.getString("route_id");
             busRouteViewModel.loadBusDataByRouteId(routeId);
         }
+
     }
 
     @Override
@@ -70,4 +74,13 @@ public class ActivityBusRoute extends ActivityBaseMap implements Marker.OnMarker
             mapController.animateTo(centerGeoPoint);
         }
     }
+
+    @Override
+    protected AdapterView.OnItemClickListener getOnRelatedBusItemClickListener() {
+        BusListToRoutePageItemClickListener busItemClickListener = new BusListToRoutePageItemClickListener(this);
+        busItemClickListener.setBusList(relatedBusList);
+        busItemClickListener.postRunnable(this::finish);
+        return busItemClickListener;
+    }
+
 }

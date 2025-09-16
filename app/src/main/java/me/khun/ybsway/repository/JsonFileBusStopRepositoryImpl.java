@@ -17,7 +17,7 @@ import me.khun.ybsway.entity.Coordinate;
 
 public class JsonFileBusStopRepositoryImpl implements BusStopRepository {
 
-    private static final String FILE_NAME = "bus_stop_old.json";
+    private static final String FILE_NAME = "bus_stop.json";
     private final List<BusStop> busStopList = new LinkedList<>();
 
     private static volatile JsonFileBusStopRepositoryImpl instance = null;
