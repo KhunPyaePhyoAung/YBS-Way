@@ -60,7 +60,7 @@ public class ActivityMain extends ActivityBaseMap implements NavigationView.OnNa
         setContentView(R.layout.activity_main);
         setupMap(R.id.map_view);
         setupGpsButton(R.id.btn_gps);
-        setupRelatedBusComponent(R.id.related_bus_btn_container, R.id.btn_related_bus, R.id.badge_related_bus);
+        setupZoomButtons(R.id.btn_zoom_in, R.id.btn_zoom_out);
 
         busStopMapper = YBSWayApplication.busStopMapper;
         busStopService = YBSWayApplication.busStopService;
@@ -123,8 +123,6 @@ public class ActivityMain extends ActivityBaseMap implements NavigationView.OnNa
         busStopResultListView.setOnItemClickListener(this);
 
         getOnBackPressedDispatcher().addCallback(this, new ActivityMainOnBackPressedCallback(true));
-
-        baseMapViewModel.getRelatedBusStopData().observe(this, new RelatedBusListObserver());
 
         navigationView.setNavigationItemSelectedListener(this);
         mainViewModel.loadAllBusStopsData();
@@ -192,9 +190,8 @@ public class ActivityMain extends ActivityBaseMap implements NavigationView.OnNa
     }
 
     @Override
-    protected AdapterView.OnItemClickListener getOnRelatedBusItemClickListener() {
+    protected BusListToRoutePageItemClickListener getOnRelatedBusItemClickListener() {
         BusListToRoutePageItemClickListener busItemClickListener = new BusListToRoutePageItemClickListener(this);
-        busItemClickListener.setBusList(relatedBusList);
         return busItemClickListener;
     }
 

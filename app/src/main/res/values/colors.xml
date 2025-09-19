@@ -11,6 +11,7 @@
     <color name="secondary">#B8E1FF</color>
     <color name="secondary_dark">#85BDE6</color>
     <color name="text_primary">#FFFFFF</color>
+    <color name="text_primary_dark">#AFAFAF</color>
     <color name="text_secondary">#000000</color>
     <color name="background_primary">#FFFFF1</color>
     <color name="background_primary_light">#FFFFFA</color>
@@ -95,5 +96,10 @@
     <color name="my_location_marker_border">@color/accent</color>
     <color name="my_location_marker_bg">@color/background_primary</color>
     <color name="my_location_marker_icon">@color/primary</color>
+
+    <color name="btn_zoom_icon">@color/glass</color>
+    <color name="btn_zoom_bg">@color/background_primary</color>
+    <color name="btn_zoom_bg_pressed">@color/background_primary_dark</color>
+    <color name="btn_zoom_group_bg">@color/background_primary_dark</color>
 
 </resources>

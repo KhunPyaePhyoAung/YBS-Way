@@ -21,7 +21,7 @@
 
     <dimen name="bus_stop_list_not_found_icon_size">120dp</dimen>
 
-    <dimen name="bus_stop_info_window_name_text_size">14sp</dimen>
+    <dimen name="bus_stop_info_window_name_text_size">13sp</dimen>
     <dimen name="bus_stop_info_window_street_text_size">11sp</dimen>
     <dimen name="bus_stop_info_window_township_text_size">11sp</dimen>
     <dimen name="bus_stop_info_window_arrow_size">16dp</dimen>
@@ -61,6 +61,8 @@
     <dimen name="related_bus_icon_size">64dp</dimen>
     <dimen name="related_bus_btn_size">40dp</dimen>
     <dimen name="related_bus_btn_padding">12dp</dimen>
+    <dimen name="related_bus_badge_size">22dp</dimen>
+    <dimen name="related_bus_badge_text_size">10sp</dimen>
 
     <dimen name="dialog_related_bus_icon_size">40dp</dimen>
     <dimen name="dialog_related_bus_title_size">21sp</dimen>
@@ -71,4 +73,10 @@
     <dimen name="dialog_related_bus_item_name">20sp</dimen>
     <dimen name="dialog_related_bus_item_sub_name">9sp</dimen>
     <dimen name="dialog_related_bus_item_icon">26dp</dimen>
+
+    <dimen name="btn_zoom_size">35dp</dimen>
+    <dimen name="btn_zoom_icon">20dp</dimen>
+    <dimen name="btn_zoom_group_padding">1dp</dimen>
+    <dimen name="btn_zoom_group_corner">3dp</dimen>
+    <dimen name="btn_zoom_corner">2dp</dimen>
 </resources>

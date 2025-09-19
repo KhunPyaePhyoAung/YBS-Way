@@ -37,7 +37,7 @@ public class ActivityBusRoute extends ActivityBaseMap implements Marker.OnMarker
 
         setupMap(R.id.map_view);
         setupGpsButton(R.id.btn_gps);
-        setupRelatedBusComponent(R.id.related_bus_btn_container, R.id.btn_related_bus, R.id.badge_related_bus);
+        setupZoomButtons(R.id.btn_zoom_in, R.id.btn_zoom_out);
 
         Toolbar toolbar = findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
@@ -76,9 +76,8 @@ public class ActivityBusRoute extends ActivityBaseMap implements Marker.OnMarker
     }
 
     @Override
-    protected AdapterView.OnItemClickListener getOnRelatedBusItemClickListener() {
+    protected BusListToRoutePageItemClickListener getOnRelatedBusItemClickListener() {
         BusListToRoutePageItemClickListener busItemClickListener = new BusListToRoutePageItemClickListener(this);
-        busItemClickListener.setBusList(relatedBusList);
         busItemClickListener.postRunnable(this::finish);
         return busItemClickListener;
     }

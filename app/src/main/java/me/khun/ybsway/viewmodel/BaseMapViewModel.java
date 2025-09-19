@@ -19,7 +19,6 @@ public class BaseMapViewModel extends ViewModel {
     private BusMapper busMapper;
 
     private final MutableLiveData<BusStopView> selectedBusStopViewData = new MutableLiveData<>();
-    private final MutableLiveData<List<BusView>> relatedBusViewListData = new MutableLiveData<>();
 
     public BaseMapViewModel(BusMapper busMapper, BusService busService) {
         this.busMapper = busMapper;
@@ -32,17 +31,11 @@ public class BaseMapViewModel extends ViewModel {
 
     public void setSelectedBusStop(BusStopView busStopView) {
         selectedBusStopViewData.setValue(busStopView);
-
-        if (busStopView != null) {
-            List<Bus> busList = busService.getBusListByBusStopId(busStopView.getId());
-            relatedBusViewListData.setValue(busMapper.mapToBusViewList(busList));
-        } else {
-            relatedBusViewListData.setValue(Collections.emptyList());
-        }
     }
 
-    public LiveData<List<BusView>> getRelatedBusStopData() {
-        return relatedBusViewListData;
+    public List<BusView> getRelatedBusListByBusStopId(Integer busStopId) {
+        List<Bus> busList = busService.getBusListByBusStopId(busStopId);
+        return busMapper.mapToBusViewList(busList);
     }
 
 }

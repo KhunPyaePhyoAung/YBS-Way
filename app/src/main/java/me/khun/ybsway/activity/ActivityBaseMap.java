@@ -20,15 +20,12 @@ import android.os.Looper;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ImageButton;
-import android.widget.TextView;
 
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
+import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -71,6 +68,7 @@ import java.util.concurrent.TimeUnit;
 
 import me.khun.ybsway.R;
 import me.khun.ybsway.application.YBSWayApplication;
+import me.khun.ybsway.component.BusListToRoutePageItemClickListener;
 import me.khun.ybsway.component.BusStopInfoWindow;
 import me.khun.ybsway.component.BusStopMarker;
 import me.khun.ybsway.component.RelatedBusListDialog;
@@ -89,8 +87,11 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
     public static final double DEFAULT_MAP_ZOOM_LEVEL = 13;
     public static final double MIN_ZOOM_LEVEL = 10;
     public static final double MAX_ZOOM_LEVEL = 22;
-    public static final double PROPER_ZOOM_LEVEL = 18;
-    public static final long ZOOM_ANIMATION_SPEED = 1000L;
+    public static final double TARGET_ZOOM_LEVEL = 15;
+    public static final long FAST_ZOOM_ANIMATION_SPEED = 500L;
+    public static final long NORMAL_ZOOM_ANIMATION_SPEED = 750L;
+    public static final long SLOW_ZOOM_ANIMATION_SPEED = 1000L;
+    public static final double ZOOM_STEP = 1.5f;
     protected static final int LOCATION_PERMISSIONS_REQUEST_CODE = 1;
     protected static final int LOCATION_PERMISSIONS_FORCE_SETTING_REQUEST_CODE = 2;
     protected static final int STORAGE_PERMISSIONS_FORCE_SETTING_REQUEST_CODE = 3;
@@ -115,11 +116,9 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
     protected IMapController mapController;
     protected MyLocationNewOverlay mLocationOverlay;
     protected BusStopView selectedBusStopView;
-    protected List<BusView> relatedBusList;
-    protected View relatedBusBtnWrapper;
-    protected ImageButton btnGPS;
-    protected ImageButton btnRelatedBus;
-    protected TextView badgeRelatedBus;
+    protected AppCompatImageButton btnGPS;
+    protected AppCompatImageButton btnZoomIn;
+    protected AppCompatImageButton btnZoomOut;
     protected Drawable busStopIcon;
     protected GeoPoint mapCenterPoint;
     protected BroadcastReceiver gpsSwitchReceiver;
@@ -131,7 +130,6 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
     private final Handler mainHandler = new Handler(Looper.getMainLooper());
 
     private Runnable pendingIconUpdateRunnable;
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -163,10 +161,6 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
         baseMapViewModel.getSelectedBusStopData().observe(this, busStopView -> {
             selectedBusStopView = busStopView;
         });
-        baseMapViewModel.getRelatedBusStopData().observe(this, busViewList -> {
-            relatedBusList = busViewList;
-            syncRelatedBusData();
-        });
     }
 
     protected void setupGpsButton(@IdRes int btnGpsId) {
@@ -176,15 +170,11 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
         });
     }
 
-    protected void setupRelatedBusComponent(@IdRes int btnWrapperId, @IdRes int btnRelatedBusId, @IdRes int badgeRelatedBusId) {
-        relatedBusBtnWrapper = findViewById(btnWrapperId);
-        btnRelatedBus = findViewById(btnRelatedBusId);
-        badgeRelatedBus = findViewById(badgeRelatedBusId);
-
-        relatedBusBtnWrapper.setVisibility(View.GONE);
-        btnRelatedBus.setOnClickListener(view -> {
-            showRelatedBusListDialog();
-        });
+    protected void setupZoomButtons(@IdRes int btnZoomInId, @IdRes int btnZomOutId) {
+        btnZoomIn = findViewById(btnZoomInId);
+        btnZoomOut = findViewById(btnZomOutId);
+        btnZoomIn.setOnClickListener(view -> zoomIn(ZOOM_STEP));
+        btnZoomOut.setOnClickListener(view -> zoomOut(ZOOM_STEP));
     }
 
     protected void setupMap(@IdRes int mapViewId) {
@@ -298,6 +288,22 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
         }
 
         return busStopIconMap.get(dpUnit);
+    }
+
+    protected void zoomIn(double step) {
+        double currentZoomLevel = mapView.getZoomLevelDouble();
+        double updateZoomLevel = currentZoomLevel + Math.abs(step);
+        zoomTo(updateZoomLevel);
+    }
+
+    protected void zoomOut(double step) {
+        double currentZoomLevel = mapView.getZoomLevelDouble();
+        double updateZoomLevel = currentZoomLevel - Math.abs(step);
+        zoomTo(updateZoomLevel);
+    }
+
+    protected void zoomTo(double zoomLevel) {
+        mapController.animateTo(mapView.getMapCenter(), zoomLevel, getProperZoomAnimationSpeed());
     }
 
     protected void drawRoute(BusView busView) {
@@ -445,23 +451,31 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
 
     protected void createBusStopInfoWindowIfNull(BusStopMarker busStopMarker) {
         if (busStopMarker.getInfoWindow() == null) {
-            BusStopInfoWindow infoWindow = new BusStopInfoWindow(mapView, busStopMarker.getBusStop());
+            BusStopView busStopView = busStopMarker.getBusStop();
+            List<BusView> relatedBusViewList = baseMapViewModel.getRelatedBusListByBusStopId(busStopView.getId());
+            BusStopInfoWindow infoWindow = new BusStopInfoWindow(mapView, busStopView, relatedBusViewList);
             infoWindow.setOnClickListener(view -> onBusStopInfoWindowClicked(infoWindow));
             busStopMarker.setInfoWindow(infoWindow);
         }
     }
 
     protected void onBusStopInfoWindowClicked(BusStopInfoWindow busStopInfoWindow) {
-        showRelatedBusListDialog();
+        showRelatedBusListDialog(busStopInfoWindow.getRelatedBusList());
     }
 
     protected void onGpsButtonClick() {
         if (isLocationServiceOn()) {
             mLocationOverlay.enableFollowLocation();
-            mapController.animateTo(mLocationOverlay.getMyLocation());
+            if (mLocationOverlay.getMyLocation() != null) {
+                mapController.animateTo(mLocationOverlay.getMyLocation(), getProperZoomLevel(), getProperZoomAnimationSpeed());
+            }
         } else {
             turnOnLocationService(true);
         }
+    }
+
+    protected double getProperZoomLevel() {
+        return Math.max(TARGET_ZOOM_LEVEL, mapView.getZoomLevelDouble());
     }
 
     @Override
@@ -520,16 +534,16 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
     public boolean onMarkerClick(Marker marker, MapView mapView) {
         InfoWindow.closeAllInfoWindowsOn(mapView);
         mLocationOverlay.disableFollowLocation();
-        if (mapView.getZoomLevelDouble() > PROPER_ZOOM_LEVEL) {
-            mapController.animateTo(marker.getPosition());
-        } else {
-            mapController.animateTo(marker.getPosition(), PROPER_ZOOM_LEVEL, ZOOM_ANIMATION_SPEED);
-        }
+        long animationSpeed = getProperZoomAnimationSpeed();
 
         if (marker instanceof BusStopMarker) {
             BusStopMarker busStopMarker = (BusStopMarker) marker;
             showBusStopInfoWindow(busStopMarker);
+            showDynamicInfoWindow = false;
+            mainHandler.postDelayed(() -> showDynamicInfoWindow = true, animationSpeed);
         }
+
+        mapController.animateTo(marker.getPosition(), getProperZoomLevel(), animationSpeed);
 
         return true;
     }
@@ -541,40 +555,30 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
 
     protected void afterInfoWindowClosed() {
         showDynamicInfoWindow = false;
-        baseMapViewModel.setSelectedBusStop(null);
-        baseMapViewModel.setSelectedBusStop(null);
     }
 
     @Override
     public boolean singleTapConfirmedHelper(GeoPoint p) {
         closeAllInfoWindow();
+        baseMapViewModel.setSelectedBusStop(null);
         return true;
     }
 
     protected void afterBusStopMarkerIsShown(BusStopMarker busStopMarker) {
-        showDynamicInfoWindow = true;
         baseMapViewModel.setSelectedBusStop(busStopMarker.getBusStop());
     }
 
-    protected void syncRelatedBusData() {
-        if (relatedBusList == null || relatedBusList.isEmpty()) {
-            relatedBusBtnWrapper.setVisibility(View.GONE);
-            return;
-        }
-
-        relatedBusBtnWrapper.setVisibility(View.VISIBLE);
-        badgeRelatedBus.setText(String.format("%s", relatedBusList.size()));
-    }
-
-    protected void showRelatedBusListDialog() {
+    protected void showRelatedBusListDialog(List<BusView> relatedBusList) {
         RelatedBusListDialog dialog = new RelatedBusListDialog(this);
         dialog.setBusStop(selectedBusStopView);
         dialog.setRelatedBusList(relatedBusList);
-        dialog.setOnItemClickListener(getOnRelatedBusItemClickListener());
+        BusListToRoutePageItemClickListener onClickListener = getOnRelatedBusItemClickListener();
+        onClickListener.setBusList(relatedBusList);
+        dialog.setOnItemClickListener(onClickListener);
         dialog.show();
     }
 
-    protected abstract AdapterView.OnItemClickListener getOnRelatedBusItemClickListener();
+    protected abstract BusListToRoutePageItemClickListener getOnRelatedBusItemClickListener();
 
     protected void turnOnLocationService(boolean forceToSetting) {
         int requestCode = forceToSetting ?
@@ -708,6 +712,17 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
             }
             syncStates();
         });
+    }
+
+    protected long getProperZoomAnimationSpeed() {
+        double zoomLevel = mapView.getZoomLevelDouble();
+        if (zoomLevel >= 16) {
+            return FAST_ZOOM_ANIMATION_SPEED;
+        } else if (zoomLevel >= 13) {
+            return NORMAL_ZOOM_ANIMATION_SPEED;
+        } else {
+            return SLOW_ZOOM_ANIMATION_SPEED;
+        }
     }
 
 }
