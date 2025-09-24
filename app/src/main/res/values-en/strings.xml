@@ -25,4 +25,6 @@
     <string name="gps_prompt_error_action">Close</string>
 
     <string name="btn_close_text">Close</string>
+
+    <string name="bottom_sheet_bus_stop_list_title">Bus Stops</string>
 </resources>

@@ -25,4 +25,6 @@
     <string name="gps_prompt_error_action">閉じる</string>
 
     <string name="btn_close_text">閉じる</string>
+
+    <string name="bottom_sheet_bus_stop_list_title">バス停リスト</string>
 </resources>

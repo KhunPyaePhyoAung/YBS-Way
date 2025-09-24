@@ -58,44 +58,51 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:orientation="vertical"
-            android:background="@drawable/zoom_btn_group_bg"
-            android:padding="@dimen/btn_zoom_group_padding"
-            android:elevation="10dp"
-            app:layout_constraintBottom_toTopOf="@id/btn_gps"
-            app:layout_constraintStart_toStartOf="@id/btn_gps"
-            app:layout_constraintEnd_toEndOf="@id/btn_gps"
-            android:layout_marginBottom="@dimen/floating_button_margin_bottom">
-
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/btn_zoom_in"
-                android:layout_width="@dimen/btn_zoom_size"
-                android:layout_height="@dimen/btn_zoom_size"
-                android:background="@drawable/btn_zoom_in_bg_states"
-                android:src="@drawable/icon_btn_zoom_in"/>
-
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/btn_zoom_out"
-                android:layout_width="@dimen/btn_zoom_size"
-                android:layout_height="@dimen/btn_zoom_size"
-                android:layout_marginTop="1dp"
-                android:background="@drawable/btn_zoom_out_bg_states"
-                android:src="@drawable/icon_btn_zoom_out"/>
-        </LinearLayout>
-
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/btn_gps"
-            android:layout_width="@dimen/floating_button_size"
-            android:layout_height="@dimen/floating_button_size"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="@dimen/floating_button_margin_bottom"
+            android:gravity="center"
+            android:layout_marginBottom="@dimen/floating_button_container_margin_bottom"
             android:layout_marginEnd="@dimen/floating_button_margin_end"
-            android:elevation="10dp"
-            android:background="@drawable/gps_button_background_states"
-            android:scaleType="fitXY"
-            android:src="@drawable/gps_button_icon_states"/>
+            app:layout_constraintEnd_toEndOf="@id/map_view"
+            app:layout_constraintBottom_toBottomOf="@id/map_view">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:background="@drawable/zoom_btn_group_bg"
+                android:padding="@dimen/btn_zoom_group_padding"
+                android:elevation="10dp"
+                android:layout_marginBottom="@dimen/floating_button_margin_bottom">
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/btn_zoom_in"
+                    android:layout_width="@dimen/btn_zoom_size"
+                    android:layout_height="@dimen/btn_zoom_size"
+                    android:background="@drawable/btn_zoom_in_bg_states"
+                    android:src="@drawable/icon_btn_zoom_in"/>
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/btn_zoom_out"
+                    android:layout_width="@dimen/btn_zoom_size"
+                    android:layout_height="@dimen/btn_zoom_size"
+                    android:layout_marginTop="1dp"
+                    android:background="@drawable/btn_zoom_out_bg_states"
+                    android:src="@drawable/icon_btn_zoom_out"/>
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/btn_gps"
+                android:layout_width="@dimen/floating_button_size"
+                android:layout_height="@dimen/floating_button_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:elevation="10dp"
+                android:background="@drawable/gps_button_background_states"
+                android:scaleType="fitXY"
+                android:src="@drawable/gps_button_icon_states"/>
+
+        </LinearLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/search_container"

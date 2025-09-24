@@ -1,6 +1,7 @@
 package me.khun.ybsway.activity;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
@@ -29,7 +30,14 @@ public class ActivityBase extends AppCompatActivity {
 
     @Override
     protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(YBSWayApplication.languageConfig().wrap(newBase));
+        Configuration overrideConfiguration = new Configuration(newBase.getResources().getConfiguration());
+
+        if (overrideConfiguration.fontScale != 1.0f) {
+            overrideConfiguration.fontScale = 1.0f;
+        }
+
+        Context context = newBase.createConfigurationContext(overrideConfiguration);
+        super.attachBaseContext(YBSWayApplication.languageConfig().wrap(context));
     }
 
     @Override

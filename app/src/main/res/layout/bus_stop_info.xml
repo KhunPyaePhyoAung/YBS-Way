@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:id="@+id/township"
+                android:id="@+id/street"
                 android:textColor="@color/bus_stop_info_bubble_text"
                 android:textSize="@dimen/bus_stop_info_window_street_text_size"
                 android:textAppearance="@style/AppFont"
@@ -44,7 +44,7 @@
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:id="@+id/street"
+                android:id="@+id/township"
                 android:textColor="@color/bus_stop_info_bubble_text"
                 android:textSize="@dimen/bus_stop_info_window_township_text_size"
                 android:textAppearance="@style/AppFont"

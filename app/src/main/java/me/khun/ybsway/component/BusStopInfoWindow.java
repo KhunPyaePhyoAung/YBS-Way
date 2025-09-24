@@ -33,8 +33,8 @@ public class BusStopInfoWindow extends InfoWindow {
 
         busCountBadgeTextView.setText(String.format("%s", relatedBusList.size()));
         nameTextView.setText(String.format("%s : %s", busStop.getId(), busStop.getName()));
-        townshipTextView.setText(busStop.getTownshipName());
-        streetTextView.setText(String.format("(%s)", busStop.getRoadName()));
+        streetTextView.setText(busStop.getRoadName());
+        townshipTextView.setText(String.format("(%s)", busStop.getTownshipName()));
     }
 
     public List<BusView> getRelatedBusList() {

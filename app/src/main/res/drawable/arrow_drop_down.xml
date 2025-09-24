@@ -1,0 +1,9 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="100dp"
+    android:height="100dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:fillColor="@color/bottom_sheet_bus_stop_list_title_text_color"
+        android:pathData="M6.984 9.984h10.031l-5.016 5.016z" />
+</vector>

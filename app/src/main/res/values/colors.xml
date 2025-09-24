@@ -102,4 +102,14 @@
     <color name="btn_zoom_bg_pressed">@color/background_primary_dark</color>
     <color name="btn_zoom_group_bg">@color/background_primary_dark</color>
 
+    <color name="bottom_sheet_bus_stop_list_title_text_color">@color/text_background_primary</color>
+    <color name="bottom_sheet_bus_stop_list_title_bg">@color/background_primary_dark</color>
+    <color name="bottom_sheet_bus_stop_list_bg">@color/background_primary</color>
+    <color name="bottom_sheet_bus_stop_list_border">@color/glass</color>
+
+    <color name="compact_ordered_bus_stop_list_item_bg">@color/background_primary_light</color>
+    <color name="compact_ordered_bus_stop_list_item_icon_line">@color/bus_route</color>
+    <color name="compact_ordered_bus_stop_list_item_header">@color/text_background_primary</color>
+    <color name="compact_ordered_bus_stop_list_item_sub_header">@color/gray</color>
+    <color name="compact_ordered_bus_stop_list_item_sub_header_separator">@color/gray</color>
 </resources>

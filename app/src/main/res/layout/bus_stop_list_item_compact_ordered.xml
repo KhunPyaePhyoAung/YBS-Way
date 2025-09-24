@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/compact_ordered_bus_stop_list_item_height"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:background="@color/compact_ordered_bus_stop_list_item_bg">
+
+    <FrameLayout
+        android:layout_width="@dimen/compact_ordered_bus_stop_list_item_icon_container_width"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:weightSum="2">
+
+            <View
+                android:id="@+id/straight_line_top"
+                android:layout_width="@dimen/compact_ordered_bus_stop_list_item_icon_line_width"
+                android:layout_height="0dp"
+                android:layout_gravity="center"
+                android:background="@color/compact_ordered_bus_stop_list_item_icon_line"
+                android:layout_weight="1"/>
+
+            <View
+                android:id="@+id/straight_line_bottom"
+                android:layout_width="@dimen/compact_ordered_bus_stop_list_item_icon_line_width"
+                android:layout_height="0dp"
+                android:layout_gravity="center"
+                android:background="@color/compact_ordered_bus_stop_list_item_icon_line"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/compact_ordered_bus_stop_list_item_icon_stop_width"
+            android:layout_height="@dimen/compact_ordered_bus_stop_list_item_icon_stop_width"
+            android:layout_gravity="center"
+            android:src="@drawable/bus_stop_icon_48dp"/>
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="5dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/tv_bus_stop_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/compact_ordered_bus_stop_list_item_header_text_size"
+            android:textStyle="bold"
+            android:textColor="@color/compact_ordered_bus_stop_list_item_header"
+            android:includeFontPadding="false"
+            android:textAppearance="@style/AppFont"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/tv_road_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/compact_ordered_bus_stop_list_item_sub_header_text_size"
+                android:textColor="@color/compact_ordered_bus_stop_list_item_sub_header"
+                android:includeFontPadding="false"
+                android:textAppearance="@style/AppFont"/>
+
+            <ImageView
+                android:layout_width="@dimen/compact_ordered_bus_stop_list_item_sub_header_separator_icon_size"
+                android:layout_height="@dimen/compact_ordered_bus_stop_list_item_sub_header_separator_icon_size"
+                android:layout_marginHorizontal="2dp"
+                android:src="@drawable/road_township_separator"/>
+
+            <TextView
+                android:id="@+id/tv_township_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/compact_ordered_bus_stop_list_item_sub_header_text_size"
+                android:textColor="@color/compact_ordered_bus_stop_list_item_sub_header"
+                android:includeFontPadding="false"
+                android:textAppearance="@style/AppFont"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

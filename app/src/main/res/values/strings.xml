@@ -25,4 +25,6 @@
     <string name="gps_prompt_error_action">ပိတ်မည်</string>
 
     <string name="btn_close_text">ပိတ်မည်</string>
+
+    <string name="bottom_sheet_bus_stop_list_title">မှတ်တိုင်များ</string>
 </resources>
