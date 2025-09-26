@@ -18,7 +18,7 @@
     <string name="location_permission_required_title">တည်နေရာခွင့်ပြုချက်လိုအပ်သည်။</string>
     <string name="location_permission_required_message">ဤအပ်ပလီကေးရှင်းတွင် တည်နေရာ ခွင့်ပြုချက်လိုအပ်ပါသည်။ ခွင့်ပြုရန် အပ်လီကေးရှင်းဆက်တင်ကို ဖွင့်ချင်ပါသလား?</string>
     <string name="location_permission_required_confirm">လုပ်မည်</string>
-    <string name="location_permission_required_deny">မလုပ်ပါ</string>
+    <string name="location_permission_required_deny">မလုပ်တော့ပါ</string>
 
     <string name="gps_prompt_error_title">မမျှော်လင့်ထားသော အမှား</string>
     <string name="gps_prompt_error_message">GPS ဆက်တင်ကို ဖွင့်၍ မရပါ။ ဆက်တင်တွင် GPS ကို ဖွင့်ပါ။</string>
@@ -27,4 +27,14 @@
     <string name="btn_close_text">ပိတ်မည်</string>
 
     <string name="bottom_sheet_bus_stop_list_title">မှတ်တိုင်များ</string>
+
+    <string name="clear_search_history_confirm_title">အတည်ပြုရန်</string>
+    <string name="clear_search_history_confirm_message">ရှာဖွေမှုမှတ်တမ်းအားလုံးကိုဖျက်ချင်ပါသလား?</string>
+    <string name="clear_search_history_confirm_negative_message">မလုပ်တော့ပါ</string>
+    <string name="clear_search_history_confirm_positive_message">ဖျက်မည်</string>
+
+    <string name="search_history_title">ရှာဖွေထားသော</string>
+
+    <string name="search_result_title">ရှာဖွေမှုရလဒ်များ</string>
+    <string name="search_result_no_result">ရှာဖွေမှုရလဒ်မရှိပါ။</string>
 </resources>

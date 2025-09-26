@@ -82,6 +82,6 @@ public class CompactBusStopListAdapter extends RecyclerView.Adapter<CompactBusSt
 
     @FunctionalInterface
     public interface OnItemClickListener {
-        public void onItemClick(BusStopView busStopView, int position);
+        void onItemClick(BusStopView busStopView, int position);
     }
 }

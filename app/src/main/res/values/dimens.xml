@@ -17,7 +17,7 @@
     <dimen name="bus_stop_list_item_title_size">16sp</dimen>
     <dimen name="bus_stop_list_item_sub_title_size">12sp</dimen>
     <dimen name="bus_stop_list_divider_height">5dp</dimen>
-    <dimen name="bus_stop_list_item_sub_title_icon_size">12dp</dimen>
+    <dimen name="bus_stop_list_item_sub_title_icon_size">14dp</dimen>
 
     <dimen name="bus_stop_list_not_found_icon_size">120dp</dimen>
 
@@ -94,4 +94,12 @@
     <dimen name="compact_ordered_bus_stop_list_item_header_text_size">14sp</dimen>
     <dimen name="compact_ordered_bus_stop_list_item_sub_header_text_size">12sp</dimen>
     <dimen name="compact_ordered_bus_stop_list_item_sub_header_separator_icon_size">10dp</dimen>
+
+    <dimen name="search_history_list_item_icon_size">20dp</dimen>
+    <dimen name="search_history_list_item_text">14sp</dimen>
+
+    <dimen name="search_history_title">14sp</dimen>
+    <dimen name="search_history_clear_btn_size">30dp</dimen>
+
+    <dimen name="search_result_title">14sp</dimen>
 </resources>

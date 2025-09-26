@@ -16,7 +16,7 @@ public class BusStopListViewAdapter extends BaseAdapter {
 
     private final Context context;
     private final List<BusStopView> busViewList;
-    private View.OnClickListener onClickListener;
+    private OnItemClickListener onItemClickListener;
 
     public BusStopListViewAdapter(Context context, List<BusStopView> busViewList) {
         this.context = context;
@@ -55,10 +55,20 @@ public class BusStopListViewAdapter extends BaseAdapter {
         townshipNameTv.setText(busStopView.getTownshipName());
         roadNameTv.setText(busStopView.getRoadName());
 
-        if (onClickListener != null) {
-            view.setOnClickListener(onClickListener);
+        if (onItemClickListener != null) {
+            view.setOnClickListener(view1 -> {
+                onItemClickListener.onItemClick(busStopView, view1, i);
+            });
         }
 
         return view;
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(BusStopView busStopView, View itemView, int position);
     }
 }

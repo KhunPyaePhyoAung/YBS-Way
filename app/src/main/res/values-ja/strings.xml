@@ -27,4 +27,14 @@
     <string name="btn_close_text">閉じる</string>
 
     <string name="bottom_sheet_bus_stop_list_title">バス停リスト</string>
+
+    <string name="clear_search_history_confirm_title">確認</string>
+    <string name="clear_search_history_confirm_message">検索履歴をすべて消去しますか？</string>
+    <string name="clear_search_history_confirm_negative_message">キャンセル</string>
+    <string name="clear_search_history_confirm_positive_message">消去</string>
+
+    <string name="search_history_title">検索済み</string>
+
+    <string name="search_result_title">検索結果</string>
+    <string name="search_result_no_result">検索結果は見つかりません</string>
 </resources>

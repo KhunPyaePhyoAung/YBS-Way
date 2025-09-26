@@ -2,6 +2,7 @@ package me.khun.ybsway.application;
 
 import android.content.Context;
 
+import me.khun.ybsway.manager.BusStopSearchHistoryManager;
 import me.khun.ybsway.mapper.BusMapper;
 import me.khun.ybsway.mapper.BusStopMapper;
 import me.khun.ybsway.mapper.DefaultBusMapper;
@@ -28,6 +29,7 @@ public class YBSWayApplication extends android.app.Application {
     public static BusMapper busMapper;
     public static BusStopMapper busStopMapper;
     public static LanguageMapper languageMapper;
+    public static BusStopSearchHistoryManager busStopSearchHistoryManager;
 
     private static LanguageConfig LANGUAGE_CONFIG;
     private static YBSWayApplication instance;
@@ -44,6 +46,7 @@ public class YBSWayApplication extends android.app.Application {
         busStopMapper = new DefaultBusStopMapper(LANGUAGE_CONFIG);
         busMapper = new DefaultBusMapper(LANGUAGE_CONFIG, busStopMapper);
         languageMapper = new DefaultLanguageMapper();
+        busStopSearchHistoryManager = new BusStopSearchHistoryManager(getAppContext());
     }
 
     public static LanguageConfig languageConfig() {

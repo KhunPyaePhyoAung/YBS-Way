@@ -15,7 +15,6 @@
         <item name="android:textColorHint">@color/search_location_input_hint</item>
     </style>
     <style name="MyDialogTheme" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
-        <!-- Change background, text colors, corner radius, etc. -->
         <item name="android:background">@color/background_primary</item>
         <item name="android:textColor">@color/text_background_primary</item>
         <item name="android:textColorPrimary">@color/text_background_primary</item>

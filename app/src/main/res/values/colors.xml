@@ -80,6 +80,9 @@
 
     <color name="bus_stop_list_item_icon">@color/gray</color>
     <color name="bus_stop_list_not_found">@color/background_primary_dark</color>
+    <color name="bus_stop_list_item_bg">@color/background_primary</color>
+    <color name="bus_stop_list_item_header">@color/text_background_primary</color>
+    <color name="bus_stop_list_item_sub_header">@color/text_background_primary</color>
 
     <color name="related_bus_btn_bg">@color/primary</color>
     <color name="related_bus_btn_bg_pressed">@color/secondary</color>
@@ -112,4 +115,17 @@
     <color name="compact_ordered_bus_stop_list_item_header">@color/text_background_primary</color>
     <color name="compact_ordered_bus_stop_list_item_sub_header">@color/gray</color>
     <color name="compact_ordered_bus_stop_list_item_sub_header_separator">@color/gray</color>
+
+    <color name="search_history_list_item_text">@color/text_background_primary</color>
+    <color name="search_history_list_item_icon">@color/gray</color>
+    <color name="search_history_list_item_bg">@color/background_primary</color>
+
+    <color name="search_history_title">@color/text_background_primary</color>
+    <color name="search_history_bg">@color/background_primary</color>
+    <color name="search_history_clear_btn_icon">@color/gray</color>
+    <color name="search_history_clear_btn_bg">@android:color/transparent</color>
+    <color name="search_history_clear_btn_bg_pressed">@color/light_gray</color>
+
+    <color name="search_result_title">@color/text_background_primary</color>
+    <color name="search_result_bg">@color/background_primary</color>
 </resources>

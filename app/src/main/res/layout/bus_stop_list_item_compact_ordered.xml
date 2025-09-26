@@ -4,7 +4,7 @@
     android:layout_height="@dimen/compact_ordered_bus_stop_list_item_height"
     android:orientation="horizontal"
     android:gravity="center_vertical"
-    android:background="@color/compact_ordered_bus_stop_list_item_bg">
+    android:background="@drawable/click_action_background_primary">
 
     <FrameLayout
         android:layout_width="@dimen/compact_ordered_bus_stop_list_item_icon_container_width"

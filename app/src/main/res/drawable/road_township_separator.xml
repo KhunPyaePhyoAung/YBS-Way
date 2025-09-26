@@ -5,5 +5,5 @@
     android:viewportHeight="24">
     <path
         android:fillColor="@color/compact_ordered_bus_stop_list_item_sub_header_separator"
-        android:pathData="M13 18v-12c0-1.104-.896-2-2-2s-2 .896-2 2v12c0 1.104.896 2 2 2s2-.896 2-2z" />
+        android:pathData="M14 18v-12c0-1.104-.896-2-2-2s-2 .896-2 2v12c0 1.104.896 2 2 2s2-.896 2-2z" />
 </vector>

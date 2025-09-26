@@ -6,7 +6,7 @@
     android:padding="5dp"
     android:orientation="horizontal"
     android:elevation="5dp"
-    android:background="@color/background_primary"
+    android:background="@drawable/click_action_background_primary"
     >
 
     <RelativeLayout
@@ -33,7 +33,6 @@
         android:orientation="vertical"
         android:gravity="center"
         android:padding="2dp"
-        android:weightSum="3"
         >
 
         <LinearLayout
@@ -48,36 +47,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:textColor="@color/black"
+                android:textColor="@color/bus_stop_list_item_header"
                 android:textSize="@dimen/bus_stop_list_item_title_size"
                 android:textStyle="bold"
-                android:textAppearance="@style/AppFont"
-                android:singleLine="true"
-                />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:padding="2dp">
-
-            <ImageView
-                android:layout_width="@dimen/bus_stop_list_item_sub_title_icon_size"
-                android:layout_height="@dimen/bus_stop_list_item_sub_title_icon_size"
-                android:src="@drawable/bus_stop_list_item_road_icon"
-                />
-
-            <TextView
-                android:id="@+id/township_name_tv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:layout_marginStart="5dp"
-                android:textColor="@color/black"
-                android:textSize="@dimen/bus_stop_list_item_sub_title_size"
                 android:textAppearance="@style/AppFont"
                 android:singleLine="true"
                 />
@@ -103,7 +75,34 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:layout_marginStart="5dp"
-                android:textColor="@color/black"
+                android:textColor="@color/bus_stop_list_item_sub_header"
+                android:textSize="@dimen/bus_stop_list_item_sub_title_size"
+                android:textAppearance="@style/AppFont"
+                android:singleLine="true"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="2dp">
+
+            <ImageView
+                android:layout_width="@dimen/bus_stop_list_item_sub_title_icon_size"
+                android:layout_height="@dimen/bus_stop_list_item_sub_title_icon_size"
+                android:src="@drawable/bus_stop_list_item_township_icon"
+                />
+
+            <TextView
+                android:id="@+id/township_name_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginStart="5dp"
+                android:textColor="@color/bus_stop_list_item_sub_header"
                 android:textSize="@dimen/bus_stop_list_item_sub_title_size"
                 android:textAppearance="@style/AppFont"
                 android:singleLine="true"

@@ -1,5 +1,8 @@
 package me.khun.ybsway.activity;
 
+import static me.khun.ybsway.application.YBSWayApplication.*;
+
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +13,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -25,23 +27,22 @@ import androidx.lifecycle.Observer;
 
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
 import me.khun.ybsway.R;
-import me.khun.ybsway.application.YBSWayApplication;
 import me.khun.ybsway.component.BusListToRoutePageItemClickListener;
 import me.khun.ybsway.component.BusStopListViewAdapter;
 import me.khun.ybsway.component.BusStopMarker;
-import me.khun.ybsway.mapper.BusStopMapper;
-import me.khun.ybsway.service.BusStopService;
+import me.khun.ybsway.component.BusStopSearchHistoryAdapter;
 import me.khun.ybsway.view.BusStopView;
 import me.khun.ybsway.view.BusView;
 import me.khun.ybsway.viewmodel.MainViewModel;
 
-public class ActivityMain extends ActivityBaseMap implements NavigationView.OnNavigationItemSelectedListener, AdapterView.OnItemClickListener {
-    private BusStopMapper busStopMapper;
-    private BusStopService busStopService;
+public class ActivityMain extends ActivityBaseMap implements NavigationView.OnNavigationItemSelectedListener, BusStopListViewAdapter.OnItemClickListener {
+
+    private MainViewModel.Dependencies mainViewModelDependencies;
     private MainViewModel mainViewModel;
     private DrawerLayout drawerLayout;
     private LinearLayout loadingContainer;
@@ -49,10 +50,14 @@ public class ActivityMain extends ActivityBaseMap implements NavigationView.OnNa
     private ImageButton btnNavToggle;
     private ImageButton searchRouteButton;
     private ImageButton btnClearSearch;
+    private ImageButton btnClearBusStopSearchHistory;
     private ImageView ivBusStopSearchNotFound;
     private NavigationView navigationView;
     private View searchView;
+    private LinearLayout busStopResultContainer;
+    private LinearLayout busStopHistoryContainer;
     private ListView busStopResultListView;
+    private ListView busStopSearchHistoryListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,10 +67,11 @@ public class ActivityMain extends ActivityBaseMap implements NavigationView.OnNa
         setupGpsButton(R.id.btn_gps);
         setupZoomButtons(R.id.btn_zoom_in, R.id.btn_zoom_out);
 
-        busStopMapper = YBSWayApplication.busStopMapper;
-        busStopService = YBSWayApplication.busStopService;
-
-        mainViewModel = new MainViewModel(busStopMapper, busStopService);
+        mainViewModelDependencies = new MainViewModel.Dependencies();
+        mainViewModelDependencies.busStopMapper = busStopMapper;
+        mainViewModelDependencies.busStopService = busStopService;
+        mainViewModelDependencies.busStopSearchHistoryManager = busStopSearchHistoryManager;
+        mainViewModel = new MainViewModel(mainViewModelDependencies);
         mainViewModel.getAllBusStopsData().observe(this, this::onBusStopsLoaded);
 
         searchView = findViewById(R.id.search_container);
@@ -75,8 +81,12 @@ public class ActivityMain extends ActivityBaseMap implements NavigationView.OnNa
         btnNavToggle = findViewById(R.id.btn_nav_toggle);
         searchRouteButton = findViewById(R.id.btn_search_route);
         btnClearSearch = findViewById(R.id.btn_clear_search);
+        btnClearBusStopSearchHistory = findViewById(R.id.btn_clear_bus_stop_search_history);
         loadingContainer = findViewById(R.id.loading_container);
+        busStopResultContainer = findViewById(R.id.bus_stop_result_container);
+        busStopHistoryContainer = findViewById(R.id.bus_stop_history_container);
         busStopResultListView = findViewById(R.id.bus_stop_result_list_view);
+        busStopSearchHistoryListView = findViewById(R.id.bus_stop_search_history_list_view);
         ivBusStopSearchNotFound = findViewById(R.id.iv_not_found);
 
         navigationView.setVisibility(View.VISIBLE);
@@ -95,6 +105,7 @@ public class ActivityMain extends ActivityBaseMap implements NavigationView.OnNa
         busStopInput.setOnFocusChangeListener((view, hasFocus) -> {
             if (hasFocus) {
                 showSearchOverlay();
+                searchBusStop();
             }
         });
 
@@ -112,7 +123,12 @@ public class ActivityMain extends ActivityBaseMap implements NavigationView.OnNa
         busStopInput.addTextChangedListener(new BusStopSearchInputTextWatcher());
 
         btnClearSearch.setOnClickListener(view -> {
+            busStopInput.requestFocus();
             busStopInput.getText().clear();
+        });
+
+        btnClearBusStopSearchHistory.setOnClickListener(view -> {
+            showClearBusStopHistoryConfirmDialog();
         });
 
         searchRouteButton.setOnClickListener(view -> {
@@ -120,12 +136,27 @@ public class ActivityMain extends ActivityBaseMap implements NavigationView.OnNa
             searchBusStop();
         });
 
-        busStopResultListView.setOnItemClickListener(this);
-
         getOnBackPressedDispatcher().addCallback(this, new ActivityMainOnBackPressedCallback(true));
 
         navigationView.setNavigationItemSelectedListener(this);
+
+        BusStopSearchHistoryAdapter searchHistoryAdapter = new BusStopSearchHistoryAdapter(this, Collections.emptyList());
+        searchHistoryAdapter.setOnItemClickListener((searchText, itemView, position) -> {
+            busStopInput.setText(searchText);
+        });
+        busStopSearchHistoryListView.setAdapter(searchHistoryAdapter);
+
+        mainViewModel.getBusStopSearchHistoryData().observe(this, strings -> {
+            if (strings.isEmpty()) {
+                busStopHistoryContainer.setVisibility(View.GONE);
+            } else {
+                busStopHistoryContainer.setVisibility(View.VISIBLE);
+            }
+            searchHistoryAdapter.changeData(strings);
+        });
+
         mainViewModel.loadAllBusStopsData();
+        mainViewModel.loadBusStopSearchHistory();
     }
 
     private void showSearchOverlay() {
@@ -206,11 +237,13 @@ public class ActivityMain extends ActivityBaseMap implements NavigationView.OnNa
     }
 
     @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+    public void onItemClick(BusStopView busStopView, View itemView, int position) {
         hideSearchOverlay();
-        int busStopId = (int) adapterView.getItemIdAtPosition(i);
         for (BusStopMarker mk : busStopMarkerList) {
-            if (Objects.equals(busStopId, mk.getBusStop().getId())) {
+            if (Objects.equals(busStopView.getId(), mk.getBusStop().getId())) {
+                String searchText = String.format("%s %s %s", busStopView.getName(), busStopView.getRoadName(), busStopView.getTownshipName());
+                busStopInput.setText(searchText);
+                mainViewModel.addBusStopSearchHistory(searchText);
                 onMarkerClick(mk, mapView);
                 return;
             }
@@ -218,9 +251,37 @@ public class ActivityMain extends ActivityBaseMap implements NavigationView.OnNa
     }
 
     private void searchBusStop() {
-        List<BusStopView> busStopViewList = mainViewModel.searchStops(busStopInput.getText().toString());
-        busStopResultListView.setAdapter(new BusStopListViewAdapter(ActivityMain.this, busStopViewList));
-        ivBusStopSearchNotFound.setVisibility(busStopViewList.isEmpty() ? View.VISIBLE : View.GONE);
+        String keyword = busStopInput.getText().toString();
+        if (keyword.isEmpty() && busStopSearchHistoryManager.getHistory().isEmpty()) {
+            busStopResultContainer.setVisibility(View.GONE);
+            busStopHistoryContainer.setVisibility(View.GONE);
+            ivBusStopSearchNotFound.setVisibility(View.VISIBLE);
+        } else if (keyword.isEmpty()) {
+            busStopResultContainer.setVisibility(View.GONE);
+            busStopHistoryContainer.setVisibility(View.VISIBLE);
+            ivBusStopSearchNotFound.setVisibility(View.GONE);
+        } else {
+            List<BusStopView> busStopViewList = mainViewModel.searchStops(keyword);
+            BusStopListViewAdapter busStopListAdapter = new BusStopListViewAdapter(ActivityMain.this, busStopViewList);
+            busStopListAdapter.setOnItemClickListener(this);
+            busStopResultListView.setAdapter(busStopListAdapter);
+            busStopResultContainer.setVisibility(View.VISIBLE);
+            busStopHistoryContainer.setVisibility(View.GONE);
+            ivBusStopSearchNotFound.setVisibility(View.GONE);
+        }
+
+    }
+
+    private void showClearBusStopHistoryConfirmDialog() {
+        new AlertDialog.Builder(this, R.style.MyDialogTheme)
+                .setTitle(R.string.clear_search_history_confirm_title)
+                .setMessage(R.string.clear_search_history_confirm_message)
+                .setPositiveButton(R.string.clear_search_history_confirm_positive_message, (dialog, which) -> {
+                    mainViewModel.clearBusStopSearchHistory();
+                })
+                .setNegativeButton(R.string.clear_search_history_confirm_negative_message, (dialog, which) -> dialog.dismiss())
+                .setCancelable(false)
+                .show();
     }
 
     private class BusStopSearchInputTextWatcher implements TextWatcher {

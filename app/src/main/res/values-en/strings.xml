@@ -27,4 +27,15 @@
     <string name="btn_close_text">Close</string>
 
     <string name="bottom_sheet_bus_stop_list_title">Bus Stops</string>
+
+    <string name="clear_search_history_confirm_title">Confirm</string>
+    <string name="clear_search_history_confirm_message">Clear all search history?</string>
+    <string name="clear_search_history_confirm_negative_message">Cancel</string>
+    <string name="clear_search_history_confirm_positive_message">Clear</string>
+
+    <string name="search_history_title">Recent</string>
+
+    <string name="search_result_title">Search results</string>
+    <string name="search_result_no_result">No search results</string>
+
 </resources>
