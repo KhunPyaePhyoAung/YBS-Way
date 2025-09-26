@@ -1,74 +1,87 @@
 package me.khun.ybsway.component;
 
-import android.content.Context;
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.Collections;
 import java.util.List;
 
 import me.khun.ybsway.R;
 import me.khun.ybsway.view.BusStopView;
 
-public class BusStopListViewAdapter extends BaseAdapter {
+public class BusStopListViewAdapter extends RecyclerView.Adapter<BusStopListViewAdapter.BusStopViewHolder> {
 
-    private final Context context;
-    private final List<BusStopView> busViewList;
-    private OnItemClickListener onItemClickListener;
+    private List<BusStopView> busStopViewList;
+    private ItemClickListener itemClickListener;
 
-    public BusStopListViewAdapter(Context context, List<BusStopView> busViewList) {
-        this.context = context;
-        this.busViewList = busViewList;
+    public BusStopListViewAdapter() {
+        this(Collections.emptyList());
+    }
+
+    public BusStopListViewAdapter(List<BusStopView> busStopViewList) {
+        this.busStopViewList = busStopViewList;
+    }
+
+    @NonNull
+    @Override
+    public BusStopViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.bus_stop_list_item, parent, false);
+        return new BusStopViewHolder(itemView);
     }
 
     @Override
-    public int getCount() {
-        return busViewList.size();
-    }
+    public void onBindViewHolder(@NonNull BusStopViewHolder holder, int position) {
+        BusStopView busStopView = busStopViewList.get(position);
+        holder.tvBusStopName.setText(busStopView.getName());
+        holder.tvRoadName.setText(busStopView.getRoadName());
+        holder.tvTownshipName.setText(busStopView.getTownshipName());
 
-    @Override
-    public Object getItem(int i) {
-        return busViewList.get(i);
-    }
-
-    @Override
-    public long getItemId(int i) {
-        return busViewList.get(i).getId();
-    }
-
-    @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
-
-        if (view == null) {
-            view = LayoutInflater.from(context).inflate(R.layout.bus_stop_list_item, null);
-        }
-
-        BusStopView busStopView = busViewList.get(i);
-
-        TextView busStopNameTv = view.findViewById(R.id.bus_stop_name_tv);
-        TextView townshipNameTv = view.findViewById(R.id.township_name_tv);
-        TextView roadNameTv = view.findViewById(R.id.road_name_tv);
-
-        busStopNameTv.setText(busStopView.getName());
-        townshipNameTv.setText(busStopView.getTownshipName());
-        roadNameTv.setText(busStopView.getRoadName());
-
-        if (onItemClickListener != null) {
-            view.setOnClickListener(view1 -> {
-                onItemClickListener.onItemClick(busStopView, view1, i);
+        if (itemClickListener != null) {
+            holder.itemView.setOnClickListener(view -> {
+                itemClickListener.onItemClick(busStopView, view, position);
             });
+        } else {
+            holder.itemView.setOnClickListener(null);
         }
-
-        return view;
     }
 
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
-        this.onItemClickListener = onItemClickListener;
+    @Override
+    public int getItemCount() {
+        return busStopViewList.size();
     }
 
-    public interface OnItemClickListener {
+    @SuppressLint("NotifyDataSetChanged")
+    public void changeData(List<BusStopView> busStopViewList) {
+        this.busStopViewList = busStopViewList;
+        notifyDataSetChanged();
+    }
+
+    public void setOnItemClickListener(ItemClickListener itemClickListener) {
+        this.itemClickListener = itemClickListener;
+    }
+
+    public static class BusStopViewHolder extends RecyclerView.ViewHolder {
+
+        private final TextView tvBusStopName;
+        private final TextView tvRoadName;
+        private final TextView tvTownshipName;
+
+        public BusStopViewHolder(@NonNull View itemView) {
+            super(itemView);
+
+            tvBusStopName = itemView.findViewById(R.id.bus_stop_name_tv);
+            tvRoadName = itemView.findViewById(R.id.road_name_tv);
+            tvTownshipName = itemView.findViewById(R.id.township_name_tv);
+        }
+    }
+
+    public interface ItemClickListener {
         void onItemClick(BusStopView busStopView, View itemView, int position);
     }
 }

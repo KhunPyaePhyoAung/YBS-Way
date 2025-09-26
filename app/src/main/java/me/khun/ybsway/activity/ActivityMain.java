@@ -24,6 +24,9 @@ import androidx.annotation.NonNull;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.Observer;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -40,7 +43,7 @@ import me.khun.ybsway.view.BusStopView;
 import me.khun.ybsway.view.BusView;
 import me.khun.ybsway.viewmodel.MainViewModel;
 
-public class ActivityMain extends ActivityBaseMap implements NavigationView.OnNavigationItemSelectedListener, BusStopListViewAdapter.OnItemClickListener {
+public class ActivityMain extends ActivityBaseMap implements NavigationView.OnNavigationItemSelectedListener {
 
     private MainViewModel.Dependencies mainViewModelDependencies;
     private MainViewModel mainViewModel;
@@ -56,8 +59,9 @@ public class ActivityMain extends ActivityBaseMap implements NavigationView.OnNa
     private View searchView;
     private LinearLayout busStopResultContainer;
     private LinearLayout busStopHistoryContainer;
-    private ListView busStopResultListView;
+    private RecyclerView busStopResultRecyclerView;
     private ListView busStopSearchHistoryListView;
+    private BusStopListViewAdapter busStopListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +89,7 @@ public class ActivityMain extends ActivityBaseMap implements NavigationView.OnNa
         loadingContainer = findViewById(R.id.loading_container);
         busStopResultContainer = findViewById(R.id.bus_stop_result_container);
         busStopHistoryContainer = findViewById(R.id.bus_stop_history_container);
-        busStopResultListView = findViewById(R.id.bus_stop_result_list_view);
+        busStopResultRecyclerView = findViewById(R.id.bus_stop_result_rc);
         busStopSearchHistoryListView = findViewById(R.id.bus_stop_search_history_list_view);
         ivBusStopSearchNotFound = findViewById(R.id.iv_not_found);
 
@@ -139,6 +143,19 @@ public class ActivityMain extends ActivityBaseMap implements NavigationView.OnNa
         getOnBackPressedDispatcher().addCallback(this, new ActivityMainOnBackPressedCallback(true));
 
         navigationView.setNavigationItemSelectedListener(this);
+
+        busStopListAdapter = new BusStopListViewAdapter();
+        busStopListAdapter.setOnItemClickListener(this::onBusStopResultItemClick);
+
+
+        busStopResultRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(
+                this,
+                DividerItemDecoration.VERTICAL
+        );
+        dividerItemDecoration.setDrawable(getResources().getDrawable(R.drawable.bus_stop_search_result_list_divider));
+        busStopResultRecyclerView.addItemDecoration(dividerItemDecoration);
+        busStopResultRecyclerView.setAdapter(busStopListAdapter);
 
         BusStopSearchHistoryAdapter searchHistoryAdapter = new BusStopSearchHistoryAdapter(this, Collections.emptyList());
         searchHistoryAdapter.setOnItemClickListener((searchText, itemView, position) -> {
@@ -236,8 +253,7 @@ public class ActivityMain extends ActivityBaseMap implements NavigationView.OnNa
         drawBusStops(busStopViewList);
     }
 
-    @Override
-    public void onItemClick(BusStopView busStopView, View itemView, int position) {
+    public void onBusStopResultItemClick(BusStopView busStopView, View itemView, int position) {
         hideSearchOverlay();
         for (BusStopMarker mk : busStopMarkerList) {
             if (Objects.equals(busStopView.getId(), mk.getBusStop().getId())) {
@@ -262,9 +278,8 @@ public class ActivityMain extends ActivityBaseMap implements NavigationView.OnNa
             ivBusStopSearchNotFound.setVisibility(View.GONE);
         } else {
             List<BusStopView> busStopViewList = mainViewModel.searchStops(keyword);
-            BusStopListViewAdapter busStopListAdapter = new BusStopListViewAdapter(ActivityMain.this, busStopViewList);
-            busStopListAdapter.setOnItemClickListener(this);
-            busStopResultListView.setAdapter(busStopListAdapter);
+            busStopListAdapter.changeData(busStopViewList);
+            busStopResultRecyclerView.setAdapter(busStopListAdapter);
             busStopResultContainer.setVisibility(View.VISIBLE);
             busStopHistoryContainer.setVisibility(View.GONE);
             ivBusStopSearchNotFound.setVisibility(View.GONE);

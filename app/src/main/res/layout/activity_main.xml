@@ -199,14 +199,13 @@
 
                 </FrameLayout>
 
-                <ListView
-                    android:id="@+id/bus_stop_result_list_view"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/bus_stop_result_rc"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:dividerHeight="@dimen/bus_stop_list_divider_height"
                     android:clipToPadding="false"
                     android:paddingTop="10dp"
-                    android:paddingBottom="10dp"/>
+                    android:paddingBottom="10dp" />
 
             </LinearLayout>
 

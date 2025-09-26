@@ -16,7 +16,7 @@ import me.khun.ybsway.view.BusStopView;
 public class CompactBusStopListAdapter extends RecyclerView.Adapter<CompactBusStopListAdapter.CompactBusStopListViewHolder> {
 
     private final List<BusStopView> busStopViewList;
-    private OnItemClickListener onItemClickListener;
+    private ItemClickListener itemClickListener;
 
     public CompactBusStopListAdapter(List<BusStopView> busStopViewList) {
         this.busStopViewList = busStopViewList;
@@ -45,11 +45,13 @@ public class CompactBusStopListAdapter extends RecyclerView.Adapter<CompactBusSt
             holder.straightLineBottom.setVisibility(View.INVISIBLE);
         }
 
-        holder.itemView.setOnClickListener(view -> {
-            if (onItemClickListener != null) {
-                onItemClickListener.onItemClick(busStopView, position);
-            }
-        });
+        if (itemClickListener != null) {
+            holder.itemView.setOnClickListener(view -> {
+                itemClickListener.onItemClick(busStopView, view, position);
+            });
+        } else {
+            holder.itemView.setOnClickListener(null);
+        }
 
     }
 
@@ -58,8 +60,8 @@ public class CompactBusStopListAdapter extends RecyclerView.Adapter<CompactBusSt
         return busStopViewList.size();
     }
 
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
-        this.onItemClickListener = onItemClickListener;
+    public void setOnItemClickListener(ItemClickListener itemClickListener) {
+        this.itemClickListener = itemClickListener;
     }
 
     public static class CompactBusStopListViewHolder extends RecyclerView.ViewHolder {
@@ -81,7 +83,7 @@ public class CompactBusStopListAdapter extends RecyclerView.Adapter<CompactBusSt
     }
 
     @FunctionalInterface
-    public interface OnItemClickListener {
-        void onItemClick(BusStopView busStopView, int position);
+    public interface ItemClickListener {
+        void onItemClick(BusStopView busStopView, View itemView, int position);
     }
 }

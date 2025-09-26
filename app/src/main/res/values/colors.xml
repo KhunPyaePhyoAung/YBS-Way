@@ -128,4 +128,5 @@
 
     <color name="search_result_title">@color/text_background_primary</color>
     <color name="search_result_bg">@color/background_primary</color>
+    <color name="search_result_divider">@android:color/transparent</color>
 </resources>

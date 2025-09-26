@@ -139,7 +139,7 @@ public class ActivityBusRoute extends ActivityBaseMap implements Marker.OnMarker
         busRouteViewModel.getBusData().observe(this, busView -> {
             drawRoute(busView);
             CompactBusStopListAdapter adapter = new CompactBusStopListAdapter(busView.getBusStopViewList());
-            adapter.setOnItemClickListener((busStopView, position) -> {
+            adapter.setOnItemClickListener((busStopView, itemView, position) -> {
                 for (BusStopMarker marker : busStopMarkerList) {
                     BusStopView markerStop = marker.getBusStop();
                     if (Objects.equals(markerStop.getId(), busStopView.getId())) {
