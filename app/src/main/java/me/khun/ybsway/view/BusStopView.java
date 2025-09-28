@@ -59,6 +59,10 @@ public class BusStopView {
         return coordinate;
     }
 
+    public String formatText() {
+        return String.format("%s %s %s", name, roadName, townshipName);
+    }
+
     @Override
     public boolean equals(@Nullable Object obj) {
         if (!(obj instanceof BusStopView)) {
@@ -71,4 +75,5 @@ public class BusStopView {
     public int hashCode() {
         return id.hashCode();
     }
+
 }

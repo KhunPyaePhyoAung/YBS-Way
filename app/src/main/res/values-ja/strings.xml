@@ -9,7 +9,9 @@
     <string name="toolbar_back_button_description">戻る</string>
     <string name="nav_header_sub_title">ybsway@gmail.com</string>
     <string name="ybs_data_loading_message">YBS データを準備中…</string>
-    <string name="search_location_input_hint">バス停を探す</string>
+    <string name="search_location_input_hint_1">バス停を探す</string>
+    <string name="search_location_input_hint_2">バス停  道  郡区</string>
+    <string name="search_location_input_hint_3">Hledan Insein Road Kamayut</string>
     <string name="app_about_title">アプリについて</string>
     <string name="app_about_body">YBS Way はヤンゴン・バス・サービスのためのシンプルな経路検索アプリです。ユーザーがヤンゴンで最も速く、便利なバス経路を見つけるのに役立ちます。</string>
     <string name="app_developer_title">開発者</string>
@@ -36,5 +38,5 @@
     <string name="search_history_title">検索済み</string>
 
     <string name="search_result_title">検索結果</string>
-    <string name="search_result_no_result">検索結果は見つかりません</string>
+    <string name="search_result_no_bus_stop">バス停が見つかりません。</string>
 </resources>

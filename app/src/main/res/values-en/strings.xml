@@ -9,7 +9,9 @@
     <string name="toolbar_back_button_description">Go Back</string>
     <string name="nav_header_sub_title">ybsway@gmail.com</string>
     <string name="ybs_data_loading_message">Preparing YBS data…</string>
-    <string name="search_location_input_hint">Find a bus stop</string>
+    <string name="search_location_input_hint_1">Find a bus stop</string>
+    <string name="search_location_input_hint_2">Bus Stop Road Township</string>
+    <string name="search_location_input_hint_3">Hledan Insein Road Kamayut</string>
     <string name="app_about_title">About</string>
     <string name="app_about_body">YBS Way is a simple route-finding app for Yangon Bus Service. It helps users find the fastest and most convenient bus routes in Yangon.</string>
     <string name="app_developer_title">Developed By</string>
@@ -36,6 +38,6 @@
     <string name="search_history_title">Recent</string>
 
     <string name="search_result_title">Search results</string>
-    <string name="search_result_no_result">No search results</string>
+    <string name="search_result_no_bus_stop">No bus stop found.</string>
 
 </resources>

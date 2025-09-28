@@ -120,13 +120,16 @@
     <color name="search_history_list_item_icon">@color/gray</color>
     <color name="search_history_list_item_bg">@color/background_primary</color>
 
-    <color name="search_history_title">@color/text_background_primary</color>
+    <color name="search_history_title">@color/accent_light</color>
+    <color name="search_history_title_bar_bg">@color/background_primary</color>
     <color name="search_history_bg">@color/background_primary</color>
     <color name="search_history_clear_btn_icon">@color/gray</color>
     <color name="search_history_clear_btn_bg">@android:color/transparent</color>
     <color name="search_history_clear_btn_bg_pressed">@color/light_gray</color>
 
-    <color name="search_result_title">@color/text_background_primary</color>
+    <color name="search_result_title">@color/accent_light</color>
+    <color name="search_result_title_bar_bg">@color/background_primary</color>
     <color name="search_result_bg">@color/background_primary</color>
     <color name="search_result_divider">@android:color/transparent</color>
+    <color name="search_result_no_result_text">@color/gray</color>
 </resources>

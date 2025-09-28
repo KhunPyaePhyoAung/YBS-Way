@@ -9,6 +9,8 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.khun.ybsway.view.BusStopSearchHistoryItem;
+
 public class BusStopSearchHistoryManager {
 
     private static final String PREFS_NAME = "search_prefs";
@@ -23,14 +25,14 @@ public class BusStopSearchHistoryManager {
         gson = new Gson();
     }
 
-    public void addSearchQuery(String query) {
-        List<String> history = getHistory();
+    public void addSearchQuery(BusStopSearchHistoryItem item) {
+        List<BusStopSearchHistoryItem> history = getHistory();
 
         // Remove if already exists (avoid duplicates)
-        history.remove(query);
+        history.remove(item);
 
         // Add at the top
-        history.add(0, query);
+        history.add(0, item);
 
         // Keep only latest MAX_HISTORY items
         if (history.size() > MAX_HISTORY) {
@@ -40,16 +42,16 @@ public class BusStopSearchHistoryManager {
         saveHistory(history);
     }
 
-    public List<String> getHistory() {
+    public List<BusStopSearchHistoryItem> getHistory() {
         String json = prefs.getString(KEY_HISTORY, null);
         if (json == null) {
             return new ArrayList<>();
         }
-        Type type = new TypeToken<List<String>>(){}.getType();
+        Type type = new TypeToken<List<BusStopSearchHistoryItem>>(){}.getType();
         return gson.fromJson(json, type);
     }
 
-    private void saveHistory(List<String> history) {
+    private void saveHistory(List<BusStopSearchHistoryItem> history) {
         String json = gson.toJson(history);
         prefs.edit().putString(KEY_HISTORY, json).apply();
     }

@@ -5,7 +5,7 @@
     android:paddingVertical="10dp"
     android:paddingHorizontal="20dp"
     android:orientation="horizontal"
-    android:elevation="5dp"
+    android:elevation="2dp"
     android:background="@drawable/click_action_background_primary"
     android:gravity="center_vertical">
 

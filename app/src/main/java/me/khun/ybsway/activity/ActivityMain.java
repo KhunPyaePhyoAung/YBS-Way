@@ -18,6 +18,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
@@ -39,6 +40,8 @@ import me.khun.ybsway.component.BusListToRoutePageItemClickListener;
 import me.khun.ybsway.component.BusStopListViewAdapter;
 import me.khun.ybsway.component.BusStopMarker;
 import me.khun.ybsway.component.BusStopSearchHistoryAdapter;
+import me.khun.ybsway.view.BusStopSearchHistoryItem;
+import me.khun.ybsway.view.BusStopSearchState;
 import me.khun.ybsway.view.BusStopView;
 import me.khun.ybsway.view.BusView;
 import me.khun.ybsway.viewmodel.MainViewModel;
@@ -55,6 +58,8 @@ public class ActivityMain extends ActivityBaseMap implements NavigationView.OnNa
     private ImageButton btnClearSearch;
     private ImageButton btnClearBusStopSearchHistory;
     private ImageView ivBusStopSearchNotFound;
+    private TextView tvBusStopSearchResultTitle;
+    private TextView tvNoBusStopFound;
     private NavigationView navigationView;
     private View searchView;
     private LinearLayout busStopResultContainer;
@@ -62,6 +67,7 @@ public class ActivityMain extends ActivityBaseMap implements NavigationView.OnNa
     private RecyclerView busStopResultRecyclerView;
     private ListView busStopSearchHistoryListView;
     private BusStopListViewAdapter busStopListAdapter;
+    private BusStopSearchHintProvider busStopSearchHintProvider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,8 +97,14 @@ public class ActivityMain extends ActivityBaseMap implements NavigationView.OnNa
         busStopHistoryContainer = findViewById(R.id.bus_stop_history_container);
         busStopResultRecyclerView = findViewById(R.id.bus_stop_result_rc);
         busStopSearchHistoryListView = findViewById(R.id.bus_stop_search_history_list_view);
+        tvBusStopSearchResultTitle = findViewById(R.id.tv_bus_stop_search_result_title);
+        tvNoBusStopFound = findViewById(R.id.tv_no_bus_stop_found);
         ivBusStopSearchNotFound = findViewById(R.id.iv_not_found);
 
+        busStopSearchHintProvider = new BusStopSearchHintProvider();
+        busStopSearchHintProvider.setConsumer(s -> {
+            busStopInput.setHint(s);
+        });
         navigationView.setVisibility(View.VISIBLE);
         busStopInput.setEnabled(false);
         searchRouteButton.setEnabled(false);
@@ -129,6 +141,7 @@ public class ActivityMain extends ActivityBaseMap implements NavigationView.OnNa
         btnClearSearch.setOnClickListener(view -> {
             busStopInput.requestFocus();
             busStopInput.getText().clear();
+            searchBusStop();
         });
 
         btnClearBusStopSearchHistory.setOnClickListener(view -> {
@@ -147,7 +160,6 @@ public class ActivityMain extends ActivityBaseMap implements NavigationView.OnNa
         busStopListAdapter = new BusStopListViewAdapter();
         busStopListAdapter.setOnItemClickListener(this::onBusStopResultItemClick);
 
-
         busStopResultRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(
                 this,
@@ -158,22 +170,30 @@ public class ActivityMain extends ActivityBaseMap implements NavigationView.OnNa
         busStopResultRecyclerView.setAdapter(busStopListAdapter);
 
         BusStopSearchHistoryAdapter searchHistoryAdapter = new BusStopSearchHistoryAdapter(this, Collections.emptyList());
-        searchHistoryAdapter.setOnItemClickListener((searchText, itemView, position) -> {
-            busStopInput.setText(searchText);
+        searchHistoryAdapter.setOnItemClickListener((searchItem, itemView, position) -> {
+            onBusStopSearchHistoryItemClicked(searchItem);
         });
         busStopSearchHistoryListView.setAdapter(searchHistoryAdapter);
 
-        mainViewModel.getBusStopSearchHistoryData().observe(this, strings -> {
-            if (strings.isEmpty()) {
+        mainViewModel.getBusStopSearchStateData().observe(this, this::onBusStopSearchResultStateChanged);
+
+        mainViewModel.getBusStopSearchHistoryData().observe(this, searchHistoryItems -> {
+            if (searchHistoryItems.isEmpty()) {
                 busStopHistoryContainer.setVisibility(View.GONE);
             } else {
                 busStopHistoryContainer.setVisibility(View.VISIBLE);
             }
-            searchHistoryAdapter.changeData(strings);
+            searchHistoryAdapter.changeData(searchHistoryItems);
         });
 
         mainViewModel.loadAllBusStopsData();
         mainViewModel.loadBusStopSearchHistory();
+    }
+
+    private void onBusStopSearchHistoryItemClicked(BusStopSearchHistoryItem searchItem) {
+        BusStopView busStopView = searchItem.getBusStopView();
+        viewBusStopOnMap(busStopView);
+        mainViewModel.addBusStopSearchHistory(searchItem);
     }
 
     private void showSearchOverlay() {
@@ -184,6 +204,7 @@ public class ActivityMain extends ActivityBaseMap implements NavigationView.OnNa
         searchView.setVisibility(View.VISIBLE);
         searchView.setAlpha(0f);
         searchView.animate().alpha(1f).setDuration(300).start();
+        busStopSearchHistoryListView.smoothScrollToPosition(0);
     }
 
     private void hideSearchOverlay() {
@@ -253,38 +274,59 @@ public class ActivityMain extends ActivityBaseMap implements NavigationView.OnNa
         drawBusStops(busStopViewList);
     }
 
-    public void onBusStopResultItemClick(BusStopView busStopView, View itemView, int position) {
+    private void onBusStopResultItemClick(BusStopView busStopView, View itemView, int position) {
+        viewBusStopOnMap(busStopView);
+        String searchText = busStopView.formatText();
+        busStopInput.setText(searchText);
+        mainViewModel.addBusStopSearchHistory(new BusStopSearchHistoryItem(busStopView));
+    }
+
+    private void viewBusStopOnMap(BusStopView busStopView) {
         hideSearchOverlay();
         for (BusStopMarker mk : busStopMarkerList) {
             if (Objects.equals(busStopView.getId(), mk.getBusStop().getId())) {
-                String searchText = String.format("%s %s %s", busStopView.getName(), busStopView.getRoadName(), busStopView.getTownshipName());
-                busStopInput.setText(searchText);
-                mainViewModel.addBusStopSearchHistory(searchText);
                 onMarkerClick(mk, mapView);
                 return;
             }
         }
     }
 
-    private void searchBusStop() {
-        String keyword = busStopInput.getText().toString();
-        if (keyword.isEmpty() && busStopSearchHistoryManager.getHistory().isEmpty()) {
-            busStopResultContainer.setVisibility(View.GONE);
-            busStopHistoryContainer.setVisibility(View.GONE);
-            ivBusStopSearchNotFound.setVisibility(View.VISIBLE);
-        } else if (keyword.isEmpty()) {
-            busStopResultContainer.setVisibility(View.GONE);
-            busStopHistoryContainer.setVisibility(View.VISIBLE);
-            ivBusStopSearchNotFound.setVisibility(View.GONE);
-        } else {
-            List<BusStopView> busStopViewList = mainViewModel.searchStops(keyword);
-            busStopListAdapter.changeData(busStopViewList);
-            busStopResultRecyclerView.setAdapter(busStopListAdapter);
-            busStopResultContainer.setVisibility(View.VISIBLE);
-            busStopHistoryContainer.setVisibility(View.GONE);
-            ivBusStopSearchNotFound.setVisibility(View.GONE);
+    private void onBusStopSearchResultStateChanged(BusStopSearchState state) {
+        switch (state.status) {
+            case EMPTY_QUERY:
+                hideBusStopSearchResults();
+                break;
+            case NO_RESULTS:
+                showNoBusStopSearchResults();
+                break;
+            case RESULTS:
+                showBusStopSearchResults(state.results);
+                break;
         }
+    }
 
+    private void searchBusStop() {
+        String query = busStopInput.getText().toString();
+        mainViewModel.searchBusStops(query);
+        busStopResultRecyclerView.scrollToPosition(0);
+    }
+
+    private void hideBusStopSearchResults() {
+        busStopResultContainer.setVisibility(View.GONE);
+    }
+
+    private void showNoBusStopSearchResults() {
+        busStopListAdapter.changeData(Collections.emptyList());
+        busStopResultContainer.setVisibility(View.VISIBLE);
+        tvBusStopSearchResultTitle.setVisibility(View.GONE);
+        tvNoBusStopFound.setVisibility(View.VISIBLE);
+    }
+
+    private void showBusStopSearchResults(List<BusStopView> searchResults) {
+        busStopListAdapter.changeData(searchResults);
+        busStopResultContainer.setVisibility(View.VISIBLE);
+        tvBusStopSearchResultTitle.setVisibility(View.VISIBLE);
+        tvNoBusStopFound.setVisibility(View.GONE);
     }
 
     private void showClearBusStopHistoryConfirmDialog() {
@@ -334,20 +376,4 @@ public class ActivityMain extends ActivityBaseMap implements NavigationView.OnNa
         }
     }
 
-    private class RelatedBusListObserver implements Observer<List<BusView>> {
-
-        @Override
-        public void onChanged(List<BusView> busViews) {
-            if (busViews.isEmpty()) {
-                System.out.println("No related bus");
-            } else {
-                System.out.println("Related bus list:");
-                for (BusView bv : busViews) {
-                    System.out.print(bv.getName());
-                    System.out.print(",");
-                }
-                System.out.println();
-            }
-        }
-    }
 }

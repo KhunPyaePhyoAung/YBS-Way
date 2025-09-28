@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:padding="5dp"
     android:orientation="horizontal"
-    android:elevation="5dp"
+    android:elevation="3dp"
     android:background="@drawable/click_action_background_primary"
     >
 

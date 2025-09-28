@@ -69,14 +69,15 @@ public class BusStopServiceImpl implements BusStopService {
         keyword = keyword.toLowerCase().trim();
         String[] tokens = keyword.split("\\s+");
 
-        for (String token : tokens) {
-            for (BusStop bs : sourceList) {
-                int nameMmRatio = FuzzySearch.partialRatio(token, bs.getNameMM().toLowerCase());
-                int nameEnRatio = FuzzySearch.partialRatio(token, bs.getNameEN().toLowerCase());
-                int roadNameMmRatio = FuzzySearch.partialRatio(token, bs.getRoadNameMM().toLowerCase());
-                int roadNameEnRatio = FuzzySearch.partialRatio(token, bs.getRoadNameEN().toLowerCase());
-                int townshipNameMmRatio = FuzzySearch.partialRatio(token, bs.getTownshipMM().toLowerCase());
-                int townshipNameEnRatio = FuzzySearch.partialRatio(token, bs.getTownshipEN().toLowerCase());
+
+        for (BusStop bs : sourceList) {
+            for (String token : tokens) {
+                int nameMmRatio = getRatio(bs.getNameMM().toLowerCase(), token);
+                int nameEnRatio = getRatio(bs.getNameEN().toLowerCase(), token);
+                int roadNameMmRatio = getRatio(bs.getRoadNameMM().toLowerCase(), token);
+                int roadNameEnRatio = getRatio(bs.getRoadNameEN().toLowerCase(), token);
+                int townshipNameMmRatio = getRatio(bs.getTownshipMM().toLowerCase(), token);
+                int townshipNameEnRatio = getRatio(bs.getTownshipEN().toLowerCase(), token);
 
                 int[] ratios = {nameMmRatio * 2, nameEnRatio * 2, roadNameMmRatio, roadNameEnRatio, townshipNameMmRatio, townshipNameEnRatio};
 
@@ -86,11 +87,19 @@ public class BusStopServiceImpl implements BusStopService {
 
                     int max = Arrays.stream(ratios).max().orElse(0);
                     double average = Arrays.stream(ratios).average().orElse(0);
-                    int score = (int) (max + average);
+                    int bonus = 0;
+                    if (bs.getNameMM().toLowerCase().startsWith(token)
+                            || bs.getNameEN().toLowerCase().startsWith(token)) {
+                        bonus += 100;
+                    }
+                    if (bs.getNameMM().toLowerCase().equals(token)
+                            || bs.getNameEN().toLowerCase().equals(token)) {
+                        bonus += 100;
+                    }
+                    int score = (int) (max + average + bonus);
 
                     if (resultMap.containsKey(bs)) {
                         resultMap.merge(bs, score, Integer::sum);
-
                     } else {
                         resultMap.put(bs, score);
                     }
@@ -98,8 +107,15 @@ public class BusStopServiceImpl implements BusStopService {
             }
         }
 
-
-
         return resultMap.entrySet().stream().sorted((a, b) -> b.getValue().compareTo(a.getValue())).map(Map.Entry::getKey).collect(Collectors.toList());
+    }
+
+    private int getRatio(String source, String target) {
+        int tolerence = 5;
+        if (target.length() > source.length() + tolerence) {
+            return 0;
+        }
+
+        return FuzzySearch.partialRatio(source, target);
     }
 }

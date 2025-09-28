@@ -73,6 +73,7 @@ import me.khun.ybsway.component.BusStopInfoWindow;
 import me.khun.ybsway.component.BusStopMarker;
 import me.khun.ybsway.component.RelatedBusListDialog;
 import me.khun.ybsway.entity.Coordinate;
+import me.khun.ybsway.provider.TextProvider;
 import me.khun.ybsway.view.BusStopView;
 import me.khun.ybsway.view.BusView;
 import me.khun.ybsway.viewmodel.BaseMapViewModel;
@@ -722,6 +723,31 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
             return NORMAL_ZOOM_ANIMATION_SPEED;
         } else {
             return SLOW_ZOOM_ANIMATION_SPEED;
+        }
+    }
+
+    protected class BusStopSearchHintProvider extends TextProvider {
+        private List<String> hintList = new ArrayList<>();
+        private ScheduledExecutorService scheduledExecutorService;
+        private int currentIndex = 0;
+        private final int INTERVAL_SECOND = 2;
+
+        public BusStopSearchHintProvider() {
+            hintList.add(getResources().getString(R.string.search_location_input_hint_1));
+            hintList.add(getResources().getString(R.string.search_location_input_hint_2));
+            hintList.add(getResources().getString(R.string.search_location_input_hint_3));
+
+            scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
+            scheduledExecutorService.scheduleWithFixedDelay(() -> {
+                if (hintList.isEmpty()) {
+                    return;
+                }
+                if (currentIndex >= hintList.size()) {
+                    currentIndex = 0;
+                }
+                String text = hintList.get(currentIndex++);
+                mainHandler.post(() -> provide(text));
+            }, 0, INTERVAL_SECOND, TimeUnit.SECONDS);
         }
     }
 

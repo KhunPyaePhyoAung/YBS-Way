@@ -10,14 +10,16 @@ import android.widget.TextView;
 import java.util.List;
 
 import me.khun.ybsway.R;
+import me.khun.ybsway.view.BusStopSearchHistoryItem;
+import me.khun.ybsway.view.BusStopView;
 
 public class BusStopSearchHistoryAdapter extends BaseAdapter {
 
     private Context context;
-    private List<String> searchList;
+    private List<BusStopSearchHistoryItem> searchList;
     private ItemClickListener itemClickListener;
 
-    public BusStopSearchHistoryAdapter(Context context, List<String> searchList) {
+    public BusStopSearchHistoryAdapter(Context context, List<BusStopSearchHistoryItem> searchList) {
         this.context = context;
         this.searchList = searchList;
     }
@@ -44,12 +46,13 @@ public class BusStopSearchHistoryAdapter extends BaseAdapter {
         }
 
         TextView tvSearchText = view.findViewById(R.id.tv_search_text);
-        String searchText = searchList.get(i);
-        tvSearchText.setText(searchText);
+        BusStopSearchHistoryItem searchItem = searchList.get(i);
+        BusStopView busStopView = searchItem.getBusStopView();
+        tvSearchText.setText(busStopView.formatText());
 
         if (itemClickListener != null) {
             view.setOnClickListener(view1 -> {
-                itemClickListener.onItemClick(searchText, view1, i);
+                itemClickListener.onItemClick(searchItem, view1, i);
             });
         }
 
@@ -60,12 +63,12 @@ public class BusStopSearchHistoryAdapter extends BaseAdapter {
         this.itemClickListener = itemClickListener;
     }
 
-    public void changeData(List<String> searchList) {
+    public void changeData(List<BusStopSearchHistoryItem> searchList) {
         this.searchList = searchList;
         notifyDataSetChanged();
     }
 
     public interface ItemClickListener {
-        void onItemClick(String searchText, View itemView, int position);
+        void onItemClick(BusStopSearchHistoryItem searchItem, View itemView, int position);
     }
 }

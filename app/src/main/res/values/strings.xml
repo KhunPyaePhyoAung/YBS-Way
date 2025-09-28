@@ -9,7 +9,9 @@
     <string name="toolbar_back_button_description">နောက်သို့</string>
     <string name="nav_header_sub_title">ybsway@gmail.com</string>
     <string name="ybs_data_loading_message">အချက်အလက်များတင်သွင်းနေပါသည်။</string>
-    <string name="search_location_input_hint">မှတ်တိုင်ရှာမည်</string>
+    <string name="search_location_input_hint_1">မှတ်တိုင်ရှာမည်</string>
+    <string name="search_location_input_hint_2">မှတ်တိုင် လမ်း မြို့နယ်</string>
+    <string name="search_location_input_hint_3">လှည်တန်း အင်းစိန်လမ်း ကမာရွတ် </string>
     <string name="app_about_title">အကြောင်း</string>
     <string name="app_about_body">YBS Way သည် ရန်ကုန် ဘတ်စ်စနစ်အတွက် လမ်းကြောင်းရှာဖွေရေး အပ်ပလီကေးရှင်းလေးတစ်ခု ဖြစ်သည်။ ဤအပ်ပလီကေးရှင်းသည် အသုံးပြုသူများအတွက် ရန်ကုန်ရှိ အမြန်ဆုံးနှင့် အဆင်ပြေနိုင်ဆုံး ဘတ်စ်လမ်းကြောင်းများကို ရှာဖွေရာတွင် ကူညီပေးနိုင်ပါသည်။</string>
     <string name="app_developer_title">ဖန်တီးရေးဆွဲသူ</string>
@@ -36,5 +38,5 @@
     <string name="search_history_title">ရှာဖွေထားသော</string>
 
     <string name="search_result_title">ရှာဖွေမှုရလဒ်များ</string>
-    <string name="search_result_no_result">ရှာဖွေမှုရလဒ်မရှိပါ။</string>
+    <string name="search_result_no_bus_stop">မှတ်တိုင်ရှာမတွေ့ပါ။</string>
 </resources>
