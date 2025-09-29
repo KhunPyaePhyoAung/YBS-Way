@@ -467,9 +467,6 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
     protected void onGpsButtonClick() {
         if (isLocationServiceOn()) {
             mLocationOverlay.enableFollowLocation();
-            if (mLocationOverlay.getMyLocation() != null) {
-                mapController.animateTo(mLocationOverlay.getMyLocation(), getProperZoomLevel(), getProperZoomAnimationSpeed());
-            }
         } else {
             turnOnLocationService(true);
         }
