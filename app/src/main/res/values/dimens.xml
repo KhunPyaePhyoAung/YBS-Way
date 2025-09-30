@@ -46,7 +46,7 @@
     <dimen name="about_page_icon_size">100dp</dimen>
     <dimen name="about_page_app_name_size">24sp</dimen>
     <dimen name="about_page_app_version_size">18sp</dimen>
-    <dimen name="about_page_content_title_size">20sp</dimen>
+    <dimen name="about_page_content_title_size">16sp</dimen>
     <dimen name="about_page_content_body_size">14sp</dimen>
 
     <dimen name="floating_button_size">50dp</dimen>

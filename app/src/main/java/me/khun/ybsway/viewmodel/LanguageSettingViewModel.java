@@ -21,9 +21,9 @@ public class LanguageSettingViewModel extends ViewModel {
     private final MutableLiveData<List<LanguageView>> languageListData = new MutableLiveData<>(Collections.emptyList());
     private final MutableLiveData<LanguageView> selectedLanguageData = new MutableLiveData<>();
 
-    public LanguageSettingViewModel(LanguageConfig languageConfig, LanguageMapper languageMapper) {
-        this.languageConfig = languageConfig;
-        this.languageMapper = languageMapper;
+    public LanguageSettingViewModel(Dependencies dependencies) {
+        this.languageConfig = dependencies.languageConfig;
+        this.languageMapper = dependencies.languageMapper;
     }
 
     public LiveData<List<LanguageView>> getLanguageListData() {
@@ -55,5 +55,10 @@ public class LanguageSettingViewModel extends ViewModel {
     public void setSelectedLanguageData(Language language) {
         languageConfig.setLanguage(language);
         selectedLanguageData.setValue(languageMapper.mapToLanguageView(language));
+    }
+
+    public static class Dependencies {
+        public LanguageConfig languageConfig;
+        public LanguageMapper languageMapper;
     }
 }

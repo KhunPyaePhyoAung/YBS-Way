@@ -15,7 +15,7 @@
     <string name="app_about_title">アプリについて</string>
     <string name="app_about_body">YBS Way はヤンゴン・バス・サービスのためのシンプルな経路検索アプリです。ユーザーがヤンゴンで最も速く、便利なバス経路を見つけるのに役立ちます。</string>
     <string name="app_developer_title">開発者</string>
-    <string name="app_developer_body">クン ピィッ ピョー アウン\nkhunpyaephyoaung74@gmail.com</string>
+    <string name="app_developer_body">クン ピィッ ピョー アウン</string>
 
     <string name="location_permission_required_title">位置情報の許可が必要です</string>
     <string name="location_permission_required_message">このアプリは位置情報の許可が必要です。アプリの設定を開いて有効にしますか？</string>

@@ -6,6 +6,9 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.IBinder;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,12 +21,14 @@ import me.khun.ybsway.application.LanguageConfig;
 import me.khun.ybsway.application.YBSWayApplication;
 
 public class ActivityBase extends AppCompatActivity {
+    protected InputMethodManager imm;
     private LanguageConfig languageConfig;
     private Language currentLanguage;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         languageConfig = YBSWayApplication.languageConfig();
         currentLanguage = languageConfig.getCurrentLanguage();
     }
@@ -47,6 +52,18 @@ public class ActivityBase extends AppCompatActivity {
         if (!Objects.equals(currentLanguage, newLanguage)) {
             currentLanguage = newLanguage;
             recreate();
+        }
+    }
+
+    protected void closeSoftInput(IBinder windowToken) {
+        if (imm != null) {
+            imm.hideSoftInputFromWindow(windowToken, InputMethodManager.HIDE_NOT_ALWAYS);
+        }
+    }
+
+    protected void showSoftInput(View view) {
+        if (imm != null) {
+            imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
         }
     }
 

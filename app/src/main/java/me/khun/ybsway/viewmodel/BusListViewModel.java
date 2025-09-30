@@ -13,13 +13,13 @@ import me.khun.ybsway.view.BusView;
 
 public class BusListViewModel extends ViewModel {
 
-    private BusMapper busMapper;
-    private BusService busService;
+    private final BusMapper busMapper;
+    private final BusService busService;
     private final MutableLiveData<List<BusView>> busList = new MutableLiveData<List<BusView>>();
 
-    public BusListViewModel(BusMapper busMapper, BusService busService) {
-        this.busMapper = busMapper;
-        this.busService = busService;
+    public BusListViewModel(Dependencies dependencies) {
+        this.busMapper = dependencies.busMapper;
+        this.busService = dependencies.busService;
     }
 
     public void loadBusData() {
@@ -30,5 +30,10 @@ public class BusListViewModel extends ViewModel {
 
     public LiveData<List<BusView>> getAllBusListData() {
         return busList;
+    }
+
+    public static class Dependencies {
+        public BusMapper busMapper;
+        public BusService busService;
     }
 }

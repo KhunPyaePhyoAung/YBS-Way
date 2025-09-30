@@ -127,6 +127,17 @@
                 android:background="@color/search_result_bg"
                 android:layout_marginTop="@dimen/search_list_margin_top">
 
+                <ImageView
+                    android:id="@+id/iv_not_found"
+                    android:layout_width="@dimen/bus_stop_list_not_found_icon_size"
+                    android:layout_height="@dimen/bus_stop_list_not_found_icon_size"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_gravity="center"
+                    android:src="@drawable/bus_stop_not_found_icon"/>
+
                 <LinearLayout
                     android:id="@+id/bus_stop_history_container"
                     android:layout_width="match_parent"
@@ -225,7 +236,7 @@
                     </FrameLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/bus_stop_result_rc"
+                        android:id="@+id/rc_bus_stop_search_result"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:clipToPadding="false"
@@ -236,17 +247,6 @@
 
             </FrameLayout>
 
-
-
-            <ImageView
-                android:id="@+id/iv_not_found"
-                android:layout_width="@dimen/bus_stop_list_not_found_icon_size"
-                android:layout_height="@dimen/bus_stop_list_not_found_icon_size"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:src="@drawable/bus_stop_not_found_icon"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

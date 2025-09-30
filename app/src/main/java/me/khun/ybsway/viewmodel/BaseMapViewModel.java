@@ -15,8 +15,8 @@ import me.khun.ybsway.view.BusView;
 
 public class BaseMapViewModel extends ViewModel {
 
-    private BusService busService;
-    private BusMapper busMapper;
+    private final BusService busService;
+    private final BusMapper busMapper;
 
     private final MutableLiveData<BusStopView> selectedBusStopViewData = new MutableLiveData<>();
 

@@ -61,6 +61,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Queue;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -78,7 +79,7 @@ import me.khun.ybsway.view.BusStopView;
 import me.khun.ybsway.view.BusView;
 import me.khun.ybsway.viewmodel.BaseMapViewModel;
 
-public abstract class ActivityBaseMap extends ActivityBase implements MapListener, MapEventsReceiver, Marker.OnMarkerClickListener {
+public abstract class ActivityBaseMap extends ActivityBase implements MapListener, MapEventsReceiver {
     public static final double YANGON_LATITUDE = 16.866931;
     public static final double YANGON_LONGITUDE = 96.172709;
     public static final double MAX_NORTH_LATITUDE = 18.400445;
@@ -128,7 +129,7 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
     protected volatile boolean isLoadingBusStops = false;
     protected boolean showDynamicInfoWindow = false;
 
-    private final Handler mainHandler = new Handler(Looper.getMainLooper());
+    protected final Handler mainHandler = new Handler(Looper.getMainLooper());
 
     private Runnable pendingIconUpdateRunnable;
 
@@ -159,9 +160,119 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
         busStopIconMap.put(4, AppCompatResources.getDrawable(getApplicationContext(), R.drawable.bus_stop_icon_4dp));
 
         baseMapViewModel = new BaseMapViewModel(YBSWayApplication.busMapper, YBSWayApplication.busService);
-        baseMapViewModel.getSelectedBusStopData().observe(this, busStopView -> {
-            selectedBusStopView = busStopView;
-        });
+        baseMapViewModel.getSelectedBusStopData().observe(this, this::onSelectedBusStopChanged);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        gpsSwitchReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                if (intent.getAction() != null && intent.getAction().matches(LocationManager.PROVIDERS_CHANGED_ACTION)) {
+                    syncStates();
+                }
+            }
+        };
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        registerReceiver(gpsSwitchReceiver, new IntentFilter(LocationManager.PROVIDERS_CHANGED_ACTION));
+        mapView.onResume();
+        syncStates();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        unregisterReceiver(gpsSwitchReceiver);
+        mapView.onPause();
+    }
+
+    @Override
+    public boolean onScroll(ScrollEvent event) {
+        mapCenterPoint = new GeoPoint(mapView.getMapCenter().getLatitude(), mapView.getMapCenter().getLongitude());
+        Marker newNearestMarker = findNearestMarker(mapCenterPoint, busStopMarkerList);
+
+        if (nearestMarker == newNearestMarker) {
+            return false;
+        }
+
+        nearestMarker = newNearestMarker;
+
+        if (nearestMarker != null && showDynamicInfoWindow) {
+            InfoWindow.closeAllInfoWindowsOn(mapView);
+            if (nearestMarker instanceof BusStopMarker) {
+                BusStopMarker busStopMarker = (BusStopMarker) nearestMarker;
+                showBusStopInfoWindow(busStopMarker);
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onZoom(ZoomEvent event) {
+        int zoomLevel = (int) event.getZoomLevel();
+        if (currentZoomLevel != zoomLevel) {
+            currentZoomLevel = zoomLevel;
+
+            if (pendingIconUpdateRunnable != null) {
+                mainHandler.removeCallbacks(pendingIconUpdateRunnable);
+            }
+
+            pendingIconUpdateRunnable = () -> {
+                resetBusStopIcons();
+                mapView.postInvalidateOnAnimation();
+            };
+            mainHandler.postDelayed(pendingIconUpdateRunnable, ICON_RESET_INTERVAL_MILLS);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean singleTapConfirmedHelper(GeoPoint p) {
+        closeAllInfoWindow();
+        baseMapViewModel.setSelectedBusStop(null);
+        return true;
+    }
+
+    @Override
+    public boolean longPressHelper(GeoPoint p) {
+        return false;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == LOCATION_PERMISSIONS_REQUEST_CODE) {
+            for (int result : grantResults) {
+                if (result == PackageManager.PERMISSION_DENIED) {
+                    // Permission denied → just return
+                    return;
+                }
+            }
+            // Location permission granted
+            promptEnableGpsIfOff();
+        } else if (requestCode == LOCATION_PERMISSIONS_FORCE_SETTING_REQUEST_CODE) {
+            for (int i = 0; i < permissions.length; i++) {
+                if (grantResults[i] == PackageManager.PERMISSION_DENIED) {
+                    // Permission denied
+                    if (!ActivityCompat.shouldShowRequestPermissionRationale(this, permissions[i])) {
+                        showLocationPermissionSettingsDialog();
+                    }
+                    return;
+                }
+            }
+
+            // Location permission granted
+            promptEnableGpsIfOff();
+        }
+
+        syncStates();
     }
 
     protected void setupGpsButton(@IdRes int btnGpsId) {
@@ -174,8 +285,8 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
     protected void setupZoomButtons(@IdRes int btnZoomInId, @IdRes int btnZomOutId) {
         btnZoomIn = findViewById(btnZoomInId);
         btnZoomOut = findViewById(btnZomOutId);
-        btnZoomIn.setOnClickListener(view -> zoomIn(ZOOM_STEP));
-        btnZoomOut.setOnClickListener(view -> zoomOut(ZOOM_STEP));
+        btnZoomIn.setOnClickListener(view -> onZoomInButtonClick());
+        btnZoomOut.setOnClickListener(view -> onZoomOutButtonClick());
     }
 
     protected void setupMap(@IdRes int mapViewId) {
@@ -203,7 +314,6 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
 
         FolderOverlay markerOverlay = new FolderOverlay();
         mapView.getOverlays().add(MAP_OVERLAY_SORTED_LIST.indexOf("bus_stops"), markerOverlay);
-
 
         Bitmap personBitmap = getBitmapFromDrawable(this, LOCATION_PERSON_DRAWABLE_ID, STATIC_MARKER_SIZE_IN_DP);
         Bitmap busBitmap = getBitmapFromDrawable(this, LOCATION_DIRECTION_DRAWABLE_ID, STATIC_MARKER_SIZE_IN_DP);
@@ -257,6 +367,15 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
         return busStopMarker;
     }
 
+    protected void viewBusStopOnMap(BusStopView busStopView) {
+        for (BusStopMarker mk : busStopMarkerList) {
+            if (Objects.equals(busStopView.getId(), mk.getBusStop().getId())) {
+                onBusStopMarkerClick(mk);
+                return;
+            }
+        }
+    }
+
     protected Drawable getScaledBusStopIcon(int zoomLevel) {
         int dpUnit;
 
@@ -304,7 +423,9 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
     }
 
     protected void zoomTo(double zoomLevel) {
-        mapController.animateTo(mapView.getMapCenter(), zoomLevel, getProperZoomAnimationSpeed());
+        if (mapView.getZoomLevelDouble() < MAX_ZOOM_LEVEL) {
+            mapController.animateTo(mapView.getMapCenter(), zoomLevel, getProperZoomAnimationSpeed());
+        }
     }
 
     protected void drawRoute(BusView busView) {
@@ -348,7 +469,7 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
 
         for (BusStopView bs : busStopViewList) {
             BusStopMarker busStopMarker = createBusStopMarker(bs);
-            busStopMarker.setOnMarkerClickListener(this);
+            busStopMarker.setOnMarkerClickListener((marker, mapView1) -> onBusStopMarkerClick(busStopMarker));
             markerList.add(busStopMarker);
         }
         ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
@@ -388,48 +509,6 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
         isLoadingBusStops = false;
         resetBusStopIcons();
         mapView.invalidate();
-    }
-
-    @Override
-    public boolean onScroll(ScrollEvent event) {
-        mapCenterPoint = new GeoPoint(mapView.getMapCenter().getLatitude(), mapView.getMapCenter().getLongitude());
-        Marker newNearestMarker = findNearestMarker(mapCenterPoint, busStopMarkerList);
-
-        if (nearestMarker == newNearestMarker) {
-            return false;
-        }
-
-        nearestMarker = newNearestMarker;
-
-        if (nearestMarker != null && showDynamicInfoWindow) {
-            InfoWindow.closeAllInfoWindowsOn(mapView);
-            if (nearestMarker instanceof BusStopMarker) {
-                BusStopMarker busStopMarker = (BusStopMarker) nearestMarker;
-                showBusStopInfoWindow(busStopMarker);
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public boolean onZoom(ZoomEvent event) {
-        int zoomLevel = (int) event.getZoomLevel();
-        System.out.println("Zoom Level : " + zoomLevel);
-        if (currentZoomLevel != zoomLevel) {
-            currentZoomLevel = zoomLevel;
-
-            if (pendingIconUpdateRunnable != null) {
-                mainHandler.removeCallbacks(pendingIconUpdateRunnable);
-            }
-
-            pendingIconUpdateRunnable = () -> {
-                resetBusStopIcons();
-                mapView.postInvalidateOnAnimation();
-            };
-            mainHandler.postDelayed(pendingIconUpdateRunnable, ICON_RESET_INTERVAL_MILLS);
-            return true;
-        }
-        return false;
     }
 
     protected void resetBusStopIcons() {
@@ -472,41 +551,16 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
         }
     }
 
+    protected void onZoomInButtonClick() {
+        zoomIn(ZOOM_STEP);
+    }
+
+    protected void onZoomOutButtonClick() {
+        zoomOut(ZOOM_STEP);
+    }
+
     protected double getProperZoomLevel() {
         return Math.max(TARGET_ZOOM_LEVEL, mapView.getZoomLevelDouble());
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        gpsSwitchReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                if (intent.getAction() != null && intent.getAction().matches(LocationManager.PROVIDERS_CHANGED_ACTION)) {
-                    syncStates();
-                }
-            }
-        };
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        registerReceiver(gpsSwitchReceiver, new IntentFilter(LocationManager.PROVIDERS_CHANGED_ACTION));
-        mapView.onResume();
-        syncStates();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        unregisterReceiver(gpsSwitchReceiver);
-        mapView.onPause();
-    }
-
-    @Override
-    public boolean longPressHelper(GeoPoint p) {
-        return false;
     }
 
     public Marker findNearestMarker(GeoPoint target, List<? extends Marker> markers) {
@@ -528,22 +582,22 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
         return nearest;
     }
 
-    @Override
-    public boolean onMarkerClick(Marker marker, MapView mapView) {
+    public boolean onBusStopMarkerClick(BusStopMarker busStopMarker) {
         InfoWindow.closeAllInfoWindowsOn(mapView);
         mLocationOverlay.disableFollowLocation();
         long animationSpeed = getProperZoomAnimationSpeed();
 
-        if (marker instanceof BusStopMarker) {
-            BusStopMarker busStopMarker = (BusStopMarker) marker;
-            showBusStopInfoWindow(busStopMarker);
-            showDynamicInfoWindow = false;
-            mainHandler.postDelayed(() -> showDynamicInfoWindow = true, animationSpeed);
-        }
+        showBusStopInfoWindow(busStopMarker);
+        showDynamicInfoWindow = false;
+        mainHandler.postDelayed(() -> showDynamicInfoWindow = true, animationSpeed);
 
-        mapController.animateTo(marker.getPosition(), getProperZoomLevel(), animationSpeed);
+        mapController.animateTo(busStopMarker.getPosition(), getProperZoomLevel(), animationSpeed);
 
         return true;
+    }
+
+    protected void onSelectedBusStopChanged(BusStopView newSelectedBusStopView) {
+        selectedBusStopView = newSelectedBusStopView;
     }
 
     protected void closeAllInfoWindow() {
@@ -553,13 +607,6 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
 
     protected void afterInfoWindowClosed() {
         showDynamicInfoWindow = false;
-    }
-
-    @Override
-    public boolean singleTapConfirmedHelper(GeoPoint p) {
-        closeAllInfoWindow();
-        baseMapViewModel.setSelectedBusStop(null);
-        return true;
     }
 
     protected void afterBusStopMarkerIsShown(BusStopMarker busStopMarker) {
@@ -616,37 +663,6 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
                             requestCode
                     );
         }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        if (requestCode == LOCATION_PERMISSIONS_REQUEST_CODE) {
-            for (int result : grantResults) {
-                if (result == PackageManager.PERMISSION_DENIED) {
-                    // Permission denied → just return
-                    return;
-                }
-            }
-            // Location permission granted
-            promptEnableGpsIfOff();
-        } else if (requestCode == LOCATION_PERMISSIONS_FORCE_SETTING_REQUEST_CODE) {
-            for (int i = 0; i < permissions.length; i++) {
-                if (grantResults[i] == PackageManager.PERMISSION_DENIED) {
-                    // Permission denied
-                    if (!ActivityCompat.shouldShowRequestPermissionRationale(this, permissions[i])) {
-                        showLocationPermissionSettingsDialog();
-                    }
-                    return;
-                }
-            }
-
-            // Location permission granted
-            promptEnableGpsIfOff();
-        }
-
-        syncStates();
     }
 
     protected void openLocationSettings() {
@@ -743,7 +759,7 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
                     currentIndex = 0;
                 }
                 String text = hintList.get(currentIndex++);
-                mainHandler.post(() -> provide(text));
+                provide(text);
             }, 0, INTERVAL_SECOND, TimeUnit.SECONDS);
         }
     }

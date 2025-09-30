@@ -18,19 +18,19 @@ import me.khun.ybsway.view.BusView;
 
 public class BusRouteViewModel extends ViewModel {
 
-    private BusMapper busMapper;
-    private BusStopMapper busStopMapper;
-    private BusService busService;
-    private BusStopService busStopService;
+    private final BusMapper busMapper;
+    private final BusStopMapper busStopMapper;
+    private final BusService busService;
+    private final BusStopService busStopService;
     private final MutableLiveData<BusView> busViewData = new MutableLiveData<>();
     private final MutableLiveData<List<BusStopView>> busStopListData = new MutableLiveData<>();
     private final LiveData<String> toolbarTitle;
 
-    public BusRouteViewModel(BusMapper busMapper, BusStopMapper busStopMapper, BusService busService, BusStopService busStopService) {
-        this.busMapper = busMapper;
-        this.busStopMapper = busStopMapper;
-        this.busService = busService;
-        this.busStopService = busStopService;
+    public BusRouteViewModel(Dependencies dependencies) {
+        this.busMapper = dependencies.busMapper;
+        this.busStopMapper = dependencies.busStopMapper;
+        this.busService = dependencies.busService;
+        this.busStopService = dependencies.busStopService;
         toolbarTitle = Transformations.map(busViewData, b -> String.format("%s %s %s", b.getPrefixName(), b.getName(), b.getSubName() == null ? "" : String.format("(%s)", b.getSubName())));
     }
 
@@ -48,5 +48,12 @@ public class BusRouteViewModel extends ViewModel {
 
     public LiveData<String> getToolbarTitle() {
         return toolbarTitle;
+    }
+
+    public static class Dependencies {
+        public BusMapper busMapper;
+        public BusStopMapper busStopMapper;
+        public BusService busService;
+        public BusStopService busStopService;
     }
 }
