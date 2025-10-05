@@ -56,8 +56,10 @@ import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider;
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Queue;
 import java.util.concurrent.Executors;
@@ -94,12 +96,14 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
     protected static final int LOCATION_PERMISSIONS_REQUEST_CODE = 1;
     protected static final int LOCATION_PERMISSIONS_FORCE_SETTING_REQUEST_CODE = 2;
     protected static final int STORAGE_PERMISSIONS_FORCE_SETTING_REQUEST_CODE = 3;
-    protected static final int ICON_RESET_INTERVAL_MILLS = 250;
+    protected static final int ICON_RESET_INTERVAL_MILLS = 300;
     protected static final int STATIC_MARKER_SIZE_IN_DP = 45;
     protected static final int LOCATION_PERSON_DRAWABLE_ID = R.drawable.my_location_person_icon;
     protected static final int LOCATION_DIRECTION_DRAWABLE_ID = R.drawable.my_location_bus_icon;
     protected static final int BUS_ROUTE_ROAD_LINE_WIDTH = 10;
 
+    protected final Map<Integer, Drawable> busStopIconMap = new HashMap<>();
+    protected final Map<Integer, Integer> busStopIconZoomToSizeMap = new HashMap<>();
     protected final List<BusStopMarker> busStopMarkerList = new ArrayList<>(YBSWayApplication.DEFAULT_BUS_STOP_LIST_SIZE);
     protected final List<String> MAP_OVERLAY_SORTED_LIST = List.of("event", "bus_route", "bus_stops", "my_location");
     protected final String[] LOCATION_PERMISSIONS = {
@@ -126,6 +130,7 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
     protected volatile boolean isLoadingBusStops = false;
     protected boolean showDynamicInfoWindow = false;
 
+
     protected final Handler mainHandler = new Handler(Looper.getMainLooper());
 
     private Runnable pendingIconUpdateRunnable;
@@ -141,6 +146,7 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
 
         requestPermissionsIfNecessary(STORAGE_PERMISSIONS, STORAGE_PERMISSIONS_FORCE_SETTING_REQUEST_CODE);
 
+        setupBusStopIconMap();
         baseMapViewModel = new BaseMapViewModel(YBSWayApplication.busMapper, YBSWayApplication.busService);
         baseMapViewModel.getSelectedBusStopData().observe(this, this::onSelectedBusStopChanged);
     }
@@ -313,7 +319,7 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
 
         currentZoomLevel = mapView.getZoomLevel();
         mapCenterPoint = new GeoPoint(mapView.getMapCenter().getLatitude(), mapView.getMapCenter().getLongitude());
-        busStopIcon = getScaledBusStopIcon(currentZoomLevel);
+        busStopIcon = busStopIconMap.get(currentZoomLevel);
     }
 
     protected ITileSource getTileSource() {
@@ -328,6 +334,29 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
                 ));
 
         return tileSource;
+    }
+
+    private void setupBusStopIconMap () {
+        busStopIconZoomToSizeMap.put(22, 48);
+        busStopIconZoomToSizeMap.put(21, 44);
+        busStopIconZoomToSizeMap.put(20, 40);
+        busStopIconZoomToSizeMap.put(19, 36);
+        busStopIconZoomToSizeMap.put(18, 28);
+        busStopIconZoomToSizeMap.put(17, 24);
+        busStopIconZoomToSizeMap.put(16, 20);
+        busStopIconZoomToSizeMap.put(15, 16);
+        busStopIconZoomToSizeMap.put(14, 12);
+        busStopIconZoomToSizeMap.put(13, 10);
+        busStopIconZoomToSizeMap.put(12, 6);
+        busStopIconZoomToSizeMap.put(11, 4);
+        busStopIconZoomToSizeMap.put(10, 4);
+
+        for (Map.Entry<Integer, Integer> zoomEntry : busStopIconZoomToSizeMap.entrySet()) {
+            int zoomLevel = zoomEntry.getKey();
+            int sizeInDp = zoomEntry.getValue();
+            Bitmap bitmap = getBitmapFromDrawable(this, R.drawable.bus_stop_icon, sizeInDp, sizeInDp);
+            busStopIconMap.put(zoomLevel, new BitmapDrawable(getResources(), bitmap));
+        }
     }
 
     protected BusStopMarker createBusStopMarker(BusStopView busStop) {
@@ -348,41 +377,6 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
                 return;
             }
         }
-    }
-
-    protected Drawable getScaledBusStopIcon(int zoomLevel) {
-        int dpUnit;
-
-        if (zoomLevel > 21) {
-            dpUnit = 48;
-        } else if (zoomLevel > 20) {
-            dpUnit = 44;
-        } else if (zoomLevel > 19) {
-            dpUnit = 40;
-        } else if (zoomLevel > 18) {
-            dpUnit = 36;
-        } else if (zoomLevel > 17) {
-            dpUnit = 28;
-        } else if (zoomLevel > 16) {
-            dpUnit = 24;
-        } else if (zoomLevel > 15) {
-            dpUnit = 20;
-        } else if (zoomLevel > 14) {
-            dpUnit = 16;
-        } else if (zoomLevel > 13) {
-            dpUnit = 12;
-        } else if (zoomLevel > 12) {
-            dpUnit = 10;
-        } else if (zoomLevel > 11) {
-            dpUnit = 6;
-        } else if (zoomLevel > 10) {
-            dpUnit = 4;
-        } else {
-            dpUnit = 4;
-        }
-
-        Bitmap bitmap = getBitmapFromDrawable(this, R.drawable.bus_stop_icon, dpUnit, dpUnit);
-        return new BitmapDrawable(getResources(), bitmap);
     }
 
     protected void zoomIn(double step) {
@@ -488,7 +482,7 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
             return;
         }
 
-        busStopIcon = getScaledBusStopIcon(currentZoomLevel);
+        busStopIcon = busStopIconMap.get(currentZoomLevel);
 
         for (BusStopMarker busStopMarker : busStopMarkerList) {
             busStopMarker.setIcon(busStopIcon);
