@@ -41,7 +41,7 @@
             android:layout_width="@dimen/compact_ordered_bus_stop_list_item_icon_stop_width"
             android:layout_height="@dimen/compact_ordered_bus_stop_list_item_icon_stop_width"
             android:layout_gravity="center"
-            android:src="@drawable/bus_stop_icon_48dp"/>
+            android:src="@drawable/bus_stop_icon"/>
 
     </FrameLayout>
 

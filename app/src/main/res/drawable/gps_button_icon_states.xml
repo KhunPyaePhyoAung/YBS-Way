@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <item
+        android:state_activated="true"
+        android:state_selected="true"
+        android:drawable="@drawable/gps_follow" />
+
     <!-- State: button is "on" -->
-    <item android:state_activated="true" android:drawable="@drawable/gps_active" />
+    <item
+        android:state_activated="true"
+        android:drawable="@drawable/gps_active" />
+
+
+
 
     <!-- State: button is "off" -->
     <item android:drawable="@drawable/gps_inactive" />

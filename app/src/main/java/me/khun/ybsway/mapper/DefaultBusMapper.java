@@ -10,7 +10,7 @@ import me.khun.ybsway.view.BusView;
 
 public class DefaultBusMapper implements BusMapper {
 
-    private static final int AIRPLANE_ICON = R.drawable.aeroplane;
+    private static final int AIRPLANE_ICON = R.drawable.bus_list_item_plane;
     private final BusStopMapper busStopMapper;
     private final LanguageConfig languageConfig;
 

@@ -17,7 +17,7 @@
         <ImageView
             android:layout_width="@dimen/dialog_related_bus_icon_size"
             android:layout_height="@dimen/dialog_related_bus_icon_size"
-            android:src="@drawable/bus_stop_icon_48dp"/>
+            android:src="@drawable/bus_stop_icon"/>
 
         <TextView
             android:id="@+id/tv_bus_stop_name"

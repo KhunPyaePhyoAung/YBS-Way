@@ -20,7 +20,7 @@
         <ImageView
             android:layout_width="@dimen/bus_stop_list_icon_size"
             android:layout_height="@dimen/bus_stop_list_icon_size"
-            android:src="@drawable/bus_stop_icon_48dp"
+            android:src="@drawable/bus_stop_icon"
             android:layout_centerInParent="true"
             android:elevation="10dp" />
 

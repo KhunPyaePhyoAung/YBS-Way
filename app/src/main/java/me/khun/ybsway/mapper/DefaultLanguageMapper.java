@@ -20,9 +20,9 @@ public class DefaultLanguageMapper implements LanguageMapper {
     private final Map<Language, Integer> languageFlagMap = new HashMap<>();
 
     public DefaultLanguageMapper() {
-        languageFlagMap.put(BURMESE, R.drawable.myanmar_round_icon);
-        languageFlagMap.put(ENGLISH, R.drawable.united_kingdom_round_icon);
-        languageFlagMap.put(JAPANESE, R.drawable.japan_round_icon);
+        languageFlagMap.put(BURMESE, R.drawable.myanmar_flag);
+        languageFlagMap.put(ENGLISH, R.drawable.uk_flag);
+        languageFlagMap.put(JAPANESE, R.drawable.japan_flag);
     }
 
     @Override

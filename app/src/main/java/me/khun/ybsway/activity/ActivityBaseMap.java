@@ -9,8 +9,8 @@ import android.content.IntentFilter;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.location.LocationManager;
 import android.net.Uri;
@@ -24,7 +24,6 @@ import android.provider.Settings;
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -57,10 +56,8 @@ import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider;
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Queue;
 import java.util.concurrent.Executors;
@@ -100,9 +97,9 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
     protected static final int ICON_RESET_INTERVAL_MILLS = 250;
     protected static final int STATIC_MARKER_SIZE_IN_DP = 45;
     protected static final int LOCATION_PERSON_DRAWABLE_ID = R.drawable.my_location_person_icon;
-    protected static final int LOCATION_DIRECTION_DRAWABLE_ID = R.drawable.my_location_bus_icon_1;
+    protected static final int LOCATION_DIRECTION_DRAWABLE_ID = R.drawable.my_location_bus_icon;
+    protected static final int BUS_ROUTE_ROAD_LINE_WIDTH = 10;
 
-    protected final Map<Integer, Drawable> busStopIconMap = new HashMap<>();
     protected final List<BusStopMarker> busStopMarkerList = new ArrayList<>(YBSWayApplication.DEFAULT_BUS_STOP_LIST_SIZE);
     protected final List<String> MAP_OVERLAY_SORTED_LIST = List.of("event", "bus_route", "bus_stops", "my_location");
     protected final String[] LOCATION_PERMISSIONS = {
@@ -116,7 +113,7 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
     protected BaseMapViewModel baseMapViewModel;
     protected MapView mapView;
     protected IMapController mapController;
-    protected MyLocationNewOverlay mLocationOverlay;
+    protected MyLocationNewOverlay locationOverlay;
     protected BusStopView selectedBusStopView;
     protected AppCompatImageButton btnGPS;
     protected AppCompatImageButton btnZoomIn;
@@ -144,21 +141,6 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
 
         requestPermissionsIfNecessary(STORAGE_PERMISSIONS, STORAGE_PERMISSIONS_FORCE_SETTING_REQUEST_CODE);
 
-        busStopIconMap.put(48, AppCompatResources.getDrawable(getApplicationContext(), R.drawable.bus_stop_icon_48dp));
-        busStopIconMap.put(44, AppCompatResources.getDrawable(getApplicationContext(), R.drawable.bus_stop_icon_44dp));
-        busStopIconMap.put(40, AppCompatResources.getDrawable(getApplicationContext(), R.drawable.bus_stop_icon_40dp));
-        busStopIconMap.put(36, AppCompatResources.getDrawable(getApplicationContext(), R.drawable.bus_stop_icon_36dp));
-        busStopIconMap.put(32, AppCompatResources.getDrawable(getApplicationContext(), R.drawable.bus_stop_icon_32dp));
-        busStopIconMap.put(28, AppCompatResources.getDrawable(getApplicationContext(), R.drawable.bus_stop_icon_28dp));
-        busStopIconMap.put(24, AppCompatResources.getDrawable(getApplicationContext(), R.drawable.bus_stop_icon_24dp));
-        busStopIconMap.put(20, AppCompatResources.getDrawable(getApplicationContext(), R.drawable.bus_stop_icon_20dp));
-        busStopIconMap.put(16, AppCompatResources.getDrawable(getApplicationContext(), R.drawable.bus_stop_icon_16dp));
-        busStopIconMap.put(12, AppCompatResources.getDrawable(getApplicationContext(), R.drawable.bus_stop_icon_12dp));
-        busStopIconMap.put(10, AppCompatResources.getDrawable(getApplicationContext(), R.drawable.bus_stop_icon_10dp));
-        busStopIconMap.put(8, AppCompatResources.getDrawable(getApplicationContext(), R.drawable.bus_stop_icon_8dp));
-        busStopIconMap.put(6, AppCompatResources.getDrawable(getApplicationContext(), R.drawable.bus_stop_icon_6dp));
-        busStopIconMap.put(4, AppCompatResources.getDrawable(getApplicationContext(), R.drawable.bus_stop_icon_4dp));
-
         baseMapViewModel = new BaseMapViewModel(YBSWayApplication.busMapper, YBSWayApplication.busService);
         baseMapViewModel.getSelectedBusStopData().observe(this, this::onSelectedBusStopChanged);
     }
@@ -170,7 +152,7 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
             @Override
             public void onReceive(Context context, Intent intent) {
                 if (intent.getAction() != null && intent.getAction().matches(LocationManager.PROVIDERS_CHANGED_ACTION)) {
-                    syncStates();
+                    syncGpsButtonStates();
                 }
             }
         };
@@ -181,7 +163,7 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
         super.onResume();
         registerReceiver(gpsSwitchReceiver, new IntentFilter(LocationManager.PROVIDERS_CHANGED_ACTION));
         mapView.onResume();
-        syncStates();
+        syncGpsButtonStates();
     }
 
     @Override
@@ -193,11 +175,12 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
 
     @Override
     public boolean onScroll(ScrollEvent event) {
+        syncGpsButtonStates();
         mapCenterPoint = new GeoPoint(mapView.getMapCenter().getLatitude(), mapView.getMapCenter().getLongitude());
         Marker newNearestMarker = findNearestMarker(mapCenterPoint, busStopMarkerList);
 
         if (nearestMarker == newNearestMarker) {
-            return false;
+            return true;
         }
 
         nearestMarker = newNearestMarker;
@@ -227,20 +210,22 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
                 mapView.postInvalidateOnAnimation();
             };
             mainHandler.postDelayed(pendingIconUpdateRunnable, ICON_RESET_INTERVAL_MILLS);
-            return true;
         }
-        return false;
+        syncGpsButtonStates();
+        return true;
     }
 
     @Override
     public boolean singleTapConfirmedHelper(GeoPoint p) {
         closeAllInfoWindow();
         baseMapViewModel.setSelectedBusStop(null);
+        syncGpsButtonStates();
         return true;
     }
 
     @Override
     public boolean longPressHelper(GeoPoint p) {
+        syncGpsButtonStates();
         return false;
     }
 
@@ -272,7 +257,7 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
             promptEnableGpsIfOff();
         }
 
-        syncStates();
+        syncGpsButtonStates();
     }
 
     protected void setupGpsButton(@IdRes int btnGpsId) {
@@ -315,27 +300,16 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
         FolderOverlay markerOverlay = new FolderOverlay();
         mapView.getOverlays().add(MAP_OVERLAY_SORTED_LIST.indexOf("bus_stops"), markerOverlay);
 
-        Bitmap personBitmap = getBitmapFromDrawable(this, LOCATION_PERSON_DRAWABLE_ID, STATIC_MARKER_SIZE_IN_DP);
-        Bitmap busBitmap = getBitmapFromDrawable(this, LOCATION_DIRECTION_DRAWABLE_ID, STATIC_MARKER_SIZE_IN_DP);
+        Bitmap personBitmap = getBitmapFromDrawable(this, LOCATION_PERSON_DRAWABLE_ID, STATIC_MARKER_SIZE_IN_DP, STATIC_MARKER_SIZE_IN_DP);
+        Bitmap busBitmap = getBitmapFromDrawable(this, LOCATION_DIRECTION_DRAWABLE_ID, STATIC_MARKER_SIZE_IN_DP, STATIC_MARKER_SIZE_IN_DP);
 
-        Drawable drawable = AppCompatResources.getDrawable(this, LOCATION_DIRECTION_DRAWABLE_ID);
-
-        float density = this.getResources().getDisplayMetrics().density;
-        int sizeLInPx = (int) (46 * density);
-        int sizeHInPx = (int) (23 * density);
-
-        Bitmap bitmap = Bitmap.createBitmap(sizeHInPx, sizeLInPx, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmap);
-        drawable.setBounds(0, 0, sizeHInPx, sizeLInPx);
-        drawable.draw(canvas);
-
-        mLocationOverlay = new MyLocationNewOverlay(new GpsMyLocationProvider(this), mapView);
-        mLocationOverlay.enableMyLocation();
-        mLocationOverlay.setPersonIcon(personBitmap);
-        mLocationOverlay.setPersonAnchor(0.5f, 1f);
-        mLocationOverlay.setDirectionIcon(bitmap);
-        mLocationOverlay.setDirectionAnchor(0.5f, 0.5f);
-        mapView.getOverlays().add(MAP_OVERLAY_SORTED_LIST.indexOf("my_location"), mLocationOverlay);
+        locationOverlay = new MyLocationNewOverlay(new GpsMyLocationProvider(this), mapView);
+        locationOverlay.enableMyLocation();
+        locationOverlay.setPersonIcon(personBitmap);
+        locationOverlay.setPersonAnchor(0.5f, 1f);
+        locationOverlay.setDirectionIcon(busBitmap);
+        locationOverlay.setDirectionAnchor(0.5f, 0.5f);
+        mapView.getOverlays().add(MAP_OVERLAY_SORTED_LIST.indexOf("my_location"), locationOverlay);
 
         currentZoomLevel = mapView.getZoomLevel();
         mapCenterPoint = new GeoPoint(mapView.getMapCenter().getLatitude(), mapView.getMapCenter().getLongitude());
@@ -407,7 +381,8 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
             dpUnit = 4;
         }
 
-        return busStopIconMap.get(dpUnit);
+        Bitmap bitmap = getBitmapFromDrawable(this, R.drawable.bus_stop_icon, dpUnit, dpUnit);
+        return new BitmapDrawable(getResources(), bitmap);
     }
 
     protected void zoomIn(double step) {
@@ -423,9 +398,7 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
     }
 
     protected void zoomTo(double zoomLevel) {
-        if (mapView.getZoomLevelDouble() < MAX_ZOOM_LEVEL) {
-            mapController.animateTo(mapView.getMapCenter(), zoomLevel, getProperZoomAnimationSpeed());
-        }
+        mapController.animateTo(mapView.getMapCenter(), zoomLevel, getProperZoomAnimationSpeed());
     }
 
     protected void drawRoute(BusView busView) {
@@ -433,11 +406,10 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
             return;
         }
 
-        int roadWidth = 15;
         int roadColor = getResources().getColor(R.color.bus_route);
 
         Polyline roadOverlay = (Polyline) mapView.getOverlays().get(MAP_OVERLAY_SORTED_LIST.indexOf("bus_route"));
-        roadOverlay.getOutlinePaint().setStrokeWidth(roadWidth);
+        roadOverlay.getOutlinePaint().setStrokeWidth(BUS_ROUTE_ROAD_LINE_WIDTH);
         roadOverlay.getOutlinePaint().setColor(roadColor);
         roadOverlay.getOutlinePaint().setStrokeJoin(Paint.Join.ROUND);
 
@@ -517,6 +489,7 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
         }
 
         busStopIcon = getScaledBusStopIcon(currentZoomLevel);
+
         for (BusStopMarker busStopMarker : busStopMarkerList) {
             busStopMarker.setIcon(busStopIcon);
             busStopMarker.resetAnchor(0.5f, 0f);
@@ -545,10 +518,11 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
 
     protected void onGpsButtonClick() {
         if (isLocationServiceOn()) {
-            mLocationOverlay.enableFollowLocation();
+            locationOverlay.enableFollowLocation();
         } else {
             turnOnLocationService(true);
         }
+        syncGpsButtonStates();
     }
 
     protected void onZoomInButtonClick() {
@@ -584,7 +558,7 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
 
     public boolean onBusStopMarkerClick(BusStopMarker busStopMarker) {
         InfoWindow.closeAllInfoWindowsOn(mapView);
-        mLocationOverlay.disableFollowLocation();
+        locationOverlay.disableFollowLocation();
         long animationSpeed = getProperZoomAnimationSpeed();
 
         showBusStopInfoWindow(busStopMarker);
@@ -634,16 +608,17 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
         if (isLocationPermissionGranted()) {
             promptEnableGpsIfOff();
         }
-        syncStates();
+        syncGpsButtonStates();
     }
 
-    protected void syncStates() {
+    protected void syncGpsButtonStates() {
         if (isLocationServiceOn()) {
             btnGPS.setActivated(true);
-            mLocationOverlay.enableMyLocation();
+            if (locationOverlay.getMyLocation() != null) {
+                btnGPS.setSelected(locationOverlay.isFollowLocationEnabled());
+            }
         } else {
             btnGPS.setActivated(false);
-            mLocationOverlay.disableMyLocation();
         }
     }
 
@@ -724,7 +699,7 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
                             .show();
                 }
             }
-            syncStates();
+            syncGpsButtonStates();
         });
     }
 

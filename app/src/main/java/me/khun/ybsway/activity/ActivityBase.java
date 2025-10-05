@@ -67,16 +67,17 @@ public class ActivityBase extends AppCompatActivity {
         }
     }
 
-    protected static Bitmap getBitmapFromDrawable(Context context, int drawableId, int sizeInDp) {
+    protected static Bitmap getBitmapFromDrawable(Context context, int drawableId, int widthInDp, int heightInDp) {
         Drawable drawable = AppCompatResources.getDrawable(context, drawableId);
         if (drawable == null) return null;
 
         float density = context.getResources().getDisplayMetrics().density;
-        int sizeInPx = (int) (sizeInDp * density);
+        int widthInPx = (int) (widthInDp * density);
+        int heightInPx = (int) (heightInDp * density);
 
-        Bitmap bitmap = Bitmap.createBitmap(sizeInPx, sizeInPx, Bitmap.Config.ARGB_8888);
+        Bitmap bitmap = Bitmap.createBitmap(widthInPx, heightInPx, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
-        drawable.setBounds(0, 0, sizeInPx, sizeInPx);
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
         drawable.draw(canvas);
 
         return bitmap;

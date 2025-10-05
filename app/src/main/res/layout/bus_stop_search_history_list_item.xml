@@ -21,14 +21,22 @@
 
     </FrameLayout>
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_search_text"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:gravity="center_vertical"
-        android:textSize="@dimen/search_history_list_item_text"
-        android:textColor="@color/search_history_list_item_text"
-        android:textAppearance="@style/AppFont"/>
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_bus_stop_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/search_history_list_item_text"
+            android:textColor="@color/search_history_list_item_text"
+            android:textAppearance="@style/AppFont"/>
+
+    </LinearLayout>
 
 </LinearLayout>

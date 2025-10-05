@@ -5,7 +5,7 @@
     android:layout_height="@dimen/bus_list_item_height"
     android:orientation="horizontal"
     android:elevation="10dp"
-    android:background="@color/background_primary"
+    android:background="@drawable/click_action_background_primary"
 >
 
     <RelativeLayout
@@ -68,7 +68,7 @@
         <ImageView
             android:layout_width="@dimen/bus_list_item_trip_icon_size"
             android:layout_height="@dimen/bus_list_item_trip_icon_size"
-            android:src="@drawable/more_vertical"
+            android:src="@drawable/bus_route_between"
         />
 
         <ImageView

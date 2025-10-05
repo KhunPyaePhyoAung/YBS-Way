@@ -45,10 +45,10 @@ public class BusStopSearchHistoryAdapter extends BaseAdapter {
             view = LayoutInflater.from(context).inflate(R.layout.bus_stop_search_history_list_item, null);
         }
 
-        TextView tvSearchText = view.findViewById(R.id.tv_search_text);
+        TextView tvBusStopName = view.findViewById(R.id.tv_bus_stop_name);
         BusStopSearchHistoryItem searchItem = searchList.get(i);
         BusStopView busStopView = searchItem.getBusStopView();
-        tvSearchText.setText(busStopView.formatText());
+        tvBusStopName.setText(busStopView.formatText());
 
         if (itemClickListener != null) {
             view.setOnClickListener(view1 -> {

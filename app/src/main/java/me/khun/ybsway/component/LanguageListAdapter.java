@@ -60,7 +60,7 @@ public class LanguageListAdapter extends BaseAdapter {
         if (Objects.equals(selectedPosition, i)) {
             view.setBackgroundResource(R.color.language_list_item_selected);
         } else {
-            view.setBackgroundResource(R.color.language_list_item);
+            view.setBackgroundResource(R.drawable.click_action_background_primary);
         }
 
         return view;
