@@ -33,6 +33,35 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:background="@drawable/map_action_container_bg"
+        android:padding="@dimen/btn_zoom_group_padding"
+        android:elevation="10dp"
+        android:layout_marginTop="@dimen/floating_button_margin_bottom"
+        android:layout_marginEnd="@dimen/floating_button_margin_end"
+        app:layout_constraintTop_toBottomOf="@id/tool_bar"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btn_yps_toggle"
+            android:layout_width="@dimen/btn_map_action"
+            android:layout_height="@dimen/btn_map_action"
+            android:background="@drawable/btn_map_action_first_bg_states"
+            android:src="@drawable/icon_yps_states"/>
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btn_anchor_toggle"
+            android:layout_width="@dimen/btn_map_action"
+            android:layout_height="@dimen/btn_map_action"
+            android:layout_marginTop="1dp"
+            android:background="@drawable/btn_map_action_last_bg_states"
+            android:src="@drawable/icon_bus_stop_info_anchor_states"/>
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/fab_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -48,24 +77,24 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical"
-            android:background="@drawable/zoom_btn_group_bg"
+            android:background="@drawable/map_action_container_bg"
             android:padding="@dimen/btn_zoom_group_padding"
             android:elevation="10dp"
             android:layout_marginBottom="@dimen/floating_button_margin_bottom">
 
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/btn_zoom_in"
-                android:layout_width="@dimen/btn_zoom_size"
-                android:layout_height="@dimen/btn_zoom_size"
-                android:background="@drawable/btn_zoom_in_bg_states"
+                android:layout_width="@dimen/btn_map_action"
+                android:layout_height="@dimen/btn_map_action"
+                android:background="@drawable/btn_map_action_first_bg_states"
                 android:src="@drawable/icon_btn_zoom_in"/>
 
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/btn_zoom_out"
-                android:layout_width="@dimen/btn_zoom_size"
-                android:layout_height="@dimen/btn_zoom_size"
+                android:layout_width="@dimen/btn_map_action"
+                android:layout_height="@dimen/btn_map_action"
                 android:layout_marginTop="1dp"
-                android:background="@drawable/btn_zoom_out_bg_states"
+                android:background="@drawable/btn_map_action_last_bg_states"
                 android:src="@drawable/icon_btn_zoom_out"/>
         </LinearLayout>
 

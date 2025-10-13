@@ -19,8 +19,8 @@ import org.osmdroid.util.GeoPoint;
 
 import java.util.Objects;
 
-import me.khun.ybsway.application.YBSWayApplication;
 import me.khun.ybsway.R;
+import me.khun.ybsway.application.YBSWayApplication;
 import me.khun.ybsway.component.BusListToRoutePageItemClickListener;
 import me.khun.ybsway.component.BusStopMarker;
 import me.khun.ybsway.component.CompactBusStopListAdapter;
@@ -59,6 +59,7 @@ public class ActivityBusRoute extends ActivityBaseMap {
 
     private void initViews() {
         setupMap(R.id.map_view);
+        setupActionToggleButtons(R.id.btn_yps_toggle, R.id.btn_anchor_toggle);
         setupGpsButton(R.id.btn_gps);
         setupZoomButtons(R.id.btn_zoom_in, R.id.btn_zoom_out);
 

@@ -119,6 +119,8 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
     protected IMapController mapController;
     protected MyLocationNewOverlay locationOverlay;
     protected BusStopView selectedBusStopView;
+    protected AppCompatImageButton btnYps;
+    protected AppCompatImageButton btnAnchor;
     protected AppCompatImageButton btnGPS;
     protected AppCompatImageButton btnZoomIn;
     protected AppCompatImageButton btnZoomOut;
@@ -129,7 +131,6 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
     protected int currentZoomLevel;
     protected volatile boolean isLoadingBusStops = false;
     protected boolean showDynamicInfoWindow = false;
-
 
     protected final Handler mainHandler = new Handler(Looper.getMainLooper());
 
@@ -147,8 +148,8 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
         requestPermissionsIfNecessary(STORAGE_PERMISSIONS, STORAGE_PERMISSIONS_FORCE_SETTING_REQUEST_CODE);
 
         setupBusStopIconMap();
-        baseMapViewModel = new BaseMapViewModel(YBSWayApplication.busMapper, YBSWayApplication.busService);
-        baseMapViewModel.getSelectedBusStopData().observe(this, this::onSelectedBusStopChanged);
+        initObjects();
+        initListeners();
     }
 
     @Override
@@ -191,7 +192,9 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
 
         nearestMarker = newNearestMarker;
 
-        if (nearestMarker != null && showDynamicInfoWindow) {
+        boolean anchorToggle = Boolean.TRUE.equals(baseMapViewModel.getAnchorToggleData().getValue());
+
+        if (nearestMarker != null && showDynamicInfoWindow && !anchorToggle) {
             InfoWindow.closeAllInfoWindowsOn(mapView);
             if (nearestMarker instanceof BusStopMarker) {
                 BusStopMarker busStopMarker = (BusStopMarker) nearestMarker;
@@ -264,6 +267,23 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
         }
 
         syncGpsButtonStates();
+    }
+
+    private void initObjects() {
+        baseMapViewModel = new BaseMapViewModel(YBSWayApplication.busMapper, YBSWayApplication.busService);
+    }
+
+    private void initListeners() {
+        baseMapViewModel.getSelectedBusStopData().observe(this, this::onSelectedBusStopChanged);
+        baseMapViewModel.getYpsToggleData().observe(this, this::onYpsToggle);
+        baseMapViewModel.getAnchorToggleData().observe(this, this::onAnchorToggle);
+    }
+
+    protected void setupActionToggleButtons(@IdRes int btnYpsId, @IdRes int btnAnchorId) {
+        btnYps = findViewById(btnYpsId);
+        btnYps.setOnClickListener(view -> onYpsToggleButtonClick());
+        btnAnchor = findViewById(btnAnchorId);
+        btnAnchor.setOnClickListener(view -> onAnchorButtonClick());
     }
 
     protected void setupGpsButton(@IdRes int btnGpsId) {
@@ -508,6 +528,22 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
 
     protected void onBusStopInfoWindowClicked(BusStopInfoWindow busStopInfoWindow) {
         showRelatedBusListDialog(busStopInfoWindow.getRelatedBusList());
+    }
+
+    protected void onYpsToggleButtonClick() {
+        baseMapViewModel.toggleYps();
+    }
+
+    protected void onAnchorButtonClick() {
+        baseMapViewModel.toggleAnchor();
+    }
+
+    protected void onYpsToggle(boolean toggle) {
+        btnYps.setActivated(toggle);
+    }
+
+    protected void onAnchorToggle(boolean toggle) {
+        btnAnchor.setActivated(toggle);
     }
 
     protected void onGpsButtonClick() {

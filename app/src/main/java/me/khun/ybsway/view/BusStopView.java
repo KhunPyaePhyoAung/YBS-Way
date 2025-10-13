@@ -1,7 +1,9 @@
 package me.khun.ybsway.view;
 
 import androidx.annotation.Nullable;
+
 import java.util.Objects;
+
 import me.khun.ybsway.entity.Coordinate;
 
 public class BusStopView {

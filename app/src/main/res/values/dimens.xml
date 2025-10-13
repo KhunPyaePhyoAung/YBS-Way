@@ -78,8 +78,8 @@
     <dimen name="dialog_related_bus_item_sub_name">9sp</dimen>
     <dimen name="dialog_related_bus_item_icon">26dp</dimen>
 
-    <dimen name="btn_zoom_size">35dp</dimen>
-    <dimen name="btn_zoom_icon">20dp</dimen>
+    <dimen name="btn_map_action">35dp</dimen>
+    <dimen name="icon_map_action">20dp</dimen>
     <dimen name="btn_zoom_group_padding">1dp</dimen>
     <dimen name="btn_zoom_group_corner">3dp</dimen>
     <dimen name="btn_zoom_corner">2dp</dimen>

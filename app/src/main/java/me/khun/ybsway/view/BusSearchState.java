@@ -3,8 +3,6 @@ package me.khun.ybsway.view;
 import java.util.Collections;
 import java.util.List;
 
-import me.khun.ybsway.entity.Bus;
-
 public class BusSearchState {
     public enum Status {EMPTY_QUERY, NO_RESULTS, RESULTS, ALL_RESULTS};
 

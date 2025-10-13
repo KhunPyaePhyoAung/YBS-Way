@@ -3,12 +3,12 @@
     <item
         android:state_pressed="true"
         android:state_enabled="true"
-        android:drawable="@drawable/btn_zoom_in_bg_pressed" />
+        android:drawable="@drawable/btn_map_action_first_bg_pressed" />
     <item
         android:state_focused="true"
         android:state_enabled="true"
-        android:drawable="@drawable/btn_zoom_in_bg_pressed" />
+        android:drawable="@drawable/btn_map_action_first_bg_pressed" />
     <item
         android:state_enabled="true"
-        android:drawable="@drawable/btn_zoom_in_bg" />
+        android:drawable="@drawable/btn_map_action_first_bg" />
 </selector>

@@ -1,9 +1,8 @@
 package me.khun.ybsway.mapper;
 
-import static me.khun.ybsway.application.Language.*;
-
-import androidx.annotation.DrawableRes;
-import androidx.annotation.IdRes;
+import static me.khun.ybsway.application.Language.BURMESE;
+import static me.khun.ybsway.application.Language.ENGLISH;
+import static me.khun.ybsway.application.Language.JAPANESE;
 
 import java.util.HashMap;
 import java.util.List;

@@ -144,6 +144,8 @@
     <color name="search_result_divider">@android:color/transparent</color>
     <color name="search_result_no_result_text">@color/accent_light</color>
 
-
     <color name="bus_list_divider">@android:color/transparent</color>
+
+    <color name="btn_map_toggle_off">@color/light_gray</color>
+    <color name="btn_map_toggle_on">@color/accent</color>
 </resources>

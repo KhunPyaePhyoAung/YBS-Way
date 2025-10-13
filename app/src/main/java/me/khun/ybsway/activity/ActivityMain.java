@@ -1,6 +1,8 @@
 package me.khun.ybsway.activity;
 
-import static me.khun.ybsway.application.YBSWayApplication.*;
+import static me.khun.ybsway.application.YBSWayApplication.busStopMapper;
+import static me.khun.ybsway.application.YBSWayApplication.busStopSearchHistoryManager;
+import static me.khun.ybsway.application.YBSWayApplication.busStopService;
 
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -116,6 +118,7 @@ public class ActivityMain extends ActivityBaseMap implements NavigationView.OnNa
 
     private void initViews() {
         setupMap(R.id.map_view);
+        setupActionToggleButtons(R.id.btn_yps_toggle, R.id.btn_anchor_toggle);
         setupGpsButton(R.id.btn_gps);
         setupZoomButtons(R.id.btn_zoom_in, R.id.btn_zoom_out);
 
