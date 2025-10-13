@@ -46,13 +46,16 @@
     <color name="btn_direction_bg">@color/primary</color>
     <color name="btn_direction_bg_pressed">@color/secondary</color>
 
-    <color name="search_location_input_border">#CACACA</color>
-    <color name="search_location_input_bg">#FFFFF6</color>
-    <color name="search_location_input_text">#000000</color>
-    <color name="search_location_input_hint">#CCCCCC</color>
-    <color name="search_location_input_cursor">@color/primary</color>
-    <color name="search_location_input_icon">@color/primary</color>
-    <color name="search_location_input_delete_icon">@color/gray</color>
+    <color name="search_input_border">#CACACA</color>
+    <color name="search_input_bg">#FFFFF6</color>
+    <color name="search_input_text">#000000</color>
+    <color name="search_input_hint">#CCCCCC</color>
+    <color name="search_input_cursor">@color/primary</color>
+    <color name="search_input_delete_icon">@color/gray</color>
+
+    <color name="search_bus_stop_input_icon">@color/primary</color>
+
+    <color name="search_bus_input_icon">@color/primary</color>
 
     <color name="screen_loading_border">@color/accent_dark</color>
     <color name="screen_loading_bg">@color/accent</color>
@@ -139,5 +142,8 @@
     <color name="search_result_title_bar_bg">@color/background_primary</color>
     <color name="search_result_bg">@color/background_primary</color>
     <color name="search_result_divider">@android:color/transparent</color>
-    <color name="search_result_no_result_text">@color/gray</color>
+    <color name="search_result_no_result_text">@color/accent_light</color>
+
+
+    <color name="bus_list_divider">@android:color/transparent</color>
 </resources>

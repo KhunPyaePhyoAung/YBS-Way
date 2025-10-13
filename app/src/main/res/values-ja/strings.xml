@@ -39,4 +39,10 @@
 
     <string name="search_result_title">検索結果</string>
     <string name="search_result_no_bus_stop">バス停が見つかりません。</string>
+    <string name="search_result_no_bus">バスが見つかりません。</string>
+
+    <string name="bus_search_input_hint_1">バスを探す</string>
+    <string name="bus_search_input_hint_2">145</string>
+    <string name="bus_search_input_hint_3">Airport</string>
+    <string name="bus_search_input_hint_4">Sule Hmawbi</string>
 </resources>

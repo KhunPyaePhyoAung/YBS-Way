@@ -39,4 +39,10 @@
 
     <string name="search_result_title">ရှာဖွေမှုရလဒ်များ</string>
     <string name="search_result_no_bus_stop">မှတ်တိုင်ရှာမတွေ့ပါ။</string>
+    <string name="search_result_no_bus">ယာဉ်လိုင်းရှာမတွေ့ပါ။</string>
+
+    <string name="bus_search_input_hint_1">ယာဉ်လိုင်းရှာမည်</string>
+    <string name="bus_search_input_hint_2">၁၄၅</string>
+    <string name="bus_search_input_hint_3">လေဆိပ်</string>
+    <string name="bus_search_input_hint_4">ဆူးလေ မှော်ဘီ</string>
 </resources>

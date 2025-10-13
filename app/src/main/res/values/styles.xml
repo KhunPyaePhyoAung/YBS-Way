@@ -12,7 +12,7 @@
     <style name="editText.location.outline" parent="@android:style/Widget.EditText">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/primary</item>
-        <item name="android:textColorHint">@color/search_location_input_hint</item>
+        <item name="android:textColorHint">@color/search_input_hint</item>
     </style>
     <style name="MyDialogTheme" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
         <item name="android:background">@color/background_primary</item>

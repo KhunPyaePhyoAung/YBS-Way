@@ -59,6 +59,13 @@ public class ActivityMain extends ActivityBaseMap implements NavigationView.OnNa
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+        closeSoftInput(viewBinding.busStopInput.getWindowToken());
+        viewBinding.busStopInput.clearFocus();
+    }
+
+    @Override
     protected void postDrawBusStops() {
         super.postDrawBusStops();
         viewBinding.loadingContainer.setVisibility(View.GONE);

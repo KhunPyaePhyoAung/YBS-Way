@@ -285,13 +285,13 @@
                     android:layout_weight="1"
                     android:orientation="horizontal"
                     android:gravity="center"
-                    android:background="@drawable/search_location_input_outline_states" >
+                    android:background="@drawable/search_input_outline_states" >
 
                     <ImageView
                         android:layout_width="@dimen/search_location_input_icon_size"
                         android:layout_height="@dimen/search_location_input_icon_size"
                         android:scaleType="fitCenter"
-                        android:src="@drawable/search_location_input_icon" />
+                        android:src="@drawable/search_bus_stop_input_icon" />
 
                     <EditText
                         android:id="@+id/bus_stop_input"
@@ -304,9 +304,9 @@
                         android:textSize="@dimen/search_location_input_text_size"
                         android:maxLength="100"
                         android:inputType="text|textNoSuggestions"
-                        android:background="@drawable/search_location_edit_text_shape"
+                        android:background="@drawable/search_edit_text_shape"
                         style="@style/editText.location.outline"
-                        android:textCursorDrawable="@drawable/search_location_input_cursor"
+                        android:textCursorDrawable="@drawable/search_input_cursor"
                         android:autofillHints="Source" />
 
                     <androidx.appcompat.widget.AppCompatImageButton

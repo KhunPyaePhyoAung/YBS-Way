@@ -39,5 +39,10 @@
 
     <string name="search_result_title">Search results</string>
     <string name="search_result_no_bus_stop">No bus stop found.</string>
+    <string name="search_result_no_bus">No bus found.</string>
 
+    <string name="bus_search_input_hint_1">Find a bus</string>
+    <string name="bus_search_input_hint_2">145</string>
+    <string name="bus_search_input_hint_3">Airport</string>
+    <string name="bus_search_input_hint_4">Sule Hmawbi</string>
 </resources>

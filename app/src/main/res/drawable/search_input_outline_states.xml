@@ -3,12 +3,12 @@
     <item
         android:state_pressed="true"
         android:state_enabled="true"
-        android:drawable="@drawable/search_location_input_outline_focused" />
+        android:drawable="@drawable/search_input_outline_focused" />
     <item
         android:state_focused="true"
         android:state_enabled="true"
-        android:drawable="@drawable/search_location_input_outline_focused" />
+        android:drawable="@drawable/search_input_outline_focused" />
     <item
         android:state_enabled="true"
-        android:drawable="@drawable/search_location_input_outline" />
+        android:drawable="@drawable/search_input_outline" />
 </selector>
