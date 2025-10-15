@@ -21,6 +21,10 @@ import androidx.core.view.GravityCompat;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.Collections;
@@ -55,6 +59,7 @@ public class ActivityMain extends ActivityBaseMap implements NavigationView.OnNa
         initViews();
         initObjects();
         initListeners();
+        initAds();
 
         mainViewModel.loadAllBusStopsData();
         mainViewModel.loadBusStopSearchHistory();
@@ -65,6 +70,7 @@ public class ActivityMain extends ActivityBaseMap implements NavigationView.OnNa
         super.onPause();
         closeSoftInput(viewBinding.busStopInput.getWindowToken());
         viewBinding.busStopInput.clearFocus();
+        viewBinding.bottomBannerAdView.pause();
     }
 
     @Override
@@ -102,6 +108,13 @@ public class ActivityMain extends ActivityBaseMap implements NavigationView.OnNa
     public void onResume() {
         super.onResume();
         viewBinding.navView.setCheckedItem(R.id.nav_home);
+        viewBinding.bottomBannerAdView.resume();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        viewBinding.bottomBannerAdView.destroy();
     }
 
     @Override
@@ -195,6 +208,17 @@ public class ActivityMain extends ActivityBaseMap implements NavigationView.OnNa
         mainViewModel.getBusStopSearchHistoryData().observe(this, this::onBusStopSearchHistoryChanged);
     }
 
+    private void initAds() {
+        MobileAds.initialize(this, initializationStatus -> {});
+        viewBinding.bottomBannerAdView.setAdListener(new BottomBannerAdListener());
+        loadBottomBannerAds();
+    }
+
+    private void loadBottomBannerAds() {
+        AdRequest adRequest = new AdRequest.Builder().build();
+        viewBinding.bottomBannerAdView.loadAd(adRequest);
+    }
+
     private void onNavToggleButtonClick() {
         if (viewBinding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
             viewBinding.drawerLayout.closeDrawer(GravityCompat.START);
@@ -257,6 +281,7 @@ public class ActivityMain extends ActivityBaseMap implements NavigationView.OnNa
         viewBinding.searchContainer.setAlpha(0f);
         viewBinding.searchContainer.animate().alpha(1f).setDuration(300).start();
         viewBinding.busStopSearchHistoryListView.smoothScrollToPosition(0);
+        onSearchContainerVisibilityChanged();
     }
 
     private void hideSearchOverlay() {
@@ -264,6 +289,19 @@ public class ActivityMain extends ActivityBaseMap implements NavigationView.OnNa
         viewBinding.searchContainer.animate().alpha(0f).setDuration(300).start();
         viewBinding.busStopInput.clearFocus();
         closeSoftInput(viewBinding.busStopInput.getWindowToken());
+        onSearchContainerVisibilityChanged();
+    }
+
+    private void onSearchContainerVisibilityChanged() {
+        switch (viewBinding.searchContainer.getVisibility()) {
+            case View.VISIBLE:
+                viewBinding.bottomBannerAdView.pause();
+                break;
+            case View.INVISIBLE:
+            case View.GONE:
+                viewBinding.bottomBannerAdView.resume();
+                break;
+        }
     }
 
     private void onBusStopsLoaded(List<BusStopView> busStopViewList) {
@@ -335,6 +373,32 @@ public class ActivityMain extends ActivityBaseMap implements NavigationView.OnNa
                 .setNegativeButton(R.string.clear_search_history_confirm_negative_message, (dialog, which) -> dialog.dismiss())
                 .setCancelable(false)
                 .show();
+    }
+
+    private class BottomBannerAdListener extends AdListener {
+        private static final int RETRY_LOAD_INTERVAL_MILL = 10000;
+        private boolean isAdLoaded = false;
+
+        @Override
+        public void onAdLoaded() {
+            super.onAdLoaded();
+            isAdLoaded = true;
+        }
+
+        @Override
+        public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+            super.onAdFailedToLoad(loadAdError);
+            isAdLoaded = false;
+            scheduleRetry();
+        }
+
+        private void scheduleRetry() {
+            mainHandler.postDelayed(() -> {
+                if (!isAdLoaded && isInternetAvailable()) {
+                    loadBottomBannerAds();
+                }
+            }, RETRY_LOAD_INTERVAL_MILL);
+        }
     }
 
     private class BusStopSearchInputTextWatcher implements TextWatcher {

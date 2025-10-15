@@ -5,6 +5,8 @@ import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.view.View;
@@ -65,6 +67,15 @@ public class ActivityBase extends AppCompatActivity {
         if (imm != null) {
             imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
         }
+    }
+
+    protected boolean isInternetAvailable() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (cm != null) {
+            NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+            return networkInfo != null && networkInfo.isConnected();
+        }
+        return false;
     }
 
     protected static Bitmap getBitmapFromDrawable(Context context, int drawableId, int widthInDp, int heightInDp) {

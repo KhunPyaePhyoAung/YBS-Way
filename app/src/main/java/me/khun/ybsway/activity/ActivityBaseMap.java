@@ -126,7 +126,7 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
     protected AppCompatImageButton btnZoomOut;
     protected Drawable busStopIcon;
     protected GeoPoint mapCenterPoint;
-    protected BroadcastReceiver gpsSwitchReceiver;
+    protected BroadcastReceiver broadcastReceiver;
     protected Marker nearestMarker;
     protected int currentZoomLevel;
     protected volatile boolean isLoadingBusStops = false;
@@ -155,20 +155,13 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
     @Override
     protected void onStart() {
         super.onStart();
-        gpsSwitchReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                if (intent.getAction() != null && intent.getAction().matches(LocationManager.PROVIDERS_CHANGED_ACTION)) {
-                    syncGpsButtonStates();
-                }
-            }
-        };
+        broadcastReceiver = new MapBroadcaseReceiver();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        registerReceiver(gpsSwitchReceiver, new IntentFilter(LocationManager.PROVIDERS_CHANGED_ACTION));
+        registerReceiver(broadcastReceiver, new IntentFilter(LocationManager.PROVIDERS_CHANGED_ACTION));
         mapView.onResume();
         syncGpsButtonStates();
     }
@@ -176,7 +169,7 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
     @Override
     public void onPause() {
         super.onPause();
-        unregisterReceiver(gpsSwitchReceiver);
+        unregisterReceiver(broadcastReceiver);
         mapView.onPause();
     }
 
@@ -526,6 +519,10 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
         }
     }
 
+    protected void onGpsStateChanged() {
+        syncGpsButtonStates();
+    }
+
     protected void onBusStopInfoWindowClicked(BusStopInfoWindow busStopInfoWindow) {
         showRelatedBusListDialog(busStopInfoWindow.getRelatedBusList());
     }
@@ -741,6 +738,19 @@ public abstract class ActivityBaseMap extends ActivityBase implements MapListene
             return NORMAL_ZOOM_ANIMATION_SPEED;
         } else {
             return SLOW_ZOOM_ANIMATION_SPEED;
+        }
+    }
+
+    protected class MapBroadcaseReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction() == null) {
+                return;
+            }
+            if (intent.getAction().matches(LocationManager.PROVIDERS_CHANGED_ACTION)) {
+                onGpsStateChanged();
+            }
         }
     }
 
