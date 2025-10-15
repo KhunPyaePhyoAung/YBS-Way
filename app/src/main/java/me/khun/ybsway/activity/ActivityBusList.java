@@ -8,11 +8,17 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
+
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.MobileAds;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -51,6 +57,7 @@ public class ActivityBusList extends ActivityBase {
         initViews();
         initObjects();
         initListeners();
+        initAds();
 
         busViewModel.loadBusData();
     }
@@ -60,6 +67,19 @@ public class ActivityBusList extends ActivityBase {
         super.onPause();
         closeSoftInput(viewBinding.busSearchInput.getWindowToken());
         viewBinding.busSearchInput.clearFocus();
+        viewBinding.bottomBannerAdView.pause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        viewBinding.bottomBannerAdView.resume();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        viewBinding.bottomBannerAdView.destroy();
     }
 
     private void initViews() {
@@ -79,6 +99,7 @@ public class ActivityBusList extends ActivityBase {
         );
         dividerItemDecoration.setDrawable(Objects.requireNonNull(ResourcesCompat.getDrawable(getResources(), R.drawable.bus_list_divider, null)));
         viewBinding.busList.addItemDecoration(dividerItemDecoration);
+        viewBinding.busList.setPadding(0, 0, 0, viewBinding.bottomBannerAdView.getHeight());
     }
 
     private void initObjects() {
@@ -96,6 +117,17 @@ public class ActivityBusList extends ActivityBase {
         busViewModel.getAllBusListData().observe(this, this::onBusListLoaded);
         busViewModel.getBusSearchStateData().observe(this, this::onBusSearchStateChanged);
         busSearchHintProvider.setConsumer(this::onBusSearchInputHintChanged);
+    }
+
+    private void initAds() {
+        MobileAds.initialize(this, initializationStatus -> {});
+        viewBinding.bottomBannerAdView.setAdListener(new BottomBannerAdListener());
+        loadBottomBannerAds();
+    }
+
+    private void loadBottomBannerAds() {
+        AdRequest adRequest = new AdRequest.Builder().build();
+        viewBinding.bottomBannerAdView.loadAd(adRequest);
     }
 
     private void onBusListLoaded(List<BusView> busViewList) {
@@ -141,6 +173,38 @@ public class ActivityBusList extends ActivityBase {
     private void showBusResults(List<BusView> busViewList) {
         viewBinding.noBusFoundView.setVisibility(View.GONE);
         busListAdapter.changeData(busViewList);
+    }
+
+    private class BottomBannerAdListener extends AdListener {
+        private static final int RETRY_LOAD_INTERVAL_MILL = 10000;
+        private boolean isAdLoaded = false;
+
+        @Override
+        public void onAdLoaded() {
+            super.onAdLoaded();
+            isAdLoaded = true;
+        }
+
+        @Override
+        public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+            super.onAdFailedToLoad(loadAdError);
+            isAdLoaded = false;
+            scheduleRetry();
+        }
+
+        @Override
+        public void onAdImpression() {
+            super.onAdImpression();
+            viewBinding.busList.setPadding(0, 0, 0, viewBinding.bottomBannerAdView.getHeight());
+        }
+
+        private void scheduleRetry() {
+            mainHandler.postDelayed(() -> {
+                if (!isAdLoaded && isInternetAvailable()) {
+                    loadBottomBannerAds();
+                }
+            }, RETRY_LOAD_INTERVAL_MILL);
+        }
     }
 
     private class BusListItemClickListener implements BusListAdapter.ItemClickListener {
