@@ -1,11 +1,13 @@
 package me.khun.ybsway.entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import me.khun.ybsway.application.YBSWayApplication;
 
-public class Route {
+public class Route implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     private final List<BusStop> busStopList = new ArrayList<>(YBSWayApplication.DEFAULT_BUS_STOP_LIST_SIZE);
     private int currentIndex = 0;
