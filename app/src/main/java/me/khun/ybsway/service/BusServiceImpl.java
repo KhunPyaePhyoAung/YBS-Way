@@ -3,6 +3,7 @@ package me.khun.ybsway.service;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import me.khun.ybsway.entity.Bus;
 import me.khun.ybsway.entity.Route;
@@ -30,7 +31,7 @@ public class BusServiceImpl implements BusService {
         this.busRepository = busRepository;
         this.busStopService = busStopService;
 
-        busList = busRepository.getAll();
+        busList = busRepository.getAll().stream().filter(Bus::isActive).collect(Collectors.toList());
         for ( Bus bus : busList ) {
             Route route = new Route(busStopService.findAllByIds(bus.getBusStopIdList()));
             bus.setRoute(route);

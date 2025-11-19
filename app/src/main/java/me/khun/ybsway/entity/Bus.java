@@ -14,6 +14,7 @@ public class Bus {
     private String destinationNameEN;
     private String agencyId;
     private String hexColorCode;
+    private boolean isActive;
     private List<Integer> busStopIdList;
     private List<Coordinate> routeCoordinateList;
     private Route route;
@@ -114,6 +115,14 @@ public class Bus {
 
     public void setHexColorCode(String hexColorCode) {
         this.hexColorCode = hexColorCode;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
     }
 
     public List<Integer> getBusStopIdList() {
