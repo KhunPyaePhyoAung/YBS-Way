@@ -2,6 +2,7 @@
 ## YBS Way helps you quickly find the right bus routes in Yangon. Easy search, clear results, and a smooth experience.
 
 Main Map
+<img src="screenshots/main_page.jpg" width="350">
 ![Main Map](screenshots/main_page.jpg)
 ![GPS](screenshots/main_page_gps.jpg)
 ![Bus Stop](screenshots/bus_stop_info.jpg)
